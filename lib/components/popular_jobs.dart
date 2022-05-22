@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:job_portal/components/showAllTextBanner.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/routes/routes.dart';
 
 class PopularJobs extends StatelessWidget {
   const PopularJobs({Key? key}) : super(key: key);
@@ -11,17 +14,18 @@ class PopularJobs extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("Popular Jobs"),
-            OutlinedButton(
-              onPressed: () {},
-              child: Text("See All"),
-            ),
-          ],
+        ShowAllTextBanner(
+          title: "Popular Jobs",
+          onPressed: () => Get.toNamed(RouteNames.popularJobs),
         ),
-        PopularJobCard(),
+        Container(
+          height: 175,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: 5,
+            itemBuilder: (context, index) => PopularJobCard(),
+          ),
+        )
       ],
     );
   }
@@ -33,12 +37,15 @@ class PopularJobCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      color: Colors.teal,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.teal,
+          boxShadow: [kCardShadow]),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      margin: EdgeInsets.only(left: 15),
       width: 250,
-      height: 150,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -47,9 +54,9 @@ class PopularJobCard extends StatelessWidget {
               Column(
                 children: [
                   Container(
-                    color: Colors.red,
-                    width: 40,
-                    height: 40,
+                    color: Colors.cyanAccent,
+                    width: 45,
+                    height: 45,
                   ),
                   Text(" Name"),
                 ],
@@ -62,13 +69,13 @@ class PopularJobCard extends StatelessWidget {
             style: kTitleTextStyle,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("Salary"),
               Text("Location"),
               Text("Full Time"),
             ],
-          )
+          ),
         ],
       ),
     );

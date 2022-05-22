@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:job_portal/components/homepage_searchbar.dart';
 import 'package:job_portal/components/popular_jobs.dart';
+import 'package:job_portal/components/recent_posts.dart';
 import 'package:job_portal/components/searchbar.dart';
+import 'package:job_portal/routes/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,12 +15,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Job Portal',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        // appBarTheme: AppBarTheme(
+        //   textTheme: Theme.of(context).textTheme.apply(
+        //         bodyColor: const Color(0xff22215B),
+        //         displayColor: const Color(0xff22215B),
+        //       ),
+        // ),
+        textTheme: Theme.of(context).textTheme.apply(
+              bodyColor: Colors.white,
+              displayColor: Colors.yellow,
+            ),
+        primarySwatch: Colors.teal,
       ),
-      home: const HomePage(),
+      initialRoute: RouteNames.home,
+      getPages: routes(),
     );
   }
 }
@@ -30,19 +45,27 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: const Icon(Icons.sort),
-        actions: const [Icon(Icons.person)],
-      ),
-      body: Column(
-        children: const [
-          //Search Bar
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 35.0, vertical: 20.0),
-            child: HomePageSearchBar(),
-          ),
-          //Popular Job
-          PopularJobs(),
-          //Recent Post
+        actions: const [
+          Icon(Icons.person),
+          SizedBox(
+            width: 15,
+          )
         ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            //Search Bar
+            Padding(
+              padding: EdgeInsets.only(left: 35.0, right: 35.0, top: 20.0),
+              child: HomePageSearchBar(),
+            ),
+            //Popular Job
+            PopularJobs(),
+            //Recent Post
+            RecentPosts(),
+          ],
+        ),
       ),
     );
   }

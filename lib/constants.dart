@@ -1,17 +1,34 @@
 import 'package:flutter/material.dart';
 
 const Color kThemeColor = Colors.teal;
-final kSpacingUnit = 10.00;
-const kSilverColor = const Color(0xFFF6F7FB);
-const kAccentColor = const Color(0xFFED5575);
-const kPrimaryTextColor = const Color(0xFF211D42);
-const kSecondaryTextColor = const Color(0xFFB9B8CD);
+const double kSpacingUnit = 10.00;
+const Color kSilverColor = Color(0xFFF6F7FB);
+const Color kAccentColor = Color(0xFFED5575);
+const Color kPrimaryTextColor = Color(0xFF211D42);
+const Color kSecondaryTextColor = Color(0xFFB9B8CD);
 
-final kTitleTextStyle = TextStyle(
-  fontSize: 20,
+const TextStyle kHeaderTextStyle = TextStyle(
+  fontSize: 22,
+  fontWeight: FontWeight.bold,
+  color: Color.fromARGB(164, 0, 0, 0),
 );
 
-final kBodyTextStyle = TextStyle(
+const TextStyle kTitleTextStyle = TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.w500,
+);
+const TextStyle kBodyTextStyle = TextStyle(
   color: kPrimaryTextColor,
   fontSize: 13,
+);
+
+const BoxShadow kCardShadow = BoxShadow(
+  color: Color.fromARGB(41, 0, 0, 0),
+  blurRadius: 2,
+  offset: Offset(1, 1),
+  spreadRadius: 1,
+);
+
+const TextStyle kCardBodyTextStyle = TextStyle(
+  color: Colors.white,
 );

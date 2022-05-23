@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Job Portal',
       theme: ThemeData(
+        scaffoldBackgroundColor: Color.fromRGBO(251, 251, 251, 1),
         // appBarTheme: AppBarTheme(
         //   textTheme: Theme.of(context).textTheme.apply(
         //         bodyColor: const Color(0xff22215B),
@@ -57,7 +58,7 @@ class HomePage extends StatelessWidget {
           children: const [
             //Search Bar
             Padding(
-              padding: EdgeInsets.only(left: 35.0, right: 35.0, top: 20.0),
+              padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
               child: HomePageSearchBar(),
             ),
             //Popular Job

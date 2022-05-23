@@ -19,6 +19,7 @@ class PopularJobs extends StatelessWidget {
           onPressed: () => Get.toNamed(RouteNames.popularJobs),
         ),
         Container(
+          padding: EdgeInsets.only(left: 10),
           height: 175,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -37,12 +38,12 @@ class PopularJobCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Colors.teal,
           boxShadow: [kCardShadow]),
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-      margin: EdgeInsets.only(left: 15),
       width: 250,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

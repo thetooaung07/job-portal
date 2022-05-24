@@ -6,6 +6,7 @@ const Color kSilverColor = Color(0xFFF6F7FB);
 const Color kAccentColor = Color(0xFFED5575);
 const Color kPrimaryTextColor = Color(0xFF211D42);
 const Color kSecondaryTextColor = Color(0xFFB9B8CD);
+const Color kBgColor = Color.fromRGBO(251, 251, 251, 1);
 
 class assetsPath {
   static String iconPath = '/assets/icons';

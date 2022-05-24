@@ -7,7 +7,7 @@ import 'package:job_portal/components/recent_posts.dart';
 import 'package:job_portal/components/searchbar.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/routes/routes.dart';
-import 'package:job_portal/view/search_page.dart';
+import 'package:job_portal/view/search_page/search_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,17 +22,17 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Job Portal',
       theme: ThemeData(
-        scaffoldBackgroundColor: Color.fromRGBO(251, 251, 251, 1),
+        // scaffoldBackgroundColor: Color.fromRGBO(251, 251, 251, 1),
         // appBarTheme: AppBarTheme(
         //   textTheme: Theme.of(context).textTheme.apply(
         //         bodyColor: const Color(0xff22215B),
         //         displayColor: const Color(0xff22215B),
         //       ),
         // ),
-        textTheme: Theme.of(context).textTheme.apply(
-              bodyColor: Colors.white,
-              displayColor: Colors.yellow,
-            ),
+        // textTheme: Theme.of(context).textTheme.apply(
+        //       bodyColor: Colors.white,
+        //       displayColor: Colors.yellow,
+        //     ),
         primarySwatch: Colors.teal,
       ),
       initialRoute: RouteNames.home,

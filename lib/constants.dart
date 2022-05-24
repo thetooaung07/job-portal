@@ -7,6 +7,11 @@ const Color kAccentColor = Color(0xFFED5575);
 const Color kPrimaryTextColor = Color(0xFF211D42);
 const Color kSecondaryTextColor = Color(0xFFB9B8CD);
 
+class assetsPath {
+  static String iconPath = '/assets/icons';
+  static String imagePath = '/assets/images';
+}
+
 const TextStyle kHeaderTextStyle = TextStyle(
   fontSize: 22,
   fontWeight: FontWeight.bold,

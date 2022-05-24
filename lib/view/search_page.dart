@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:job_portal/components/searchbar.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/view/most_relevent_tab.dart';
+import 'package:job_portal/view/recent_posts/most_recent_tab.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -8,13 +12,15 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(251, 251, 251, 1),
+      // backgroundColor: Color.fromRGBO(251, 251, 251, 1),
+      backgroundColor: Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
         title: Text("Search"),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: 20,
@@ -27,22 +33,32 @@ class SearchPage extends StatelessWidget {
                 SizedBox(
                   width: 15,
                 ),
-                Container(
-                  height: 45,
-                  width: 45,
-                  decoration: BoxDecoration(
-                      color: Colors.teal,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Center(
-                      child: SvgPicture.asset(
-                    'assets/icons/slider_icon.svg',
-                    height: 20,
-                    width: 20,
-                    color: Colors.white,
-                  )),
+                GestureDetector(
+                  onTap: () {
+                    Get.bottomSheet(FilterBottomSheet(),
+                        isScrollControlled: true);
+                  },
+                  child: Container(
+                    height: 45,
+                    width: 45,
+                    decoration: BoxDecoration(
+                        color: Colors.teal,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                        child: SvgPicture.asset(
+                      'assets/icons/slider_icon.svg',
+                      height: 20,
+                      width: 20,
+                      color: Colors.white,
+                    )),
+                  ),
                 ),
               ],
-            )
+            ),
+            Text(
+              "24 Jobs Opportunities found",
+            ),
+            Expanded(child: SearchPageTabView()),
           ],
         ),
       ),
@@ -50,48 +66,66 @@ class SearchPage extends StatelessWidget {
   }
 }
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({
-    Key? key,
-  }) : super(key: key);
+class SearchPageTabView extends StatefulWidget {
+  SearchPageTabView({Key? key}) : super(key: key);
+
+  @override
+  State<SearchPageTabView> createState() => _SearchPageTabViewState();
+}
+
+class _SearchPageTabViewState extends State<SearchPageTabView>
+    with SingleTickerProviderStateMixin {
+  late TabController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = TabController(length: 2, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      style: TextStyle(
-        color: Color.fromARGB(162, 0, 0, 0),
-        fontWeight: FontWeight.w500,
-      ),
-      decoration: InputDecoration(
-        prefixIcon: Icon(Icons.search),
-        contentPadding: EdgeInsets.symmetric(horizontal: 20),
-        hintText: "search job",
-        hintStyle: TextStyle(
-          color: Color.fromARGB(111, 0, 0, 0),
+    return Column(
+      children: [
+        TabBar(
+          controller: controller,
+          tabs: [
+            Tab(child: Text("Most Relevent")),
+            Tab(child: Text("Most Recent")),
+          ],
         ),
-        filled: true,
-        fillColor: kSilverColor,
-        enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: BorderSide(
-              color: Colors.white,
-              width: 1,
-            )),
-
-        focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: BorderSide(
-              color: Colors.white,
-              width: 1,
-            )),
-        // errorBorder: InputBorder.none,
-        // disabledBorder: InputBorder.none,
-      ),
+        Expanded(
+          child: TabBarView(
+            controller: controller,
+            children: [
+              MostRecentTab(),
+              MostReleventTab(),
+            ],
+          ),
+        )
+      ],
     );
   }
 }
 
+class FilterBottomSheet extends StatelessWidget {
+  const FilterBottomSheet({Key? key}) : super(key: key);
 
-
-
-//To change the Input UI you need to define both enableBorder and border and focusBorder
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          height: 100,
+          width: Get.width,
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+          ),
+        ),
+      ],
+    );
+  }
+}

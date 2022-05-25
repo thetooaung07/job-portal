@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/components/searchbar.dart';
+import 'package:job_portal/constants.dart';
 import 'package:job_portal/view/search_page/filter_bottom_sheet.dart';
 import 'package:job_portal/view/search_page/search_page_tab_view.dart';
 
@@ -16,15 +17,15 @@ class SearchPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Search"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            Row(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Row(
               children: [
                 Flexible(
                   child: SearchBar(),
@@ -54,13 +55,59 @@ class SearchPage extends StatelessWidget {
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            child: Row(
+              children: [
+                SearchTag(),
+                SizedBox(width: 20),
+                Text(
+                  "24 Jobs Opportunities found",
+                ),
+              ],
+            ),
+          ),
+          Expanded(child: SearchPageTabView()),
+        ],
+      ),
+    );
+  }
+}
+
+class SearchTag extends StatelessWidget {
+  const SearchTag({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: kSpacingUnit * 2.5,
+      width: kSpacingUnit * 9,
+      margin: EdgeInsets.only(left: kSpacingUnit),
+      decoration: BoxDecoration(
+        color: Colors.teal,
+        borderRadius: BorderRadius.circular(kSpacingUnit * 3),
+      ),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(width: kSpacingUnit),
+            Flexible(
               child: Text(
-                "24 Jobs Opportunities found",
+                "Facebook",
+                overflow: TextOverflow.ellipsis,
+                style: kCaptionTextStyle.copyWith(
+                  color: Colors.white,
+                ),
               ),
             ),
-            Expanded(child: SearchPageTabView()),
+            SvgPicture.asset(
+              'assets/icons/close_icon.svg',
+              height: 15,
+              width: 15,
+            ),
+            SizedBox(width: kSpacingUnit * 0.5),
           ],
         ),
       ),

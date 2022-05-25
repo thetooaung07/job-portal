@@ -38,3 +38,8 @@ const BoxShadow kCardShadow = BoxShadow(
 const TextStyle kCardBodyTextStyle = TextStyle(
   color: Colors.white,
 );
+
+const kCaptionTextStyle = TextStyle(
+  color: kSecondaryTextColor,
+  fontSize: 12,
+);

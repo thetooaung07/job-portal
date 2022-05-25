@@ -18,6 +18,7 @@ class FilterBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
+      height: Get.height * 0.8,
       decoration: BoxDecoration(
         color: kBgColor,
         borderRadius: BorderRadius.only(
@@ -26,11 +27,23 @@ class FilterBottomSheet extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+        padding: const EdgeInsets.only(
+          top: 15,
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(
+              height: 10,
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                "Set Filters",
+                style: kHeaderTextStyle,
+              ),
+            ),
             Align(
               child: Container(
                 width: 100,
@@ -38,16 +51,6 @@ class FilterBottomSheet extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.black54,
                     borderRadius: BorderRadius.circular(10)),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Text(
-                "Set Filters",
-                style: kHeaderTextStyle,
               ),
             ),
             LabelDropDownBtn(
@@ -67,16 +70,16 @@ class FilterBottomSheet extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 20),
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
               child: Text(
                 "Job Type",
                 style: kTitleTextStyle,
               ),
             ),
-            SizedBox(
-              width: Get.width,
-              child: Align(
+            Expanded(
+              child: Container(
                 alignment: Alignment.center,
+                width: Get.width,
                 child: Wrap(
                   // runAlignment: WrapAlignment.start,
                   // alignment: WrapAlignment.center,
@@ -84,12 +87,6 @@ class FilterBottomSheet extends StatelessWidget {
                   spacing: 15,
                   runSpacing: 15,
                   children: [
-                    OutlineBtnBubble(),
-                    OutlineBtnBubble(),
-                    OutlineBtnBubble(),
-                    OutlineBtnBubble(),
-                    OutlineBtnBubble(),
-                    OutlineBtnBubble(),
                     OutlineBtnBubble(),
                     OutlineBtnBubble(),
                     OutlineBtnBubble(),
@@ -105,12 +102,11 @@ class FilterBottomSheet extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             Container(
-                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
                 width: Get.width,
-                height: 75,
+                height: 60,
                 decoration: BoxDecoration(color: Colors.teal),
                 child: OutlinedButton(
                     onPressed: () {},
@@ -156,43 +152,46 @@ class LabelDropDownBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     RxString selectedItem = "Flutter".obs;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20.0),
-          child: Text(
-            label,
-            style: kTitleTextStyle,
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(10)),
-          child: Obx(
-            () => DropdownButton(
-              icon: Icon(Icons.arrow_drop_down),
-              iconSize: 42,
-              underline: SizedBox(),
-              dropdownColor: Colors.white,
-              value: selectedItem.value,
-              isExpanded: true,
-              focusColor: Colors.red,
-              hint: Text("UI / UX Designer"),
-              onChanged: (v) {
-                selectedItem.value = v.toString();
-              },
-              items: DropdownItemList.map(
-                (item) => DropdownMenuItem(
-                  value: item,
-                  child: Text("$item"),
-                ),
-              ).toList(),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15.0),
+            child: Text(
+              label,
+              style: kTitleTextStyle,
             ),
           ),
-        ),
-      ],
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(10)),
+            child: Obx(
+              () => DropdownButton(
+                icon: Icon(Icons.arrow_drop_down),
+                iconSize: 42,
+                underline: SizedBox(),
+                dropdownColor: Colors.white,
+                value: selectedItem.value,
+                isExpanded: true,
+                focusColor: Colors.red,
+                hint: Text("UI / UX Designer"),
+                onChanged: (v) {
+                  selectedItem.value = v.toString();
+                },
+                items: DropdownItemList.map(
+                  (item) => DropdownMenuItem(
+                    value: item,
+                    child: Text("$item"),
+                  ),
+                ).toList(),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

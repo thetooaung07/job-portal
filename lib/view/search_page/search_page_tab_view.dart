@@ -28,18 +28,21 @@ class _SearchPageTabViewState extends State<SearchPageTabView>
               hoverColor: Colors.transparent,
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent),
-          child: TabBar(
-            unselectedLabelColor: Colors.black,
-            indicatorSize: TabBarIndicatorSize.tab,
-            indicator: BoxDecoration(
-              color: Colors.teal,
-              borderRadius: BorderRadius.circular(50),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: TabBar(
+              unselectedLabelColor: Colors.black,
+              indicatorSize: TabBarIndicatorSize.tab,
+              indicator: BoxDecoration(
+                color: Colors.teal,
+                borderRadius: BorderRadius.circular(50),
+              ),
+              controller: controller,
+              tabs: [
+                Tab(child: Text("Most Relevent")),
+                Tab(child: Text("Most Recent")),
+              ],
             ),
-            controller: controller,
-            tabs: [
-              Tab(child: Text("Most Relevent")),
-              Tab(child: Text("Most Recent")),
-            ],
           ),
         ),
         Expanded(

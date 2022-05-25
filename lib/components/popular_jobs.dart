@@ -37,47 +37,52 @@ class PopularJobCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.teal,
-          boxShadow: [kCardShadow]),
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-      width: 250,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Container(
-                    color: Colors.cyanAccent,
-                    width: 45,
-                    height: 45,
-                  ),
-                  Text(" Name"),
-                ],
-              ),
-              Icon(Icons.favorite_border_outlined),
-            ],
-          ),
-          Text(
-            "Job Position",
-            style: kTitleTextStyle,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Salary"),
-              Text("Location"),
-              Text("Full Time"),
-            ],
-          ),
-        ],
+    return InkWell(
+      onTap: () {
+        Get.toNamed(RouteNames.jobDetails);
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.teal,
+            boxShadow: [kCardShadow]),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        width: 250,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      color: Colors.cyanAccent,
+                      width: 45,
+                      height: 45,
+                    ),
+                    Text(" Name"),
+                  ],
+                ),
+                Icon(Icons.favorite_border_outlined),
+              ],
+            ),
+            Text(
+              "Job Position",
+              style: kTitleTextStyle,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Salary"),
+                Text("Location"),
+                Text("Full Time"),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

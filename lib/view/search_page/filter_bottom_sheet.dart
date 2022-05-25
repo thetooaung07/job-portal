@@ -105,18 +105,18 @@ class FilterBottomSheet extends StatelessWidget {
               height: 20,
             ),
             Container(
-                width: Get.width,
-                height: 60,
-                decoration: BoxDecoration(color: Colors.teal),
-                child: OutlinedButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Apply Filters",
-                      style: kTitleTextStyle.copyWith(
-                          fontSize: 20,
-                          letterSpacing: 1.5,
-                          color: Colors.white),
-                    )))
+              width: Get.width,
+              height: 60,
+              decoration: BoxDecoration(color: Colors.teal),
+              child: OutlinedButton(
+                onPressed: () {},
+                child: Text(
+                  "Apply Filters",
+                  style: kTitleTextStyle.copyWith(
+                      fontSize: 20, letterSpacing: 1.5, color: Colors.white),
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -20,8 +20,10 @@ class HomePageSearchBar extends StatelessWidget {
       onChanged: (v) => _controller.getTitleFromSearchBar(v),
       onEditingComplete: () {
         _textController.text = _controller.searchTitle.value;
+        _textController.clear();
+        FocusManager.instance.primaryFocus?.unfocus();
+
         Get.toNamed(RouteNames.search);
-        _textController.text = "";
       },
       style: TextStyle(
         color: Color.fromARGB(162, 0, 0, 0),

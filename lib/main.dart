@@ -61,16 +61,8 @@ class HomePage extends StatelessWidget {
           children: [
             //Search Bar
             Padding(
-              padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-              child: SearchBar(
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.manage_search_rounded),
-                  onPressed: () {
-                    Get.toNamed(RouteNames.search);
-                  },
-                ),
-              ),
-            ),
+                padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+                child: HomePageSearchBar()),
             //Popular Job
             PopularJobs(),
             //Recent Post

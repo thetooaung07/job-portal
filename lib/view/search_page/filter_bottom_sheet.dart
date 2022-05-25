@@ -126,6 +126,7 @@ class FilterBottomSheet extends StatelessWidget {
 
 class OutlineBtnBubble extends StatelessWidget {
   final String? title;
+
   const OutlineBtnBubble({Key? key, this.title = "Hello"}) : super(key: key);
 
   @override

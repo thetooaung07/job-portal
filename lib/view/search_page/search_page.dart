@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/components/searchbar.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/search_title_controller.dart';
 import 'package:job_portal/view/search_page/filter_bottom_sheet.dart';
 import 'package:job_portal/view/search_page/search_page_tab_view.dart';
 
@@ -33,7 +34,7 @@ class SearchPage extends StatelessWidget {
                 SizedBox(
                   width: 15,
                 ),
-                InkWell(
+                GestureDetector(
                   onTap: () {
                     Get.bottomSheet(FilterBottomSheet(),
                         isScrollControlled: true);
@@ -61,7 +62,7 @@ class SearchPage extends StatelessWidget {
             child: Row(
               children: [
                 SearchTag(),
-                SizedBox(width: 20),
+                Spacer(),
                 Text(
                   "24 Jobs Opportunities found",
                 ),
@@ -80,6 +81,8 @@ class SearchTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final SearchTitleController _controller = Get.find(tag: "search_bar");
+
     return Container(
       height: kSpacingUnit * 2.5,
       width: kSpacingUnit * 9,
@@ -94,11 +97,13 @@ class SearchTag extends StatelessWidget {
           children: [
             SizedBox(width: kSpacingUnit),
             Flexible(
-              child: Text(
-                "Facebook",
-                overflow: TextOverflow.ellipsis,
-                style: kCaptionTextStyle.copyWith(
-                  color: Colors.white,
+              child: Obx(
+                () => Text(
+                  _controller.searchTitle.value,
+                  overflow: TextOverflow.ellipsis,
+                  style: kCaptionTextStyle.copyWith(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

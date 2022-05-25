@@ -1,6 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:job_portal/components/recent_posts.dart';
 
 class MostRecentTab extends StatelessWidget {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:job_portal/components/popular_jobs.dart';
 import 'package:job_portal/components/recent_posts.dart';
 
 class PopularJobsPage extends StatelessWidget {

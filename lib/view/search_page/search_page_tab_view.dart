@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:job_portal/controller/search_title_controller.dart';
 import 'package:job_portal/view/most_relevent_tab.dart';
 import 'package:job_portal/view/recent_posts/most_recent_tab.dart';
 

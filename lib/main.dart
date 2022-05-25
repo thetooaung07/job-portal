@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/components/homepage_searchbar.dart';
 import 'package:job_portal/components/popular_jobs.dart';
 import 'package:job_portal/components/recent_posts.dart';
-import 'package:job_portal/components/searchbar.dart';
-import 'package:job_portal/constants.dart';
 import 'package:job_portal/routes/routes.dart';
-import 'package:job_portal/view/search_page/search_page.dart';
 
 void main() {
   runApp(const MyApp());

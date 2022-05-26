@@ -16,7 +16,7 @@ class RouteNames {
 routes() => [
       GetPage(
         name: RouteNames.home,
-        page: () => const HomePage(),
+        page: () => const BaseWrapper(),
       ),
       GetPage(
         name: RouteNames.popularJobs,

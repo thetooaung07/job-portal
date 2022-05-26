@@ -36,9 +36,6 @@ class _SearchBarState extends State<SearchBar> {
     return TextFormField(
       controller: searchPageController,
       onChanged: (v) => _controller.getTitleFromSearchBar(v),
-      onEditingComplete: () {
-        Get.toNamed(RouteNames.search);
-      },
       style: TextStyle(
         color: Color.fromARGB(162, 0, 0, 0),
         fontWeight: FontWeight.w500,

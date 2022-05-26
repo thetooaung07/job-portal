@@ -12,6 +12,8 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final SearchTitleController _controller = Get.find(tag: "search_bar");
+
     return Scaffold(
       // backgroundColor: Color.fromRGBO(251, 251, 251, 1),
       // backgroundColor: Color.fromARGB(255, 0, 0, 0),
@@ -58,15 +60,21 @@ class SearchPage extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: Row(
-              children: [
-                SearchTag(),
-                Spacer(),
-                Text(
-                  "24 Jobs Opportunities found",
-                ),
-              ],
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: Obx(
+              () => _controller.searchTitle.value.isNotEmpty
+                  ? Row(
+                      children: [
+                        SearchTag(),
+                        Spacer(),
+                        Text(
+                          "24 Jobs Opportunities found",
+                        ),
+                      ],
+                    )
+                  : SizedBox(
+                      height: 1,
+                    ),
             ),
           ),
           Expanded(child: SearchPageTabView()),

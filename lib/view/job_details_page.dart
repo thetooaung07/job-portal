@@ -10,7 +10,12 @@ class JobDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Apple Inc")),
+      appBar: AppBar(
+        title: Text("Apple Inc"),
+        backgroundColor: kBgColor,
+        foregroundColor: Colors.teal,
+        elevation: 0,
+      ),
       body: SizedBox(
         width: Get.width,
         child: Padding(
@@ -36,9 +41,10 @@ class JobDetailsPage extends StatelessWidget {
                       Expanded(
                         child: Container(
                           height: 60,
-                          decoration: BoxDecoration(color: Colors.teal),
-                          child: OutlinedButton(
-                            onPressed: () {},
+                          decoration: BoxDecoration(
+                              color: Colors.teal,
+                              borderRadius: BorderRadius.circular(15)),
+                          child: Center(
                             child: Text(
                               "Apply Now",
                               style: kTitleTextStyle.copyWith(
@@ -48,7 +54,7 @@ class JobDetailsPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: 20,
+                        width: 15,
                       ),
                       GestureDetector(
                         onTap: () {},
@@ -57,6 +63,7 @@ class JobDetailsPage extends StatelessWidget {
                             width: 60,
                             decoration: BoxDecoration(
                                 color: kSilverColor,
+                                borderRadius: BorderRadius.circular(10),
                                 border:
                                     Border.all(color: Colors.teal, width: 2)),
                             child: Icon(Icons.bookmark_border_rounded)),
@@ -79,18 +86,39 @@ class AboutJob extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15.0),
+      padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
-            children: [Text("Salary"), Text("85,000.00")],
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Salary",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              ),
+              Text("85,000.00")
+            ],
           ),
           Column(
-            children: [Text("Salary"), Text("85,000.00")],
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Location",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              ),
+              Text("USA")
+            ],
           ),
           Column(
-            children: [Text("Salary"), Text("85,000.00")],
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Posts",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              ),
+              Text("5")
+            ],
           ),
         ],
       ),

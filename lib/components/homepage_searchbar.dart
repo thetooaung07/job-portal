@@ -4,25 +4,36 @@ import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/search_title_controller.dart';
 import 'package:job_portal/routes/routes.dart';
 
-class HomePageSearchBar extends StatelessWidget {
+class HomePageSearchBar extends StatefulWidget {
   const HomePageSearchBar({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final TextEditingController _textController = TextEditingController();
-    final SearchTitleController _controller =
-        Get.put(SearchTitleController(), tag: "search_bar");
+  State<HomePageSearchBar> createState() => _HomePageSearchBarState();
+}
 
+class _HomePageSearchBarState extends State<HomePageSearchBar> {
+  final TextEditingController _textController = TextEditingController();
+  final SearchTitleController _controller =
+      Get.put(SearchTitleController(), tag: "search_bar");
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _textController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return TextFormField(
       controller: _textController,
       onChanged: (v) => _controller.getTitleFromSearchBar(v),
       onEditingComplete: () {
         _textController.text = _controller.searchTitle.value;
         _textController.clear();
-        FocusManager.instance.primaryFocus?.unfocus();
-
+        // FocusManager.instance.primaryFocus?.unfocus();
         Get.toNamed(RouteNames.search);
       },
       style: TextStyle(

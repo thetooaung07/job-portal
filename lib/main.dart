@@ -61,7 +61,10 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           leading: isDrawerOpen
               ? IconButton(
-                  icon: Icon(Icons.chevron_left),
+                  icon: Icon(
+                    Icons.chevron_left,
+                    size: 35,
+                  ),
                   onPressed: () {
                     setState(() {
                       xOffset = 0;

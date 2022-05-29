@@ -5,22 +5,22 @@ import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 
 List<Map<String, dynamic>> navBarItem = [
   {
-    "id": 1,
+    "index": 0,
     "icon": Icons.home_rounded,
     "label": "Home",
   },
   {
-    "id": 2,
+    "index": 1,
     "icon": Icons.work_rounded,
     "label": "Jobs",
   },
   {
-    "id": 3,
+    "index": 2,
     "icon": Icons.notifications_rounded,
     "label": "Notifications",
   },
   {
-    "id": 4,
+    "index": 3,
     "icon": Icons.person_rounded,
     "label": "Profile",
   },
@@ -31,8 +31,7 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BottomNavBarController _controller =
-        Get.put(BottomNavBarController());
+    final BottomNavBarController _controller = Get.find();
 
     return ClipRRect(
       borderRadius: BorderRadius.only(
@@ -52,12 +51,11 @@ class BottomNavBar extends StatelessWidget {
               return Expanded(
                 child: BottomNavBarItem(
                   onPressed: () {
-                    _controller.selectedIndex.value = item["id"];
+                    _controller.onPageChange(item["index"]);
                   },
-                  id: item["id"],
+                  index: item["index"],
                   label: item["label"],
                   icon: Icon(item["icon"]),
-                  selectedIndex: _controller.selectedIndex.value,
                 ),
               );
             },

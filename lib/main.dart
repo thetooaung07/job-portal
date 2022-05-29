@@ -4,8 +4,12 @@ import 'package:job_portal/components/bottom_navigation_bar/bottom_nav_bar.dart'
 import 'package:job_portal/components/homepage_searchbar.dart';
 import 'package:job_portal/components/popular_jobs.dart';
 import 'package:job_portal/components/recent_posts.dart';
+import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/view/app_drawer.dart';
+import 'package:job_portal/view/jobs_page.dart';
+import 'package:job_portal/view/notifications_page.dart';
+import 'package:job_portal/view/profile_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,20 +43,22 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomePageWrapper extends StatefulWidget {
+  const HomePageWrapper({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePageWrapper> createState() => _HomePageWrapperState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageWrapperState extends State<HomePageWrapper> {
   double xOffset = 0;
   double yOffset = 0;
   double scaleFactor = 1;
   bool isDrawerOpen = false;
 
   int selectedIndex = 1;
+  final BottomNavBarController _controller = Get.put(BottomNavBarController());
+
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
@@ -94,21 +100,41 @@ class _HomePageState extends State<HomePage> {
             )
           ],
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              //Search Bar
-              Padding(
-                  padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-                  child: HomePageSearchBar()),
-              //Popular Job
-              PopularJobs(),
-              //Recent Post
-              RecentPosts(),
-            ],
-          ),
+        body: PageView(
+          children: [
+            HomePage(),
+            JobsPage(),
+            NotificationsPage(),
+            ProfilePage(),
+          ],
+          controller: _controller.pageController,
+          onPageChanged: (value) {
+            _controller.onPageChange(value);
+          },
         ),
         bottomNavigationBar: BottomNavBar(),
+      ),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          //Search Bar
+          Padding(
+              padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+              child: HomePageSearchBar()),
+          //Popular Job
+          PopularJobs(),
+          //Recent Post
+          RecentPosts(),
+        ],
       ),
     );
   }
@@ -128,7 +154,7 @@ class _BaseWrapperState extends State<BaseWrapper> {
       body: Stack(
         children: [
           AppDrawer(),
-          HomePage(),
+          HomePageWrapper(),
         ],
       ),
     );

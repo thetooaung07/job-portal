@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/components/bottom_navigation_bar/bottom_nav_bar_item.dart';
+import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 
 List<Map<String, dynamic>> navBarItem = [
   {
@@ -25,43 +26,43 @@ List<Map<String, dynamic>> navBarItem = [
   },
 ];
 
-class BottomNavBar extends StatefulWidget {
+class BottomNavBar extends StatelessWidget {
   const BottomNavBar({Key? key}) : super(key: key);
 
   @override
-  State<BottomNavBar> createState() => _BottomNavBarState();
-}
-
-class _BottomNavBarState extends State<BottomNavBar> {
-  int _selectedIndex = 1;
-
-  @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: 40, right: 40),
-      height: 60,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
-        ),
+    final BottomNavBarController _controller =
+        Get.put(BottomNavBarController());
+
+    return ClipRRect(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(30),
+        topRight: Radius.circular(30),
       ),
-      width: Get.width,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: navBarItem.map(
-          (item) {
-            return BottomNavBarItem(
-              onPressed: () => setState(() {
-                _selectedIndex = item["id"];
-              }),
-              id: item["id"],
-              label: item["label"],
-              icon: Icon(item["icon"]),
-              selectedIndex: _selectedIndex,
-            );
-          },
-        ).toList(),
+      child: Container(
+        height: 60,
+        decoration: BoxDecoration(
+          color: Colors.red,
+        ),
+        width: Get.width,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: navBarItem.map(
+            (item) {
+              return Expanded(
+                child: BottomNavBarItem(
+                  onPressed: () {
+                    _controller.selectedIndex.value = item["id"];
+                  },
+                  id: item["id"],
+                  label: item["label"],
+                  icon: Icon(item["icon"]),
+                  selectedIndex: _controller.selectedIndex.value,
+                ),
+              );
+            },
+          ).toList(),
+        ),
       ),
     );
   }

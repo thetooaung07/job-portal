@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 
 class BottomNavBarItem extends StatelessWidget {
   final String label;
@@ -18,17 +20,29 @@ class BottomNavBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed,
-      child: Container(
-        decoration: BoxDecoration(
-            color: selectedIndex == id ? Colors.teal : Colors.white),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            icon,
-            Text(label),
-          ],
+    final BottomNavBarController _controller = Get.find();
+
+    print("${_controller.selectedIndex.value}");
+
+    return Obx(
+      () => InkWell(
+        onTap: onPressed,
+        child: Container(
+          // width: (Get.width - 80) / 4,
+          decoration: BoxDecoration(
+              color: _controller.selectedIndex.value == id
+                  ? Colors.teal
+                  : Colors.transparent),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              icon,
+              Text(
+                label,
+                style: TextStyle(overflow: TextOverflow.ellipsis),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
 
 class BottomNavBarController extends GetxController {
-  bool isSelected = false;
+  RxInt selectedIndex = 1.obs;
+  void onPageChange(value) {
+    selectedIndex.value = value;
+  }
 }

@@ -20,7 +20,6 @@ class _HomePageSearchBarState extends State<HomePageSearchBar> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _textController.dispose();
     super.dispose();
   }
@@ -33,7 +32,7 @@ class _HomePageSearchBarState extends State<HomePageSearchBar> {
       onEditingComplete: () {
         _textController.text = _controller.searchTitle.value;
         _textController.clear();
-        // FocusManager.instance.primaryFocus?.unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
         Get.toNamed(RouteNames.search);
       },
       style: TextStyle(
@@ -41,12 +40,11 @@ class _HomePageSearchBarState extends State<HomePageSearchBar> {
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
-        suffixIcon: IconButton(
-          splashRadius: null,
-          icon: Icon(Icons.manage_search_rounded),
-          onPressed: () {
+        suffixIcon: GestureDetector(
+          onTap: () {
             Get.toNamed(RouteNames.search);
           },
+          child: Icon(Icons.manage_search_rounded),
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 20),
         hintText: "Search job",

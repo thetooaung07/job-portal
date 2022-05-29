@@ -108,6 +108,7 @@ class _HomePageWrapperState extends State<HomePageWrapper> {
             ProfilePage(),
           ],
           controller: _controller.pageController,
+          physics: NeverScrollableScrollPhysics(),
           onPageChanged: (value) {
             _controller.onPageChange(value);
           },

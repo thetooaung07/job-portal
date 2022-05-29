@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:job_portal/components/bottom_navigation_bar/bottom_nav_bar.dart';
 import 'package:job_portal/components/homepage_searchbar.dart';
 import 'package:job_portal/components/popular_jobs.dart';
 import 'package:job_portal/components/recent_posts.dart';
@@ -49,8 +50,9 @@ class _HomePageState extends State<HomePage> {
   double xOffset = 0;
   double yOffset = 0;
   double scaleFactor = 1;
-
   bool isDrawerOpen = false;
+
+  int selectedIndex = 1;
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
@@ -106,6 +108,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
+        bottomNavigationBar: BottomNavBar(),
       ),
     );
   }

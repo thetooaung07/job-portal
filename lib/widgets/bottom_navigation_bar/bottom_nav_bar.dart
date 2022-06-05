@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:job_portal/components/bottom_navigation_bar/bottom_nav_bar_item.dart';
+import 'package:job_portal/widgets/bottom_navigation_bar/bottom_nav_bar_item.dart';
 import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 
 List<Map<String, dynamic>> navBarItem = [

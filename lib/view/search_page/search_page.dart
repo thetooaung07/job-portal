@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:job_portal/components/searchbar.dart';
+import 'package:job_portal/widgets/searchbar.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/search_title_controller.dart';
 import 'package:job_portal/view/search_page/filter_bottom_sheet.dart';

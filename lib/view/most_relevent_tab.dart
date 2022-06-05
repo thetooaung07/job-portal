@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:job_portal/components/recent_posts.dart';
+import 'package:job_portal/widgets/job-post-card-vt.dart';
+import 'package:job_portal/widgets/recent-posts.container.dart';
 
 class MostReleventTab extends StatelessWidget {
   const MostReleventTab({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class MostReleventTab extends StatelessWidget {
       padding: const EdgeInsets.only(top: 25.0),
       child: ListView.builder(
         itemCount: 10,
-        itemBuilder: (context, index) => RecentPostCard(),
+        itemBuilder: (context, index) => JobPostCardVt(),
       ),
     );
   }

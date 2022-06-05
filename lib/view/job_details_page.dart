@@ -18,9 +18,9 @@ class JobDetailsPage extends StatelessWidget {
       ),
       body: SizedBox(
         width: Get.width,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25),
-          child: SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

@@ -94,7 +94,7 @@ class _HomePageWrapperState extends State<HomePageWrapper> {
                   },
                 ),
           actions: const [
-            Icon(Icons.person),
+            Icon(Icons.search_rounded),
             SizedBox(
               width: 15,
             )
@@ -129,9 +129,10 @@ class HomePage extends StatelessWidget {
       child: Column(
         children: [
           //Search Bar
-          Padding(
-              padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-              child: HomePageSearchBar()),
+          // Padding(
+          //   padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+          //   child: HomePageSearchBar(),
+          // ),
           //Popular Job
           PopularJobsContainer(),
           //Recent Post
@@ -142,23 +143,23 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class BaseWrapper extends StatefulWidget {
-  const BaseWrapper({Key? key}) : super(key: key);
+// class BaseWrapper extends StatefulWidget {
+//   const BaseWrapper({Key? key}) : super(key: key);
 
-  @override
-  State<BaseWrapper> createState() => _BaseWrapperState();
-}
+//   @override
+//   State<BaseWrapper> createState() => _BaseWrapperState();
+// }
 
-class _BaseWrapperState extends State<BaseWrapper> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          AppDrawer(),
-          HomePageWrapper(),
-        ],
-      ),
-    );
-  }
-}
+// class _BaseWrapperState extends State<BaseWrapper> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Stack(
+//         children: [
+//           AppDrawer(),
+//           HomePageWrapper(),
+//         ],
+//       ),
+//     );
+//   }
+// }

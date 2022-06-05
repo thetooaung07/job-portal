@@ -22,7 +22,7 @@ class RouteNames {
 routes() => [
       GetPage(
         name: RouteNames.home,
-        page: () => const BaseWrapper(),
+        page: () => const HomePageWrapper(),
       ),
       GetPage(
         name: RouteNames.popularJobs,

@@ -20,9 +20,11 @@ class ShowAllTextBanner extends StatelessWidget {
             title,
             style: kHeaderTextStyle,
           ),
-          TextButton(
+          IconButton(
+            splashRadius: 17,
+            splashColor: Colors.white,
             onPressed: onPressed,
-            child: Text("See All"),
+            icon: Icon(Icons.more_horiz_rounded),
           ),
         ],
       ),

@@ -12,7 +12,7 @@ class JobDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Apple Inc"),
-        backgroundColor: kBgColor,
+        backgroundColor: themeBgColor,
         foregroundColor: Colors.teal,
         elevation: 0,
       ),
@@ -47,7 +47,7 @@ class JobDetailsPage extends StatelessWidget {
                           child: Center(
                             child: Text(
                               "Apply Now",
-                              style: kTitleTextStyle.copyWith(
+                              style: kLabelTextStyle.copyWith(
                                   fontSize: 20, color: Colors.white),
                             ),
                           ),
@@ -167,7 +167,7 @@ class Responsibilities extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 15),
           child: Text(
             "Responsibilities",
-            style: kTitleTextStyle,
+            style: kLabelTextStyle,
           ),
         ),
         Padding(
@@ -212,7 +212,7 @@ class Qualifications extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 15),
           child: Text(
             "Minimum Qualifications",
-            style: kTitleTextStyle,
+            style: kLabelTextStyle,
           ),
         ),
         Padding(

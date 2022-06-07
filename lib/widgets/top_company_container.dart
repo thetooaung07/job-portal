@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/widgets/job-post-card-hr.dart';
 import 'package:job_portal/widgets/showAllTextBanner.dart';
-import 'package:job_portal/constants.dart';
 import 'package:job_portal/routes/routes.dart';
 
-class PopularJobsContainer extends StatelessWidget {
-  const PopularJobsContainer({Key? key}) : super(key: key);
+class TopCompanyContainer extends StatelessWidget {
+  const TopCompanyContainer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +13,7 @@ class PopularJobsContainer extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ShowAllTextBanner(
-          title: "Popular Jobs",
+          title: "Top Company",
           onPressed: () => Get.toNamed(RouteNames.popularJobs),
         ),
         Container(

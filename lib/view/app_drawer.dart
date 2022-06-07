@@ -79,7 +79,7 @@ class AppDrawer extends StatelessWidget {
                         ),
                         Text(
                           item["title"],
-                          style: kTitleTextStyle.copyWith(
+                          style: kLabelTextStyle.copyWith(
                               color: Color.fromARGB(167, 255, 255, 255)),
                         ),
                       ],
@@ -101,7 +101,7 @@ class AppDrawer extends StatelessWidget {
                   ),
                   Text(
                     "Settings",
-                    style: kTitleTextStyle.copyWith(
+                    style: kLabelTextStyle.copyWith(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                   Container(
@@ -112,7 +112,7 @@ class AppDrawer extends StatelessWidget {
                   ),
                   Text(
                     "Log Out",
-                    style: kTitleTextStyle.copyWith(
+                    style: kLabelTextStyle.copyWith(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   )
                 ],

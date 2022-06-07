@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:job_portal/routes/routes.dart';
 
 class BottomNavBarController extends GetxController {
   RxInt selectedIndex = 0.obs;

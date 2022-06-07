@@ -20,7 +20,7 @@ class FilterBottomSheet extends StatelessWidget {
       width: Get.width,
       height: Get.height * 0.8,
       decoration: BoxDecoration(
-        color: kBgColor,
+        color: themeBgColor,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(50),
           topRight: Radius.circular(50),
@@ -73,7 +73,7 @@ class FilterBottomSheet extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
               child: Text(
                 "Job Type",
-                style: kTitleTextStyle,
+                style: kLabelTextStyle,
               ),
             ),
             Expanded(
@@ -112,7 +112,7 @@ class FilterBottomSheet extends StatelessWidget {
                 onPressed: () {},
                 child: Text(
                   "Apply Filters",
-                  style: kTitleTextStyle.copyWith(
+                  style: kLabelTextStyle.copyWith(
                       fontSize: 20, letterSpacing: 1.5, color: Colors.white),
                 ),
               ),
@@ -162,7 +162,7 @@ class LabelDropDownBtn extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 15.0),
             child: Text(
               label,
-              style: kTitleTextStyle,
+              style: kLabelTextStyle,
             ),
           ),
           Container(

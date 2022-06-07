@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_portal/widgets/job-post-card-vt.dart';
-import 'package:job_portal/widgets/recent-posts.container.dart';
+import 'package:job_portal/widgets/suggested_job_container.dart';
 
 class MostReleventTab extends StatelessWidget {
   const MostReleventTab({Key? key}) : super(key: key);

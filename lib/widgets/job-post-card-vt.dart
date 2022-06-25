@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 
 class JobPostCardVt extends StatelessWidget {
@@ -7,121 +8,57 @@ class JobPostCardVt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 7),
+      padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
       margin: EdgeInsets.only(
           left: kSpacingUnit * 1.5,
           right: kSpacingUnit * 1.5,
           bottom: kSpacingUnit * 2),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.teal)
+          border: Border.all(color: Colors.transparent)
           // TODO: Add colors and remove Card later
           // color: Colors.teal,
           ),
-      height: 125,
-      // child: Row(
-      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //   children: [
-      //     Column(
-      //       mainAxisAlignment: MainAxisAlignment.center,
-      //       children: [
-      //         Container(
-      //           margin: EdgeInsets.only(right: 15),
-      //           color: Colors.cyan,
-      //           width: 45,
-      //           height: 45,
-      //         ),
-      //       ],
-      //     ),
-      //     Expanded(
-      //       child: Column(
-      //         mainAxisAlignment: MainAxisAlignment.center,
-      //         crossAxisAlignment: CrossAxisAlignment.start,
-      //         children: [
-      //           Padding(
-      //             padding: const EdgeInsets.only(bottom: 7.0),
-      //             child: Row(
-      //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //               children: [
-      //                 Column(
-      //                   crossAxisAlignment: CrossAxisAlignment.start,
-      //                   children: [
-      //                     Text("Facebook"),
-      //                     Text(
-      //                       "UI/UX Designer",
-      //                       style: kTitleTextStyle,
-      //                     ),
-      //                   ],
-      //                 ),
-      //                 Icon(Icons.favorite_outline),
-      //               ],
-      //             ),
-      //           ),
-      //           // Padding(
-      //           //   padding: const EdgeInsets.only(bottom: 10.0),
-      //           //   child: Text(
-      //           //     "UI/UX Designer",
-      //           //     style: kTitleTextStyle,
-      //           //   ),
-      //           // ),
-      //           Row(
-      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //             children: [
-      //               Expanded(
-      //                 child: Column(
-      //                   crossAxisAlignment: CrossAxisAlignment.start,
-      //                   children: [
-      //                     Row(
-      //                       children: [
-      //                         Text("\$140K/month"),
-      //                         SizedBox(
-      //                           width: 20,
-      //                         ),
-      //                         Flexible(
-      //                           child: Text(
-      //                             "USA Califonia sadasda",
-      //                             overflow: TextOverflow.ellipsis,
-      //                           ),
-      //                         ),
-      //                       ],
-      //                     ),
-      //                     SizedBox(
-      //                       height: 3,
-      //                     ),
-      //                     Text("Full-time asdadasdasd"),
-      //                   ],
-      //                 ),
-      //               ),
-      //               SizedBox(
-      //                 width: 20,
-      //               ),
-      //               Text("12h"),
-      //             ],
-      //           ),
-      //         ],
-      //       ),
-      //     ),
-      //   ],
-      // ),
-
+      height: 100,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     margin: EdgeInsets.only(right: 15),
                     color: Colors.cyan,
-                    width: 60,
-                    height: 60,
+                    width: 50,
+                    height: 50,
                   ),
-                  Text("junior Node.js Developer"),
+                  SizedBox(
+                    height: 50,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 2,
+                        ),
+                        Text(
+                          "Nodejs Developer",
+                          style: kJobPositionTextStyle,
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text("Facebook"),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-              Icon(Icons.favorite_outline_rounded),
+              // Icon(Icons.favorite_outline_rounded),
+              Text("\$15,00/Mo")
             ],
           ),
           Row(
@@ -129,12 +66,20 @@ class JobPostCardVt extends StatelessWidget {
             children: [
               Row(
                 children: [
+                  Icon(
+                    Icons.location_on_outlined,
+                    size: 18,
+                  ),
                   Text("Full Time"),
                   SizedBox(width: 15),
+                  Icon(
+                    Icons.workspace_premium_outlined,
+                    size: 18,
+                  ),
                   Text("Mid-Senior"),
                 ],
               ),
-              Text("2 hr ago")
+              Text("${bullet}2 hr")
             ],
           ),
         ],

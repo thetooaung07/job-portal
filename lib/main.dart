@@ -33,56 +33,61 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: themeBgColor,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            MyAppBar(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomButton(
-                        child: Icon(
-                          Icons.notifications_none_rounded,
-                          size: 30,
-                          color: Colors.black,
+      backgroundColor: themeBgMainColor,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              MyAppBar(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomIconButton(
+                          child: Icon(
+                            Icons.notifications_none_rounded,
+                            size: 30,
+                            color: Colors.black,
+                          ),
                         ),
-                      ),
-                      Text(
-                        "QWERTY",
-                        style: kLogoTextStyle,
-                      ),
-                      CustomButton(
-                        child: Icon(
-                          Icons.search_rounded,
-                          size: 30,
-                          color: Colors.black,
+                        Text(
+                          "QWERTY",
+                          style: kLogoTextStyle,
                         ),
-                      ),
-                    ]),
+                        CustomIconButton(
+                          child: Icon(
+                            Icons.search_rounded,
+                            size: 30,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ]),
+                ),
               ),
-            ),
-            //Search Bar
-            // Padding(
-            //   padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-            //   child: HomePageSearchBar(),
-            // ),
-            //Popular Job
-            TopCompanyContainer(),
-            //Recent Post
-            SuggestedJobContainer(),
-          ],
+              //Search Bar
+              // Padding(
+              //   padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+              //   child: HomePageSearchBar(),
+              // ),
+              //Popular Job
+              TopCompanyContainer(),
+              //Recent Post
+              SuggestedJobContainer(),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-class CustomButton extends StatelessWidget {
+class CustomIconButton extends StatelessWidget {
   final Widget child;
-  const CustomButton({Key? key, required this.child}) : super(key: key);
+  final Color btnBgColor;
+  const CustomIconButton(
+      {Key? key, required this.child, this.btnBgColor = btnBgColorWhite})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +96,7 @@ class CustomButton extends StatelessWidget {
         width: 35,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: btnBgColorWhite,
+          color: btnBgColor,
         ),
         child: child);
   }

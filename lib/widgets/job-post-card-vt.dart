@@ -14,11 +14,13 @@ class JobPostCardVt extends StatelessWidget {
           right: kSpacingUnit * 1.5,
           bottom: kSpacingUnit * 2),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.transparent)
-          // TODO: Add colors and remove Card later
-          // color: Colors.teal,
-          ),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.white),
+        boxShadow: [kCardShadow],
+        color: Colors.white,
+        // TODO: Add colors and remove Card later
+        // color: Colors.teal,
+      ),
       height: 100,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -31,7 +33,7 @@ class JobPostCardVt extends StatelessWidget {
                 children: [
                   Container(
                     margin: EdgeInsets.only(right: 15),
-                    color: Colors.cyan,
+                    color: Colors.red,
                     width: 50,
                     height: 50,
                   ),

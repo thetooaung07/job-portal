@@ -12,7 +12,8 @@ class ShowAllTextBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: kSpacingUnit * 2, vertical: kSpacingUnit * 1.5),
+        horizontal: kSpacingUnit * 2,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

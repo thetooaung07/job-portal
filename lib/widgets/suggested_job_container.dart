@@ -15,6 +15,9 @@ class SuggestedJobContainer extends StatelessWidget {
           title: "Suggested Job",
           onPressed: () => Get.toNamed(RouteNames.recentPosts),
         ),
+        SizedBox(
+          height: 15,
+        ),
         JobPostCardVt(),
         JobPostCardVt(),
         JobPostCardVt(),

@@ -31,11 +31,12 @@ const TextStyle kJobPositionTextStyle = TextStyle(
   fontWeight: FontWeight.w500,
 );
 const BoxShadow kCardShadow = BoxShadow(
-  color: Color.fromARGB(41, 0, 0, 0),
-  blurRadius: 2,
-  offset: Offset(1, 1),
-  spreadRadius: 1,
+  color: Color.fromARGB(20, 0, 0, 0),
+  blurRadius: 5,
+  offset: Offset(2, 1),
+  spreadRadius: 2,
 );
+
 // TODO: Change font size initialize for error removing
 
 const Color kSilverColor = Color(0xFFF6F7FB);

@@ -18,12 +18,12 @@ class TopCompanyContainer extends StatelessWidget {
         ),
         Container(
           padding: EdgeInsets.only(left: 10),
-          height: 200,
+          height: 210,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: 5,
             itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.all(5.0),
+              padding: const EdgeInsets.only(bottom: 20.0, top: 10),
               child: JobPostCardHr(),
             ),
           ),

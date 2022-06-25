@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/main.dart';
+import 'package:job_portal/widgets/my_app_bar.dart';
 
 class JobDetailsPage extends StatelessWidget {
   const JobDetailsPage({Key? key}) : super(key: key);
@@ -10,118 +12,118 @@ class JobDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Apple Inc"),
-        backgroundColor: themeBgColor,
-        foregroundColor: Colors.teal,
-        elevation: 0,
-      ),
-      body: SizedBox(
-        width: Get.width,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // Company Logo
-                CompanyLogo(),
-                // 3 Column Row
-                AboutJob(),
-                //Responsibilites
-                Responsibilities(),
-                // Qualifications
-                Qualifications(),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // App Bar
 
-                //ApplyNowBtn
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
-                  child: Row(
+            MyAppBar(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(
-                        child: Container(
-                          height: 60,
-                          decoration: BoxDecoration(
-                              color: Colors.teal,
-                              borderRadius: BorderRadius.circular(15)),
-                          child: Center(
-                            child: Text(
-                              "Apply Now",
-                              style: kLabelTextStyle.copyWith(
-                                  fontSize: 20, color: Colors.white),
-                            ),
-                          ),
+                      CustomIconButton(
+                        onTap: () {},
+                        child: Icon(
+                          Icons.notifications_none_rounded,
+                          size: 30,
+                          color: Colors.black,
                         ),
                       ),
-                      SizedBox(
-                        width: 15,
+                      Text(
+                        "Detail",
+                        style: kLogoTextStyle,
                       ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                            height: 60,
-                            width: 60,
-                            decoration: BoxDecoration(
-                                color: kSilverColor,
-                                borderRadius: BorderRadius.circular(10),
-                                border:
-                                    Border.all(color: Colors.teal, width: 2)),
-                            child: Icon(Icons.bookmark_border_rounded)),
+                      CustomIconButton(
+                        child: Icon(
+                          Icons.search_rounded,
+                          size: 30,
+                          color: Colors.black,
+                        ),
                       ),
-                    ],
-                  ),
-                ),
-              ],
+                    ]),
+              ),
             ),
-          ),
+
+            // Company Logo
+            CompanyLogo(),
+            // 3 Column Row
+            JobTab(),
+            //Responsibilites
+            Responsibilities(),
+            // Qualifications
+            Qualifications(),
+
+            //ApplyNowBtn
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 60,
+                      decoration: BoxDecoration(
+                          color: Colors.teal,
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Center(
+                        child: Text(
+                          "Apply Now",
+                          style: kLabelTextStyle.copyWith(
+                              fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            color: kSilverColor,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.teal, width: 2)),
+                        child: Icon(Icons.bookmark_border_rounded)),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-class AboutJob extends StatelessWidget {
-  const AboutJob({Key? key}) : super(key: key);
+class JobTab extends StatefulWidget {
+  const JobTab({Key? key}) : super(key: key);
 
   @override
+  State<JobTab> createState() => _JobTabState();
+}
+
+class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
+  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Salary",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-              ),
-              Text("85,000.00")
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Location",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-              ),
-              Text("USA")
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Posts",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-              ),
-              Text("5")
-            ],
-          ),
-        ],
-      ),
+    TabController _tabController = TabController(length: 3, vsync: this);
+
+    return Container(
+      child: TabBar(controller: _tabController, tabs: [
+        Tab(
+          text: "Overview",
+        ),
+        Tab(
+          text: "Company",
+        ),
+        Tab(
+          text: "Review",
+        ),
+      ]),
     );
   }
 }
@@ -136,19 +138,22 @@ class CompanyLogo extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 10),
             alignment: Alignment.center,
-            width: 100,
-            height: 100,
-            decoration: BoxDecoration(color: Colors.teal),
+            width: 75,
+            height: 75,
+            decoration: BoxDecoration(color: Colors.red),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 8.0, bottom: 5),
+            padding: const EdgeInsets.only(top: 20.0, bottom: 10),
             child: Text(
-              "Apple Inc",
+              "UI/ UX Designer",
+              style: kHeaderTextStyle,
             ),
           ),
-          Text("Singapore, Contract"),
+          Text(
+            "Youtube",
+            style: kCaptionTextStyle,
+          ),
         ],
       ),
     );
@@ -170,31 +175,10 @@ class Responsibilities extends StatelessWidget {
             style: kLabelTextStyle,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
-          child: Text(
-              "Works effectively blah Blah and Dlutter is really good blah and Lorem Ipsum Askman Thether "),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
-          child: Text(
-              "Works effectively blah Blah and Dlutter is really good blah and Lorem Ipsum Askman Thether "),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
-          child: Text(
-              "Works effectively blah Blah and Dlutter is really good blah and Lorem Ipsum Askman Thether "),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
-          child: Text(
-              "Works effectively blah Blah and Dlutter is really good blah and Lorem Ipsum Askman Thether "),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
-          child: Text(
-              "Works effectively blah Blah and Dlutter is really good blah and Lorem Ipsum Askman Thether "),
-        ),
+        BulletText(),
+        BulletText(),
+        BulletText(),
+        BulletText(),
       ],
     );
   }
@@ -215,32 +199,41 @@ class Qualifications extends StatelessWidget {
             style: kLabelTextStyle,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
-          child: Text(
-              "Works effectively blah Blah and Dlutter is really good blah and Lorem Ipsum Askman Thether "),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
-          child: Text(
-              "Works effectively blah Blah and Dlutter is really good blah and Lorem Ipsum Askman Thether "),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
-          child: Text(
-              "Works effectively blah Blah and Dlutter is really good blah and Lorem Ipsum Askman Thether "),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
-          child: Text(
-              "Works effectively blah Blah and Dlutter is really good blah and Lorem Ipsum Askman Thether "),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
-          child: Text(
-              "Works effectively blah Blah and Dlutter is really good blah and Lorem Ipsum Askman Thether "),
-        ),
+        BulletText(),
+        BulletText(),
+        BulletText(),
+        BulletText(),
       ],
+    );
+  }
+}
+
+class BulletText extends StatelessWidget {
+  const BulletText({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 1.5),
+            child: Icon(
+              Icons.fiber_manual_record_rounded,
+              size: 11,
+            ),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          Expanded(
+            child: Text(
+                "Works effectively blah Blah and Dlutter is really good blah and Lorem Ipsum Askman Thether "),
+          ),
+        ],
+      ),
     );
   }
 }

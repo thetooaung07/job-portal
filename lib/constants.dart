@@ -36,7 +36,12 @@ const BoxShadow kCardShadow = BoxShadow(
   offset: Offset(2, 1),
   spreadRadius: 2,
 );
-
+const BoxShadow kIconShadow = BoxShadow(
+  color: Color.fromARGB(19, 122, 122, 122),
+  blurRadius: 2,
+  offset: Offset(0, 0),
+  spreadRadius: 4,
+);
 // TODO: Change font size initialize for error removing
 
 const Color kSilverColor = Color(0xFFF6F7FB);

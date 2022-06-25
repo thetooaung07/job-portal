@@ -56,6 +56,7 @@ class HomePage extends StatelessWidget {
                           style: kLogoTextStyle,
                         ),
                         CustomIconButton(
+                          onTap: (() => Get.toNamed(RouteNames.search)),
                           child: Icon(
                             Icons.search_rounded,
                             size: 30,
@@ -85,19 +86,26 @@ class HomePage extends StatelessWidget {
 class CustomIconButton extends StatelessWidget {
   final Widget child;
   final Color btnBgColor;
+  final void Function()? onTap;
   const CustomIconButton(
-      {Key? key, required this.child, this.btnBgColor = btnBgColorWhite})
+      {Key? key,
+      required this.child,
+      this.onTap,
+      this.btnBgColor = btnBgColorWhite})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: 35,
-        width: 35,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: btnBgColor,
-        ),
-        child: child);
+    return GestureDetector(
+      onTap: onTap ?? null,
+      child: Container(
+          height: 35,
+          width: 35,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: btnBgColor,
+              boxShadow: [kIconShadow]),
+          child: child),
+    );
   }
 }

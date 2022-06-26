@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/routes/routes.dart';
@@ -34,11 +35,13 @@ class JobPostCardVt extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      margin: EdgeInsets.only(right: 15),
-                      color: Colors.red,
-                      width: 50,
+                    SvgPicture.asset(
+                      "assets/icons/logo_youtube.svg",
                       height: 50,
+                      width: 50,
+                    ),
+                    SizedBox(
+                      width: 20,
                     ),
                     SizedBox(
                       height: 50,
@@ -46,9 +49,6 @@ class JobPostCardVt extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            height: 2,
-                          ),
                           Text(
                             "Nodejs Developer",
                             style: kJobPositionTextStyle,
@@ -63,7 +63,7 @@ class JobPostCardVt extends StatelessWidget {
                   ],
                 ),
                 // Icon(Icons.favorite_outline_rounded),
-                Text("\$15,00/Mo")
+                Text("\$1299/Mo")
               ],
             ),
             Row(
@@ -84,7 +84,7 @@ class JobPostCardVt extends StatelessWidget {
                     Text("Mid-Senior"),
                   ],
                 ),
-                Text("${bullet}2 hr")
+                Text("${bullet}23 min ago")
               ],
             ),
           ],

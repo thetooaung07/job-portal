@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/main.dart';
@@ -295,11 +296,10 @@ class CompanyLogo extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 15.0),
       child: Column(
         children: [
-          Container(
-            alignment: Alignment.center,
-            width: 75,
+          SvgPicture.asset(
+            "assets/icons/logo_youtube.svg",
             height: 75,
-            decoration: BoxDecoration(color: Colors.red),
+            width: 75,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20.0, bottom: 10),

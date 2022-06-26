@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/main.dart';
@@ -30,10 +31,10 @@ class JobPostCardHr extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Container(
+                  SvgPicture.asset(
+                    "assets/icons/logo_youtube.svg",
                     height: 50,
                     width: 50,
-                    color: Colors.red,
                   ),
                   SizedBox(
                     width: 15,

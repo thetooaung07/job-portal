@@ -12,7 +12,8 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SearchTitleController _controller = Get.find(tag: "search_bar");
+    final SearchTitleController _controller =
+        Get.put(SearchTitleController(), tag: "search_bar");
 
     return Scaffold(
       // backgroundColor: Color.fromRGBO(251, 251, 251, 1),

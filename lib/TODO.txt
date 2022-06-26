@@ -1,1 +1,2 @@
 Main Page > Top Company Card Shadow Radius blur etc.
+continue tab_bar in job_details page

@@ -52,47 +52,47 @@ class JobDetailsPage extends StatelessWidget {
             // 3 Column Row
             JobTab(),
             //Responsibilites
-            Responsibilities(),
-            // Qualifications
-            Qualifications(),
+            // Responsibilities(),
+            // // Qualifications
+            // Qualifications(),
 
             //ApplyNowBtn
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 60,
-                      decoration: BoxDecoration(
-                          color: Colors.teal,
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Center(
-                        child: Text(
-                          "Apply Now",
-                          style: kLabelTextStyle.copyWith(
-                              fontSize: 20, color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                            color: kSilverColor,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.teal, width: 2)),
-                        child: Icon(Icons.bookmark_border_rounded)),
-                  ),
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(vertical: 20.0),
+            //   child: Row(
+            //     children: [
+            //       Expanded(
+            //         child: Container(
+            //           height: 60,
+            //           decoration: BoxDecoration(
+            //               color: Colors.teal,
+            //               borderRadius: BorderRadius.circular(15)),
+            //           child: Center(
+            //             child: Text(
+            //               "Apply Now",
+            //               style: kLabelTextStyle.copyWith(
+            //                   fontSize: 20, color: Colors.white),
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //       SizedBox(
+            //         width: 15,
+            //       ),
+            //       GestureDetector(
+            //         onTap: () {},
+            //         child: Container(
+            //             height: 60,
+            //             width: 60,
+            //             decoration: BoxDecoration(
+            //                 color: kSilverColor,
+            //                 borderRadius: BorderRadius.circular(10),
+            //                 border: Border.all(color: Colors.teal, width: 2)),
+            //             child: Icon(Icons.bookmark_border_rounded)),
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -112,18 +112,56 @@ class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 3, vsync: this);
 
-    return Container(
-      child: TabBar(controller: _tabController, tabs: [
-        Tab(
-          text: "Overview",
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          decoration: BoxDecoration(
+            color: themeBgColor,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Theme(
+            data: ThemeData().copyWith(
+                hoverColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent),
+            child: TabBar(
+              unselectedLabelColor: Colors.black,
+              indicatorSize: TabBarIndicatorSize.tab,
+              indicator: BoxDecoration(
+                color: btnBgColorRed,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              labelColor: Colors.white,
+              controller: _tabController,
+              tabs: [
+                Tab(
+                  text: "Overview",
+                ),
+                Tab(
+                  text: "Company",
+                ),
+                Tab(
+                  text: "Review",
+                ),
+              ],
+            ),
+          ),
         ),
-        Tab(
-          text: "Company",
+        Container(
+          width: Get.width,
+          height: 500,
+          child: TabBarView(
+            controller: _tabController,
+            children: [
+              Text("Tab Bar View 1"),
+              Text("Tab Bar View 2"),
+              Text("Tab Bar View 3"),
+            ],
+          ),
         ),
-        Tab(
-          text: "Review",
-        ),
-      ]),
+      ],
     );
   }
 }

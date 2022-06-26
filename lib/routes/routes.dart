@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:job_portal/binding/searchpage_binding.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/view/job_details_page.dart';
 import 'package:job_portal/view/jobs_page.dart';
@@ -34,6 +35,7 @@ routes() => [
       ),
       GetPage(
         name: RouteNames.search,
+        binding: SearchPageBinding(),
         page: () => const SearchPage(),
       ),
       GetPage(

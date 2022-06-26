@@ -40,9 +40,9 @@ const BoxShadow kCardShadow = BoxShadow(
 );
 const BoxShadow kIconShadow = BoxShadow(
   color: Color.fromARGB(19, 122, 122, 122),
-  blurRadius: 2,
-  offset: Offset(0, 0),
-  spreadRadius: 4,
+  blurRadius: 4,
+  offset: Offset(2, 2),
+  spreadRadius: 2,
 );
 // TODO: Change font size initialize for error removing
 

@@ -18,8 +18,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Job Portal',
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
+      theme: ThemeData().copyWith(
+        scaffoldBackgroundColor: Colors.white,
+        colorScheme:
+            ThemeData().colorScheme.copyWith(primary: kPrimaryRedColor),
       ),
       initialRoute: RouteNames.home,
       getPages: routes(),

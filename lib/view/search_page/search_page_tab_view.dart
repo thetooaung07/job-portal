@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:job_portal/constants.dart';
 import 'package:job_portal/view/most_relevent_tab.dart';
 import 'package:job_portal/view/recent_posts/most_recent_tab.dart';
 
@@ -34,7 +35,7 @@ class _SearchPageTabViewState extends State<SearchPageTabView>
               unselectedLabelColor: Colors.black,
               indicatorSize: TabBarIndicatorSize.tab,
               indicator: BoxDecoration(
-                color: Colors.teal,
+                color: kPrimaryRedColor,
                 borderRadius: BorderRadius.circular(50),
               ),
               controller: controller,

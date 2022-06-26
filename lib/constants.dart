@@ -4,11 +4,13 @@ const String bullet = "\u2022 ";
 
 const themeBgColor = Color.fromARGB(255, 245, 245, 245);
 const themeBgMainColor = Color.fromARGB(255, 253, 253, 253);
+const jobDetailsTabBgColor = Color.fromARGB(242, 240, 240, 240);
+
 //  TODO: Change Color to linear from up(dark) to down(light) like pale color at bottom
 const btnColor = Color.fromRGBO(35, 35, 35, 1);
 const btnBgColorWhite = Color.fromRGBO(255, 255, 255, 1);
 const btnBgColorGrey = Color.fromRGBO(35, 35, 35, 1);
-const btnBgColorRed = Color.fromRGBO(250, 88, 4, 1);
+const kPrimaryRedColor = Color.fromRGBO(250, 88, 4, 1);
 const double kSpacingUnit = 10;
 const TextStyle kHeaderTextStyle = TextStyle(
   fontSize: 20,

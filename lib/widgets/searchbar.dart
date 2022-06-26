@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/search_title_controller.dart';
-import 'package:job_portal/routes/routes.dart';
 
 class SearchBar extends StatefulWidget {
   final Widget? prefixIcon;
@@ -37,7 +36,7 @@ class _SearchBarState extends State<SearchBar> {
       controller: searchPageController,
       onChanged: (v) => _controller.getTitleFromSearchBar(v),
       style: TextStyle(
-        color: Color.fromARGB(162, 0, 0, 0),
+        color: kPrimaryRedColor,
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
@@ -50,15 +49,16 @@ class _SearchBarState extends State<SearchBar> {
         ),
         filled: true,
         fillColor: kSilverColor,
+
         enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
               color: Colors.white,
               width: 1,
             )),
 
         focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
               color: Colors.white,
               width: 1,

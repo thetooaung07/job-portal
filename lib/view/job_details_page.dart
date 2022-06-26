@@ -12,6 +12,7 @@ class JobDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: themeBgColor,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -23,9 +24,11 @@ class JobDetailsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomIconButton(
-                        onTap: () {},
+                        onTap: () {
+                          Get.back();
+                        },
                         child: Icon(
-                          Icons.notifications_none_rounded,
+                          Icons.chevron_left_rounded,
                           size: 30,
                           color: Colors.black,
                         ),
@@ -51,23 +54,10 @@ class JobDetailsPage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+        padding: EdgeInsets.fromLTRB(40, 10, 40, 15),
         color: Colors.white,
-        height: 100,
+        height: 80,
         child: ApplyNowBtn(),
-      ),
-    );
-  }
-}
-
-class JobTabs extends StatelessWidget {
-  const JobTabs({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        child: PageView(children: []),
       ),
     );
   }
@@ -104,7 +94,7 @@ class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
           padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
           margin: EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
-            color: themeBgColor,
+            color: jobDetailsTabBgColor,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Theme(
@@ -115,13 +105,11 @@ class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
             child: TabBar(
               onTap: (idx) {
                 tabIndex.value = idx;
-
-                print(idx);
               },
               unselectedLabelColor: Colors.black,
               indicatorSize: TabBarIndicatorSize.tab,
               indicator: BoxDecoration(
-                color: btnBgColorRed,
+                color: kPrimaryRedColor,
                 borderRadius: BorderRadius.circular(10),
               ),
               labelColor: Colors.white,
@@ -151,30 +139,6 @@ class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
             thirdTab: FirstTab(),
           ),
         )
-        // Container(
-        //   width: Get.width,
-        //   height: 550,
-        //   child: TabBarView(
-        //     controller: _tabController,
-        //     children: [
-        //       SingleChildScrollView(
-        // child: Column(
-        //   children: [
-        //     // Responsibilities
-        //     Responsibilities(),
-        //     // Qualifications
-        //     Qualifications(),
-        //     Qualifications(),
-        //     // ApplyNowBtn
-        //     // ApplyNowBtn(),
-        //   ],
-        // ),
-        // ),
-        //       Text("Tab Bar View 2"),
-        //       Text("Tab Bar View 3"),
-        //     ],
-        //   ),
-        // ),
       ],
     );
   }
@@ -185,16 +149,83 @@ class FirstTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // Responsibilities
-        Responsibilities(),
-        // Qualifications
-        Qualifications(),
-        Qualifications(),
-        // ApplyNowBtn
-        // ApplyNowBtn(),
-      ],
+    return Container(
+      child: Column(
+        children: [
+          //JobDescShort
+          JobDescShort(),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            decoration: BoxDecoration(
+                color: themeBgMainColor,
+                borderRadius: BorderRadius.circular(20)),
+            child: Column(children: [
+              // Requirements
+              Requirements(),
+              // Responsibilities
+              Responsibilities(),
+            ]),
+          ),
+
+          // ApplyNowBtn
+          // ApplyNowBtn(),
+        ],
+      ),
+    );
+  }
+}
+
+class JobDescShort extends StatelessWidget {
+  const JobDescShort({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // margin: EdgeInsets.symmetric(horizontal: 10),
+      padding: EdgeInsets.fromLTRB(50, 12, 50, 5),
+      decoration: BoxDecoration(
+        color: themeBgMainColor,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomIconButton(child: Icon(Icons.work_history_outlined)),
+              SizedBox(
+                height: 10,
+              ),
+              Text("Design"),
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomIconButton(child: Icon(Icons.location_on_outlined)),
+              SizedBox(
+                height: 10,
+              ),
+              Text("USA NewYork"),
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomIconButton(child: Icon(Icons.history_rounded)),
+              SizedBox(
+                height: 10,
+              ),
+              Text("Full Time"),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -229,7 +260,7 @@ class CustomTabBarView extends StatelessWidget {
         AnimatedContainer(
           child: secondTab,
           width: Get.width,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
           transform: Matrix4.translationValues(
               tabIndex == 1
                   ? 0
@@ -244,7 +275,7 @@ class CustomTabBarView extends StatelessWidget {
         AnimatedContainer(
           child: thirdTab,
           width: Get.width,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
           transform:
               Matrix4.translationValues(tabIndex == 2 ? 0 : Get.width, 0, 0),
           duration: Duration(milliseconds: 175),
@@ -296,9 +327,7 @@ class Responsibilities extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: 15,
-          ),
+          padding: EdgeInsets.only(bottom: 25, top: 10),
           child: Text(
             "Responsibilities",
             style: kLabelTextStyle,
@@ -313,8 +342,8 @@ class Responsibilities extends StatelessWidget {
   }
 }
 
-class Qualifications extends StatelessWidget {
-  const Qualifications({Key? key}) : super(key: key);
+class Requirements extends StatelessWidget {
+  const Requirements({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -322,9 +351,9 @@ class Qualifications extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 15),
+          padding: EdgeInsets.only(bottom: 25, top: 10),
           child: Text(
-            "Minimum Qualifications",
+            "Requirements",
             style: kLabelTextStyle,
           ),
         ),
@@ -387,8 +416,8 @@ class ApplyNowBtn extends StatelessWidget {
               style: kCaptionTextStyle,
             ),
             Text(
-              "\$1000/Mo",
-              style: kHeaderTextStyle.copyWith(color: btnBgColorRed),
+              "\$1000 / Month",
+              style: kHeaderTextStyle.copyWith(color: kPrimaryRedColor),
             ),
           ],
         ),

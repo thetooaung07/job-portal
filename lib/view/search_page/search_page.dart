@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:job_portal/main.dart';
+import 'package:job_portal/routes/routes.dart';
+import 'package:job_portal/widgets/my_app_bar.dart';
 import 'package:job_portal/widgets/searchbar.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/search_title_controller.dart';
@@ -16,14 +19,45 @@ class SearchPage extends StatelessWidget {
         Get.put(SearchTitleController(), tag: "search_bar");
 
     return Scaffold(
-      // backgroundColor: Color.fromRGBO(251, 251, 251, 1),
-      // backgroundColor: Color.fromARGB(255, 0, 0, 0),
-      appBar: AppBar(
-        title: Text("Search"),
-      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          MyAppBar(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomIconButton(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Icon(
+                        Icons.chevron_left_rounded,
+                        size: 30,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Text(
+                      "Search",
+                      style: kLogoTextStyle,
+                    ),
+                    CustomIconButton(
+                      onTap: () {
+                        Get.bottomSheet(FilterBottomSheet(),
+                            isScrollControlled: true);
+                      },
+                      child: Center(
+                          child: SvgPicture.asset(
+                        'assets/icons/slider_icon.svg',
+                        height: 20,
+                        width: 20,
+                        color: Colors.black,
+                      )),
+                    ),
+                  ]),
+            ),
+          ),
           SizedBox(
             height: 20,
           ),
@@ -32,34 +66,19 @@ class SearchPage extends StatelessWidget {
             child: Row(
               children: [
                 Flexible(
-                  child: SearchBar(),
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Get.bottomSheet(FilterBottomSheet(),
-                        isScrollControlled: true);
-                  },
-                  child: Container(
-                    height: 45,
-                    width: 45,
-                    decoration: BoxDecoration(
-                        color: Colors.teal,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Center(
-                        child: SvgPicture.asset(
-                      'assets/icons/slider_icon.svg',
-                      height: 20,
-                      width: 20,
-                      color: Colors.white,
-                    )),
+                  child: SearchBar(
+                    prefixIcon: Icon(Icons.search),
+                    suffixIcon: Icon(Icons.clear),
                   ),
                 ),
               ],
             ),
           ),
+          Container(
+              margin: EdgeInsets.all(10),
+              alignment: Alignment.center,
+              child: Text(
+                  "Below this is the section,later needed to Change UI.s")),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: Obx(
@@ -97,7 +116,7 @@ class SearchTag extends StatelessWidget {
       width: kSpacingUnit * 9,
       margin: EdgeInsets.only(left: kSpacingUnit),
       decoration: BoxDecoration(
-        color: Colors.teal,
+        color: kPrimaryRedColor,
         borderRadius: BorderRadius.circular(kSpacingUnit * 3),
       ),
       child: Center(

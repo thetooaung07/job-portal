@@ -16,8 +16,6 @@ class JobDetailsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // App Bar
-
             MyAppBar(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -46,55 +44,30 @@ class JobDetailsPage extends StatelessWidget {
                     ]),
               ),
             ),
-
-            // Company Logo
             CompanyLogo(),
-            // 3 Column Row
             JobTab(),
-            //Responsibilites
-            // Responsibilities(),
-            // // Qualifications
-            // Qualifications(),
-
-            //ApplyNowBtn
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(vertical: 20.0),
-            //   child: Row(
-            //     children: [
-            //       Expanded(
-            //         child: Container(
-            //           height: 60,
-            //           decoration: BoxDecoration(
-            //               color: Colors.teal,
-            //               borderRadius: BorderRadius.circular(15)),
-            //           child: Center(
-            //             child: Text(
-            //               "Apply Now",
-            //               style: kLabelTextStyle.copyWith(
-            //                   fontSize: 20, color: Colors.white),
-            //             ),
-            //           ),
-            //         ),
-            //       ),
-            //       SizedBox(
-            //         width: 15,
-            //       ),
-            //       GestureDetector(
-            //         onTap: () {},
-            //         child: Container(
-            //             height: 60,
-            //             width: 60,
-            //             decoration: BoxDecoration(
-            //                 color: kSilverColor,
-            //                 borderRadius: BorderRadius.circular(10),
-            //                 border: Border.all(color: Colors.teal, width: 2)),
-            //             child: Icon(Icons.bookmark_border_rounded)),
-            //       ),
-            //     ],
-            //   ),
-            // ),
+            // ApplyNowBtn(),
           ],
         ),
+      ),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+        color: Colors.white,
+        height: 100,
+        child: ApplyNowBtn(),
+      ),
+    );
+  }
+}
+
+class JobTabs extends StatelessWidget {
+  const JobTabs({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        child: PageView(children: []),
       ),
     );
   }
@@ -108,9 +81,22 @@ class JobTab extends StatefulWidget {
 }
 
 class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  @override
+  void initState() {
+    _tabController = TabController(length: 3, vsync: this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    TabController _tabController = TabController(length: 3, vsync: this);
+    RxInt tabIndex = 0.obs;
 
     return Column(
       children: [
@@ -127,6 +113,11 @@ class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent),
             child: TabBar(
+              onTap: (idx) {
+                tabIndex.value = idx;
+
+                print(idx);
+              },
               unselectedLabelColor: Colors.black,
               indicatorSize: TabBarIndicatorSize.tab,
               indicator: BoxDecoration(
@@ -137,30 +128,128 @@ class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
               controller: _tabController,
               tabs: [
                 Tab(
+                  height: 40,
                   text: "Overview",
                 ),
                 Tab(
+                  height: 40,
                   text: "Company",
                 ),
                 Tab(
+                  height: 40,
                   text: "Review",
                 ),
               ],
             ),
           ),
         ),
-        Container(
-          width: Get.width,
-          height: 500,
-          child: TabBarView(
-            controller: _tabController,
-            children: [
-              Text("Tab Bar View 1"),
-              Text("Tab Bar View 2"),
-              Text("Tab Bar View 3"),
-            ],
+        Obx(
+          () => CustomTabBarView(
+            tabIndex: tabIndex.value,
+            firstTab: FirstTab(),
+            secondTab: FirstTab(),
+            thirdTab: FirstTab(),
           ),
+        )
+        // Container(
+        //   width: Get.width,
+        //   height: 550,
+        //   child: TabBarView(
+        //     controller: _tabController,
+        //     children: [
+        //       SingleChildScrollView(
+        // child: Column(
+        //   children: [
+        //     // Responsibilities
+        //     Responsibilities(),
+        //     // Qualifications
+        //     Qualifications(),
+        //     Qualifications(),
+        //     // ApplyNowBtn
+        //     // ApplyNowBtn(),
+        //   ],
+        // ),
+        // ),
+        //       Text("Tab Bar View 2"),
+        //       Text("Tab Bar View 3"),
+        //     ],
+        //   ),
+        // ),
+      ],
+    );
+  }
+}
+
+class FirstTab extends StatelessWidget {
+  const FirstTab({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // Responsibilities
+        Responsibilities(),
+        // Qualifications
+        Qualifications(),
+        Qualifications(),
+        // ApplyNowBtn
+        // ApplyNowBtn(),
+      ],
+    );
+  }
+}
+
+class CustomTabBarView extends StatelessWidget {
+  final int tabIndex;
+  final Widget firstTab;
+  final Widget secondTab;
+  final Widget thirdTab;
+
+  const CustomTabBarView({
+    Key? key,
+    required this.tabIndex,
+    required this.firstTab,
+    required this.secondTab,
+    required this.thirdTab,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        AnimatedContainer(
+          child: firstTab,
+          width: Get.width,
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+          transform:
+              Matrix4.translationValues(tabIndex == 0 ? 0 : -Get.width, 0, 0),
+          duration: Duration(milliseconds: 175),
+          curve: Curves.easeIn,
         ),
+        AnimatedContainer(
+          child: secondTab,
+          width: Get.width,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          transform: Matrix4.translationValues(
+              tabIndex == 1
+                  ? 0
+                  : tabIndex == 2
+                      ? -Get.width
+                      : Get.width,
+              0,
+              0),
+          duration: Duration(milliseconds: 175),
+          curve: Curves.easeIn,
+        ),
+        AnimatedContainer(
+          child: thirdTab,
+          width: Get.width,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          transform:
+              Matrix4.translationValues(tabIndex == 2 ? 0 : Get.width, 0, 0),
+          duration: Duration(milliseconds: 175),
+          curve: Curves.easeIn,
+        )
       ],
     );
   }
@@ -207,7 +296,9 @@ class Responsibilities extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 15),
+          padding: EdgeInsets.symmetric(
+            vertical: 15,
+          ),
           child: Text(
             "Responsibilities",
             style: kLabelTextStyle,
@@ -252,7 +343,7 @@ class BulletText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10.0),
+      padding: const EdgeInsets.only(bottom: 10.0, left: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -272,6 +363,56 @@ class BulletText extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ApplyNowBtn extends StatelessWidget {
+  const ApplyNowBtn({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Salary",
+              style: kCaptionTextStyle,
+            ),
+            Text(
+              "\$1000/Mo",
+              style: kHeaderTextStyle.copyWith(color: btnBgColorRed),
+            ),
+          ],
+        ),
+        SizedBox(
+          width: 50,
+        ),
+        Expanded(
+          child: Container(
+            // padding: EdgeInsets.symmetric(vertical: 5, horizontal: 75),
+            height: 60,
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(50),
+            ),
+            child: Center(
+              child: Text(
+                "Apply Now",
+                style:
+                    kLabelTextStyle.copyWith(fontSize: 20, color: themeBgColor),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

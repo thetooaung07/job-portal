@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/view/app_drawer.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 import 'package:job_portal/widgets/top_company_container.dart';
 import 'package:job_portal/widgets/suggested_job_container.dart';
@@ -29,61 +30,96 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+//  isDrawerOpen
+//               ? IconButton(
+//                   icon: Icon(
+//                     Icons.chevron_left,
+//                     size: 35,
+//                   ),
+//                   onPressed: () {
+//                     setState(() {
+//                       xOffset = 0;
+//                       yOffset = 0;
+//                       scaleFactor = 1;
+//                       isDrawerOpen = false;
+//                     });
+//                   },
+//                 )
+//               : IconButton(
+//                   icon: Icon(Icons.sort),
+//                   onPressed: () {
+//                     setState(() {
+//                       xOffset = 230;
+//                       yOffset = 150;
+//                       scaleFactor = 0.6;
+//                       isDrawerOpen = true;
+//                     });
+//                   },
+//                 ),
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: themeBgMainColor,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              MyAppBar(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomIconButton(
-                          child: Icon(
-                            Icons.notifications_none_rounded,
-                            size: 30,
-                            color: Colors.black,
-                          ),
-                        ),
-                        Text(
-                          "QWERTY",
-                          style: kLogoTextStyle,
-                        ),
-                        CustomIconButton(
-                          onTap: (() => Get.toNamed(RouteNames.search)),
-                          child: Icon(
-                            Icons.search_rounded,
-                            size: 30,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ]),
-                ),
-              ),
-              //Search Bar
-              // Padding(
-              //   padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-              //   child: HomePageSearchBar(),
-              // ),
-              //Popular Job
-              TopCompanyContainer(),
-              //Recent Post
-              SuggestedJobContainer(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+// class HomePage extends StatelessWidget {
+//   const HomePage({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: themeBgMainColor,
+//       body: SafeArea(
+//         child: SingleChildScrollView(
+//           child: Column(
+//             children: [
+//               MyAppBar(
+//                 child: Padding(
+//                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
+//                   child: Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       children: [
+//                         Obx(
+//                           () => CustomIconButton(
+//                             onTap: () {
+//                               xOffset.value = 0;
+//                               yOffset.value = 0;
+//                               scaleFactor.value = 1;
+//                               isDrawerOpen.value = false;
+//                             },
+//                             child: Icon(
+//                               Icons.clear_all,
+//                               size: 30,
+//                               color: Colors.black,
+//                             ),
+//                           ),
+//                         ),
+//                         Text(
+//                           "QWERTY",
+//                           style: kLogoTextStyle,
+//                         ),
+//                         CustomIconButton(
+//                           onTap: (() => Get.toNamed(RouteNames.search)),
+//                           child: Icon(
+//                             Icons.search_rounded,
+//                             size: 30,
+//                             color: Colors.black,
+//                           ),
+//                         ),
+//                       ]),
+//                 ),
+//               ),
+//               //Search Bar
+//               // Padding(
+//               //   padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+//               //   child: HomePageSearchBar(),
+//               // ),
+//               //Popular Job
+//               TopCompanyContainer(),
+//               //Recent Post
+//               SuggestedJobContainer(),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class CustomIconButton extends StatelessWidget {
   final Widget child;
@@ -108,6 +144,111 @@ class CustomIconButton extends StatelessWidget {
               color: btnBgColor,
               boxShadow: [kIconShadow]),
           child: child),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    RxDouble xOffset = 0.0.obs;
+    RxDouble yOffset = 0.0.obs;
+    RxDouble scaleFactor = 1.0.obs;
+    RxBool isDrawerOpen = false.obs;
+    return Obx(
+      () => AnimatedContainer(
+        duration: Duration(milliseconds: 100),
+        transform: Matrix4.translationValues(xOffset.value, yOffset.value, 0)
+          ..scale(scaleFactor.value),
+        child: Scaffold(
+          backgroundColor: themeBgMainColor,
+          body: SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  MyAppBar(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            isDrawerOpen.value
+                                ? CustomIconButton(
+                                    onTap: () {
+                                      print("on tap is working");
+                                      xOffset.value = 0;
+                                      yOffset.value = 0;
+                                      scaleFactor.value = 1;
+                                      isDrawerOpen.value = false;
+                                    },
+                                    child: Icon(
+                                      Icons.arrow_circle_left_outlined,
+                                      size: 40,
+                                      color: Colors.black,
+                                    ),
+                                  )
+                                : CustomIconButton(
+                                    onTap: () {
+                                      print("on tap is working 2");
+                                      xOffset.value = 230;
+                                      yOffset.value = 150;
+                                      scaleFactor.value = 0.6;
+                                      isDrawerOpen.value = true;
+                                    },
+                                    child: Icon(
+                                      Icons.clear_all,
+                                      size: 30,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                            Text(
+                              "QWERTY",
+                              style: kLogoTextStyle,
+                            ),
+                            CustomIconButton(
+                              onTap: (() => Get.toNamed(RouteNames.search)),
+                              child: Icon(
+                                Icons.search_rounded,
+                                size: 30,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ]),
+                    ),
+                  ),
+                  //Search Bar
+                  // Padding(
+                  //   padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+                  //   child: HomePageSearchBar(),
+                  // ),
+                  //Popular Job
+                  TopCompanyContainer(),
+                  //Recent Post
+                  SuggestedJobContainer(),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class BaseWrapper extends StatelessWidget {
+  const BaseWrapper({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          AppDrawer(),
+          HomePage(),
+        ],
+      ),
     );
   }
 }

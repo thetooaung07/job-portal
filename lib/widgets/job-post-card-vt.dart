@@ -22,8 +22,6 @@ class JobPostCardVt extends StatelessWidget {
           border: Border.all(color: Colors.white),
           boxShadow: [kCardShadow],
           color: Colors.white,
-          // TODO: Add colors and remove Card later
-          // color: Colors.teal,
         ),
         height: 100,
         child: Column(

@@ -1,2 +1,9 @@
-Main Page > Top Company Card Shadow Radius blur etc.
-continue tab_bar in job_details page
+Main Page > Top Company Card Shadow Radius blur etc. > done
+continue tab_bar in job_details page. > done
+
+
+
+
+
+Last Update
+- HomePage Wrapper with animated Container

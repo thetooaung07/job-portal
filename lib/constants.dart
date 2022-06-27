@@ -35,7 +35,7 @@ const TextStyle kJobPositionTextStyle = TextStyle(
 const BoxShadow kCardShadow = BoxShadow(
   color: Color.fromARGB(20, 0, 0, 0),
   blurRadius: 5,
-  offset: Offset(2, 1),
+  offset: Offset(2, 0),
   spreadRadius: 2,
 );
 const BoxShadow kIconShadow = BoxShadow(

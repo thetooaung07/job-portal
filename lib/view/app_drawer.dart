@@ -32,7 +32,7 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        color: Colors.teal,
+        color: Colors.black54,
         padding: EdgeInsets.all(20),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

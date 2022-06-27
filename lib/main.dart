@@ -184,7 +184,7 @@ class HomePage extends StatelessWidget {
                                       isDrawerOpen.value = false;
                                     },
                                     child: Icon(
-                                      Icons.arrow_circle_left_outlined,
+                                      Icons.clear_all,
                                       size: 40,
                                       color: Colors.black,
                                     ),
@@ -218,11 +218,7 @@ class HomePage extends StatelessWidget {
                           ]),
                     ),
                   ),
-                  //Search Bar
-                  // Padding(
-                  //   padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-                  //   child: HomePageSearchBar(),
-                  // ),
+
                   //Popular Job
                   TopCompanyContainer(),
                   //Recent Post
@@ -230,6 +226,64 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+          bottomNavigationBar: Container(
+            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            // padding: EdgeInsets.symmetric(horizontal: 10),
+            height: 60,
+            decoration: BoxDecoration(
+              color: jobDetailsTabBgColor,
+              borderRadius: BorderRadius.circular(50),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  NavItem(),
+                  NavItem(),
+                  NavItem(),
+                  NavItem(),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class NavItem extends StatelessWidget {
+  const NavItem({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: InkWell(
+        onTap: () {
+          print("hl");
+        },
+        child: Container(
+          decoration: BoxDecoration(),
+          // width: (Get.width - 60) / 4,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.home,
+                color: Colors.black,
+              ),
+              Text("Home",
+                  style: TextStyle(
+                    color: Colors.black,
+                  )),
+              // SizedBox(
+              //   height: 1,
+              // ),
+            ],
           ),
         ),
       ),

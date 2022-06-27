@@ -22,6 +22,8 @@ class SuggestedJobContainer extends StatelessWidget {
         JobPostCardVt(),
         JobPostCardVt(),
         JobPostCardVt(),
+        JobPostCardVt(),
+        JobPostCardVt(),
       ],
     );
   }

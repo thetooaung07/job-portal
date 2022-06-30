@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/view/app_drawer.dart';
@@ -153,10 +154,12 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double _width = Get.width;
     RxDouble xOffset = 0.0.obs;
     RxDouble yOffset = 0.0.obs;
     RxDouble scaleFactor = 1.0.obs;
     RxBool isDrawerOpen = false.obs;
+    RxInt currentIndex = 0.obs;
     return Obx(
       () => AnimatedContainer(
         duration: Duration(milliseconds: 100),
@@ -177,7 +180,6 @@ class HomePage extends StatelessWidget {
                             isDrawerOpen.value
                                 ? CustomIconButton(
                                     onTap: () {
-                                      print("on tap is working");
                                       xOffset.value = 0;
                                       yOffset.value = 0;
                                       scaleFactor.value = 1;
@@ -191,7 +193,6 @@ class HomePage extends StatelessWidget {
                                   )
                                 : CustomIconButton(
                                     onTap: () {
-                                      print("on tap is working 2");
                                       xOffset.value = 230;
                                       yOffset.value = 150;
                                       scaleFactor.value = 0.6;
@@ -227,24 +228,138 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
+          // bottomNavigationBar: Container(
+          //   margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          //   height: 60,
+          //   decoration: BoxDecoration(
+          //     color: jobDetailsTabBgColor,
+          //     borderRadius: BorderRadius.circular(50),
+          //   ),
+          //   child: Padding(
+          //     padding: EdgeInsets.symmetric(horizontal: 12),
+          //     child: Row(
+          //       crossAxisAlignment: CrossAxisAlignment.center,
+          //       children: [
+          //         NavItem(),
+          //         NavItem(),
+          //         NavItem(),
+          //         NavItem(),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+
           bottomNavigationBar: Container(
-            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            // padding: EdgeInsets.symmetric(horizontal: 10),
-            height: 60,
+            margin: EdgeInsets.all(_width * 0.05),
+            height: _width * 0.155,
             decoration: BoxDecoration(
-              color: jobDetailsTabBgColor,
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 30,
+                  offset: Offset(0, 10),
+                ),
+              ],
               borderRadius: BorderRadius.circular(50),
             ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  NavItem(),
-                  NavItem(),
-                  NavItem(),
-                  NavItem(),
-                ],
+            child: ListView.builder(
+              itemCount: 4,
+              scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.symmetric(horizontal: _width * 0.02),
+              itemBuilder: (context, index) => InkWell(
+                onTap: () {
+                  currentIndex.value = index;
+                  print(currentIndex.value);
+                  HapticFeedback.lightImpact();
+                },
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                child: Stack(
+                  children: [
+                    Obx(
+                      () => AnimatedContainer(
+                        duration: Duration(seconds: 1),
+                        curve: Curves.fastLinearToSlowEaseIn,
+                        width: index == currentIndex.value
+                            ? _width * 0.32
+                            : _width * 0.18,
+                        alignment: Alignment.center,
+                        child: AnimatedContainer(
+                          duration: Duration(seconds: 1),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          height:
+                              index == currentIndex.value ? _width * 0.12 : 0,
+                          width:
+                              index == currentIndex.value ? _width * 0.32 : 0,
+                          decoration: BoxDecoration(
+                            color: index == currentIndex.value
+                                ? Colors.blueAccent.withOpacity(.2)
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Obx(
+                      () => AnimatedContainer(
+                        duration: Duration(seconds: 1),
+                        curve: Curves.fastLinearToSlowEaseIn,
+                        width: index == currentIndex.value
+                            ? _width * 0.31
+                            : _width * 0.18,
+                        alignment: Alignment.center,
+                        child: Stack(
+                          children: [
+                            Row(
+                              children: [
+                                AnimatedContainer(
+                                  duration: Duration(seconds: 1),
+                                  curve: Curves.fastLinearToSlowEaseIn,
+                                  width: index == currentIndex.value
+                                      ? _width * 0.13
+                                      : 0,
+                                ),
+                                AnimatedOpacity(
+                                  opacity: index == currentIndex.value ? 1 : 0,
+                                  duration: Duration(seconds: 1),
+                                  curve: Curves.fastLinearToSlowEaseIn,
+                                  child: Text(
+                                    index == currentIndex.value
+                                        ? '${bottomNavBarLabels[index]}'
+                                        : '',
+                                    style: TextStyle(
+                                        color: Colors.blueAccent,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 15),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                AnimatedContainer(
+                                  duration: Duration(seconds: 1),
+                                  curve: Curves.fastLinearToSlowEaseIn,
+                                  width: index == currentIndex.value
+                                      ? _width * 0.03
+                                      : 20,
+                                ),
+                                Icon(
+                                  bottomNavBarIcons[index],
+                                  size: _width * 0.076,
+                                  color: index == currentIndex.value
+                                      ? Colors.blueAccent
+                                      : Colors.black26,
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
@@ -263,12 +378,9 @@ class NavItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: InkWell(
-        onTap: () {
-          print("hl");
-        },
+        onTap: () {},
         child: Container(
           decoration: BoxDecoration(),
-          // width: (Get.width - 60) / 4,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -276,12 +388,11 @@ class NavItem extends StatelessWidget {
                 Icons.home,
                 color: Colors.black,
               ),
-              Text("Home",
-                  style: TextStyle(
-                    color: Colors.black,
-                  )),
-              // SizedBox(
-              //   height: 1,
+              // Text(
+              //   "Home",
+              //   style: TextStyle(
+              //     color: Colors.black,
+              //   ),
               // ),
             ],
           ),

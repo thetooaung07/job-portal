@@ -2,6 +2,20 @@ import 'package:flutter/material.dart';
 
 const String bullet = "\u2022 ";
 
+const List<String> bottomNavBarLabels = [
+  'Home',
+  'Favorite',
+  'Settings',
+  'Account',
+];
+
+const List<IconData> bottomNavBarIcons = [
+  Icons.home_rounded,
+  Icons.favorite_rounded,
+  Icons.settings_rounded,
+  Icons.person_rounded,
+];
+
 const themeBgColor = Color.fromARGB(255, 245, 245, 245);
 const themeBgMainColor = Color.fromARGB(255, 253, 253, 253);
 const jobDetailsTabBgColor = Color.fromARGB(242, 240, 240, 240);

@@ -7,6 +7,6 @@ class HomePageBinding extends Bindings {
   void dependencies() {
     // TODO: implement dependencies
     print("Controller is put");
-    Get.lazyPut(() => BottomNavBarController());
+    Get.put(() => BottomNavBarController());
   }
 }

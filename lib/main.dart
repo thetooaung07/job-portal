@@ -162,7 +162,8 @@ class HomePage extends StatelessWidget {
     RxInt currentIndex = 0.obs;
     return Obx(
       () => AnimatedContainer(
-        duration: Duration(milliseconds: 100),
+        duration: Duration(milliseconds: 300),
+        curve: Curves.fastOutSlowIn,
         transform: Matrix4.translationValues(xOffset.value, yOffset.value, 0)
           ..scale(scaleFactor.value),
         child: Scaffold(
@@ -228,27 +229,6 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          // bottomNavigationBar: Container(
-          //   margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          //   height: 60,
-          //   decoration: BoxDecoration(
-          //     color: jobDetailsTabBgColor,
-          //     borderRadius: BorderRadius.circular(50),
-          //   ),
-          //   child: Padding(
-          //     padding: EdgeInsets.symmetric(horizontal: 12),
-          //     child: Row(
-          //       crossAxisAlignment: CrossAxisAlignment.center,
-          //       children: [
-          //         NavItem(),
-          //         NavItem(),
-          //         NavItem(),
-          //         NavItem(),
-          //       ],
-          //     ),
-          //   ),
-          // ),
-
           bottomNavigationBar: Container(
             margin: EdgeInsets.all(_width * 0.05),
             height: _width * 0.155,
@@ -275,6 +255,7 @@ class HomePage extends StatelessWidget {
                 },
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
+                hoverColor: Colors.transparent,
                 child: Stack(
                   children: [
                     Obx(
@@ -294,7 +275,7 @@ class HomePage extends StatelessWidget {
                               index == currentIndex.value ? _width * 0.32 : 0,
                           decoration: BoxDecoration(
                             color: index == currentIndex.value
-                                ? Colors.blueAccent.withOpacity(.2)
+                                ? kPrimaryRedColor.withOpacity(.1)
                                 : Colors.transparent,
                             borderRadius: BorderRadius.circular(50),
                           ),
@@ -329,7 +310,7 @@ class HomePage extends StatelessWidget {
                                         ? '${bottomNavBarLabels[index]}'
                                         : '',
                                     style: TextStyle(
-                                        color: Colors.blueAccent,
+                                        color: kPrimaryRedColor,
                                         fontWeight: FontWeight.w600,
                                         fontSize: 15),
                                   ),
@@ -349,7 +330,7 @@ class HomePage extends StatelessWidget {
                                   bottomNavBarIcons[index],
                                   size: _width * 0.076,
                                   color: index == currentIndex.value
-                                      ? Colors.blueAccent
+                                      ? kPrimaryRedColor
                                       : Colors.black26,
                                 )
                               ],
@@ -417,3 +398,26 @@ class BaseWrapper extends StatelessWidget {
     );
   }
 }
+
+
+
+ // bottomNavigationBar: Container(
+          //   margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          //   height: 60,
+          //   decoration: BoxDecoration(
+          //     color: jobDetailsTabBgColor,
+          //     borderRadius: BorderRadius.circular(50),
+          //   ),
+          //   child: Padding(
+          //     padding: EdgeInsets.symmetric(horizontal: 12),
+          //     child: Row(
+          //       crossAxisAlignment: CrossAxisAlignment.center,
+          //       children: [
+          //         NavItem(),
+          //         NavItem(),
+          //         NavItem(),
+          //         NavItem(),
+          //       ],
+          //     ),
+          //   ),
+          // ),

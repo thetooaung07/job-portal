@@ -4,16 +4,16 @@ const String bullet = "\u2022 ";
 
 const List<String> bottomNavBarLabels = [
   'Home',
-  'Favorite',
-  'Settings',
+  'Nearby',
+  'Applied',
   'Account',
 ];
 
 const List<IconData> bottomNavBarIcons = [
   Icons.home_rounded,
-  Icons.favorite_rounded,
-  Icons.settings_rounded,
-  Icons.person_rounded,
+  Icons.radar_rounded,
+  Icons.work_history_outlined,
+  Icons.person_outline_rounded,
 ];
 
 const themeBgColor = Color.fromARGB(255, 245, 245, 245);

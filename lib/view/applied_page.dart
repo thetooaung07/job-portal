@@ -6,7 +6,7 @@ class AppliedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("Applied Page"),
+      body: Center(child: Text("Applied Page")),
     );
   }
 }

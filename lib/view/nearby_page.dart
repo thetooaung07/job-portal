@@ -6,7 +6,7 @@ class NearbyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("Nearby Page"),
+      body: Center(child: Text("Nearby Page")),
     );
   }
 }

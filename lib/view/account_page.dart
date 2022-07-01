@@ -6,7 +6,9 @@ class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("AccountPage Page"),
+      body: Center(
+        child: Text("AccountPage Page"),
+      ),
     );
   }
 }

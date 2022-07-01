@@ -31,6 +31,11 @@ class MyApp extends StatelessWidget {
   }
 }
 
+//     RxDouble xOffset = 0.0.obs;
+//     RxDouble yOffset = 0.0.obs;
+//     RxDouble scaleFactor = 1.0.obs;
+//     RxBool isDrawerOpen = false.obs;
+
 //  isDrawerOpen
 //               ? IconButton(
 //                   icon: Icon(
@@ -154,19 +159,14 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PageController _pageController = PageController();
+
+    RxInt selectedIndex = 0.obs;
     double _width = Get.width;
-    RxDouble xOffset = 0.0.obs;
-    RxDouble yOffset = 0.0.obs;
-    RxDouble scaleFactor = 1.0.obs;
-    RxBool isDrawerOpen = false.obs;
-    RxInt currentIndex = 0.obs;
-    return Obx(
-      () => AnimatedContainer(
-        duration: Duration(milliseconds: 300),
-        curve: Curves.fastOutSlowIn,
-        transform: Matrix4.translationValues(xOffset.value, yOffset.value, 0)
-          ..scale(scaleFactor.value),
-        child: Scaffold(
+    return PageView(
+      controller: _pageController,
+      children: [
+        Scaffold(
           backgroundColor: themeBgMainColor,
           body: SafeArea(
             child: SingleChildScrollView(
@@ -178,33 +178,13 @@ class HomePage extends StatelessWidget {
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            isDrawerOpen.value
-                                ? CustomIconButton(
-                                    onTap: () {
-                                      xOffset.value = 0;
-                                      yOffset.value = 0;
-                                      scaleFactor.value = 1;
-                                      isDrawerOpen.value = false;
-                                    },
-                                    child: Icon(
-                                      Icons.clear_all,
-                                      size: 40,
-                                      color: Colors.black,
-                                    ),
-                                  )
-                                : CustomIconButton(
-                                    onTap: () {
-                                      xOffset.value = 230;
-                                      yOffset.value = 150;
-                                      scaleFactor.value = 0.6;
-                                      isDrawerOpen.value = true;
-                                    },
-                                    child: Icon(
-                                      Icons.clear_all,
-                                      size: 30,
-                                      color: Colors.black,
-                                    ),
-                                  ),
+                            CustomIconButton(
+                              child: Icon(
+                                Icons.clear_all,
+                                size: 30,
+                                color: Colors.black,
+                              ),
+                            ),
                             Text(
                               "QWERTY",
                               style: kLogoTextStyle,
@@ -249,8 +229,8 @@ class HomePage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: _width * 0.02),
               itemBuilder: (context, index) => InkWell(
                 onTap: () {
-                  currentIndex.value = index;
-                  print(currentIndex.value);
+                  selectedIndex.value = index;
+
                   HapticFeedback.lightImpact();
                 },
                 splashColor: Colors.transparent,
@@ -262,7 +242,7 @@ class HomePage extends StatelessWidget {
                       () => AnimatedContainer(
                         duration: Duration(seconds: 1),
                         curve: Curves.fastLinearToSlowEaseIn,
-                        width: index == currentIndex.value
+                        width: index == selectedIndex.value
                             ? _width * 0.32
                             : _width * 0.18,
                         alignment: Alignment.center,
@@ -270,11 +250,11 @@ class HomePage extends StatelessWidget {
                           duration: Duration(seconds: 1),
                           curve: Curves.fastLinearToSlowEaseIn,
                           height:
-                              index == currentIndex.value ? _width * 0.12 : 0,
+                              index == selectedIndex.value ? _width * 0.12 : 0,
                           width:
-                              index == currentIndex.value ? _width * 0.32 : 0,
+                              index == selectedIndex.value ? _width * 0.32 : 0,
                           decoration: BoxDecoration(
-                            color: index == currentIndex.value
+                            color: index == selectedIndex.value
                                 ? kPrimaryRedColor.withOpacity(.1)
                                 : Colors.transparent,
                             borderRadius: BorderRadius.circular(50),
@@ -286,7 +266,7 @@ class HomePage extends StatelessWidget {
                       () => AnimatedContainer(
                         duration: Duration(seconds: 1),
                         curve: Curves.fastLinearToSlowEaseIn,
-                        width: index == currentIndex.value
+                        width: index == selectedIndex.value
                             ? _width * 0.31
                             : _width * 0.18,
                         alignment: Alignment.center,
@@ -297,16 +277,16 @@ class HomePage extends StatelessWidget {
                                 AnimatedContainer(
                                   duration: Duration(seconds: 1),
                                   curve: Curves.fastLinearToSlowEaseIn,
-                                  width: index == currentIndex.value
+                                  width: index == selectedIndex.value
                                       ? _width * 0.13
                                       : 0,
                                 ),
                                 AnimatedOpacity(
-                                  opacity: index == currentIndex.value ? 1 : 0,
+                                  opacity: index == selectedIndex.value ? 1 : 0,
                                   duration: Duration(seconds: 1),
                                   curve: Curves.fastLinearToSlowEaseIn,
                                   child: Text(
-                                    index == currentIndex.value
+                                    index == selectedIndex.value
                                         ? '${bottomNavBarLabels[index]}'
                                         : '',
                                     style: TextStyle(
@@ -322,14 +302,14 @@ class HomePage extends StatelessWidget {
                                 AnimatedContainer(
                                   duration: Duration(seconds: 1),
                                   curve: Curves.fastLinearToSlowEaseIn,
-                                  width: index == currentIndex.value
+                                  width: index == selectedIndex.value
                                       ? _width * 0.03
                                       : 20,
                                 ),
                                 Icon(
                                   bottomNavBarIcons[index],
                                   size: _width * 0.076,
-                                  color: index == currentIndex.value
+                                  color: index == selectedIndex.value
                                       ? kPrimaryRedColor
                                       : Colors.black26,
                                 )
@@ -345,7 +325,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
-      ),
+      ],
     );
   }
 }
@@ -383,21 +363,21 @@ class NavItem extends StatelessWidget {
   }
 }
 
-class BaseWrapper extends StatelessWidget {
-  const BaseWrapper({Key? key}) : super(key: key);
+// class BaseWrapper extends StatelessWidget {
+//   const BaseWrapper({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          AppDrawer(),
-          HomePage(),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Stack(
+//         children: [
+//           AppDrawer(),
+//           HomePage(),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 
 

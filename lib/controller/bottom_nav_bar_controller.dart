@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class BottomNavBarController extends GetxController {
   RxInt selectedIndex = 0.obs;
-  final PageController pageController = PageController(initialPage: 0);
+  final PageController pageController = PageController();
   void onPageChange(value) {
     selectedIndex.value = value;
 

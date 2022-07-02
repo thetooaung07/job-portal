@@ -60,13 +60,15 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Circular
+    - family: SF-Pro
       fonts:
-        - asset: assets/fonts/CircularStd-Medium.ttf
-        - asset: assets/fonts/CircularAir-Light.ttf
-          weight: 100
-        - asset: assets/fonts/CircularStd-Bold.ttf
-          weight: 500
+        - asset: assets/fonts/SF-Pro-Rounded-Bold.otf
+        - asset: assets/fonts/SF-Pro-Rounded-Heavy.otf
+        - asset: assets/fonts/SF-Pro-Rounded-Thin.otf
+        - asset: assets/fonts/SF-Pro-Text-Bold.otf
+        - asset: assets/fonts/SF-Pro-Text-Medium.otf
+        - asset: assets/fonts/SF-Pro-Text-Regular.otf
+        - asset: assets/fonts/SF-Pro-Text-Semibold.otf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

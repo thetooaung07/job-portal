@@ -55,9 +55,9 @@ class JobDetailsPage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.fromLTRB(40, 10, 40, 15),
+        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.07),
+        height: Get.width * 0.205,
         color: Colors.white,
-        height: 80,
         child: ApplyNowBtn(),
       ),
     );
@@ -377,7 +377,7 @@ class BulletText extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 1.5),
+            padding: const EdgeInsets.only(top: 3),
             child: Icon(
               Icons.fiber_manual_record_rounded,
               size: 11,
@@ -416,18 +416,19 @@ class ApplyNowBtn extends StatelessWidget {
               style: kCaptionTextStyle,
             ),
             Text(
-              "\$1000 / Month",
+              "\$1000/Month",
               style: kHeaderTextStyle.copyWith(color: kPrimaryRedColor),
             ),
           ],
         ),
         SizedBox(
-          width: 50,
+          width: 20,
         ),
         Expanded(
           child: Container(
             // padding: EdgeInsets.symmetric(vertical: 5, horizontal: 75),
-            height: 60,
+            margin: EdgeInsets.symmetric(vertical: Get.width * 0.035),
+            alignment: Alignment.center,
             decoration: BoxDecoration(
               color: Colors.black,
               borderRadius: BorderRadius.circular(50),

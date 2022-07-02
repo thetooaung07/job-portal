@@ -1,8 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/main.dart';
-import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 import 'package:job_portal/widgets/searchbar.dart';
 import 'package:job_portal/constants.dart';
@@ -81,21 +81,19 @@ class SearchPage extends StatelessWidget {
                   "Below this is the section,later needed to Change UI.s")),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: Obx(
-              () => _controller.searchTitle.value.isNotEmpty
-                  ? Row(
-                      children: [
-                        SearchTag(),
-                        Spacer(),
-                        Text(
-                          "24 Jobs Opportunities found",
-                        ),
-                      ],
-                    )
-                  : SizedBox(
-                      height: 1,
-                    ),
-            ),
+            child: Obx(() => _controller.searchTitle.value.isNotEmpty
+                ? Row(
+                    children: [
+                      SearchTag(),
+                      Spacer(),
+                      Text(
+                        "24 Jobs Opportunities found",
+                      ),
+                    ],
+                  )
+                : SizedBox(
+                    height: 1,
+                  )),
           ),
           Expanded(child: SearchPageTabView()),
         ],
@@ -104,6 +102,7 @@ class SearchPage extends StatelessWidget {
   }
 }
 
+// TODO: Change SearchTag Style
 class SearchTag extends StatelessWidget {
   const SearchTag({Key? key}) : super(key: key);
 
@@ -111,39 +110,55 @@ class SearchTag extends StatelessWidget {
   Widget build(BuildContext context) {
     final SearchTitleController _controller = Get.find(tag: "search_bar");
 
-    return Container(
-      height: kSpacingUnit * 2.5,
-      width: kSpacingUnit * 9,
-      margin: EdgeInsets.only(left: kSpacingUnit),
-      decoration: BoxDecoration(
-        color: kPrimaryRedColor,
-        borderRadius: BorderRadius.circular(kSpacingUnit * 3),
-      ),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(width: kSpacingUnit),
-            Flexible(
-              child: Obx(
-                () => Text(
-                  _controller.searchTitle.value,
-                  overflow: TextOverflow.ellipsis,
-                  style: kCaptionTextStyle.copyWith(
-                    color: Colors.white,
+    return Stack(
+      children: [
+        Container(
+          height: 30,
+          width: (Get.width * 0.3) - 20,
+          margin: EdgeInsets.only(left: kSpacingUnit, top: 7, right: 7),
+          decoration: BoxDecoration(
+            color: kPrimaryRedColor,
+            borderRadius: BorderRadius.circular(7),
+          ),
+          child: Center(
+            child: Stack(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                  child: Flexible(
+                    child: Obx(
+                      () => Text(
+                        _controller.searchTitle.value,
+                        overflow: TextOverflow.ellipsis,
+                        style: kCaptionTextStyle.copyWith(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
-            SvgPicture.asset(
-              'assets/icons/close_icon.svg',
-              height: 15,
-              width: 15,
-            ),
-            SizedBox(width: kSpacingUnit * 0.5),
-          ],
+          ),
         ),
-      ),
+        Positioned(
+          right: 2,
+          top: 2,
+          child: Container(
+            height: 17,
+            width: 17,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [kIconShadow],
+              shape: BoxShape.circle,
+            ),
+            child: Center(
+              child: Icon(Icons.close_rounded,
+                  color: kPrimaryRedColor, size: 14, shadows: [kCardShadow]),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

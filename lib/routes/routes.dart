@@ -30,7 +30,7 @@ class RouteNames {
 routes() => [
       GetPage(
         name: RouteNames.home,
-        // binding: HomePageBinding(),
+        binding: HomePageBinding(),
         page: () => const HomePage(),
       ),
       GetPage(

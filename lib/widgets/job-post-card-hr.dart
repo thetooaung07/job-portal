@@ -33,8 +33,7 @@ class JobPostCardHr extends StatelessWidget {
                 children: [
                   SvgPicture.asset(
                     "assets/icons/logo_youtube.svg",
-                    height: 50,
-                    width: 50,
+                    height: 40,
                   ),
                   SizedBox(
                     width: 15,

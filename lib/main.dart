@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Job Portal',
-      theme: ThemeData().copyWith(
+      theme: ThemeData(fontFamily: 'Circular').copyWith(
         scaffoldBackgroundColor: Colors.white,
         colorScheme:
             ThemeData().colorScheme.copyWith(primary: kPrimaryRedColor),
@@ -73,7 +73,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: themeBgMainColor,
       body: PageView(
         controller: controller.pageController,
-        onPageChanged: (index) => controller.selectedIndex.value == index,
+        onPageChanged: (index) => controller.onPageChange(index),
         children: [
           HomePageView(),
           NearbyPage(),

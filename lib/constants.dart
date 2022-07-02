@@ -25,6 +25,8 @@ const btnColor = Color.fromRGBO(35, 35, 35, 1);
 const btnBgColorWhite = Color.fromRGBO(255, 255, 255, 1);
 const btnBgColorGrey = Color.fromRGBO(35, 35, 35, 1);
 const kPrimaryRedColor = Color.fromRGBO(250, 88, 4, 1);
+const kTextBodyFadeColor = Color.fromARGB(185, 0, 0, 0);
+
 const double kSpacingUnit = 10;
 const TextStyle kHeaderTextStyle = TextStyle(
   fontSize: 20,
@@ -34,7 +36,7 @@ const TextStyle kHeaderTextStyle = TextStyle(
 const TextStyle kLogoTextStyle = TextStyle(
   fontSize: 20,
   color: Colors.black,
-  fontWeight: FontWeight.w900,
+  fontWeight: FontWeight.bold,
 );
 const TextStyle kLabelTextStyle = TextStyle(
   fontSize: 18,
@@ -57,6 +59,10 @@ const BoxShadow kIconShadow = BoxShadow(
   blurRadius: 4,
   offset: Offset(2, 2),
   spreadRadius: 2,
+);
+const TextStyle kBulletListTextStyle = TextStyle(
+  fontSize: 15,
+  color: kTextBodyFadeColor,
 );
 // TODO: Change font size initialize for error removing
 

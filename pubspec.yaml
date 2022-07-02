@@ -62,13 +62,15 @@ flutter:
   fonts:
     - family: SF-Pro
       fonts:
-        - asset: assets/fonts/SF-Pro-Rounded-Bold.otf
-        - asset: assets/fonts/SF-Pro-Rounded-Heavy.otf
-        - asset: assets/fonts/SF-Pro-Rounded-Thin.otf
-        - asset: assets/fonts/SF-Pro-Text-Bold.otf
-        - asset: assets/fonts/SF-Pro-Text-Medium.otf
         - asset: assets/fonts/SF-Pro-Text-Regular.otf
+        - asset: assets/fonts/SF-Pro-Text-Medium.otf
+          weight: 500
         - asset: assets/fonts/SF-Pro-Text-Semibold.otf
+          weight: 600
+        - asset: assets/fonts/SF-Pro-Text-Bold.otf
+        - asset: assets/fonts/SF-Pro-Rounded-Thin.otf
+        - asset: assets/fonts/SF-Pro-Rounded-Heavy.otf
+        - asset: assets/fonts/SF-Pro-Rounded-Bold.otf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

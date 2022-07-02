@@ -388,7 +388,9 @@ class BulletText extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-                "Works effectively blah Blah and Dlutter is really good blah and Lorem Ipsum Askman Thether "),
+              "Works effectively blah Blah and Dlutter is really good blah and Lorem Ipsum Askman Thether ",
+              style: kBulletListTextStyle,
+            ),
           ),
         ],
       ),

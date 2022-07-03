@@ -22,8 +22,8 @@ class _SearchBarState extends State<SearchBar> {
 
   @override
   void initState() {
-    searchPageController.text = _controller.searchTitle.value;
     _focusNode.requestFocus();
+    // searchPageController.text = _controller.searchTitle.value;
     super.initState();
   }
 

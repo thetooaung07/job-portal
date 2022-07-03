@@ -7,7 +7,7 @@ class BottomNavBarController extends GetxController {
 
   void onPageChange(index) {
     selectedIndex.value = index;
-    pageController.animateToPage(index,
-        duration: const Duration(milliseconds: 500), curve: Curves.ease);
+
+    pageController.jumpToPage(index);
   }
 }

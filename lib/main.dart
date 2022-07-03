@@ -72,14 +72,16 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: themeBgMainColor,
       body: PageView(
-        controller: controller.pageController,
-        onPageChanged: (index) => controller.onPageChange(index),
         children: [
           HomePageView(),
           NearbyPage(),
           AppliedPage(),
           AccountPage(),
         ],
+        controller: controller.pageController,
+        onPageChanged: (index) {
+          controller.selectedIndex.value = index;
+        },
       ),
       bottomNavigationBar: Container(
         margin: EdgeInsets.all(_width * 0.05),

@@ -6,7 +6,6 @@ class HomePageBinding extends Bindings {
   @override
   void dependencies() {
     // TODO: implement dependencies
-    // print("Controller is put");
     // Get.put(() => BottomNavBarController());
   }
 }

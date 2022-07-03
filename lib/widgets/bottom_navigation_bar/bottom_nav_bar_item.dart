@@ -20,11 +20,6 @@ class BottomNavBarItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final BottomNavBarController _controller = Get.find();
 
-    print(
-        "_controller.selectedIndex.value  ${_controller.selectedIndex.value}");
-
-    print("index ${index}");
-
     return Obx(
       () => InkWell(
         onTap: onPressed,

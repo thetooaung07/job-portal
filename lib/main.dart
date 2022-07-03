@@ -67,7 +67,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final BottomNavBarController controller = Get.put(BottomNavBarController());
 
-    double _width = Get.width;
     return Scaffold(
       backgroundColor: themeBgMainColor,
       body: PageView(
@@ -83,130 +82,140 @@ class HomePage extends StatelessWidget {
         },
       ),
       bottomNavigationBar: BottomNavBarConstraints(
-        child: Container(
-          margin: EdgeInsets.all(Get.width * 0.05),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 30,
-                offset: Offset(0, 10),
-              ),
-            ],
-            borderRadius: BorderRadius.circular(50),
+        child: CustomBottomNavBar(),
+      ),
+    );
+  }
+}
+
+class CustomBottomNavBar extends StatelessWidget {
+  const CustomBottomNavBar({Key? key});
+
+  @override
+  Widget build(BuildContext context) {
+    final double _width = Get.width;
+    final BottomNavBarController controller =
+        Get.find<BottomNavBarController>();
+    return Container(
+      margin: EdgeInsets.all(Get.width * 0.05),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 30,
+            offset: Offset(0, 10),
           ),
-          child: ListView.builder(
-            itemCount: 4,
-            scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.symmetric(horizontal: _width * 0.02),
-            itemBuilder: (context, index) {
-              return InkWell(
-                onTap: () {
-                  controller.onPageChange(index);
-                },
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                child: Stack(
-                  children: [
-                    Obx(
+        ],
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: ListView.builder(
+        itemCount: 4,
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.symmetric(horizontal: _width * 0.02),
+        itemBuilder: (context, index) {
+          return InkWell(
+            onTap: () {
+              controller.onPageChange(index);
+            },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            child: Stack(
+              children: [
+                Obx(
+                  () => AnimatedContainer(
+                    duration: Duration(seconds: 1),
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    width: index == controller.selectedIndex.value
+                        ? _width * 0.32
+                        : _width * 0.18,
+                    alignment: Alignment.center,
+                    child: Obx(
                       () => AnimatedContainer(
                         duration: Duration(seconds: 1),
                         curve: Curves.fastLinearToSlowEaseIn,
+                        height: index == controller.selectedIndex.value
+                            ? _width * 0.12
+                            : 0,
                         width: index == controller.selectedIndex.value
                             ? _width * 0.32
-                            : _width * 0.18,
-                        alignment: Alignment.center,
-                        child: Obx(
-                          () => AnimatedContainer(
-                            duration: Duration(seconds: 1),
-                            curve: Curves.fastLinearToSlowEaseIn,
-                            height: index == controller.selectedIndex.value
-                                ? _width * 0.12
-                                : 0,
-                            width: index == controller.selectedIndex.value
-                                ? _width * 0.32
-                                : 0,
-                            decoration: BoxDecoration(
-                              color: index == controller.selectedIndex.value
-                                  ? kPrimaryRedColor.withOpacity(.1)
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                          ),
+                            : 0,
+                        decoration: BoxDecoration(
+                          color: index == controller.selectedIndex.value
+                              ? kPrimaryRedColor.withOpacity(.1)
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
                     ),
-                    Obx(
-                      () => AnimatedContainer(
-                        duration: Duration(seconds: 1),
-                        curve: Curves.fastLinearToSlowEaseIn,
-                        width: index == controller.selectedIndex.value
-                            ? _width * 0.31
-                            : _width * 0.18,
-                        alignment: Alignment.center,
-                        child: Stack(
-                          children: [
-                            Obx(
-                              () => Row(
-                                children: [
-                                  AnimatedContainer(
-                                    duration: Duration(seconds: 1),
-                                    curve: Curves.fastLinearToSlowEaseIn,
-                                    width:
-                                        index == controller.selectedIndex.value
-                                            ? _width * 0.13
-                                            : 0,
-                                  ),
-                                  AnimatedOpacity(
-                                    opacity:
-                                        index == controller.selectedIndex.value
-                                            ? 1
-                                            : 0,
-                                    duration: Duration(seconds: 1),
-                                    curve: Curves.fastLinearToSlowEaseIn,
-                                    child: Text(
-                                      index == controller.selectedIndex.value
-                                          ? '${bottomNavBarLabels[index]}'
-                                          : '',
-                                      style: TextStyle(
-                                          color: kPrimaryRedColor,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 15),
-                                    ),
-                                  ),
-                                ],
+                  ),
+                ),
+                Obx(
+                  () => AnimatedContainer(
+                    duration: Duration(seconds: 1),
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    width: index == controller.selectedIndex.value
+                        ? _width * 0.31
+                        : _width * 0.18,
+                    alignment: Alignment.center,
+                    child: Stack(
+                      children: [
+                        Obx(
+                          () => Row(
+                            children: [
+                              AnimatedContainer(
+                                duration: Duration(seconds: 1),
+                                curve: Curves.fastLinearToSlowEaseIn,
+                                width: index == controller.selectedIndex.value
+                                    ? _width * 0.13
+                                    : 0,
                               ),
-                            ),
-                            Row(
-                              children: [
-                                AnimatedContainer(
-                                  duration: Duration(seconds: 1),
-                                  curve: Curves.fastLinearToSlowEaseIn,
-                                  width: index == controller.selectedIndex.value
-                                      ? _width * 0.03
-                                      : 20,
+                              AnimatedOpacity(
+                                opacity: index == controller.selectedIndex.value
+                                    ? 1
+                                    : 0,
+                                duration: Duration(seconds: 1),
+                                curve: Curves.fastLinearToSlowEaseIn,
+                                child: Text(
+                                  index == controller.selectedIndex.value
+                                      ? '${bottomNavBarLabels[index]}'
+                                      : '',
+                                  style: TextStyle(
+                                      color: kPrimaryRedColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15),
                                 ),
-                                Icon(
-                                  bottomNavBarIcons[index],
-                                  size: _width * 0.076,
-                                  color: index == controller.selectedIndex.value
-                                      ? kPrimaryRedColor
-                                      : Colors.black26,
-                                )
-                              ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            AnimatedContainer(
+                              duration: Duration(seconds: 1),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              width: index == controller.selectedIndex.value
+                                  ? _width * 0.03
+                                  : 20,
+                            ),
+                            Icon(
+                              bottomNavBarIcons[index],
+                              size: _width * 0.076,
+                              color: index == controller.selectedIndex.value
+                                  ? kPrimaryRedColor
+                                  : Colors.black26,
                             )
                           ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              );
-            },
-          ),
-        ),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          );
+        },
       ),
     );
   }

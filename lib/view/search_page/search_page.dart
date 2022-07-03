@@ -52,7 +52,7 @@ class SearchPage extends StatelessWidget {
                         },
                         child: Center(
                             child: SvgPicture.asset(
-                          'assets/icons/slider_icon.svg',
+                          'assets/logos/slider_icon.svg',
                           height: 20,
                           width: 20,
                           color: Colors.black,

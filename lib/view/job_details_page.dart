@@ -294,7 +294,7 @@ class CompanyLogo extends StatelessWidget {
       child: Column(
         children: [
           SvgPicture.asset(
-            "assets/icons/logo_youtube.svg",
+            "assets/logos/logo_youtube.svg",
             height: 75,
             width: 75,
           ),

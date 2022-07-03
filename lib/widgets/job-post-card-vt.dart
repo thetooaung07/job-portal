@@ -61,7 +61,11 @@ class JobPostCardVt extends StatelessWidget {
                   ],
                 ),
                 // Icon(Icons.favorite_outline_rounded),
-                Text("\$1299/Mo")
+                Text(
+                  "\$1299/Mo",
+                  style: kLabelTextStyle.copyWith(
+                      color: kPrimaryRedColor, fontSize: 18),
+                )
               ],
             ),
             Row(

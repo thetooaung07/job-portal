@@ -18,11 +18,8 @@ class _SearchBarState extends State<SearchBar> {
   final TextEditingController searchPageController =
       new TextEditingController();
 
-  final FocusNode _focusNode = new FocusNode();
-
   @override
   void initState() {
-    _focusNode.requestFocus();
     // searchPageController.text = _controller.searchTitle.value;
     super.initState();
   }
@@ -36,7 +33,7 @@ class _SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      focusNode: _focusNode,
+      autofocus: false,
       controller: searchPageController,
       onChanged: (v) => _controller.getTitleFromSearchBar(v),
       style: TextStyle(

@@ -82,7 +82,7 @@ class SearchPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Obx(() => _controller.searchTitle.value.isNotEmpty
                   ? SizedBox(
-                      height: 70,
+                      height: 45,
                       child: ListView.builder(
                         itemCount: 1,
                         scrollDirection: Axis.horizontal,
@@ -96,6 +96,9 @@ class SearchPage extends StatelessWidget {
             Column(
               children: [
                 ShowAllTextBanner(title: "14 Jobs Available"),
+                SizedBox(
+                  height: 10,
+                ),
                 JobPostCardVt(),
                 JobPostCardVt(),
                 JobPostCardVt(),
@@ -122,27 +125,23 @@ class SearchTag extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 30,
-          width: (Get.width * 0.3) - 20,
-          margin: EdgeInsets.only(left: kSpacingUnit, top: 7, right: 7),
+          height: 45,
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          margin: EdgeInsets.only(left: 5, top: 7, right: 7),
           decoration: BoxDecoration(
             color: kPrimaryRedColor,
-            borderRadius: BorderRadius.circular(7),
+            borderRadius: BorderRadius.circular(8),
           ),
           child: Center(
             child: Stack(
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                  child: Obx(
-                    () => Text(
-                      _controller.searchTitle.value,
-                      overflow: TextOverflow.ellipsis,
-                      style: kCaptionTextStyle.copyWith(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+                Text(
+                  "Full-Time",
+                  overflow: TextOverflow.ellipsis,
+                  style: kLabelTextStyle.copyWith(
+                      fontSize: 15,
+                      color: Colors.white,
+                      fontWeight: FontWeight.normal),
                 ),
               ],
             ),
@@ -152,16 +151,16 @@ class SearchTag extends StatelessWidget {
           right: 2,
           top: 2,
           child: Container(
-            height: 17,
-            width: 17,
+            height: 20,
+            width: 20,
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [kIconShadow],
+              boxShadow: [kCloseBtnShadow],
               shape: BoxShape.circle,
             ),
             child: Center(
               child: Icon(Icons.close_rounded,
-                  color: kPrimaryRedColor, size: 14, shadows: [kCardShadow]),
+                  color: Colors.black, size: 13, shadows: [kIconShadow]),
             ),
           ),
         ),

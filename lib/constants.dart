@@ -60,6 +60,12 @@ const BoxShadow kIconShadow = BoxShadow(
   offset: Offset(2, 2),
   spreadRadius: 2,
 );
+const BoxShadow kCloseBtnShadow = BoxShadow(
+  color: Color.fromARGB(20, 0, 0, 0),
+  blurRadius: 1,
+  offset: Offset(1, -1),
+  spreadRadius: 0.5,
+);
 const TextStyle kBulletListTextStyle = TextStyle(
   fontSize: 15,
   color: kTextBodyFadeColor,

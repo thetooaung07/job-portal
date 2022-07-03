@@ -13,54 +13,54 @@ class JobDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: themeBgColor,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            MyAppBar(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomIconButton(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Icon(
-                          Icons.chevron_left_rounded,
-                          size: 30,
-                          color: Colors.black,
+        backgroundColor: themeBgColor,
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              MyAppBar(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomIconButton(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Icon(
+                            Icons.chevron_left_rounded,
+                            size: 30,
+                            color: Colors.black,
+                          ),
                         ),
-                      ),
-                      Text(
-                        "Detail",
-                        style: kLogoTextStyle,
-                      ),
-                      CustomIconButton(
-                        child: Icon(
-                          Icons.search_rounded,
-                          size: 30,
-                          color: Colors.black,
+                        Text(
+                          "Detail",
+                          style: kLogoTextStyle,
                         ),
-                      ),
-                    ]),
+                        CustomIconButton(
+                          child: Icon(
+                            Icons.search_rounded,
+                            size: 30,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ]),
+                ),
               ),
-            ),
-            CompanyLogo(),
-            JobTab(),
-            // ApplyNowBtn(),
-          ],
+              CompanyLogo(),
+              JobTab(),
+            ],
+          ),
         ),
-      ),
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.07),
-        height: Get.width * 0.205,
-        color: Colors.white,
-        child: ApplyNowBtn(),
-      ),
-    );
+        bottomNavigationBar: BottomNavBarConstraints(
+          color: Colors.white,
+          child: Container(
+            margin: EdgeInsets.all(Get.width * 0.05),
+            padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+            child: ApplyNowBtn(),
+          ),
+        ));
   }
 }
 
@@ -170,9 +170,6 @@ class FirstTab extends StatelessWidget {
               Responsibilities(),
             ]),
           ),
-
-          // ApplyNowBtn
-          // ApplyNowBtn(),
         ],
       ),
     );
@@ -415,7 +412,10 @@ class ApplyNowBtn extends StatelessWidget {
           children: [
             Text(
               "Salary",
-              style: kCaptionTextStyle,
+              style: kBulletListTextStyle.copyWith(
+                  letterSpacing: 1,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54),
             ),
             Text(
               "\$1000/Month",
@@ -429,7 +429,7 @@ class ApplyNowBtn extends StatelessWidget {
         Expanded(
           child: Container(
             // padding: EdgeInsets.symmetric(vertical: 5, horizontal: 75),
-            margin: EdgeInsets.symmetric(vertical: Get.width * 0.035),
+            margin: EdgeInsets.symmetric(vertical: Get.width * 0.01),
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: Colors.black,

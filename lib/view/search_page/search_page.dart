@@ -9,7 +9,6 @@ import 'package:job_portal/widgets/searchbar.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/search_title_controller.dart';
 import 'package:job_portal/view/search_page/filter_bottom_sheet.dart';
-import 'package:job_portal/view/search_page/search_page_tab_view.dart';
 import 'package:job_portal/widgets/showAllTextBanner.dart';
 
 class SearchPage extends StatelessWidget {
@@ -17,8 +16,7 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SearchTitleController _controller =
-        Get.put(SearchTitleController(), tag: "search_bar");
+    final SearchTitleController controller = Get.put(SearchTitleController());
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -70,9 +68,18 @@ class SearchPage extends StatelessWidget {
                 children: [
                   Flexible(
                     child: SearchBar(
-                      prefixIcon: Icon(Icons.search),
-                      suffixIcon: Icon(Icons.clear),
-                    ),
+                        prefixIcon: Icon(Icons.search),
+                        suffixIcon: IconButton(
+                            highlightColor: Colors.transparent,
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            icon: Icon(
+                              Icons.clear_rounded,
+                            ),
+                            onPressed: () {
+                              controller.clearText();
+                            })),
                   ),
                 ],
               ),
@@ -80,7 +87,7 @@ class SearchPage extends StatelessWidget {
             //Filter Result
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Obx(() => _controller.searchTitle.value.isNotEmpty
+              child: Obx(() => controller.searchTitle.value.isNotEmpty
                   ? SizedBox(
                       height: 45,
                       child: ListView.builder(
@@ -114,13 +121,13 @@ class SearchPage extends StatelessWidget {
   }
 }
 
-// TODO: Change SearchTag Style
 class SearchTag extends StatelessWidget {
   const SearchTag({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final SearchTitleController _controller = Get.find(tag: "search_bar");
+    // TODO : connect with Filters
+    // final SearchTitleController _controller = Get.find<SearchTitleController>();
 
     return Stack(
       children: [

@@ -52,9 +52,10 @@ class CustomIconButton extends StatelessWidget {
           height: 35,
           width: 35,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: btnBgColor,
-              boxShadow: [kIconShadow]),
+            borderRadius: BorderRadius.circular(8),
+            color: btnBgColor,
+            boxShadow: [kIconShadow],
+          ),
           child: child),
     );
   }

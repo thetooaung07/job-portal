@@ -5,6 +5,6 @@ class SearchPageBinding extends Bindings {
   @override
   void dependencies() {
     // TODO: implement dependencies
-    Get.put(() => SearchTitleController());
+    // Get.put(() => SearchTitleController());
   }
 }

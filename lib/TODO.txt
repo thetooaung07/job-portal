@@ -1,9 +1,9 @@
 Main Page > Top Company Card Shadow Radius blur etc. > done
 continue tab_bar in job_details page. > done
-
+Change Icon and title > done
 
 
 
 
 Last Update
-- HomePage Wrapper with animated Container
+- HomePage Wrapper with animated Container > undo

@@ -26,8 +26,6 @@ const btnBgColorWhite = Color.fromRGBO(255, 255, 255, 1);
 const btnBgColorGrey = Color.fromRGBO(35, 35, 35, 1);
 const kPrimaryRedColor = Color.fromRGBO(250, 88, 4, 1);
 const kTextBodyFadeColor = Color.fromARGB(185, 0, 0, 0);
-const kPrimaryBlackColor = Color.fromARGB(244, 14, 14, 14);
-const kPrimaryWhiteColor = Color.fromARGB(244, 240, 240, 240);
 
 const double kSpacingUnit = 10;
 const TextStyle kHeaderTextStyle = TextStyle(

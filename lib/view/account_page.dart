@@ -48,7 +48,7 @@ class AccountPage extends StatelessWidget {
                 child: Column(
                   children: [
                     CircleAvatar(
-                      backgroundColor: Colors.red,
+                      backgroundColor: kPrimaryRedColor,
                       radius: 50,
                     ),
                     SizedBox(

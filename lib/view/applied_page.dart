@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
@@ -21,8 +22,14 @@ class AppliedPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomIconButton(
+                        onTap: () {
+                          final _controller =
+                              Get.find<BottomNavBarController>();
+                          // _controller.selectedIndex.value = 0;
+                          _controller.onPageChange(0);
+                        },
                         child: Icon(
-                          Icons.clear_all,
+                          Icons.chevron_left_rounded,
                           size: 30,
                           color: Colors.black,
                         ),
@@ -46,6 +53,7 @@ class AppliedPage extends StatelessWidget {
                     icon: Icon(
                       Icons.check_box_outlined,
                       size: 60,
+                      color: kPrimaryRedColor,
                     ),
                     text: "Applications",
                   ),
@@ -53,6 +61,7 @@ class AppliedPage extends StatelessWidget {
                     icon: Icon(
                       Icons.work_history_outlined,
                       size: 60,
+                      color: kPrimaryRedColor,
                     ),
                     text: "History",
                   ),
@@ -60,6 +69,7 @@ class AppliedPage extends StatelessWidget {
                     icon: Icon(
                       Icons.bookmark_added_outlined,
                       size: 60,
+                      color: kPrimaryRedColor,
                     ),
                     text: "Saved",
                   ),

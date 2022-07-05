@@ -144,7 +144,8 @@ class CustomBottomNavBar extends StatelessWidget {
                             : 0,
                         decoration: BoxDecoration(
                           color: index == controller.selectedIndex.value
-                              ? kPrimaryRedColor.withOpacity(.1)
+                              // ? kPrimaryRedColor.withOpacity(.1)
+                              ? Colors.black
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -183,7 +184,7 @@ class CustomBottomNavBar extends StatelessWidget {
                                       ? '${bottomNavBarLabels[index]}'
                                       : '',
                                   style: TextStyle(
-                                      color: kPrimaryRedColor,
+                                      color: Color.fromARGB(255, 255, 255, 255),
                                       fontWeight: FontWeight.w600,
                                       fontSize: 15),
                                 ),
@@ -204,7 +205,7 @@ class CustomBottomNavBar extends StatelessWidget {
                               bottomNavBarIcons[index],
                               size: _width * 0.076,
                               color: index == controller.selectedIndex.value
-                                  ? kPrimaryRedColor
+                                  ? Color.fromARGB(255, 255, 255, 255)
                                   : Colors.black26,
                             )
                           ],

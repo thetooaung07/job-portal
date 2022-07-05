@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:job_portal/binding/homepage_binding.dart';
 import 'package:job_portal/binding/searchpage_binding.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/view/account_page.dart';

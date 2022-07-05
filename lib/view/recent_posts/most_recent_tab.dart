@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:job_portal/widgets/job-post-card-vt.dart';
-import 'package:job_portal/widgets/suggested_job_container.dart';
 
 class MostRecentTab extends StatelessWidget {
   const MostRecentTab({Key? key}) : super(key: key);

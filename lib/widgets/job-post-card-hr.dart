@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
-import 'package:job_portal/main.dart';
 import 'package:job_portal/routes/routes.dart';
 
 class JobPostCardHr extends StatelessWidget {

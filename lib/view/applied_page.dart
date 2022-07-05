@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/main.dart';
+import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
 class AppliedPage extends StatelessWidget {
@@ -49,6 +50,9 @@ class AppliedPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   JobCard(
+                    onTap: () {
+                      Get.toNamed(RouteNames.myjobs);
+                    },
                     icon: Icon(
                       Icons.check_box_outlined,
                       size: 60,
@@ -85,38 +89,40 @@ class AppliedPage extends StatelessWidget {
 class JobCard extends StatelessWidget {
   final Widget icon;
   final String text;
-  const JobCard({Key? key, required this.icon, required this.text})
+  final void Function()? onTap;
+  const JobCard({Key? key, required this.icon, required this.text, this.onTap})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromARGB(16, 0, 0, 0),
-            blurRadius: 15,
-            offset: Offset(1, 0),
-            spreadRadius: 1,
-          )
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromARGB(16, 0, 0, 0),
+              blurRadius: 15,
+              offset: Offset(1, 0),
+              spreadRadius: 1,
+            )
+          ],
+        ),
+        margin: EdgeInsets.symmetric(vertical: 10),
+        width: 160,
+        height: Get.height * 0.2,
+        child: Column(children: [
+          icon,
+          Spacer(),
+          Text(
+            text,
+            style: kCaptionTextStyle,
+          ),
+        ]),
       ),
-      margin: EdgeInsets.symmetric(vertical: 10),
-      width: 160,
-      height: 160,
-      child: Column(children: [
-        icon,
-        SizedBox(
-          height: 20,
-        ),
-        Text(
-          text,
-          style: kCaptionTextStyle,
-        ),
-      ]),
     );
   }
 }

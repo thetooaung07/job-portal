@@ -45,6 +45,9 @@ class AccountPage extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Column(
                   children: [
+                    SizedBox(
+                      height: 15,
+                    ),
                     CircleAvatar(
                       backgroundColor: kPrimaryRedColor,
                       radius: 50,

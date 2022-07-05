@@ -5,7 +5,8 @@ const String bullet = "\u2022 ";
 const List<String> bottomNavBarLabels = [
   'Home',
   'Nearby',
-  'Applied',
+  // 'Applied',
+  "My Jobs",
   'Account',
 ];
 

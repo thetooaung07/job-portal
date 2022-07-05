@@ -14,17 +14,6 @@ void main() {
   runApp(const MyApp());
 }
 
-class TestMyApp extends StatelessWidget {
-  const TestMyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: Text("Hello")),
-    );
-  }
-}
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -100,9 +89,6 @@ class HomePage extends StatelessWidget {
   }
 }
 
-//get.width * 0.32 => 132
-//get.width * 0.18 => 75
-//get.width * 0.12 => 50
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({Key? key});
 
@@ -146,23 +132,21 @@ class CustomBottomNavBar extends StatelessWidget {
                         ? _width * 0.32
                         : _width * 0.18,
                     alignment: Alignment.center,
-                    child: Obx(
-                      () => AnimatedContainer(
-                        duration: Duration(seconds: 1),
-                        curve: Curves.fastLinearToSlowEaseIn,
-                        height: index == controller.selectedIndex.value
-                            ? _width * 0.12
-                            : 0,
-                        width: index == controller.selectedIndex.value
-                            ? _width * 0.32
-                            : 0,
-                        decoration: BoxDecoration(
-                          color: index == controller.selectedIndex.value
-                              // ? kPrimaryRedColor.withOpacity(.1)
-                              ? Colors.black
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                    child: AnimatedContainer(
+                      duration: Duration(seconds: 1),
+                      curve: Curves.fastLinearToSlowEaseIn,
+                      height: index == controller.selectedIndex.value
+                          ? _width * 0.12
+                          : 0,
+                      width: index == controller.selectedIndex.value
+                          ? _width * 0.32
+                          : 0,
+                      decoration: BoxDecoration(
+                        color: index == controller.selectedIndex.value
+                            // ? kPrimaryRedColor.withOpacity(.1)
+                            ? Colors.black
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),
@@ -177,34 +161,32 @@ class CustomBottomNavBar extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Stack(
                       children: [
-                        Obx(
-                          () => Row(
-                            children: [
-                              AnimatedContainer(
-                                duration: Duration(seconds: 1),
-                                curve: Curves.fastLinearToSlowEaseIn,
-                                width: index == controller.selectedIndex.value
-                                    ? _width * 0.13
-                                    : 0,
+                        Row(
+                          children: [
+                            AnimatedContainer(
+                              duration: Duration(seconds: 1),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              width: index == controller.selectedIndex.value
+                                  ? _width * 0.13
+                                  : 0,
+                            ),
+                            AnimatedOpacity(
+                              opacity: index == controller.selectedIndex.value
+                                  ? 1
+                                  : 0,
+                              duration: Duration(seconds: 1),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              child: Text(
+                                index == controller.selectedIndex.value
+                                    ? '${bottomNavBarLabels[index]}'
+                                    : '',
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 255, 255, 255),
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15),
                               ),
-                              AnimatedOpacity(
-                                opacity: index == controller.selectedIndex.value
-                                    ? 1
-                                    : 0,
-                                duration: Duration(seconds: 1),
-                                curve: Curves.fastLinearToSlowEaseIn,
-                                child: Text(
-                                  index == controller.selectedIndex.value
-                                      ? '${bottomNavBarLabels[index]}'
-                                      : '',
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                         Row(
                           children: [

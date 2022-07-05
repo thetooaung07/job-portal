@@ -40,7 +40,7 @@ class JobDetailsPage extends StatelessWidget {
                       ),
                       CustomIconButton(
                         child: Icon(
-                          Icons.search_rounded,
+                          Icons.bookmark_border_rounded,
                           size: 30,
                           color: Colors.black,
                         ),

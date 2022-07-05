@@ -13,118 +13,121 @@ class AccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            MyAppBar(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        height: 35,
-                        width: 25,
-                      ),
-                      Text(
-                        "Profile",
-                        style: kLogoTextStyle,
-                      ),
-                      CustomIconButton(
-                        onTap: () {},
-                        child: Icon(
-                          Icons.more_vert_rounded,
-                          size: 30,
-                          color: Colors.black,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              MyAppBar(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          height: 35,
+                          width: 25,
                         ),
-                      ),
-                    ]),
+                        Text(
+                          "Profile",
+                          style: kLogoTextStyle,
+                        ),
+                        CustomIconButton(
+                          onTap: () {},
+                          child: Icon(
+                            Icons.more_vert_rounded,
+                            size: 30,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ]),
+                ),
               ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Colors.red,
-                    radius: 50,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "Thet Oo Aung",
-                    style: kHeaderTextStyle,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "React Developer || Flutter Beginner",
-                    style: kBulletListTextStyle.copyWith(color: Colors.black54),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  )
-                ],
-              ),
-            ),
-            //TODO: To Change Custom to look more beautiful // indicator indside Square
-            //  Complete Your Profile
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Complete Your Profile (1/4)"),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: LinearProgressIndicator(
-                      backgroundColor: themeBgColor,
-                      value: 0.3,
-                      minHeight: 12,
+              Align(
+                alignment: Alignment.center,
+                child: Column(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.red,
+                      radius: 50,
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Thet Oo Aung",
+                      style: kHeaderTextStyle,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "React Developer || Flutter Beginner",
+                      style:
+                          kBulletListTextStyle.copyWith(color: Colors.black54),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    )
+                  ],
+                ),
               ),
-            ),
+              //TODO: To Change Custom to look more beautiful // indicator indside Square
+              //  Complete Your Profile
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Complete Your Profile (1/4)"),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: LinearProgressIndicator(
+                        backgroundColor: themeBgColor,
+                        value: 0.3,
+                        minHeight: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
 
-            Container(
-              height: 200,
-              child: ListView.builder(
-                padding: EdgeInsets.only(left: 20),
-                scrollDirection: Axis.horizontal,
-                itemCount: 4,
-                itemBuilder: (context, index) => ProfileCardHr(),
+              Container(
+                height: 200,
+                child: ListView.builder(
+                  padding: EdgeInsets.only(left: 20),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 4,
+                  itemBuilder: (context, index) => ProfileCardHr(),
+                ),
               ),
-            ),
 
-            ListTile(
-              minLeadingWidth: 0,
-              contentPadding: EdgeInsets.symmetric(horizontal: 20),
-              leading: Icon(Icons.settings),
-              title: Text("Setting"),
-              trailing: Icon(Icons.chevron_right_rounded),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            ListTile(
-              minLeadingWidth: 0,
-              contentPadding: EdgeInsets.symmetric(horizontal: 20),
-              leading: Icon(
-                Icons.message_rounded,
-                size: 25,
+              ListTile(
+                horizontalTitleGap: 7,
+                minLeadingWidth: 0,
+                contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                leading: Icon(Icons.settings),
+                title: Text("Setting"),
+                trailing: Icon(Icons.chevron_right_rounded),
               ),
-              title: Text("Help & Feedback"),
-              trailing: Icon(Icons.chevron_right_rounded),
-            ),
-          ],
+
+              ListTile(
+                horizontalTitleGap: 7,
+                minLeadingWidth: 0,
+                contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                leading: Icon(
+                  Icons.message_rounded,
+                  size: 25,
+                ),
+                title: Text("Help & Feedback"),
+                trailing: Icon(Icons.chevron_right_rounded),
+              ),
+            ],
+          ),
         ),
       ),
     );

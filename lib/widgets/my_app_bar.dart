@@ -7,12 +7,14 @@ class MyAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
-      width: Get.width,
-      height: MediaQuery.of(context).viewPadding.top + 60,
-      decoration: BoxDecoration(color: Colors.transparent),
-      child: child,
+    return SafeArea(
+      child: Container(
+        // padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
+        width: Get.width,
+        height: MediaQuery.of(context).viewPadding.top + 60,
+        decoration: BoxDecoration(color: Colors.transparent),
+        child: child,
+      ),
     );
   }
 }

@@ -143,16 +143,6 @@ class ApplicationCard extends StatelessWidget {
                   style: kBodyTextStyle.copyWith(color: Colors.white),
                 ),
               ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 7),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.black),
-                child: Text(
-                  "Delivered",
-                  style: kBodyTextStyle.copyWith(color: Colors.white),
-                ),
-              ),
               Text(
                 "\$1200 Monthly",
                 style: kCaptionTextStyle.copyWith(color: kPrimaryRedColor),

@@ -68,20 +68,31 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final BottomNavBarController controller = Get.put(BottomNavBarController());
 
+    final List<Widget> _pages = [
+      HomePageView(),
+      NearbyPage(),
+      AppliedPage(),
+      AccountPage(),
+    ];
+
     return Scaffold(
       backgroundColor: themeBgMainColor,
-      body: PageView(
-        children: [
-          HomePageView(),
-          NearbyPage(),
-          AppliedPage(),
-          AccountPage(),
-        ],
-        controller: controller.pageController,
-        onPageChanged: (index) {
-          controller.selectedIndex.value = index;
-        },
+      body: Obx(
+        () => _pages[controller.selectedIndex.value],
       ),
+
+      //  PageView(
+      //   children: [
+      //     HomePageView(),
+      //     NearbyPage(),
+      //     AppliedPage(),
+      //     AccountPage(),
+      //   ],
+      //   controller: controller.pageController,
+      //   onPageChanged: (index) {
+      //     controller.selectedIndex.value = index;
+      //   },
+      // ),
       bottomNavigationBar: BottomNavBarConstraints(
         child: CustomBottomNavBar(),
       ),
@@ -98,7 +109,7 @@ class CustomBottomNavBar extends StatelessWidget {
     final BottomNavBarController controller =
         Get.find<BottomNavBarController>();
     return Container(
-      margin: EdgeInsets.all(Get.width * 0.05),
+      margin: EdgeInsets.all(_width * 0.05),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -280,8 +291,8 @@ class BottomNavBarConstraints extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // margin: EdgeInsets.all(Get.width * 0.05),
-      height: Get.width * 0.255,
+      // margin: EdgeInsets.all(_width * 0.05),
+      height: MediaQuery.of(context).size.width * 0.255,
       color: color ?? Colors.white,
 
       child: child,

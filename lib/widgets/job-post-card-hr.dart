@@ -80,7 +80,7 @@ class CustomTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width,
+      width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
         color: btnBgColorGrey,

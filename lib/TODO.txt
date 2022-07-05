@@ -11,3 +11,16 @@ Last Update
 
 TODO: 
 -change AppliedPage Button UI to neumorphism
+
+
+
+
+
+
+
+White Screen Error Happening 
+
+- white scrren on physical device > Reason PageView of HomePage (body[1] works)
+- widget sometimes not showing > Reason Get.width (MediaQuery works fine)
+
+White Screen Error Solved

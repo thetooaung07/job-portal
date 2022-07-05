@@ -44,7 +44,7 @@ class AppliedPage extends StatelessWidget {
                     ]),
               ),
             ),
-            Expanded(
+            Flexible(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -105,8 +105,8 @@ class JobCard extends StatelessWidget {
         ],
       ),
       margin: EdgeInsets.symmetric(vertical: 10),
-      width: Get.width * 0.4,
-      height: Get.width * 0.4,
+      width: 160,
+      height: 160,
       child: Column(children: [
         icon,
         SizedBox(

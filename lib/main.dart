@@ -89,6 +89,10 @@ class HomePage extends StatelessWidget {
   }
 }
 
+//get.width * 0.32 => 132
+//get.width * 0.18 => 75
+//get.width * 0.12 => 50
+
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({Key? key});
 
@@ -128,20 +132,16 @@ class CustomBottomNavBar extends StatelessWidget {
                   () => AnimatedContainer(
                     duration: Duration(seconds: 1),
                     curve: Curves.fastLinearToSlowEaseIn,
-                    width: index == controller.selectedIndex.value
-                        ? _width * 0.32
-                        : _width * 0.18,
+                    width: index == controller.selectedIndex.value ? 132 : 75,
                     alignment: Alignment.center,
                     child: Obx(
                       () => AnimatedContainer(
                         duration: Duration(seconds: 1),
                         curve: Curves.fastLinearToSlowEaseIn,
-                        height: index == controller.selectedIndex.value
-                            ? _width * 0.12
-                            : 0,
-                        width: index == controller.selectedIndex.value
-                            ? _width * 0.32
-                            : 0,
+                        height:
+                            index == controller.selectedIndex.value ? 50 : 0,
+                        width:
+                            index == controller.selectedIndex.value ? 132 : 0,
                         decoration: BoxDecoration(
                           color: index == controller.selectedIndex.value
                               // ? kPrimaryRedColor.withOpacity(.1)
@@ -159,7 +159,7 @@ class CustomBottomNavBar extends StatelessWidget {
                     curve: Curves.fastLinearToSlowEaseIn,
                     width: index == controller.selectedIndex.value
                         ? _width * 0.31
-                        : _width * 0.18,
+                        : 75,
                     alignment: Alignment.center,
                     child: Stack(
                       children: [
@@ -285,19 +285,9 @@ class BottomNavBarConstraints extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // margin: EdgeInsets.all(Get.width * 0.05),
-      height: Get.width * 0.255,
+      height: 105,
       color: color ?? Colors.white,
-      // decoration: BoxDecoration(
-      //   color: Colors.white,
-      //   boxShadow: [
-      //     BoxShadow(
-      //       color: Colors.black.withOpacity(0.1),
-      //       blurRadius: 30,
-      //       offset: Offset(0, 10),
-      //     ),
-      //   ],
-      //   borderRadius: BorderRadius.circular(50),
-      // ),
+
       child: child,
     );
   }

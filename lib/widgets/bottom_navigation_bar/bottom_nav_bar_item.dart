@@ -24,7 +24,6 @@ class BottomNavBarItem extends StatelessWidget {
       () => InkWell(
         onTap: onPressed,
         child: Container(
-          // width: (Get.width - 80) / 4,
           decoration: BoxDecoration(
               color: _controller.selectedIndex.value == index
                   ? Colors.teal

@@ -18,7 +18,7 @@ class FilterBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      height: Get.height * 0.82,
+      height: Get.height * 0.85,
       decoration: BoxDecoration(
         color: themeBgColor,
         borderRadius: BorderRadius.only(
@@ -36,7 +36,7 @@ class FilterBottomSheet extends StatelessWidget {
           children: [
             Align(
               child: Container(
-                width: Get.width * 0.12,
+                width: 50,
                 height: 7,
                 decoration: BoxDecoration(
                     color: Colors.black54,

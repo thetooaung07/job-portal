@@ -74,7 +74,9 @@ class JobPostCardHr extends StatelessWidget {
 }
 
 class CustomTextButton extends StatelessWidget {
-  const CustomTextButton({Key? key}) : super(key: key);
+  final String? label;
+
+  const CustomTextButton({Key? key, this.label = "Show All"}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +89,7 @@ class CustomTextButton extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          "Show All",
+          label ?? "Show All",
           style: TextStyle(color: Colors.white),
         ),
       ),

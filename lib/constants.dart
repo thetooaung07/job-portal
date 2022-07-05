@@ -66,6 +66,14 @@ const BoxShadow kCloseBtnShadow = BoxShadow(
   offset: Offset(1, -1),
   spreadRadius: 0.5,
 );
+
+// const BoxShadow kProfileCardShadow = BoxShadow(
+//   color: Color.fromARGB(22, 0, 0, 0),
+//   blurRadius: 10,
+//   offset: Offset(1, 0),
+//   spreadRadius: 10,
+// );
+
 const TextStyle kBulletListTextStyle = TextStyle(
   fontSize: 15,
   color: kTextBodyFadeColor,
@@ -75,4 +83,4 @@ const TextStyle kBulletListTextStyle = TextStyle(
 const Color kSilverColor = Color(0xFFF6F7FB);
 
 const kCaptionTextStyle = TextStyle(fontSize: 18, color: Colors.black);
-const kBodyTextStyle = TextStyle(fontSize: 18, color: Colors.black);
+const kBodyTextStyle = TextStyle(fontSize: 14, color: Colors.black);

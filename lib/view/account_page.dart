@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/main.dart';
+import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/job-post-card-hr.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
@@ -11,36 +13,52 @@ class AccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: MyAppBar(
+        label: "Profile",
+        action: [
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+            child: CustomIconButton(
+              onTap: (() => Get.toNamed(RouteNames.search)),
+              child: Icon(
+                Icons.more_vert_rounded,
+                size: 30,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MyAppBar(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          height: 35,
-                          width: 25,
-                        ),
-                        Text(
-                          "Profile",
-                          style: kLogoTextStyle,
-                        ),
-                        CustomIconButton(
-                          onTap: () {},
-                          child: Icon(
-                            Icons.more_vert_rounded,
-                            size: 30,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ]),
-                ),
-              ),
+              // MyAppBar(
+              //   child: Padding(
+              //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              //     child: Row(
+              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //         children: [
+              //           SizedBox(
+              //             height: 35,
+              //             width: 25,
+              //           ),
+              //           Text(
+              //             "Profile",
+              //             style: kLogoTextStyle,
+              //           ),
+              //           CustomIconButton(
+              //             onTap: () {},
+              //             child: Icon(
+              //               Icons.more_vert_rounded,
+              //               size: 30,
+              //               color: Colors.black,
+              //             ),
+              //           ),
+              //         ]),
+              //   ),
+              // ),
               Align(
                 alignment: Alignment.center,
                 child: Column(

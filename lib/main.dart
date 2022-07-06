@@ -33,6 +33,142 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final BottomNavBarController controller = Get.put(BottomNavBarController());
+
+    final List<Widget> _pages = [
+      HomePageView(),
+      NearbyPage(),
+      AppliedPage(),
+      AccountPage(),
+    ];
+
+    return Scaffold(
+      backgroundColor: themeBgMainColor,
+
+      body: Obx(
+        () => _pages[controller.selectedIndex.value],
+      ),
+      // body: PageView(
+      //   children: [
+      //     HomePageView(),
+      //     NearbyPage(),
+      //     AppliedPage(),
+      //     AccountPage(),
+      //   ],
+      //   controller: controller.pageController,
+      //   onPageChanged: (index) {
+      //     controller.selectedIndex.value = index;
+      //   },
+      // ),
+      bottomNavigationBar: BottomNavBarConstraints(
+        child: CustomBottomNavBar(),
+      ),
+    );
+  }
+}
+
+class HomePageView extends StatelessWidget {
+  const HomePageView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: MyAppBar(
+        leading: Container(
+          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: CustomIconButton(
+            onTap: (() => {}),
+            child: Icon(
+              Icons.clear_all_rounded,
+              size: 30,
+              color: Colors.black,
+            ),
+          ),
+        ),
+        label: "QWERTY",
+        action: [
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+            child: CustomIconButton(
+              onTap: (() => Get.toNamed(RouteNames.search)),
+              child: Icon(
+                Icons.search_rounded,
+                size: 30,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // MyAppBar(
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            //     child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           CustomIconButton(
+            //             child: Icon(
+            //               Icons.clear_all,
+            //               size: 30,
+            //               color: Colors.black,
+            //             ),
+            //           ),
+            //           Text(
+            //             "QWERTY",
+            //             style: kLogoTextStyle,
+            //           ),
+            //           CustomIconButton(
+            //             onTap: (() => Get.toNamed(RouteNames.search)),
+            //             child: Icon(
+            //               Icons.search_rounded,
+            //               size: 30,
+            //               color: Colors.black,
+            //             ),
+            //           ),
+            //         ]),
+            //   ),
+            // ),
+
+            //Popular Job
+            TopCompanyContainer(),
+            //Recent Post
+            SuggestedJobContainer(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class BottomNavBarConstraints extends StatelessWidget {
+  final Widget child;
+  final Color? color;
+
+  const BottomNavBarConstraints({Key? key, required this.child, this.color})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // margin: EdgeInsets.all(_width * 0.05),
+      height: MediaQuery.of(context).size.width * 0.255,
+      color: color ?? Colors.white,
+
+      child: child,
+    );
+  }
+}
+
 class CustomIconButton extends StatelessWidget {
   final Widget child;
   final Color btnBgColor;
@@ -57,45 +193,6 @@ class CustomIconButton extends StatelessWidget {
             boxShadow: [kIconShadow],
           ),
           child: child),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final BottomNavBarController controller = Get.put(BottomNavBarController());
-
-    final List<Widget> _pages = [
-      HomePageView(),
-      NearbyPage(),
-      AppliedPage(),
-      AccountPage(),
-    ];
-
-    return Scaffold(
-      backgroundColor: themeBgMainColor,
-      body: Obx(
-        () => _pages[controller.selectedIndex.value],
-      ),
-
-      //  PageView(
-      //   children: [
-      //     HomePageView(),
-      //     NearbyPage(),
-      //     AppliedPage(),
-      //     AccountPage(),
-      //   ],
-      //   controller: controller.pageController,
-      //   onPageChanged: (index) {
-      //     controller.selectedIndex.value = index;
-      //   },
-      // ),
-      bottomNavigationBar: BottomNavBarConstraints(
-        child: CustomBottomNavBar(),
-      ),
     );
   }
 }
@@ -226,76 +323,6 @@ class CustomBottomNavBar extends StatelessWidget {
           );
         },
       ),
-    );
-  }
-}
-
-class HomePageView extends StatelessWidget {
-  const HomePageView({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            MyAppBar(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomIconButton(
-                        child: Icon(
-                          Icons.clear_all,
-                          size: 30,
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        "QWERTY",
-                        style: kLogoTextStyle,
-                      ),
-                      CustomIconButton(
-                        onTap: (() => Get.toNamed(RouteNames.search)),
-                        child: Icon(
-                          Icons.search_rounded,
-                          size: 30,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ]),
-              ),
-            ),
-
-            //Popular Job
-            TopCompanyContainer(),
-            //Recent Post
-            SuggestedJobContainer(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class BottomNavBarConstraints extends StatelessWidget {
-  final Widget child;
-  final Color? color;
-
-  const BottomNavBarConstraints({Key? key, required this.child, this.color})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      // margin: EdgeInsets.all(_width * 0.05),
-      height: MediaQuery.of(context).size.width * 0.255,
-      color: color ?? Colors.white,
-
-      child: child,
     );
   }
 }

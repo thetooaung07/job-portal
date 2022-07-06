@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/main.dart';
+import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/job-post-card-vt.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 import 'package:job_portal/widgets/searchbar.dart';
@@ -18,46 +19,78 @@ class SearchPage extends StatelessWidget {
     final SearchTitleController controller = Get.put(SearchTitleController());
 
     return Scaffold(
+      appBar: MyAppBar(
+        leading: Container(
+          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: CustomIconButton(
+            onTap: (() => Get.back()),
+            child: Icon(
+              Icons.chevron_left_rounded,
+              size: 30,
+              color: Colors.black,
+            ),
+          ),
+        ),
+        label: "QWERTY",
+        action: [
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+            child: CustomIconButton(
+              onTap: () {
+                Get.bottomSheet(FilterBottomSheet(), isScrollControlled: true);
+              },
+              child: Center(
+                  child: SvgPicture.asset(
+                'assets/logos/slider_icon.svg',
+                height: 20,
+                width: 20,
+                color: Colors.black,
+              )),
+            ),
+            //        ,
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            MyAppBar(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomIconButton(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Icon(
-                          Icons.chevron_left_rounded,
-                          size: 30,
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        "Search",
-                        style: kLogoTextStyle,
-                      ),
-                      CustomIconButton(
-                        onTap: () {
-                          Get.bottomSheet(FilterBottomSheet(),
-                              isScrollControlled: true);
-                        },
-                        child: Center(
-                            child: SvgPicture.asset(
-                          'assets/logos/slider_icon.svg',
-                          height: 20,
-                          width: 20,
-                          color: Colors.black,
-                        )),
-                      ),
-                    ]),
-              ),
-            ),
+            // MyAppBar(
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            //     child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           CustomIconButton(
+            //             onTap: () {
+            //               Get.back();
+            //             },
+            //             child: Icon(
+            //               Icons.chevron_left_rounded,
+            //               size: 30,
+            //               color: Colors.black,
+            //             ),
+            //           ),
+            //           Text(
+            //             "Search",
+            //             style: kLogoTextStyle,
+            //           ),
+            //           CustomIconButton(
+            //             onTap: () {
+            //               Get.bottomSheet(FilterBottomSheet(),
+            //                   isScrollControlled: true);
+            //             },
+            //             child: Center(
+            //                 child: SvgPicture.asset(
+            //               'assets/logos/slider_icon.svg',
+            //               height: 20,
+            //               width: 20,
+            //               color: Colors.black,
+            //             )),
+            //           ),
+            //         ]),
+            //   ),
+            // ),
             SizedBox(
               height: 20,
             ),

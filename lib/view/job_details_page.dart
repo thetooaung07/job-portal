@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/main.dart';
+import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
 class JobDetailsPage extends StatelessWidget {
@@ -13,41 +14,68 @@ class JobDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: MyAppBar(
+        leading: Container(
+          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: CustomIconButton(
+            onTap: (() => Get.back()),
+            child: Icon(
+              Icons.chevron_left_rounded,
+              size: 30,
+              color: Colors.black,
+            ),
+          ),
+        ),
+        label: "QWERTY",
+        action: [
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+            child: CustomIconButton(
+              onTap: (() => Get.toNamed(RouteNames.search)),
+              child: Icon(
+                Icons.bookmark_border_rounded,
+                size: 30,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
+      ),
       backgroundColor: themeBgColor,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            MyAppBar(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomIconButton(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Icon(
-                          Icons.chevron_left_rounded,
-                          size: 30,
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        "Detail",
-                        style: kLogoTextStyle,
-                      ),
-                      CustomIconButton(
-                        child: Icon(
-                          Icons.bookmark_border_rounded,
-                          size: 30,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ]),
-              ),
-            ),
+            // MyAppBar(
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            //     child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           CustomIconButton(
+            //             onTap: () {
+            //               Get.back();
+            //             },
+            //             child: Icon(
+            //               Icons.chevron_left_rounded,
+            //               size: 30,
+            //               color: Colors.black,
+            //             ),
+            //           ),
+            //           Text(
+            //             "Detail",
+            //             style: kLogoTextStyle,
+            //           ),
+            //           CustomIconButton(
+            //             child: Icon(
+            //               Icons.bookmark_border_rounded,
+            //               size: 30,
+            //               color: Colors.black,
+            //             ),
+            //           ),
+            //         ]),
+            //   ),
+            // ),
             CompanyLogo(),
             JobTab(),
           ],

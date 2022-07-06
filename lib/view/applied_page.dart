@@ -12,39 +12,38 @@ class AppliedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            MyAppBar(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomIconButton(
-                        onTap: () {
-                          final _controller =
-                              Get.find<BottomNavBarController>();
-                          // _controller.selectedIndex.value = 0;
-                          _controller.onPageChange(0);
-                        },
-                        child: Icon(
-                          Icons.chevron_left_rounded,
-                          size: 30,
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        "Jobs",
-                        style: kLogoTextStyle,
-                      ),
-                      SizedBox(
-                        height: 30,
-                        width: 30,
-                      )
-                    ]),
+      appBar: MyAppBar(
+        leading: Container(
+          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: CustomIconButton(
+            onTap: (() => Get.back()),
+            child: Icon(
+              Icons.chevron_left_rounded,
+              size: 30,
+              color: Colors.black,
+            ),
+          ),
+        ),
+        label: "Jobs",
+        action: [
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+            child: CustomIconButton(
+              onTap: (() => Get.toNamed(RouteNames.search)),
+              child: Icon(
+                Icons.more_vert_rounded,
+                size: 30,
+                color: Colors.black,
               ),
             ),
+          ),
+        ],
+      ),
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
             Flexible(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

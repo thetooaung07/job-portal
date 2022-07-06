@@ -9,7 +9,7 @@ class BottomNavBarController extends GetxController {
 
   void onPageChange(index) {
     selectedIndex.value = index;
-
-    pageController.jumpToPage(index);
+    // enable only after pageView is Successfully impl;
+    // pageController.jumpToPage(index);
   }
 }

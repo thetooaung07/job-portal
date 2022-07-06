@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/main.dart';
+import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
 class ApplicationsPage extends StatelessWidget {
@@ -11,37 +12,64 @@ class ApplicationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: MyAppBar(
+        leading: Container(
+          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: CustomIconButton(
+            onTap: () => Get.back(),
+            child: Icon(
+              Icons.chevron_left_rounded,
+              size: 30,
+              color: Colors.black,
+            ),
+          ),
+        ),
+        label: "Nearby",
+        action: [
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+            child: CustomIconButton(
+              onTap: (() => Get.toNamed(RouteNames.search)),
+              child: Icon(
+                Icons.search_rounded,
+                size: 30,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MyAppBar(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomIconButton(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: Icon(
-                        Icons.chevron_left_rounded,
-                        size: 30,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Text(
-                      "Applications",
-                      style: kLogoTextStyle,
-                    ),
-                    SizedBox(
-                      height: 35,
-                      width: 35,
-                    )
-                  ],
-                ),
-              ),
+              // MyAppBar(
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       CustomIconButton(
+              //         onTap: () {
+              //           Get.back();
+              //         },
+              //         child: Icon(
+              //           Icons.chevron_left_rounded,
+              //           size: 30,
+              //           color: Colors.black,
+              //         ),
+              //       ),
+              //       Text(
+              //         "Applications",
+              //         style: kLogoTextStyle,
+              //       ),
+              //       SizedBox(
+              //         height: 35,
+              //         width: 35,
+              //       )
+              //     ],
+              //   ),
+              // ),
               Text("Your Applications"),
               Row(
                 children: [

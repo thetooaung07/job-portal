@@ -24,3 +24,7 @@ White Screen Error Happening
 - widget sometimes not showing > Reason Get.width (MediaQuery works fine)
 
 White Screen Error Solved
+
+
+PageView Removed - ScrollController Error 
+Solution found - onPageChange (controller.jumpTo()) is causing error

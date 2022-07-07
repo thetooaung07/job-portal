@@ -56,7 +56,7 @@ class AppliedPage extends StatelessWidget {
               },
               icon: Icon(
                 Icons.check_box_outlined,
-                size: 60,
+                size: 75,
                 color: kPrimaryRedColor,
               ),
               text: "Applications",
@@ -67,7 +67,7 @@ class AppliedPage extends StatelessWidget {
               },
               icon: Icon(
                 Icons.check_box_outlined,
-                size: 60,
+                size: 75,
                 color: kPrimaryRedColor,
               ),
               text: "Applications",
@@ -75,7 +75,7 @@ class AppliedPage extends StatelessWidget {
             JobCard(
               icon: Icon(
                 Icons.work_history_outlined,
-                size: 60,
+                size: 75,
                 color: kPrimaryRedColor,
               ),
               text: "History",
@@ -83,7 +83,7 @@ class AppliedPage extends StatelessWidget {
             JobCard(
               icon: Icon(
                 Icons.work_history_outlined,
-                size: 60,
+                size: 75,
                 color: kPrimaryRedColor,
               ),
               text: "History",
@@ -91,7 +91,7 @@ class AppliedPage extends StatelessWidget {
             JobCard(
               icon: Icon(
                 Icons.bookmark_added_outlined,
-                size: 60,
+                size: 75,
                 color: kPrimaryRedColor,
               ),
               text: "Saved",
@@ -99,7 +99,7 @@ class AppliedPage extends StatelessWidget {
             JobCard(
               icon: Icon(
                 Icons.bookmark_added_outlined,
-                size: 60,
+                size: 75,
                 color: kPrimaryRedColor,
               ),
               text: "Saved",
@@ -162,7 +162,7 @@ class JobCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
@@ -187,7 +187,7 @@ class JobCard extends StatelessWidget {
             style: kCaptionTextStyle.copyWith(fontSize: 25),
           ),
           SizedBox(
-            height: 20,
+            height: 10,
           ),
         ]),
       ),

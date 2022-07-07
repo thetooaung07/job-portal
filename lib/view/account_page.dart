@@ -19,7 +19,7 @@ class AccountPage extends StatelessWidget {
           Container(
             margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
             child: CustomIconButton(
-              onTap: (() => Get.toNamed(RouteNames.search)),
+              onTap: () {},
               child: Icon(
                 Icons.more_vert_rounded,
                 size: 30,
@@ -34,64 +34,56 @@ class AccountPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // MyAppBar(
-              //   child: Padding(
-              //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              //     child: Row(
-              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //         children: [
-              //           SizedBox(
-              //             height: 35,
-              //             width: 25,
-              //           ),
-              //           Text(
-              //             "Profile",
-              //             style: kLogoTextStyle,
-              //           ),
-              //           CustomIconButton(
-              //             onTap: () {},
-              //             child: Icon(
-              //               Icons.more_vert_rounded,
-              //               size: 30,
-              //               color: Colors.black,
-              //             ),
-              //           ),
-              //         ]),
-              //   ),
-              // ),
-              Align(
-                alignment: Alignment.center,
-                child: Column(
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 15,
-                    ),
                     CircleAvatar(
                       backgroundColor: kPrimaryRedColor,
                       radius: 50,
                     ),
                     SizedBox(
-                      height: 20,
+                      width: 30,
                     ),
-                    Text(
-                      "Thet Oo Aung",
-                      style: kHeaderTextStyle,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "React Developer || Flutter Beginner",
-                      style:
-                          kBulletListTextStyle.copyWith(color: Colors.black54),
-                    ),
-                    SizedBox(
-                      height: 10,
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "Thet Oo Aung",
+                          style: kHeaderTextStyle,
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "React Developer  ||  Flutter Beginner",
+                          style: kBulletListTextStyle.copyWith(
+                              color: Colors.black54),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          children: [
+                            Text("Contact me:"),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text("@thetooaung07")
+                          ],
+                        )
+                      ],
                     )
                   ],
                 ),
               ),
-              //TODO: To Change Custom to look more beautiful // indicator indside Square
+              //TODO:Change Custom to look more beautiful // border of inside indicator being Square
               //  Complete Your Profile
               Padding(
                 padding:

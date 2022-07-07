@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class BottomNavBarController extends GetxController {
-  RxInt selectedIndex = 0.obs;
+  RxInt selectedIndex = 2.obs;
   final PageController pageController = PageController(
-    initialPage: 0,
+    initialPage: 2,
   );
 
   void onPageChange(index) {

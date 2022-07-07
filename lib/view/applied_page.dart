@@ -39,47 +39,112 @@ class AppliedPage extends StatelessWidget {
           ),
         ],
       ),
-      body: SizedBox(
+      body: Container(
         width: MediaQuery.of(context).size.width,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: GridView(
+          padding: EdgeInsets.symmetric(
+            horizontal: 20,
+          ),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 1.08,
+          ),
           children: [
-            Flexible(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  JobCard(
-                    onTap: () {
-                      Get.toNamed(RouteNames.myjobs);
-                    },
-                    icon: Icon(
-                      Icons.check_box_outlined,
-                      size: 60,
-                      color: kPrimaryRedColor,
-                    ),
-                    text: "Applications",
-                  ),
-                  JobCard(
-                    icon: Icon(
-                      Icons.work_history_outlined,
-                      size: 60,
-                      color: kPrimaryRedColor,
-                    ),
-                    text: "History",
-                  ),
-                  JobCard(
-                    icon: Icon(
-                      Icons.bookmark_added_outlined,
-                      size: 60,
-                      color: kPrimaryRedColor,
-                    ),
-                    text: "Saved",
-                  ),
-                ],
+            JobCard(
+              onTap: () {
+                Get.toNamed(RouteNames.myjobs);
+              },
+              icon: Icon(
+                Icons.check_box_outlined,
+                size: 60,
+                color: kPrimaryRedColor,
               ),
-            )
+              text: "Applications",
+            ),
+            JobCard(
+              onTap: () {
+                Get.toNamed(RouteNames.myjobs);
+              },
+              icon: Icon(
+                Icons.check_box_outlined,
+                size: 60,
+                color: kPrimaryRedColor,
+              ),
+              text: "Applications",
+            ),
+            JobCard(
+              icon: Icon(
+                Icons.work_history_outlined,
+                size: 60,
+                color: kPrimaryRedColor,
+              ),
+              text: "History",
+            ),
+            JobCard(
+              icon: Icon(
+                Icons.work_history_outlined,
+                size: 60,
+                color: kPrimaryRedColor,
+              ),
+              text: "History",
+            ),
+            JobCard(
+              icon: Icon(
+                Icons.bookmark_added_outlined,
+                size: 60,
+                color: kPrimaryRedColor,
+              ),
+              text: "Saved",
+            ),
+            JobCard(
+              icon: Icon(
+                Icons.bookmark_added_outlined,
+                size: 60,
+                color: kPrimaryRedColor,
+              ),
+              text: "Saved",
+            ),
           ],
         ),
+        // child: Column(
+        //   crossAxisAlignment: CrossAxisAlignment.center,
+        //   children: [
+        //     Flexible(
+        //       child: Column(
+        //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //         children: [
+        //           JobCard(
+        //             onTap: () {
+        //               Get.toNamed(RouteNames.myjobs);
+        //             },
+        //             icon: Icon(
+        //               Icons.check_box_outlined,
+        //               size: 60,
+        //               color: kPrimaryRedColor,
+        //             ),
+        //             text: "Applications",
+        //           ),
+        //           JobCard(
+        //             icon: Icon(
+        //               Icons.work_history_outlined,
+        //               size: 60,
+        //               color: kPrimaryRedColor,
+        //             ),
+        //             text: "History",
+        //           ),
+        // JobCard(
+        //   icon: Icon(
+        //     Icons.bookmark_added_outlined,
+        //     size: 60,
+        //     color: kPrimaryRedColor,
+        //   ),
+        //   text: "Saved",
+        // ),
+        //         ],
+        //       ),
+        //     )
+        //   ],
+        // ),
       ),
     );
   }
@@ -97,7 +162,7 @@ class JobCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
@@ -105,20 +170,24 @@ class JobCard extends StatelessWidget {
             BoxShadow(
               color: Color.fromARGB(16, 0, 0, 0),
               blurRadius: 15,
-              offset: Offset(1, 0),
-              spreadRadius: 1,
+              offset: Offset(0, 0),
+              spreadRadius: 2,
             )
           ],
         ),
-        margin: EdgeInsets.symmetric(vertical: 10),
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         width: 160,
         height: Get.height * 0.2,
+        // height: Get.height * 0.15,
         child: Column(children: [
           icon,
           Spacer(),
           Text(
             text,
-            style: kCaptionTextStyle,
+            style: kCaptionTextStyle.copyWith(fontSize: 25),
+          ),
+          SizedBox(
+            height: 20,
           ),
         ]),
       ),

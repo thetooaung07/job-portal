@@ -28,3 +28,30 @@ White Screen Error Solved
 
 PageView Removed - ScrollController Error 
 Solution found - onPageChange (controller.jumpTo()) is causing error
+
+
+
+
+
+
+Firebase => engine => firebase_core
+Auth => firebase_auth
+Database => cloud_firestore
+Storage => firebase_storage
+
+
+
+
+
+https://www.oracle.com/webapps/redirect/signon?nexturl=https://download.oracle.com/otn/java/jdk/11.0.15.1%2B2/d76aabb62f1c47aa8588b9ae5a8a5b46/jdk-11.0.15.1_windows-x64_bin.exe
+
+
+
+
+
+https://download.oracle.com/otn-pub/java/jdk/11.0.15.1%2B2/d76aabb62f1c47aa8588b9ae5a8a5b46/jdk-11.0.15.1_windows-x64_bin.exe
+
+
+
+
+

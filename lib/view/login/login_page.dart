@@ -47,7 +47,7 @@ class LoginPage extends GetView<LoginPageController> {
                         children: [
                           //Username
                           TextFormField(
-                            //TODO: to re-add        // autofocus: true,
+                            autofocus: true,
                             controller: controller.emailController,
                             onEditingComplete:
                                 controller.passFocusNode.requestFocus,

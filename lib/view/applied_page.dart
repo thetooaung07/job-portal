@@ -47,7 +47,7 @@ class AppliedPage extends StatelessWidget {
           ),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            childAspectRatio: 1.08,
+            childAspectRatio: 1.0,
           ),
           children: [
             JobCard(
@@ -56,7 +56,7 @@ class AppliedPage extends StatelessWidget {
               },
               icon: Icon(
                 Icons.check_box_outlined,
-                size: 75,
+                size: 60,
                 color: kPrimaryRedColor,
               ),
               text: "Applications",
@@ -67,7 +67,7 @@ class AppliedPage extends StatelessWidget {
               },
               icon: Icon(
                 Icons.check_box_outlined,
-                size: 75,
+                size: 60,
                 color: kPrimaryRedColor,
               ),
               text: "Applications",
@@ -75,7 +75,7 @@ class AppliedPage extends StatelessWidget {
             JobCard(
               icon: Icon(
                 Icons.work_history_outlined,
-                size: 75,
+                size: 60,
                 color: kPrimaryRedColor,
               ),
               text: "History",
@@ -83,7 +83,7 @@ class AppliedPage extends StatelessWidget {
             JobCard(
               icon: Icon(
                 Icons.work_history_outlined,
-                size: 75,
+                size: 60,
                 color: kPrimaryRedColor,
               ),
               text: "History",
@@ -91,7 +91,7 @@ class AppliedPage extends StatelessWidget {
             JobCard(
               icon: Icon(
                 Icons.bookmark_added_outlined,
-                size: 75,
+                size: 60,
                 color: kPrimaryRedColor,
               ),
               text: "Saved",
@@ -99,7 +99,7 @@ class AppliedPage extends StatelessWidget {
             JobCard(
               icon: Icon(
                 Icons.bookmark_added_outlined,
-                size: 75,
+                size: 60,
                 color: kPrimaryRedColor,
               ),
               text: "Saved",
@@ -162,7 +162,7 @@ class JobCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
@@ -184,7 +184,7 @@ class JobCard extends StatelessWidget {
           Spacer(),
           Text(
             text,
-            style: kCaptionTextStyle.copyWith(fontSize: 25),
+            style: kCaptionTextStyle.copyWith(fontSize: 20),
           ),
           SizedBox(
             height: 10,

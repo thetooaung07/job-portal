@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
@@ -10,7 +11,9 @@ import 'package:job_portal/widgets/top_company_container.dart';
 import 'package:job_portal/widgets/suggested_job_container.dart';
 import 'package:job_portal/routes/routes.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -27,7 +30,7 @@ class MyApp extends StatelessWidget {
         colorScheme:
             ThemeData().colorScheme.copyWith(primary: kPrimaryRedColor),
       ),
-      initialRoute: RouteNames.login,
+      initialRoute: RouteNames.signup,
       getPages: routes(),
     );
   }

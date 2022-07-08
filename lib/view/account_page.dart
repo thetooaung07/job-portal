@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
@@ -62,7 +63,7 @@ class AccountPage extends StatelessWidget {
                           height: 5,
                         ),
                         Text(
-                          "React Developer  ||  Flutter Beginner",
+                          "React Developer \nFlutter Beginner",
                           style: kBulletListTextStyle.copyWith(
                               color: Colors.black54),
                         ),
@@ -137,6 +138,28 @@ class AccountPage extends StatelessWidget {
                 title: Text("Help & Feedback"),
                 trailing: Icon(Icons.chevron_right_rounded),
               ),
+
+              Container(
+                width: Get.width,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("--- v 1.0.0 ---"),
+                    TextButton(
+                      child: Text(
+                        "Sign Out",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      onPressed: () {
+                        final FirebaseAuth _firebaseAuth =
+                            FirebaseAuth.instance;
+                        _firebaseAuth.signOut();
+                        Get.offAllNamed(RouteNames.login);
+                      },
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),

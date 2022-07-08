@@ -4,18 +4,18 @@ import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/auth_page_controller.dart';
 import 'package:job_portal/routes/routes.dart';
 
-class CreateAccountPage extends GetView<CreateAccountPageController> {
-  const CreateAccountPage({Key? key}) : super(key: key);
+class SignUpPage extends GetView<SignUpController> {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Get.put(CreateAccountPageController());
+    Get.put(SignUpController());
     return Scaffold(
       backgroundColor: themeBgMainColor,
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.symmetric(
-            horizontal: 40,
+            horizontal: 20,
           ),
           child: Column(
             children: [
@@ -42,13 +42,14 @@ class CreateAccountPage extends GetView<CreateAccountPageController> {
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 30),
                     child: Form(
+                      // key: controller.signUpForm,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           // Username
                           TextFormField(
-                            autofocus: true,
-                            controller: controller.usernameEditingController,
+                            //TODO: to re-add   // autofocus: true,
+                            controller: controller.usernameController,
                             onEditingComplete:
                                 controller.emailFocusNode.requestFocus,
                             style: TextStyle(
@@ -60,7 +61,7 @@ class CreateAccountPage extends GetView<CreateAccountPageController> {
                               focusColor: Colors.black,
                               isDense: true,
                               contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 30),
+                                  horizontal: 20, vertical: 20),
                               hoverColor: Colors.transparent,
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
@@ -95,9 +96,9 @@ class CreateAccountPage extends GetView<CreateAccountPageController> {
 
                           TextFormField(
                             autofocus: true,
-                            controller: controller.emailEditingController,
+                            controller: controller.emailController,
                             onEditingComplete:
-                                controller.passowrdFocusNode.requestFocus,
+                                controller.passFocusNode.requestFocus,
                             style: TextStyle(
                               fontSize: 20,
                               color: Colors.black54,
@@ -107,7 +108,7 @@ class CreateAccountPage extends GetView<CreateAccountPageController> {
                               focusColor: Colors.black,
                               isDense: true,
                               contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 30),
+                                  horizontal: 20, vertical: 20),
                               hoverColor: Colors.transparent,
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
@@ -141,10 +142,10 @@ class CreateAccountPage extends GetView<CreateAccountPageController> {
                           Obx(
                             () => TextFormField(
                               onEditingComplete:
-                                  controller.cPassowrdFocusNode.requestFocus,
+                                  controller.cPassFocusNode.requestFocus,
                               obscureText: controller.isObscure.value,
-                              focusNode: controller.passowrdFocusNode,
-                              controller: controller.passwordEditingController,
+                              focusNode: controller.passFocusNode,
+                              controller: controller.passController,
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.black54,
@@ -153,7 +154,7 @@ class CreateAccountPage extends GetView<CreateAccountPageController> {
                               decoration: InputDecoration(
                                 isDense: true,
                                 contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 30),
+                                    horizontal: 20, vertical: 20),
                                 hoverColor: Colors.transparent,
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
@@ -189,8 +190,8 @@ class CreateAccountPage extends GetView<CreateAccountPageController> {
                           Obx(
                             () => TextFormField(
                               obscureText: controller.isObscure.value,
-                              focusNode: controller.cPassowrdFocusNode,
-                              controller: controller.cPassEditingController,
+                              focusNode: controller.cPassFocusNode,
+                              controller: controller.cPassController,
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.black54,
@@ -199,7 +200,7 @@ class CreateAccountPage extends GetView<CreateAccountPageController> {
                               decoration: InputDecoration(
                                 isDense: true,
                                 contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 30),
+                                    horizontal: 20, vertical: 20),
                                 hoverColor: Colors.transparent,
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
@@ -266,7 +267,7 @@ class CreateAccountPage extends GetView<CreateAccountPageController> {
                                   padding: EdgeInsets.symmetric(vertical: 25),
                                 ),
                                 onPressed: () {
-                                  Get.toNamed(RouteNames.home);
+                                  controller.goSignUp();
                                 },
                                 child: Center(
                                   child: Text(
@@ -311,7 +312,7 @@ class CreateAccountPage extends GetView<CreateAccountPageController> {
                         width: 5,
                       ),
                       GestureDetector(
-                        onTap: () => Get.toNamed(RouteNames.home),
+                        onTap: () => Get.toNamed(RouteNames.login),
                         child: Text(
                           "Login",
                           style: TextStyle(fontWeight: FontWeight.bold),

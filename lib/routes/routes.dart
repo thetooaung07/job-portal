@@ -4,6 +4,8 @@ import 'package:job_portal/main.dart';
 import 'package:job_portal/view/account_page.dart';
 import 'package:job_portal/view/applications_page.dart';
 import 'package:job_portal/view/applied_page.dart';
+import 'package:job_portal/view/login/create_account_page.dart';
+import 'package:job_portal/view/login/login_page.dart';
 import 'package:job_portal/view/job_details_page.dart';
 import 'package:job_portal/view/jobs_page.dart';
 import 'package:job_portal/view/nearby_page.dart';
@@ -22,13 +24,19 @@ class RouteNames {
   static String nearby = "/nearby";
   static String account = "/account";
   static String applied = "/applied";
+  static String createAccount = "/create-new-account";
 }
 
 routes() => [
       GetPage(
         name: RouteNames.home,
         // binding: HomePageBinding(),
-        page: () => const HomePage(),
+        page: () => const LoginPage(),
+      ),
+      GetPage(
+        name: RouteNames.createAccount,
+        // binding: HomePageBinding(),
+        page: () => const CreateAccountPage(),
       ),
       GetPage(
         name: RouteNames.popularJobs,

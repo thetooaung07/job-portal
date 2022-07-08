@@ -110,35 +110,6 @@ class HomePageView extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // MyAppBar(
-            //   child: Padding(
-            //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            //     child: Row(
-            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //         children: [
-            //           CustomIconButton(
-            //             child: Icon(
-            //               Icons.clear_all,
-            //               size: 30,
-            //               color: Colors.black,
-            //             ),
-            //           ),
-            //           Text(
-            //             "QWERTY",
-            //             style: kLogoTextStyle,
-            //           ),
-            //           CustomIconButton(
-            //             onTap: (() => Get.toNamed(RouteNames.search)),
-            //             child: Icon(
-            //               Icons.search_rounded,
-            //               size: 30,
-            //               color: Colors.black,
-            //             ),
-            //           ),
-            //         ]),
-            //   ),
-            // ),
-
             //Popular Job
             TopCompanyContainer(),
             //Recent Post

@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme:
             ThemeData().colorScheme.copyWith(primary: kPrimaryRedColor),
       ),
-      initialRoute: RouteNames.home,
+      initialRoute: RouteNames.login,
       getPages: routes(),
     );
   }

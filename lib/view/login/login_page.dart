@@ -169,7 +169,9 @@ class LoginPage extends GetView<LoginPageController> {
                                 primary: Colors.black,
                                 padding: EdgeInsets.symmetric(vertical: 25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.toNamed(RouteNames.home);
+                              },
                               child: Center(
                                 child: Text(
                                   "Log In",

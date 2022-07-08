@@ -14,6 +14,7 @@ import 'package:job_portal/view/recent_posts/recent_posts_page.dart';
 import 'package:job_portal/view/search_page/search_page.dart';
 
 class RouteNames {
+  static String login = "/login";
   static String home = "/home";
   static String popularJobs = "/popular-jobs";
   static String recentPosts = "/recent-posts";
@@ -29,7 +30,7 @@ class RouteNames {
 
 routes() => [
       GetPage(
-        name: RouteNames.home,
+        name: RouteNames.login,
         // binding: HomePageBinding(),
         page: () => const LoginPage(),
       ),
@@ -37,6 +38,11 @@ routes() => [
         name: RouteNames.createAccount,
         // binding: HomePageBinding(),
         page: () => const CreateAccountPage(),
+      ),
+      GetPage(
+        name: RouteNames.home,
+        // binding: HomePageBinding(),
+        page: () => const HomePage(),
       ),
       GetPage(
         name: RouteNames.popularJobs,

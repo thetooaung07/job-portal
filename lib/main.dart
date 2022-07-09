@@ -2,7 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/auth_page_controller.dart';
 import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
+import 'package:job_portal/controller/user_account_controller.dart';
 import 'package:job_portal/view/account_page.dart';
 import 'package:job_portal/view/applied_page.dart';
 import 'package:job_portal/view/nearby_page.dart';
@@ -13,7 +15,8 @@ import 'package:job_portal/routes/routes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp().then((value) => Get.put(AuthController()));
+  Get.put(UserAccountController());
   runApp(const MyApp());
 }
 

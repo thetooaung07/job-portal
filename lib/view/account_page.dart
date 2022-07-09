@@ -2,6 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/auth_page_controller.dart';
+import 'package:job_portal/controller/user_account_controller.dart';
+import 'package:job_portal/global.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/job-post-card-hr.dart';
@@ -37,51 +40,55 @@ class AccountPage extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: kPrimaryRedColor,
-                      radius: 50,
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: GetBuilder<UserAccountController>(
+                  builder: (controller) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "Thet Oo Aung",
-                          style: kHeaderTextStyle,
+                        CircleAvatar(
+                          backgroundColor: kPrimaryRedColor,
+                          radius: 50,
                         ),
                         SizedBox(
-                          height: 5,
+                          width: 30,
                         ),
-                        Text(
-                          "React Developer \nFlutter Beginner",
-                          style: kBulletListTextStyle.copyWith(
-                              color: Colors.black54),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Row(
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Contact me:"),
                             SizedBox(
-                              width: 5,
+                              height: 10,
                             ),
-                            Text("@thetooaung07")
+                            Text(
+                              controller.user.username ?? "User",
+                              style: kHeaderTextStyle,
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              " Flutter Beginner",
+                              style: kBulletListTextStyle.copyWith(
+                                  color: Colors.black54),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              children: [
+                                Text("Contact me:"),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text("@thetooaung07")
+                              ],
+                            )
                           ],
                         )
                       ],
-                    )
-                  ],
+                    );
+                  },
                 ),
               ),
               //TODO:Change Custom to look more beautiful // border of inside indicator being Square
@@ -145,17 +152,16 @@ class AccountPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text("--- v 1.0.0 ---"),
-                    TextButton(
-                      child: Text(
-                        "Sign Out",
-                        style: TextStyle(fontSize: 18),
+                    GetBuilder<AuthController>(
+                      builder: (controller) => TextButton(
+                        child: Text(
+                          "Sign Out",
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        onPressed: () {
+                          controller.signOut();
+                        },
                       ),
-                      onPressed: () {
-                        final FirebaseAuth _firebaseAuth =
-                            FirebaseAuth.instance;
-                        _firebaseAuth.signOut();
-                        Get.offAllNamed(RouteNames.login);
-                      },
                     ),
                   ],
                 ),

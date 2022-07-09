@@ -1,58 +1,50 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:job_portal/model/user_details.dart';
+import 'package:job_portal/controller/user_account_controller.dart';
+import 'package:job_portal/global.dart';
+import 'package:job_portal/main.dart';
+import 'package:job_portal/model/user_account.dart';
 import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/services/database.dart';
+import 'package:job_portal/view/login/login_page.dart';
 
-class LoginPageController extends GetxController {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passController = TextEditingController();
+class AuthController extends GetxController {
+  // AuthController Instance;
+  static AuthController instance = Get.find();
 
-  final FocusNode passFocusNode = FocusNode();
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  // void setloginUser(UserAccount userModel) {
+  //   _loginUser.value = userModel;
+  // }
 
-  RxBool isObscure = true.obs;
+  // User? get loginUser => _loginUser.value.user;
 
-  void togglePasswordEye() {
-    isObscure.value = !isObscure.value;
+  // String? get email => _loginUser.value.email;
+  // String? get password => _loginUser.value.password;
+
+// email , pass, username;
+  late Rx<User?> _user;
+
+  @override
+  void onReady() {
+    super.onReady();
+
+    _user = Rx<User?>(firebaseAuth.currentUser);
+
+    _user.bindStream(firebaseAuth.userChanges());
+    ever(_user, _setInitialScreen);
   }
 
-  Future goLogin() async {
-    print("Inside Gologin");
-    try {
-      //authenticate user
-      await _firebaseAuth.signInWithEmailAndPassword(
-          email: emailController.text, password: passController.text);
-
-      Fluttertoast.showToast(
-          msg: "Success",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.green,
-          textColor: Colors.white,
-          fontSize: 16.0);
-    } catch (e) {
-      Fluttertoast.showToast(
-          msg: e.toString(),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.green,
-          textColor: Colors.white,
-          fontSize: 16.0);
-      // print("Error => $e");
+  _setInitialScreen(User? user) {
+    if (user == null) {
+      Get.offAll(() => const LoginPage());
+    } else {
+      Get.offAll(() => const HomePage());
     }
-
-    Get.offNamedUntil(RouteNames.home, (route) => false);
   }
-}
 
-class SignUpController extends GetxController {
-  // late UserAccount userAccount;
+  /// UI
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passController = TextEditingController();
@@ -64,13 +56,13 @@ class SignUpController extends GetxController {
   final FocusNode cPassFocusNode = FocusNode();
 
   RxBool isObscure = true.obs;
+  RxBool isLoading = false.obs;
 
   void togglePasswordEye() {
     isObscure.value = !isObscure.value;
   }
 
   GlobalKey<FormState>? signUpForm = GlobalKey();
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   Future<void> goSignUp() async {
     // TODO: to add validate
@@ -79,51 +71,96 @@ class SignUpController extends GetxController {
     cPassFocusNode.unfocus();
     try {
       //authenticate user
-      await _firebaseAuth.createUserWithEmailAndPassword(
-          email: emailController.text, password: passController.text);
+      UserCredential _cre = await firebaseAuth.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passController.text.trim());
       //store user details in cfirestore
 
-      final FirebaseAuth auth = FirebaseAuth.instance;
-      String? userID = await auth.currentUser?.uid;
+      UserAccount user = new UserAccount(
+          user: _cre.user,
+          userId: _cre.user?.uid,
+          username: usernameController.text.trim(),
+          email: emailController.text.trim(),
+          password: passController.text.trim());
 
-      await addUserDetails(UserDetails(
-          userId: userID,
-          username: usernameController.text,
-          email: emailController.text,
-          password: passController.text));
+      print("_user => ${user.username}");
+      print("_user email => ${emailController.text.trim()}");
 
-      Fluttertoast.showToast(
-          msg: "Success",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.green,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      if (await FirestoreHelper().createNewUser(user)) {
+        print("This is working");
+        // user created successfully
+        Get.find<UserAccountController>().user = user;
+      }
+      ;
+
+      await Fluttertoast.showToast(
+              msg: "Success",
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+              fontSize: 16.0)
+          .then((value) => isLoading.value = false);
+      Get.offNamedUntil(RouteNames.home, (route) => false);
     } catch (e) {
-      Fluttertoast.showToast(
-          msg: e.toString(),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.green,
-          textColor: Colors.white,
-          fontSize: 16.0);
-      // print("Error => $e");
+      print(e);
+      isLoading.value = false;
+      await Fluttertoast.showToast(
+              toastLength: Toast.LENGTH_LONG,
+              msg: e.toString(),
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0)
+          .then((value) => isLoading.value = false);
     }
-
-    Get.offNamedUntil(RouteNames.home, (route) => false);
   }
 
-  Future addUserDetails(UserDetails user) async {
-    print("Inside addUserDetails");
-    await FirebaseHelper().create(
-        collectionPath: "users",
-        docPath: "${user.username}-${user.userId}",
-        data: {
-          "username": user.username,
-          "email": user.email,
-          "password": user.password,
-        });
+  Future goLogin() async {
+    passFocusNode.unfocus();
+    isLoading.value = true;
+    try {
+      //authenticate user
+      UserCredential _cre = await firebaseAuth.signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passController.text.trim());
+
+      Get.find<UserAccountController>().user =
+          await FirestoreHelper().getUser(_cre.user!.uid);
+
+      print(Get.find<UserAccountController>().user);
+
+      await Fluttertoast.showToast(
+              msg: "Success",
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+              fontSize: 16.0)
+          .then((value) => isLoading.value = false);
+      Get.offNamedUntil(RouteNames.home, (route) => false);
+    } catch (e) {
+      print(e);
+      await Fluttertoast.showToast(
+              toastLength: Toast.LENGTH_LONG,
+              msg: e.toString(),
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0)
+          .then((value) => isLoading.value = false);
+      // print("Error => $e");
+    }
+  }
+
+  void signOut() async {
+    try {
+      await firebaseAuth.signOut();
+      Get.find<UserAccountController>().clear();
+      Get.offAllNamed(RouteNames.login);
+    } catch (e) {
+      print(e);
+      await Fluttertoast.showToast(
+              toastLength: Toast.LENGTH_LONG,
+              msg: e.toString(),
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0)
+          .then((value) => isLoading.value = false);
+    }
   }
 }

@@ -69,12 +69,9 @@ class AppliedPage extends StatelessWidget {
                 size: 60,
                 color: kPrimaryRedColor,
               ),
-              text: "Applications",
+              text: "Coming Soon",
             ),
             JobCard(
-              onTap: () {
-                Get.toNamed(RouteNames.myJobs);
-              },
               icon: Icon(
                 Icons.work_outline,
                 size: 60,
@@ -88,9 +85,12 @@ class AppliedPage extends StatelessWidget {
                 size: 60,
                 color: kPrimaryRedColor,
               ),
-              text: "History",
+              text: "Coming Soon",
             ),
             JobCard(
+              onTap: () {
+                Get.toNamed(RouteNames.savePosts);
+              },
               icon: Icon(
                 Icons.bookmark_added_outlined,
                 size: 60,
@@ -104,7 +104,7 @@ class AppliedPage extends StatelessWidget {
                 size: 60,
                 color: kPrimaryRedColor,
               ),
-              text: "Saved",
+              text: "Coming Soon",
             ),
           ],
         ),

@@ -12,6 +12,7 @@ import 'package:job_portal/view/my_jobs_page.dart';
 import 'package:job_portal/view/nearby_page.dart';
 import 'package:job_portal/view/popular_jobs/popular_jobs_page.dart';
 import 'package:job_portal/view/recent_posts/recent_posts_page.dart';
+import 'package:job_portal/view/saved_jobs_page.dart';
 import 'package:job_portal/view/search_page/search_page.dart';
 
 class RouteNames {
@@ -28,6 +29,7 @@ class RouteNames {
   static String account = "/account";
   static String applied = "/applied";
   static String signup = "/signup";
+  static String savePosts = "/saved-posts";
 }
 
 routes() => [
@@ -86,5 +88,9 @@ routes() => [
       GetPage(
         name: RouteNames.myJobs,
         page: () => const MyJobsPage(),
+      ),
+      GetPage(
+        name: RouteNames.savePosts,
+        page: () => const SavedJobsPage(),
       ),
     ];

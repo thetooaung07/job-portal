@@ -1,18 +1,26 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/saved_jobs_page_controller.dart';
+import 'package:job_portal/main.dart';
 import 'package:job_portal/routes/routes.dart';
 
 class JobPostCardVt extends StatelessWidget {
-  const JobPostCardVt({Key? key}) : super(key: key);
+  final bool? includeSave;
+  // final bool? isDimissable;
+
+  const JobPostCardVt({Key? key, this.includeSave = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final SavedJobsPageController controller =
+        Get.put(SavedJobsPageController());
     return GestureDetector(
       onTap: () => Get.toNamed(RouteNames.jobDetails),
       child: Container(
-        padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
+        padding: EdgeInsets.fromLTRB(15, 0, 15, 5),
         margin: EdgeInsets.only(
             left: kSpacingUnit * 1.5,
             right: kSpacingUnit * 1.5,
@@ -23,48 +31,80 @@ class JobPostCardVt extends StatelessWidget {
           boxShadow: [kCardShadow],
           color: Colors.white,
         ),
-        height: 100,
+        height: 110,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SvgPicture.asset(
-                      "assets/logos/logo_youtube.svg",
-                      height: 50,
-                      width: 50,
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Nodejs Developer",
-                            style: kJobPositionTextStyle,
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text("Facebook"),
-                        ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SvgPicture.asset(
+                        "assets/logos/logo_youtube.svg",
+                        height: 50,
+                        width: 50,
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: 20,
+                      ),
+                      SizedBox(
+                        height: 65,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Nodejs Developer",
+                              style: kJobPositionTextStyle,
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text("Facebook"),
+                            SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 // Icon(Icons.favorite_outline_rounded),
-                Text(
-                  "\$1299/Mo",
-                  style: kLabelTextStyle.copyWith(
-                      color: kPrimaryRedColor, fontSize: 18),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    includeSave == true
+                        ? Obx(
+                            () => CustomIconButton(
+                              onTap: () {
+                                controller.addToFavourite();
+                              },
+                              child: controller.isFavourite.value
+                                  ? Icon(
+                                      Icons.favorite_rounded,
+                                      color: kPrimaryRedColor,
+                                    )
+                                  : Icon(
+                                      Icons.favorite_border_rounded,
+                                      color: Colors.black45,
+                                    ),
+                            ),
+                          )
+                        : SizedBox(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "\$1299/Mo",
+                      style: kLabelTextStyle.copyWith(
+                          color: kPrimaryRedColor, fontSize: 18),
+                    ),
+                  ],
                 )
               ],
             ),

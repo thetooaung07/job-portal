@@ -51,7 +51,7 @@ class AppliedPage extends StatelessWidget {
           children: [
             JobCard(
               onTap: () {
-                Get.toNamed(RouteNames.myjobs);
+                Get.toNamed(RouteNames.applications);
               },
               icon: Icon(
                 Icons.check_box_outlined,
@@ -62,7 +62,7 @@ class AppliedPage extends StatelessWidget {
             ),
             JobCard(
               onTap: () {
-                Get.toNamed(RouteNames.myjobs);
+                Get.toNamed(RouteNames.applications);
               },
               icon: Icon(
                 Icons.check_box_outlined,
@@ -72,12 +72,15 @@ class AppliedPage extends StatelessWidget {
               text: "Applications",
             ),
             JobCard(
+              onTap: () {
+                Get.toNamed(RouteNames.myJobs);
+              },
               icon: Icon(
-                Icons.work_history_outlined,
+                Icons.work_outline,
                 size: 60,
                 color: kPrimaryRedColor,
               ),
-              text: "History",
+              text: "My Jobs",
             ),
             JobCard(
               icon: Icon(

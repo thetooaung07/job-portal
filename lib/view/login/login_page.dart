@@ -9,6 +9,12 @@ class LoginPage extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
+    RxBool isFocus = false.obs;
+
+    Future.delayed(Duration(seconds: 3), () {
+      isFocus.value = true;
+    });
+
     return Scaffold(
       backgroundColor: themeBgMainColor,
       body: SafeArea(
@@ -46,45 +52,47 @@ class LoginPage extends GetView<AuthController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             //Username
-                            TextFormField(
-                              autofocus: true,
-                              controller: controller.emailController,
-                              onEditingComplete:
-                                  controller.passFocusNode.requestFocus,
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black54,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              decoration: InputDecoration(
-                                focusColor: Colors.black,
-                                isDense: true,
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 30),
-                                hoverColor: Colors.transparent,
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                      width: 1,
-                                    )),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                      width: 2,
-                                    )),
-                                filled: true,
-                                fillColor: Colors.white,
-                                prefixIcon: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 20, right: 20),
-                                  child: Icon(
-                                    Icons.email_outlined,
-                                    size: 25,
-                                  ),
+                            Obx(
+                              () => TextFormField(
+                                autofocus: isFocus.value,
+                                controller: controller.emailController,
+                                onEditingComplete:
+                                    controller.passFocusNode.requestFocus,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                                hintText: "Email",
+                                decoration: InputDecoration(
+                                  focusColor: Colors.black,
+                                  isDense: true,
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 30),
+                                  hoverColor: Colors.transparent,
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                        width: 1,
+                                      )),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                        width: 2,
+                                      )),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  prefixIcon: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 20, right: 20),
+                                    child: Icon(
+                                      Icons.email_outlined,
+                                      size: 25,
+                                    ),
+                                  ),
+                                  hintText: "Email",
+                                ),
                               ),
                             ),
                             SizedBox(

@@ -24,7 +24,7 @@ class ApplicationsPage extends StatelessWidget {
             ),
           ),
         ),
-        label: "Nearby",
+        label: "My Applications",
         action: [
           Container(
             margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
@@ -41,40 +41,18 @@ class ApplicationsPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // MyAppBar(
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     children: [
-              //       CustomIconButton(
-              //         onTap: () {
-              //           Get.back();
-              //         },
-              //         child: Icon(
-              //           Icons.chevron_left_rounded,
-              //           size: 30,
-              //           color: Colors.black,
-              //         ),
-              //       ),
-              //       Text(
-              //         "Applications",
-              //         style: kLogoTextStyle,
-              //       ),
-              //       SizedBox(
-              //         height: 35,
-              //         width: 35,
-              //       )
-              //     ],
-              //   ),
-              // ),
-              Text("Your Applications"),
+              Text(
+                "Jobs You applied: ",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
               Row(
                 children: [
                   Icon(
-                    Icons.error_outline_rounded,
+                    Icons.not_listed_location_outlined,
                     size: 20,
                   ),
                   SizedBox(
@@ -87,7 +65,7 @@ class ApplicationsPage extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 20,
+                height: 30,
               ),
               ApplicationCard(),
               ApplicationCard(),

@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         colorScheme:
             ThemeData().colorScheme.copyWith(primary: kPrimaryRedColor),
       ),
-      initialRoute: RouteNames.login,
+      initialRoute: RouteNames.root,
       getPages: routes(),
     );
   }
@@ -301,5 +301,35 @@ class CustomBottomNavBar extends StatelessWidget {
         },
       ),
     );
+  }
+}
+
+class RootPage extends GetWidget<AuthController> {
+  const RootPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      color: Colors.white,
+      child: Center(
+        child: SizedBox(
+          height: 50,
+          width: 50,
+          child: CircularProgressIndicator(
+            color: Colors.black,
+          ),
+        ),
+      ),
+    );
+    // return GetX(
+    //   builder: (controller) {
+    //     if (Get.find<UserAccountController>().user.user != null)
+    //       return HomePage();
+    //     else
+    //       return LoginPage();
+    //   },
+    // );
   }
 }

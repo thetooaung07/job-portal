@@ -46,7 +46,7 @@ class AppliedPage extends StatelessWidget {
           ),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            childAspectRatio: 1.0,
+            childAspectRatio: 1.02,
           ),
           children: [
             JobCard(
@@ -61,9 +61,6 @@ class AppliedPage extends StatelessWidget {
               text: "Applications",
             ),
             JobCard(
-              onTap: () {
-                Get.toNamed(RouteNames.applications);
-              },
               icon: Icon(
                 Icons.check_box_outlined,
                 size: 60,
@@ -72,6 +69,7 @@ class AppliedPage extends StatelessWidget {
               text: "Coming Soon",
             ),
             JobCard(
+              onTap: (() => Get.toNamed(RouteNames.myJobs)),
               icon: Icon(
                 Icons.work_outline,
                 size: 60,

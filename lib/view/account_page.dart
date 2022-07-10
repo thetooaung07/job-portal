@@ -1,12 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/auth_page_controller.dart';
 import 'package:job_portal/controller/user_account_controller.dart';
-import 'package:job_portal/global.dart';
 import 'package:job_portal/main.dart';
-import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/job-post-card-hr.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
@@ -117,12 +114,13 @@ class AccountPage extends StatelessWidget {
 
               Container(
                 height: 200,
-                child: ListView.builder(
-                  padding: EdgeInsets.only(left: 20),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 4,
-                  itemBuilder: (context, index) => ProfileCardHr(),
-                ),
+
+                // child: ListView.builder(
+                //   padding: EdgeInsets.only(left: 20),
+                //   scrollDirection: Axis.horizontal,
+                //   itemCount: 4,
+                //   itemBuilder: (context, index) => ProfileCardHr(),
+                // ),
               ),
 
               ListTile(
@@ -175,9 +173,12 @@ class AccountPage extends StatelessWidget {
 }
 
 class ProfileCardHr extends StatelessWidget {
-  const ProfileCardHr({
-    Key? key,
-  }) : super(key: key);
+  final Widget? icon;
+  final String? label;
+  final String? buttonLabel;
+
+  const ProfileCardHr({Key? key, this.icon, this.label, this.buttonLabel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -201,17 +202,18 @@ class ProfileCardHr extends StatelessWidget {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(
-                Icons.person_rounded,
-                size: 35,
-              ),
+              icon ??
+                  Icon(
+                    Icons.person_rounded,
+                    size: 35,
+                  ),
               Text(
-                "Set Your Profile Details",
+                label ?? "Set Your Profile Details",
                 textAlign: TextAlign.center,
                 style: kBodyTextStyle,
               ),
               CustomTextButton(
-                label: "Complete",
+                label: buttonLabel ?? "Complete",
               ),
             ]),
       ),

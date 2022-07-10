@@ -48,7 +48,7 @@ class SignUpPage extends GetView<AuthController> {
                           children: [
                             // Username
                             TextFormField(
-                              autofocus: true,
+                              // autofocus: true,
                               controller: controller.usernameController,
                               onEditingComplete:
                                   controller.emailFocusNode.requestFocus,

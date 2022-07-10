@@ -16,6 +16,7 @@ import 'package:job_portal/view/saved_jobs_page.dart';
 import 'package:job_portal/view/search_page/search_page.dart';
 
 class RouteNames {
+  static String root = "/root";
   static String login = "/login";
   static String home = "/home";
   static String popularJobs = "/popular-jobs";
@@ -33,6 +34,11 @@ class RouteNames {
 }
 
 routes() => [
+      GetPage(
+        name: RouteNames.root,
+        // binding: HomePageBinding(),
+        page: () => const RootPage(),
+      ),
       GetPage(
         name: RouteNames.login,
         // binding: HomePageBinding(),

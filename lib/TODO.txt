@@ -40,16 +40,14 @@ Database => cloud_firestore
 Storage => firebase_storage
 
 
+Login UI adjustment keyboard autofocus
+wrapper screen
+CRUD with firestore.
+data model for job post
+data model for profile page
 
+otn-pub
 
-
-https://www.oracle.com/webapps/redirect/signon?nexturl=https://download.oracle.com/otn/java/jdk/11.0.15.1%2B2/d76aabb62f1c47aa8588b9ae5a8a5b46/jdk-11.0.15.1_windows-x64_bin.exe
-
-
-
-
-
-https://download.oracle.com/otn-pub/java/jdk/11.0.15.1%2B2/d76aabb62f1c47aa8588b9ae5a8a5b46/jdk-11.0.15.1_windows-x64_bin.exe
 
 
 

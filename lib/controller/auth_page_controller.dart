@@ -11,19 +11,8 @@ import 'package:job_portal/services/database.dart';
 import 'package:job_portal/view/login/login_page.dart';
 
 class AuthController extends GetxController {
-  // AuthController Instance;
   static AuthController instance = Get.find();
 
-  // void setloginUser(UserAccount userModel) {
-  //   _loginUser.value = userModel;
-  // }
-
-  // User? get loginUser => _loginUser.value.user;
-
-  // String? get email => _loginUser.value.email;
-  // String? get password => _loginUser.value.password;
-
-// email , pass, username;
   late Rx<User?> _user;
 
   @override
@@ -44,9 +33,11 @@ class AuthController extends GetxController {
 
   _setInitialScreen(User? user) {
     if (user == null) {
-      Get.offAll(() => const LoginPage());
+      print("Inside stream user null");
+      Get.offAllNamed(RouteNames.login);
     } else {
-      Get.offAll(() => const HomePage());
+      print("Inside stream homepage");
+      Get.offAllNamed(RouteNames.home);
     }
   }
 
@@ -83,17 +74,14 @@ class AuthController extends GetxController {
       //store user details in cfirestore
 
       UserAccount user = new UserAccount(
-          user: _cre.user,
-          userId: _cre.user?.uid,
-          username: usernameController.text.trim(),
-          email: emailController.text.trim(),
-          password: passController.text.trim());
-
-      print("_user => ${user.username}");
-      print("_user email => ${emailController.text.trim()}");
+        user: _cre.user,
+        userId: _cre.user?.uid,
+        username: usernameController.text.trim(),
+        email: emailController.text.trim(),
+        password: passController.text.trim(),
+      );
 
       if (await FirestoreHelper().createNewUser(user)) {
-        print("This is working");
         // user created successfully
         Get.find<UserAccountController>().user = user;
       }
@@ -105,7 +93,7 @@ class AuthController extends GetxController {
               textColor: Colors.white,
               fontSize: 16.0)
           .then((value) => isLoading.value = false);
-      Get.offNamedUntil(RouteNames.home, (route) => false);
+      // Get.offNamedUntil(RouteNames.home, (route) => false);
     } catch (e) {
       print(e);
       isLoading.value = false;
@@ -139,7 +127,7 @@ class AuthController extends GetxController {
               textColor: Colors.white,
               fontSize: 16.0)
           .then((value) => isLoading.value = false);
-      Get.offNamedUntil(RouteNames.home, (route) => false);
+      // Get.offNamedUntil(RouteNames.home, (route) => false);
     } catch (e) {
       print(e);
       await Fluttertoast.showToast(
@@ -157,7 +145,7 @@ class AuthController extends GetxController {
     try {
       await firebaseAuth.signOut();
       Get.find<UserAccountController>().clear();
-      Get.offAllNamed(RouteNames.login);
+      Get.offAllNamed(RouteNames.root);
     } catch (e) {
       print(e);
       await Fluttertoast.showToast(

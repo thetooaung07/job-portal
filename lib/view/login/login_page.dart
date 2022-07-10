@@ -47,10 +47,10 @@ class LoginPage extends GetView<AuthController> {
                           children: [
                             //Username
                             TextFormField(
-                              autofocus: true,
+                              // autofocus: true,
                               controller: controller.emailController,
-                              onEditingComplete:
-                                  controller.passFocusNode.requestFocus,
+                              // onEditingComplete:
+                              //     controller.passFocusNode.requestFocus,
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.black54,

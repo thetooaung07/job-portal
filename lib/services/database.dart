@@ -15,6 +15,17 @@ class FirestoreHelper {
   }) =>
       firebaseFirestore.collection(collectionPath).get();
 
+// Watch
+  Stream<DocumentSnapshot<Map<String, dynamic>>> watchByDoc(
+          String collectionPath, String? docPath) =>
+      firebaseFirestore.collection(collectionPath).doc(docPath).snapshots();
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> watchCollection(
+          String collectionPath) =>
+      firebaseFirestore.collection(collectionPath).snapshots();
+
+// Watch
+
 // create
   Future<void> create({
     required String collectionPath,
@@ -38,17 +49,18 @@ class FirestoreHelper {
   }) =>
       firebaseFirestore.collection(collectionPath).doc(path).delete();
 
-  //Create User
+  //Create User + initialized profile_stats for this user.
   Future<bool> createNewUser(UserAccount user) async {
-    print(user.username);
-    print(user.userId);
-    print(user.email);
     try {
       await firebaseFirestore.collection("users").doc(user.userId).set({
         "username": user.username,
         "email": user.email,
         "password": user.password,
-      });
+      }).then((value) =>
+          firebaseFirestore.collection("profile_stats").doc(user.userId).set({
+            "cv_file": false,
+            "profile_details": false,
+          }));
       return true;
     } catch (e) {
       print(e);

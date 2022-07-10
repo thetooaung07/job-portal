@@ -5,6 +5,7 @@ import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/auth_page_controller.dart';
 import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/controller/user_account_controller.dart';
+import 'package:job_portal/global.dart';
 import 'package:job_portal/view/account_page.dart';
 import 'package:job_portal/view/applied_page.dart';
 import 'package:job_portal/view/nearby_page.dart';

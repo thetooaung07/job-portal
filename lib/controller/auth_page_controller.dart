@@ -26,7 +26,6 @@ class AuthController extends GetxController {
 
       controller.user =
           await FirestoreHelper().getUser(firebaseAuth.currentUser!.uid);
-      await controller.getProfileStats(firebaseAuth.currentUser!.uid);
     }
 
     _user.bindStream(firebaseAuth.userChanges());
@@ -81,6 +80,8 @@ class AuthController extends GetxController {
         username: usernameController.text.trim(),
         email: emailController.text.trim(),
         password: passController.text.trim(),
+        cvFile: false,
+        profileDetails: false,
       );
 
       if (await FirestoreHelper().createNewUser(user)) {

@@ -52,15 +52,18 @@ class FirestoreHelper {
   //Create User + initialized profile_stats for this user.
   Future<bool> createNewUser(UserAccount user) async {
     try {
-      await firebaseFirestore.collection("users").doc(user.userId).set({
-        "username": user.username,
-        "email": user.email,
-        "password": user.password,
-      }).then((value) =>
-          firebaseFirestore.collection("profile_stats").doc(user.userId).set({
-            "cv_file": false,
-            "profile_details": false,
-          }));
+      await firebaseFirestore
+          .collection("users")
+          .doc(user.userId)
+          .set(user.toJson()
+              // {
+              //   "username": user.username,
+              //   "email": user.email,
+              //   "password": user.password,
+              //   "cv_file": false,
+              //   "profile_details": false,
+              // },
+              );
       return true;
     } catch (e) {
       print(e);

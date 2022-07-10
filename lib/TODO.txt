@@ -41,6 +41,10 @@ Storage => firebase_storage
 
 
 Login UI adjustment keyboard autofocus
+
+
+Loadiing btn replacement in signup login button
+
 wrapper screen
 CRUD with firestore.
 data model for job post

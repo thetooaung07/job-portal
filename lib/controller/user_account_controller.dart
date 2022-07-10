@@ -15,24 +15,24 @@ class UserAccountController extends GetxController {
 
 // profile_stats
 
-  RxMap profileStats = {}.obs;
+  // RxMap profileStats = {}.obs;
 
-  Future getProfileStats(String docId) async {
-    DocumentSnapshot doc = await FirestoreHelper()
-        .readByDoc(collectionPath: "profile_stats", docPath: docId);
+  // Future getProfileStats(String docId) async {
+  //   DocumentSnapshot doc = await FirestoreHelper()
+  //       .readByDoc(collectionPath: "profile_stats", docPath: docId);
 
-    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+  //   Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
-    profileStats.value = data;
-  }
+  //   profileStats.value = data;
+  // }
 
-  Future updateProfileStats(
-    String collectionPath,
-    String docPath,
-    Map<String, dynamic> data,
-  ) async {
-    // update partially
-    await FirestoreHelper()
-        .update(collectionPath: collectionPath, docPath: docPath, data: data);
-  }
+  // Future updateProfileStats(
+  //   String collectionPath,
+  //   String docPath,
+  //   Map<String, dynamic> data,
+  // ) async {
+  //   // update partially
+  //   await FirestoreHelper()
+  //       .update(collectionPath: collectionPath, docPath: docPath, data: data);
+  // }
 }

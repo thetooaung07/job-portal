@@ -117,23 +117,38 @@ class AccountPage extends StatelessWidget {
                       height: 200,
                       child: GetBuilder<UserAccountController>(
                         builder: (userAccountController) {
-                          // userAccountController
-                          //     .getProfileStats(authController.user.userId!);
-                          return ListView.builder(
-                              padding: EdgeInsets.only(left: 20),
-                              scrollDirection: Axis.horizontal,
-                              itemCount:
-                                  userAccountController.profileStats.length,
-                              itemBuilder: (context, index) {
-                                return ProfileCardHr(
-                                  onTap: () =>
-                                      userAccountController.updateProfileStats(
-                                    "profile_stats",
-                                    authController.user.userId!,
-                                    {"cv_file": true},
-                                  ),
-                                );
-                              });
+                          return ListView(
+                            padding: EdgeInsets.only(left: 20),
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              userAccountController.user.cvFile != true
+                                  ? ProfileCardHr(
+                                      //             onTap: () =>    userAccountController.updateProfileStats(
+                                      //   "profile_stats",
+                                      //   firebaseAuth.currentUser!.uid,
+                                      // controller.profileStats.
+                                      // ),
+                                      icon: Icon(
+                                        Icons.person_outline_rounded,
+                                        size: 35,
+                                      ),
+                                      buttonLabel: "Continue",
+                                      label:
+                                          "Please describe personal informations",
+                                    )
+                                  : SizedBox(),
+                              userAccountController.user.profileDetails != true
+                                  ? ProfileCardHr(
+                                      icon: Icon(
+                                        Icons.person_outline_rounded,
+                                        size: 35,
+                                      ),
+                                      buttonLabel: "Upload",
+                                      label: "Upload your cv",
+                                    )
+                                  : SizedBox(),
+                            ],
+                          );
                         },
                       )),
 
@@ -232,7 +247,12 @@ class ProfileCardHr extends StatelessWidget {
                   style: kBodyTextStyle,
                 ),
                 CustomTextButton(
-                  onTap: onTap ?? null,
+                  onTap: onTap,
+                  // onTap: () => controller.updateProfileStats(
+                  //   "profile_stats",
+                  //   firebaseAuth.currentUser!.uid,
+                  // controller.profileStats.
+                  // ),
                   label: buttonLabel ?? "Complete",
                 ),
               ]);

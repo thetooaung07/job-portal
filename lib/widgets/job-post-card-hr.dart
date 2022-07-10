@@ -74,22 +74,27 @@ class JobPostCardHr extends StatelessWidget {
 
 class CustomTextButton extends StatelessWidget {
   final String? label;
+  final void Function()? onTap;
 
-  const CustomTextButton({Key? key, this.label = "Show All"}) : super(key: key);
+  const CustomTextButton({Key? key, this.label = "Show All", this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 8),
-      decoration: BoxDecoration(
-        color: btnBgColorGrey,
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Center(
-        child: Text(
-          label ?? "Show All",
-          style: TextStyle(color: Colors.white),
+    return GestureDetector(
+      onTap: onTap ?? null,
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.symmetric(vertical: 8),
+        decoration: BoxDecoration(
+          color: btnBgColorGrey,
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Center(
+          child: Text(
+            label ?? "Show All",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
     );

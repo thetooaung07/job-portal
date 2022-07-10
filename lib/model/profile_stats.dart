@@ -8,7 +8,7 @@ class ProfileStats {
 
   ProfileStats.fromDocumentSnapshot(DocumentSnapshot doc) {
     cvFile = doc["cv_file"];
-    profileDetails = doc["profileDetails"];
+    profileDetails = doc["profile_details"];
   }
 
   Map<String, dynamic> toJson() => {

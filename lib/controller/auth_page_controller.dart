@@ -22,9 +22,11 @@ class AuthController extends GetxController {
     _user = Rx<User?>(firebaseAuth.currentUser);
 
     if (firebaseAuth.currentUser != null) {
-      print("object => user is not null, assigning value to user");
-      Get.find<UserAccountController>().user =
+      final controller = Get.find<UserAccountController>();
+
+      controller.user =
           await FirestoreHelper().getUser(firebaseAuth.currentUser!.uid);
+      await controller.getProfileStats(firebaseAuth.currentUser!.uid);
     }
 
     _user.bindStream(firebaseAuth.userChanges());

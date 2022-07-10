@@ -3,7 +3,10 @@ import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/auth_page_controller.dart';
 import 'package:job_portal/controller/user_account_controller.dart';
+import 'package:job_portal/global.dart';
 import 'package:job_portal/main.dart';
+import 'package:job_portal/model/user_account.dart';
+import 'package:job_portal/services/database.dart';
 import 'package:job_portal/widgets/job-post-card-hr.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
@@ -32,14 +35,14 @@ class AccountPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: GetBuilder<UserAccountController>(
-                  builder: (controller) {
-                    return Row(
+          child: GetBuilder<UserAccountController>(
+            builder: (authController) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -58,7 +61,7 @@ class AccountPage extends StatelessWidget {
                               height: 10,
                             ),
                             Text(
-                              controller.user.username ?? "User",
+                              authController.user.username ?? "User",
                               style: kHeaderTextStyle,
                             ),
                             SizedBox(
@@ -84,87 +87,100 @@ class AccountPage extends StatelessWidget {
                           ],
                         )
                       ],
-                    );
-                  },
-                ),
-              ),
-              //TODO:Change Custom to look more beautiful // border of inside indicator being Square
-              //  Complete Your Profile
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Complete Your Profile (1/4)"),
-                    SizedBox(
-                      height: 10,
                     ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: LinearProgressIndicator(
-                        backgroundColor: themeBgColor,
-                        value: 0.3,
-                        minHeight: 12,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              Container(
-                height: 200,
-
-                // child: ListView.builder(
-                //   padding: EdgeInsets.only(left: 20),
-                //   scrollDirection: Axis.horizontal,
-                //   itemCount: 4,
-                //   itemBuilder: (context, index) => ProfileCardHr(),
-                // ),
-              ),
-
-              ListTile(
-                horizontalTitleGap: 7,
-                minLeadingWidth: 0,
-                contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                leading: Icon(Icons.settings),
-                title: Text("Setting"),
-                trailing: Icon(Icons.chevron_right_rounded),
-              ),
-
-              ListTile(
-                horizontalTitleGap: 7,
-                minLeadingWidth: 0,
-                contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                leading: Icon(
-                  Icons.message_rounded,
-                  size: 25,
-                ),
-                title: Text("Help & Feedback"),
-                trailing: Icon(Icons.chevron_right_rounded),
-              ),
-
-              Container(
-                width: Get.width,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text("--- v 1.0.0 ---"),
-                    GetBuilder<AuthController>(
-                      builder: (controller) => TextButton(
-                        child: Text(
-                          "Sign Out",
-                          style: TextStyle(fontSize: 18),
+                  ),
+                  //TODO:Change Custom to look more beautiful // border of inside indicator being Square
+                  //  Complete Your Profile
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Complete Your Profile (1/4)"),
+                        SizedBox(
+                          height: 10,
                         ),
-                        onPressed: () {
-                          controller.signOut();
-                        },
-                      ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: LinearProgressIndicator(
+                            backgroundColor: themeBgColor,
+                            value: 0.3,
+                            minHeight: 12,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              )
-            ],
+                  ),
+
+                  Container(
+                      height: 200,
+                      child: GetBuilder<UserAccountController>(
+                        builder: (userAccountController) {
+                          // userAccountController
+                          //     .getProfileStats(authController.user.userId!);
+                          return ListView.builder(
+                              padding: EdgeInsets.only(left: 20),
+                              scrollDirection: Axis.horizontal,
+                              itemCount:
+                                  userAccountController.profileStats.length,
+                              itemBuilder: (context, index) {
+                                return ProfileCardHr(
+                                  onTap: () =>
+                                      userAccountController.updateProfileStats(
+                                    "profile_stats",
+                                    authController.user.userId!,
+                                    {"cv_file": true},
+                                  ),
+                                );
+                              });
+                        },
+                      )),
+
+                  ListTile(
+                    horizontalTitleGap: 7,
+                    minLeadingWidth: 0,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                    leading: Icon(Icons.settings),
+                    title: Text("Setting"),
+                    trailing: Icon(Icons.chevron_right_rounded),
+                  ),
+
+                  ListTile(
+                    horizontalTitleGap: 7,
+                    minLeadingWidth: 0,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                    leading: Icon(
+                      Icons.message_rounded,
+                      size: 25,
+                    ),
+                    title: Text("Help & Feedback"),
+                    trailing: Icon(Icons.chevron_right_rounded),
+                  ),
+
+                  Container(
+                    width: Get.width,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text("--- v 1.0.0 ---"),
+                        GetBuilder<AuthController>(
+                          builder: (controller) => TextButton(
+                            child: Text(
+                              "Sign Out",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            onPressed: () {
+                              controller.signOut();
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              );
+            },
           ),
         ),
       ),
@@ -176,8 +192,10 @@ class ProfileCardHr extends StatelessWidget {
   final Widget? icon;
   final String? label;
   final String? buttonLabel;
+  final void Function()? onTap;
 
-  const ProfileCardHr({Key? key, this.icon, this.label, this.buttonLabel})
+  const ProfileCardHr(
+      {Key? key, this.icon, this.label, this.buttonLabel, this.onTap})
       : super(key: key);
 
   @override
@@ -199,23 +217,26 @@ class ProfileCardHr extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.fromLTRB(15, 15, 15, 10),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              icon ??
-                  Icon(
-                    Icons.person_rounded,
-                    size: 35,
-                  ),
-              Text(
-                label ?? "Set Your Profile Details",
-                textAlign: TextAlign.center,
-                style: kBodyTextStyle,
-              ),
-              CustomTextButton(
-                label: buttonLabel ?? "Complete",
-              ),
-            ]),
+        child: GetBuilder<UserAccountController>(builder: (controller) {
+          return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                icon ??
+                    Icon(
+                      Icons.person_rounded,
+                      size: 35,
+                    ),
+                Text(
+                  label ?? "Set Your Profile Details",
+                  textAlign: TextAlign.center,
+                  style: kBodyTextStyle,
+                ),
+                CustomTextButton(
+                  onTap: onTap ?? null,
+                  label: buttonLabel ?? "Complete",
+                ),
+              ]);
+        }),
       ),
     );
   }

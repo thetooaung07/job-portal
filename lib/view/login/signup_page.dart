@@ -86,6 +86,11 @@ class SignUpPage extends GetView<AuthController> {
                                   ),
                                 ),
                                 hintText: "Username",
+                                hintStyle: TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 18,
+                                  color: Colors.black26,
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -133,6 +138,11 @@ class SignUpPage extends GetView<AuthController> {
                                   ),
                                 ),
                                 hintText: "Email",
+                                hintStyle: TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 18,
+                                  color: Colors.black26,
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -179,6 +189,11 @@ class SignUpPage extends GetView<AuthController> {
                                     ),
                                   ),
                                   hintText: "Password",
+                                  hintStyle: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 18,
+                                    color: Colors.black26,
+                                  ),
                                 ),
                               ),
                             ),
@@ -240,6 +255,11 @@ class SignUpPage extends GetView<AuthController> {
                                     ),
                                   ),
                                   hintText: "Confirm Password",
+                                  hintStyle: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 18,
+                                    color: Colors.black26,
+                                  ),
                                 ),
                               ),
                             ),

@@ -41,129 +41,55 @@ class SavedJobsPage extends StatelessWidget {
             ),
           ],
         ),
-        body: ListView(
-          children: [
-            Dismissible(
-              key: ValueKey(1),
-              direction: DismissDirection.endToStart,
-              onDismissed: (direction) {
-                // TODO: remove Item on dismiss
-              },
-              background: Container(
-                // margin: EdgeInsets.symmetric(horizontal: 15),
-                // padding: EdgeInsets.only(right: 20),
-                alignment: Alignment.centerRight,
-                color: Colors.transparent,
-                child: Container(
-                  padding: EdgeInsets.fromLTRB(25, 25, 15, 25),
-                  decoration: BoxDecoration(
-                      color: kPrimaryRedColor,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                      )),
-                  child: Icon(
-                    Icons.delete_outline_rounded,
-                    size: 25,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              child: JobPostCardVt(
-                includeSave: true,
-              ),
-            ),
-            Dismissible(
-              key: ValueKey(2),
-              direction: DismissDirection.endToStart,
-              onDismissed: (direction) {
-                // TODO: remove Item on dismiss
-              },
-              background: Container(
-                // margin: EdgeInsets.symmetric(horizontal: 15),
-                // padding: EdgeInsets.only(right: 20),
-                alignment: Alignment.centerRight,
-                color: Colors.transparent,
-                child: Container(
-                  padding: EdgeInsets.fromLTRB(25, 25, 15, 25),
-                  decoration: BoxDecoration(
-                      color: kPrimaryRedColor,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                      )),
-                  child: Icon(
-                    Icons.delete_outline_rounded,
-                    size: 25,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              child: JobPostCardVt(
-                includeSave: true,
-              ),
-            ),
-            Dismissible(
-              key: ValueKey(3),
-              direction: DismissDirection.endToStart,
-              onDismissed: (direction) {
-                // TODO: remove Item on dismiss
-              },
-              background: Container(
-                // margin: EdgeInsets.symmetric(horizontal: 15),
-                // padding: EdgeInsets.only(right: 20),
-                alignment: Alignment.centerRight,
-                color: Colors.transparent,
-                child: Container(
-                  padding: EdgeInsets.fromLTRB(25, 25, 15, 25),
-                  decoration: BoxDecoration(
-                      color: kPrimaryRedColor,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                      )),
-                  child: Icon(
-                    Icons.delete_outline_rounded,
-                    size: 25,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              child: JobPostCardVt(
-                includeSave: true,
-              ),
-            ),
-            Dismissible(
-              key: ValueKey(4),
-              direction: DismissDirection.endToStart,
-              onDismissed: (direction) {
-                // TODO: remove Item on dismiss
-              },
-              background: Container(
-                // margin: EdgeInsets.symmetric(horizontal: 15),
-                // padding: EdgeInsets.only(right: 20),
-                alignment: Alignment.centerRight,
-                color: Colors.transparent,
-                child: Container(
-                  padding: EdgeInsets.fromLTRB(25, 25, 15, 25),
-                  decoration: BoxDecoration(
-                      color: kPrimaryRedColor,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                      )),
-                  child: Icon(
-                    Icons.delete_outline_rounded,
-                    size: 25,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              child: JobPostCardVt(
-                includeSave: true,
-              ),
-            ),
-          ],
+        body: ListView.builder(
+          itemCount: 4,
+          padding: EdgeInsets.symmetric(vertical: 20),
+          itemBuilder: (context, index) => DismissibleJobPostCard(
+            index: index,
+          ),
         ));
+  }
+}
+
+class DismissibleJobPostCard extends StatelessWidget {
+  final int index;
+
+  const DismissibleJobPostCard({
+    Key? key,
+    required this.index,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Dismissible(
+      key: ValueKey(index),
+      direction: DismissDirection.endToStart,
+      onDismissed: (direction) {
+        // TODO: remove Item on dismiss
+      },
+      background: Container(
+        // margin: EdgeInsets.symmetric(horizontal: 15),
+        // padding: EdgeInsets.only(right: 20),
+        alignment: Alignment.centerRight,
+        color: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.fromLTRB(25, 25, 15, 25),
+          decoration: BoxDecoration(
+              color: kPrimaryRedColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                bottomLeft: Radius.circular(20),
+              )),
+          child: Icon(
+            Icons.delete_outline_rounded,
+            size: 25,
+            color: Colors.white,
+          ),
+        ),
+      ),
+      child: JobPostCardVt(
+        includeSave: true,
+      ),
+    );
   }
 }

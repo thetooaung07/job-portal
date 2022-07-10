@@ -27,10 +27,16 @@ class AuthController extends GetxController {
   late Rx<User?> _user;
 
   @override
-  void onReady() {
+  void onReady() async {
     super.onReady();
 
     _user = Rx<User?>(firebaseAuth.currentUser);
+
+    if (firebaseAuth.currentUser != null) {
+      print("object => user is not null, assigning value to user");
+      Get.find<UserAccountController>().user =
+          await FirestoreHelper().getUser(firebaseAuth.currentUser!.uid);
+    }
 
     _user.bindStream(firebaseAuth.userChanges());
     ever(_user, _setInitialScreen);

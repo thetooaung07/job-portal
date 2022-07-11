@@ -34,10 +34,8 @@ class AuthController extends GetxController {
 
   _setInitialScreen(User? user) {
     if (user == null) {
-      print("Inside stream user null");
       Get.offAllNamed(RouteNames.login);
     } else {
-      print("Inside stream homepage");
       Get.offAllNamed(RouteNames.home);
     }
   }
@@ -121,8 +119,6 @@ class AuthController extends GetxController {
 
       Get.find<UserAccountController>().user =
           await FirestoreHelper().getUser(_cre.user!.uid);
-
-      print(Get.find<UserAccountController>().user);
 
       await Fluttertoast.showToast(
               msg: "Success",

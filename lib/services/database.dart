@@ -15,7 +15,7 @@ class FirestoreHelper {
   }) =>
       firebaseFirestore.collection(collectionPath).get();
 
-// Watch
+// Stream
   Stream<DocumentSnapshot<Map<String, dynamic>>> watchByDoc(
           String collectionPath, String? docPath) =>
       firebaseFirestore.collection(collectionPath).doc(docPath).snapshots();
@@ -35,12 +35,20 @@ class FirestoreHelper {
       firebaseFirestore.collection(collectionPath).doc(docPath).set(data);
 
 //update
-  Future<void> update({
+  Future update({
     required String collectionPath,
     required Map<String, dynamic> data,
     String? docPath,
-  }) =>
-      firebaseFirestore.collection(collectionPath).doc(docPath).update(data);
+  }) async {
+    try {
+      await firebaseFirestore
+          .collection(collectionPath)
+          .doc(docPath)
+          .update(data);
+    } catch (e) {
+      print(e);
+    }
+  }
 
 //delete
   Future<void> delete({
@@ -81,5 +89,13 @@ class FirestoreHelper {
       print(e);
       rethrow;
     }
+  }
+
+  Stream<UserAccount> userAccountStream(String userId) {
+    return firebaseFirestore
+        .collection("users")
+        .doc(userId)
+        .snapshots()
+        .map((event) => UserAccount.fromDocumentSnapshot(event));
   }
 }

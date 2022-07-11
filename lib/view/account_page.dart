@@ -36,7 +36,7 @@ class AccountPage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: GetBuilder<UserAccountController>(
-            builder: (authController) {
+            builder: (userAccountController) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -61,7 +61,7 @@ class AccountPage extends StatelessWidget {
                               height: 10,
                             ),
                             Text(
-                              authController.user.username ?? "User",
+                              userAccountController.user.username ?? "User",
                               style: kHeaderTextStyle,
                             ),
                             SizedBox(
@@ -113,44 +113,97 @@ class AccountPage extends StatelessWidget {
                     ),
                   ),
 
-                  Container(
-                      height: 200,
-                      child: GetBuilder<UserAccountController>(
-                        builder: (userAccountController) {
-                          return ListView(
-                            padding: EdgeInsets.only(left: 20),
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              userAccountController.user.cvFile != true
-                                  ? ProfileCardHr(
-                                      //             onTap: () =>    userAccountController.updateProfileStats(
-                                      //   "profile_stats",
-                                      //   firebaseAuth.currentUser!.uid,
-                                      // controller.profileStats.
-                                      // ),
-                                      icon: Icon(
-                                        Icons.person_outline_rounded,
-                                        size: 35,
-                                      ),
-                                      buttonLabel: "Continue",
-                                      label:
-                                          "Please describe personal informations",
-                                    )
-                                  : SizedBox(),
-                              userAccountController.user.profileDetails != true
-                                  ? ProfileCardHr(
-                                      icon: Icon(
-                                        Icons.person_outline_rounded,
-                                        size: 35,
-                                      ),
-                                      buttonLabel: "Upload",
-                                      label: "Upload your cv",
-                                    )
-                                  : SizedBox(),
-                            ],
-                          );
-                        },
-                      )),
+                  userAccountController.user.profileDetails != true ||
+                          userAccountController.user.cvFile != true
+                      ? StreamBuilder<UserAccount>(
+                          stream: FirestoreHelper().userAccountStream(
+                              userAccountController.user.userId!),
+                          builder: (context, snapshot) {
+                            return Container(
+                              height: 200,
+                              child: ListView(
+                                padding: EdgeInsets.only(left: 20),
+                                scrollDirection: Axis.horizontal,
+                                children: [
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.active) ...[
+                                    snapshot.data!.profileDetails != true
+                                        ? ProfileCardHr(
+                                            onTap: () {
+                                              userAccountController
+                                                  .updateProfileStats(
+                                                      "users",
+                                                      firebaseAuth
+                                                          .currentUser!.uid,
+                                                      {
+                                                    "profile_details": true
+                                                  });
+                                            },
+                                            icon: Icon(
+                                              Icons.person_outline_rounded,
+                                              size: 35,
+                                            ),
+                                            buttonLabel: "Continue",
+                                            label: "Details Info",
+                                          )
+                                        : ProfileCardHr(
+                                            onTap: () {
+                                              userAccountController
+                                                  .updateProfileStats(
+                                                      "users",
+                                                      firebaseAuth
+                                                          .currentUser!.uid,
+                                                      {
+                                                    "profile_details": false
+                                                  });
+                                            },
+                                            icon: Icon(
+                                              Icons.person_outline_rounded,
+                                              size: 35,
+                                            ),
+                                            buttonLabel: "Updated",
+                                            label:
+                                                "Please describe personal informations",
+                                          ),
+                                    snapshot.data!.cvFile != true
+                                        ? ProfileCardHr(
+                                            onTap: () {
+                                              userAccountController
+                                                  .updateProfileStats(
+                                                      "users",
+                                                      firebaseAuth
+                                                          .currentUser!.uid,
+                                                      {"cv_file": true});
+                                            },
+                                            icon: Icon(
+                                              Icons.file_upload_outlined,
+                                              size: 35,
+                                            ),
+                                            buttonLabel: "Upload",
+                                            label: "Upload your cv",
+                                          )
+                                        : ProfileCardHr(
+                                            onTap: () {
+                                              userAccountController
+                                                  .updateProfileStats(
+                                                      "users",
+                                                      firebaseAuth
+                                                          .currentUser!.uid,
+                                                      {"cv_file": false});
+                                            },
+                                            icon: Icon(
+                                              Icons.file_upload_outlined,
+                                              size: 35,
+                                            ),
+                                            buttonLabel: "Uploaded",
+                                            label: "Upload your cv",
+                                          ),
+                                  ]
+                                ],
+                              ),
+                            );
+                          })
+                      : SizedBox(),
 
                   ListTile(
                     horizontalTitleGap: 7,

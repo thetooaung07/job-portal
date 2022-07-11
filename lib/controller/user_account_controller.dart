@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:job_portal/global.dart';
 import 'package:job_portal/model/user_account.dart';
 import 'package:job_portal/services/database.dart';
 
@@ -13,26 +13,22 @@ class UserAccountController extends GetxController {
     _userAccount.value = UserAccount();
   }
 
-// profile_stats
+  @override
+  void onInit() {
+    _userAccount.bindStream(
+        FirestoreHelper().userAccountStream(firebaseAuth.currentUser!.uid));
+    super.onInit();
+  }
 
-  // RxMap profileStats = {}.obs;
+// TODO try taking with stream
 
-  // Future getProfileStats(String docId) async {
-  //   DocumentSnapshot doc = await FirestoreHelper()
-  //       .readByDoc(collectionPath: "profile_stats", docPath: docId);
-
-  //   Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-
-  //   profileStats.value = data;
-  // }
-
-  // Future updateProfileStats(
-  //   String collectionPath,
-  //   String docPath,
-  //   Map<String, dynamic> data,
-  // ) async {
-  //   // update partially
-  //   await FirestoreHelper()
-  //       .update(collectionPath: collectionPath, docPath: docPath, data: data);
-  // }
+  Future updateProfileStats(
+    String collectionPath,
+    String docPath,
+    Map<String, dynamic> data,
+  ) async {
+    // update partially
+    await FirestoreHelper()
+        .update(collectionPath: collectionPath, docPath: docPath, data: data);
+  }
 }

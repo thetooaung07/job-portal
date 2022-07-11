@@ -84,6 +84,7 @@ class FirestoreHelper {
     try {
       DocumentSnapshot doc =
           await firebaseFirestore.collection("users").doc(userId).get();
+
       return UserAccount.fromDocumentSnapshot(doc);
     } catch (e) {
       print(e);

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
@@ -5,6 +6,7 @@ import 'package:job_portal/controller/auth_page_controller.dart';
 import 'package:job_portal/controller/user_account_controller.dart';
 import 'package:job_portal/global.dart';
 import 'package:job_portal/main.dart';
+import 'package:job_portal/model/profile_stats.dart';
 import 'package:job_portal/model/user_account.dart';
 import 'package:job_portal/services/database.dart';
 import 'package:job_portal/widgets/job-post-card-hr.dart';
@@ -68,7 +70,7 @@ class AccountPage extends StatelessWidget {
                               height: 5,
                             ),
                             Text(
-                              " Flutter Beginner",
+                              "Flutter Beginner",
                               style: kBulletListTextStyle.copyWith(
                                   color: Colors.black54),
                             ),
@@ -81,7 +83,7 @@ class AccountPage extends StatelessWidget {
                                 SizedBox(
                                   width: 5,
                                 ),
-                                Text("@thetooaung07")
+                                Text(userAccountController.user.email ?? "")
                               ],
                             )
                           ],
@@ -94,23 +96,41 @@ class AccountPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20.0, vertical: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Complete Your Profile (1/4)"),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: LinearProgressIndicator(
-                            backgroundColor: themeBgColor,
-                            value: 0.3,
-                            minHeight: 12,
-                          ),
-                        ),
-                      ],
-                    ),
+                    child: StreamBuilder<UserAccount>(
+                        stream: FirestoreHelper().userAccountStream(
+                            userAccountController.user.userId!),
+                        builder: (context, snapshot) {
+                          Map profileStats = {};
+                          if (snapshot.connectionState ==
+                              ConnectionState.active) {
+                            profileStats = ProfileStats(
+                                    cvFile: snapshot.data!.cvFile,
+                                    profileDetails:
+                                        snapshot.data!.profileDetails)
+                                .toJson();
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                    "Complete Your Profile (${userAccountController.calculate(profileStats)}/${profileStats.length})"),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: LinearProgressIndicator(
+                                    backgroundColor: themeBgColor,
+                                    value: (userAccountController
+                                            .calculate(profileStats) /
+                                        profileStats.length),
+                                    minHeight: 12,
+                                  ),
+                                ),
+                              ],
+                            );
+                          } else
+                            return SizedBox();
+                        }),
                   ),
 
                   userAccountController.user.profileDetails != true ||
@@ -227,6 +247,7 @@ class AccountPage extends StatelessWidget {
                   ),
 
                   Container(
+                    margin: EdgeInsets.only(top: 20),
                     width: Get.width,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,

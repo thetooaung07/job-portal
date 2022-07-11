@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:job_portal/global.dart';
+import 'package:job_portal/model/profile_stats.dart';
 import 'package:job_portal/model/user_account.dart';
 import 'package:job_portal/services/database.dart';
 
@@ -20,8 +21,17 @@ class UserAccountController extends GetxController {
     super.onInit();
   }
 
-// TODO try taking with stream
+  int calculate(Map profileStats) {
+    int count = 0;
+    print("Inside calculate ${profileStats.values.map((e) => e)}");
+    profileStats.forEach((key, value) {
+      if (value == true) count++;
+      return;
+    });
+    return count;
+  }
 
+// TODO try taking with stream
   Future updateProfileStats(
     String collectionPath,
     String docPath,
@@ -30,5 +40,7 @@ class UserAccountController extends GetxController {
     // update partially
     await FirestoreHelper()
         .update(collectionPath: collectionPath, docPath: docPath, data: data);
+
+    // calculate();
   }
 }

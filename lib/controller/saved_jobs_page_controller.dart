@@ -6,7 +6,6 @@ class SavedJobsPageController extends GetxController {
   // List<> favouriteJobs
 
   void addToFavourite() {
-    print("isfavourite is working");
     // TODO: this below is toggle only/ Change code later
     isFavourite.value = !isFavourite.value;
 

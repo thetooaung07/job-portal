@@ -23,7 +23,6 @@ class UserAccountController extends GetxController {
 
   int calculate(Map profileStats) {
     int count = 0;
-    print("Inside calculate ${profileStats.values.map((e) => e)}");
     profileStats.forEach((key, value) {
       if (value == true) count++;
       return;

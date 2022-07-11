@@ -106,7 +106,8 @@ class AccountPage extends StatelessWidget {
                             profileStats = ProfileStats(
                                     cvFile: snapshot.data!.cvFile,
                                     profileDetails:
-                                        snapshot.data!.profileDetails)
+                                        snapshot.data!.profileDetails,
+                                    addABio: snapshot.data!.addABio)
                                 .toJson();
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,99 +133,132 @@ class AccountPage extends StatelessWidget {
                             return SizedBox();
                         }),
                   ),
+// only if you want to disapper cards if both are true
+                  // userAccountController.user.profileDetails != true ||
+                  //         userAccountController.user.cvFile != true
+                  //     ?
 
-                  userAccountController.user.profileDetails != true ||
-                          userAccountController.user.cvFile != true
-                      ? StreamBuilder<UserAccount>(
-                          stream: FirestoreHelper().userAccountStream(
-                              userAccountController.user.userId!),
-                          builder: (context, snapshot) {
-                            return Container(
-                              height: 200,
-                              child: ListView(
-                                padding: EdgeInsets.only(left: 20),
-                                scrollDirection: Axis.horizontal,
-                                children: [
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.active) ...[
-                                    snapshot.data!.profileDetails != true
-                                        ? ProfileCardHr(
-                                            onTap: () {
-                                              userAccountController
-                                                  .updateProfileStats(
-                                                      "users",
-                                                      firebaseAuth
-                                                          .currentUser!.uid,
-                                                      {
-                                                    "profile_details": true
-                                                  });
-                                            },
-                                            icon: Icon(
-                                              Icons.person_outline_rounded,
-                                              size: 35,
-                                            ),
-                                            buttonLabel: "Continue",
-                                            label: "Details Info",
-                                          )
-                                        : ProfileCardHr(
-                                            onTap: () {
-                                              userAccountController
-                                                  .updateProfileStats(
-                                                      "users",
-                                                      firebaseAuth
-                                                          .currentUser!.uid,
-                                                      {
-                                                    "profile_details": false
-                                                  });
-                                            },
-                                            icon: Icon(
-                                              Icons.person_outline_rounded,
-                                              size: 35,
-                                            ),
-                                            buttonLabel: "Updated",
-                                            label:
-                                                "Please describe personal informations",
+                  StreamBuilder<UserAccount>(
+                      stream: FirestoreHelper().userAccountStream(
+                          userAccountController.user.userId!),
+                      builder: (context, snapshot) {
+                        return Container(
+                          height: 200,
+                          child: ListView(
+                            padding: EdgeInsets.only(left: 20),
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              if (snapshot.connectionState ==
+                                  ConnectionState.active) ...[
+                                snapshot.data!.profileDetails != true
+                                    ? ProfileCardHr(
+                                        onTap: () {
+                                          userAccountController
+                                              .updateProfileStats(
+                                                  "users",
+                                                  firebaseAuth.currentUser!.uid,
+                                                  {"profile_details": true});
+                                        },
+                                        icon: Icon(
+                                          Icons.person_outline_rounded,
+                                          size: 35,
+                                        ),
+                                        buttonLabel: "See All",
+                                        label: "Details Info",
+                                      )
+                                    : CheckedProfileCardHr(
+                                        child: ProfileCardHr(
+                                          onTap: () {
+                                            userAccountController
+                                                .updateProfileStats(
+                                                    "users",
+                                                    firebaseAuth
+                                                        .currentUser!.uid,
+                                                    {"profile_details": false});
+                                          },
+                                          icon: Icon(
+                                            Icons.person_rounded,
+                                            size: 35,
                                           ),
-                                    snapshot.data!.cvFile != true
-                                        ? ProfileCardHr(
-                                            onTap: () {
-                                              userAccountController
-                                                  .updateProfileStats(
-                                                      "users",
-                                                      firebaseAuth
-                                                          .currentUser!.uid,
-                                                      {"cv_file": true});
-                                            },
-                                            icon: Icon(
-                                              Icons.file_upload_outlined,
-                                              size: 35,
-                                            ),
-                                            buttonLabel: "Upload",
-                                            label: "Upload your cv",
-                                          )
-                                        : ProfileCardHr(
-                                            onTap: () {
-                                              userAccountController
-                                                  .updateProfileStats(
-                                                      "users",
-                                                      firebaseAuth
-                                                          .currentUser!.uid,
-                                                      {"cv_file": false});
-                                            },
-                                            icon: Icon(
-                                              Icons.file_upload_outlined,
-                                              size: 35,
-                                            ),
-                                            buttonLabel: "Uploaded",
-                                            label: "Upload your cv",
+                                          buttonLabel: "Edit",
+                                          label: "Personal Info is updated",
+                                        ),
+                                      ),
+                                snapshot.data!.cvFile != true
+                                    ? ProfileCardHr(
+                                        onTap: () {
+                                          userAccountController
+                                              .updateProfileStats(
+                                                  "users",
+                                                  firebaseAuth.currentUser!.uid,
+                                                  {"cv_file": true});
+                                        },
+                                        icon: Icon(
+                                          Icons.file_upload_outlined,
+                                          size: 35,
+                                        ),
+                                        buttonLabel: "Upload Now",
+                                        label: "Upload your cv",
+                                      )
+                                    : CheckedProfileCardHr(
+                                        child: ProfileCardHr(
+                                          onTap: () {
+                                            userAccountController
+                                                .updateProfileStats(
+                                                    "users",
+                                                    firebaseAuth
+                                                        .currentUser!.uid,
+                                                    {"cv_file": false});
+                                          },
+                                          icon: Icon(
+                                            Icons.file_upload,
+                                            size: 35,
                                           ),
-                                  ]
-                                ],
-                              ),
-                            );
-                          })
-                      : SizedBox(),
-
+                                          buttonLabel: "Edit",
+                                          label: "Your CV is uploaded.",
+                                        ),
+                                      ),
+                                snapshot.data!.addABio != true
+                                    ? ProfileCardHr(
+                                        onTap: () {
+                                          userAccountController
+                                              .updateProfileStats(
+                                                  "users",
+                                                  firebaseAuth.currentUser!.uid,
+                                                  {"add_a_bio": true});
+                                        },
+                                        icon: Icon(
+                                          Icons.message_outlined,
+                                          size: 35,
+                                        ),
+                                        label: "Add a bio",
+                                        buttonLabel: "Add Now",
+                                      )
+                                    : CheckedProfileCardHr(
+                                        child: ProfileCardHr(
+                                          onTap: () {
+                                            userAccountController
+                                                .updateProfileStats(
+                                                    "users",
+                                                    firebaseAuth
+                                                        .currentUser!.uid,
+                                                    {"add_a_bio": false});
+                                          },
+                                          icon: Icon(
+                                            Icons.message_rounded,
+                                            size: 35,
+                                          ),
+                                          label: "Bio is added",
+                                          buttonLabel: "Edit",
+                                        ),
+                                      ),
+                              ]
+                            ],
+                          ),
+                        );
+                      })
+                  // : SizedBox()
+                  ,
                   ListTile(
                     horizontalTitleGap: 7,
                     minLeadingWidth: 0,
@@ -332,6 +366,30 @@ class ProfileCardHr extends StatelessWidget {
               ]);
         }),
       ),
+    );
+  }
+}
+
+class CheckedProfileCardHr extends StatelessWidget {
+  final ProfileCardHr child;
+
+  const CheckedProfileCardHr({Key? key, required this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        child,
+        Positioned(
+          top: 10,
+          right: 20,
+          child: Icon(
+            Icons.check_circle_outline_rounded,
+            color: Colors.green,
+            size: 30,
+          ),
+        )
+      ],
     );
   }
 }

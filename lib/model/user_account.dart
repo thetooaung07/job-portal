@@ -9,6 +9,7 @@ class UserAccount {
   String? userId;
   bool? cvFile;
   bool? profileDetails;
+  bool? addABio;
 
   UserAccount(
       {this.user,
@@ -17,7 +18,8 @@ class UserAccount {
       this.email,
       this.password,
       this.cvFile,
-      this.profileDetails});
+      this.profileDetails,
+      this.addABio});
 
   UserAccount.fromDocumentSnapshot(DocumentSnapshot doc) {
     userId = doc.id;
@@ -26,6 +28,7 @@ class UserAccount {
     password = doc["password"];
     cvFile = doc["cv_file"];
     profileDetails = doc["profile_details"];
+    addABio = doc["add_a_bio"];
   }
 
   Map<String, dynamic> toJson() => {
@@ -35,5 +38,6 @@ class UserAccount {
         "password": password,
         "cv_file": cvFile,
         "profile_details": profileDetails,
+        "add_a_bio": addABio,
       };
 }

@@ -80,6 +80,7 @@ class AuthController extends GetxController {
         password: passController.text.trim(),
         cvFile: false,
         profileDetails: false,
+        addABio: false,
       );
 
       if (await FirestoreHelper().createNewUser(user)) {

@@ -12,6 +12,9 @@ class TopCompanyContainer extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(
+          height: 10,
+        ),
         ShowAllTextBanner(
           title: "Top Company",
           onPressed: () => Get.toNamed(RouteNames.popularJobs),

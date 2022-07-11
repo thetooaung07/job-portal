@@ -18,17 +18,19 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      leadingWidth: 75,
-      leading: leading ?? null,
-      title: Text(
-        label ?? "",
-        style: kLogoTextStyle,
+    return SafeArea(
+      child: AppBar(
+        leadingWidth: 75,
+        leading: leading ?? null,
+        title: Text(
+          label ?? "",
+          style: kLogoTextStyle,
+        ),
+        actions: action ?? null,
+        centerTitle: centerLabel,
+        elevation: 0.75,
+        backgroundColor: Colors.white,
       ),
-      actions: action ?? null,
-      centerTitle: centerLabel,
-      elevation: 0,
-      backgroundColor: Colors.transparent,
     );
   }
 }

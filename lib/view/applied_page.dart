@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
@@ -15,7 +16,8 @@ class AppliedPage extends StatelessWidget {
         leading: Container(
           margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: CustomIconButton(
-            onTap: (() => Get.back()),
+            onTap: (() =>
+                Get.find<BottomNavBarController>().selectedIndex.value = 0),
             child: Icon(
               Icons.chevron_left_rounded,
               size: 30,
@@ -39,6 +41,7 @@ class AppliedPage extends StatelessWidget {
         ],
       ),
       body: Container(
+        margin: EdgeInsets.only(top: 20),
         width: MediaQuery.of(context).size.width,
         child: GridView(
           padding: EdgeInsets.symmetric(
@@ -46,7 +49,7 @@ class AppliedPage extends StatelessWidget {
           ),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            childAspectRatio: 1.02,
+            childAspectRatio: 1.03,
           ),
           children: [
             JobCard(

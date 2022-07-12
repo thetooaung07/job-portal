@@ -141,11 +141,25 @@ class AuthController extends GetxController {
     }
   }
 
+  void reset() {
+    usernameController.clear();
+    passController.clear();
+    cPassController.clear();
+    emailController.clear();
+    emailFocusNode.unfocus();
+    passFocusNode.unfocus();
+    cPassFocusNode.unfocus();
+    // usernameController.dispose();
+    // passController.dispose();
+    // cPassController.dispose();
+    // emailController.dispose();
+  }
+
   void signOut() async {
     try {
       await firebaseAuth.signOut();
       Get.find<UserAccountController>().clear();
-      Get.offAllNamed(RouteNames.root);
+      Get.offAllNamed(RouteNames.login);
     } catch (e) {
       print(e);
       await Fluttertoast.showToast(

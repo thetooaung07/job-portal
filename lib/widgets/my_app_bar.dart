@@ -34,12 +34,3 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 }
-// return SafeArea(
-    //   child: Container(
-    //     // padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
-    //     width: Get.width,
-    //     height: MediaQuery.of(context).viewPadding.top + 60,
-    //     decoration: BoxDecoration(color: Colors.transparent),
-    //     child: child,
-    //   ),
-    // );

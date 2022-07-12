@@ -41,41 +41,11 @@ class JobDetailsPage extends StatelessWidget {
           ),
         ],
       ),
-      backgroundColor: themeBgColor,
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // MyAppBar(
-            //   child: Padding(
-            //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            //     child: Row(
-            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //         children: [
-            //           CustomIconButton(
-            //             onTap: () {
-            //               Get.back();
-            //             },
-            //             child: Icon(
-            //               Icons.chevron_left_rounded,
-            //               size: 30,
-            //               color: Colors.black,
-            //             ),
-            //           ),
-            //           Text(
-            //             "Detail",
-            //             style: kLogoTextStyle,
-            //           ),
-            //           CustomIconButton(
-            //             child: Icon(
-            //               Icons.bookmark_border_rounded,
-            //               size: 30,
-            //               color: Colors.black,
-            //             ),
-            //           ),
-            //         ]),
-            //   ),
-            // ),
             CompanyLogo(),
             JobTab(),
           ],
@@ -124,7 +94,8 @@ class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
           padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
           margin: EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
-            color: jobDetailsTabBgColor,
+            color: Color.fromARGB(85, 233, 233, 233),
+            // color: jobDetailsTabBgColor,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Theme(
@@ -136,7 +107,7 @@ class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
               onTap: (idx) {
                 tabIndex.value = idx;
               },
-              unselectedLabelColor: Colors.black,
+              unselectedLabelColor: Colors.black54,
               indicatorSize: TabBarIndicatorSize.tab,
               indicator: BoxDecoration(
                 color: kPrimaryRedColor,
@@ -144,6 +115,7 @@ class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
               ),
               labelColor: Colors.white,
               controller: _tabController,
+              labelStyle: TextStyle(fontSize: 16),
               tabs: [
                 Tab(
                   height: 40,
@@ -190,7 +162,7 @@ class FirstTab extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             decoration: BoxDecoration(
-                color: themeBgMainColor,
+                color: kJobDetailsBgColor,
                 borderRadius: BorderRadius.circular(20)),
             child: Column(children: [
               // Requirements
@@ -214,7 +186,7 @@ class JobDescShort extends StatelessWidget {
       // margin: EdgeInsets.symmetric(horizontal: 10),
       padding: EdgeInsets.fromLTRB(50, 12, 50, 5),
       decoration: BoxDecoration(
-        color: themeBgMainColor,
+        color: kJobDetailsBgColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -398,7 +370,7 @@ class BulletText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10.0, left: 10),
+      padding: const EdgeInsets.only(bottom: 10.0, left: 5),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -410,7 +382,7 @@ class BulletText extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: 10,
+            width: 5,
           ),
           Expanded(
             child: Text(

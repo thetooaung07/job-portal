@@ -48,7 +48,7 @@ class SignUpPage extends GetView<AuthController> {
                           children: [
                             // Username
                             TextFormField(
-                              // autofocus: true,
+                              autofocus: true,
                               controller: controller.usernameController,
                               onEditingComplete:
                                   controller.emailFocusNode.requestFocus,
@@ -332,7 +332,10 @@ class SignUpPage extends GetView<AuthController> {
                           width: 5,
                         ),
                         GestureDetector(
-                          onTap: () => Get.toNamed(RouteNames.login),
+                          onTap: () {
+                            controller.reset();
+                            Get.toNamed(RouteNames.login);
+                          },
                           child: Text(
                             "Login",
                             style: TextStyle(fontWeight: FontWeight.bold),

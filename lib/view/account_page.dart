@@ -98,8 +98,8 @@ class AccountPage extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20.0, vertical: 20),
                     child: StreamBuilder<UserAccount>(
-                        stream: FirestoreHelper().userAccountStream(
-                            userAccountController.user.userId!),
+                        stream: FirestoreHelper()
+                            .userAccountStream(firebaseAuth.currentUser!.uid),
                         builder: (context, snapshot) {
                           Map profileStats = {};
                           if (snapshot.connectionState ==
@@ -140,8 +140,8 @@ class AccountPage extends StatelessWidget {
                   //     ?
 
                   StreamBuilder<UserAccount>(
-                      stream: FirestoreHelper().userAccountStream(
-                          userAccountController.user.userId!),
+                      stream: FirestoreHelper()
+                          .userAccountStream(firebaseAuth.currentUser!.uid),
                       builder: (context, snapshot) {
                         return Container(
                           height: 200,

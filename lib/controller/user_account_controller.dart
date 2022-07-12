@@ -16,8 +16,9 @@ class UserAccountController extends GetxController {
 
   @override
   void onInit() {
-    _userAccount.bindStream(
-        FirestoreHelper().userAccountStream(firebaseAuth.currentUser!.uid));
+    if (firebaseAuth.currentUser != null)
+      _userAccount.bindStream(
+          FirestoreHelper().userAccountStream(firebaseAuth.currentUser!.uid));
     super.onInit();
   }
 

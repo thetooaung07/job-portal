@@ -47,10 +47,10 @@ class LoginPage extends GetView<AuthController> {
                           children: [
                             //Username
                             TextFormField(
-                              // autofocus: true,
+                              autofocus: true,
                               controller: controller.emailController,
-                              // onEditingComplete:
-                              //     controller.passFocusNode.requestFocus,
+                              onEditingComplete:
+                                  controller.passFocusNode.requestFocus,
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.black54,
@@ -227,7 +227,10 @@ class LoginPage extends GetView<AuthController> {
                           width: 5,
                         ),
                         GestureDetector(
-                          onTap: () => Get.toNamed(RouteNames.signup),
+                          onTap: () {
+                            controller.reset();
+                            Get.toNamed(RouteNames.signup);
+                          },
                           child: Text(
                             "Create Account",
                             style: TextStyle(fontWeight: FontWeight.bold),

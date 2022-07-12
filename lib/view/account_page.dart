@@ -8,6 +8,7 @@ import 'package:job_portal/global.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/profile_stats.dart';
 import 'package:job_portal/model/user_account.dart';
+import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/services/database.dart';
 import 'package:job_portal/widgets/job-post-card-hr.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
@@ -18,297 +19,327 @@ class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: MyAppBar(
-        label: "Profile",
-        action: [
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
-            child: CustomIconButton(
-              onTap: () {},
-              child: Icon(
-                Icons.more_vert_rounded,
-                size: 30,
-                color: Colors.black,
+        backgroundColor: Colors.white,
+        appBar: MyAppBar(
+          label: "Profile",
+          action: [
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+              child: CustomIconButton(
+                onTap: () {},
+                child: Icon(
+                  Icons.more_vert_rounded,
+                  size: 30,
+                  color: Colors.black,
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: GetBuilder<UserAccountController>(
-            builder: (userAccountController) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20.0, vertical: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: kPrimaryRedColor,
-                          radius: 50,
-                        ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              userAccountController.user.username ?? "User",
-                              style: kHeaderTextStyle,
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              "Flutter Beginner",
-                              style: kBulletListTextStyle.copyWith(
-                                  color: Colors.black54),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Row(
-                              children: [
-                                Text("Contact me:"),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(userAccountController.user.email ?? "")
-                              ],
-                            )
-                          ],
-                        )
-                      ],
+          ],
+        ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: GetBuilder<UserAccountController>(
+              builder: (userAccountController) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: kPrimaryRedColor,
+                            radius: 50,
+                          ),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                userAccountController.user.username ?? "User",
+                                style: kHeaderTextStyle,
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                "Flutter Beginner",
+                                style: kBulletListTextStyle.copyWith(
+                                    color: Colors.black54),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Row(
+                                children: [
+                                  Text("Contact me:"),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(userAccountController.user.email ?? "")
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  //TODO:Change Custom to look more beautiful // border of inside indicator being Square
-                  //  Complete Your Profile
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20.0, vertical: 20),
-                    child: StreamBuilder<UserAccount>(
+                    //TODO:Change Custom to look more beautiful // border of inside indicator being Square
+                    //  Complete Your Profile
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 20),
+                      child: StreamBuilder<UserAccount>(
+                          stream: FirestoreHelper()
+                              .userAccountStream(firebaseAuth.currentUser!.uid),
+                          builder: (context, snapshot) {
+                            Map profileStats = {};
+                            if (snapshot.connectionState ==
+                                ConnectionState.active) {
+                              profileStats = ProfileStats(
+                                      cvFile: snapshot.data!.cvFile,
+                                      profileDetails:
+                                          snapshot.data!.profileDetails,
+                                      addABio: snapshot.data!.addABio)
+                                  .toJson();
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                      "Complete Your Profile (${userAccountController.calculate(profileStats)}/${profileStats.length})"),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: LinearProgressIndicator(
+                                      backgroundColor: themeBgColor,
+                                      value: (userAccountController
+                                              .calculate(profileStats) /
+                                          profileStats.length),
+                                      minHeight: 12,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            } else
+                              return SizedBox();
+                          }),
+                    ),
+// only if you want to disapper cards if both are true
+                    // userAccountController.user.profileDetails != true ||
+                    //         userAccountController.user.cvFile != true
+                    //     ?
+
+                    StreamBuilder<UserAccount>(
                         stream: FirestoreHelper()
                             .userAccountStream(firebaseAuth.currentUser!.uid),
                         builder: (context, snapshot) {
-                          Map profileStats = {};
-                          if (snapshot.connectionState ==
-                              ConnectionState.active) {
-                            profileStats = ProfileStats(
-                                    cvFile: snapshot.data!.cvFile,
-                                    profileDetails:
-                                        snapshot.data!.profileDetails,
-                                    addABio: snapshot.data!.addABio)
-                                .toJson();
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                          return Container(
+                            height: 200,
+                            child: ListView(
+                              padding: EdgeInsets.only(left: 20),
+                              scrollDirection: Axis.horizontal,
                               children: [
-                                Text(
-                                    "Complete Your Profile (${userAccountController.calculate(profileStats)}/${profileStats.length})"),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: LinearProgressIndicator(
-                                    backgroundColor: themeBgColor,
-                                    value: (userAccountController
-                                            .calculate(profileStats) /
-                                        profileStats.length),
-                                    minHeight: 12,
-                                  ),
-                                ),
+                                if (snapshot.connectionState ==
+                                    ConnectionState.active) ...[
+                                  snapshot.data!.profileDetails != true
+                                      ? ProfileCardHr(
+                                          onTap: () {
+                                            userAccountController
+                                                .updateProfileStats(
+                                                    "users",
+                                                    firebaseAuth
+                                                        .currentUser!.uid,
+                                                    {"profile_details": true});
+                                          },
+                                          icon: Icon(
+                                            Icons.person_outline_rounded,
+                                            size: 35,
+                                          ),
+                                          buttonLabel: "See All",
+                                          label: "Details Info",
+                                        )
+                                      : CheckedProfileCardHr(
+                                          child: ProfileCardHr(
+                                            onTap: () {
+                                              userAccountController
+                                                  .updateProfileStats(
+                                                      "users",
+                                                      firebaseAuth
+                                                          .currentUser!.uid,
+                                                      {
+                                                    "profile_details": false
+                                                  });
+                                            },
+                                            icon: Icon(
+                                              Icons.person_rounded,
+                                              size: 35,
+                                            ),
+                                            buttonLabel: "Edit",
+                                            label: "Personal Info is updated",
+                                          ),
+                                        ),
+                                  snapshot.data!.cvFile != true
+                                      ? ProfileCardHr(
+                                          onTap: () {
+                                            userAccountController
+                                                .updateProfileStats(
+                                                    "users",
+                                                    firebaseAuth
+                                                        .currentUser!.uid,
+                                                    {"cv_file": true});
+                                          },
+                                          icon: Icon(
+                                            Icons.file_upload_outlined,
+                                            size: 35,
+                                          ),
+                                          buttonLabel: "Upload Now",
+                                          label: "Upload your cv",
+                                        )
+                                      : CheckedProfileCardHr(
+                                          child: ProfileCardHr(
+                                            onTap: () {
+                                              userAccountController
+                                                  .updateProfileStats(
+                                                      "users",
+                                                      firebaseAuth
+                                                          .currentUser!.uid,
+                                                      {"cv_file": false});
+                                            },
+                                            icon: Icon(
+                                              Icons.file_upload,
+                                              size: 35,
+                                            ),
+                                            buttonLabel: "Edit",
+                                            label: "Your CV is uploaded.",
+                                          ),
+                                        ),
+                                  snapshot.data!.addABio != true
+                                      ? ProfileCardHr(
+                                          onTap: () {
+                                            userAccountController
+                                                .updateProfileStats(
+                                                    "users",
+                                                    firebaseAuth
+                                                        .currentUser!.uid,
+                                                    {"add_a_bio": true});
+                                          },
+                                          icon: Icon(
+                                            Icons.message_outlined,
+                                            size: 35,
+                                          ),
+                                          label: "Add a bio",
+                                          buttonLabel: "Add Now",
+                                        )
+                                      : CheckedProfileCardHr(
+                                          child: ProfileCardHr(
+                                            onTap: () {
+                                              userAccountController
+                                                  .updateProfileStats(
+                                                      "users",
+                                                      firebaseAuth
+                                                          .currentUser!.uid,
+                                                      {"add_a_bio": false});
+                                            },
+                                            icon: Icon(
+                                              Icons.message_rounded,
+                                              size: 35,
+                                            ),
+                                            label: "Bio is added",
+                                            buttonLabel: "Edit",
+                                          ),
+                                        ),
+                                ]
                               ],
-                            );
-                          } else
-                            return SizedBox();
-                        }),
-                  ),
-// only if you want to disapper cards if both are true
-                  // userAccountController.user.profileDetails != true ||
-                  //         userAccountController.user.cvFile != true
-                  //     ?
-
-                  StreamBuilder<UserAccount>(
-                      stream: FirestoreHelper()
-                          .userAccountStream(firebaseAuth.currentUser!.uid),
-                      builder: (context, snapshot) {
-                        return Container(
-                          height: 200,
-                          child: ListView(
-                            padding: EdgeInsets.only(left: 20),
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              if (snapshot.connectionState ==
-                                  ConnectionState.active) ...[
-                                snapshot.data!.profileDetails != true
-                                    ? ProfileCardHr(
-                                        onTap: () {
-                                          userAccountController
-                                              .updateProfileStats(
-                                                  "users",
-                                                  firebaseAuth.currentUser!.uid,
-                                                  {"profile_details": true});
-                                        },
-                                        icon: Icon(
-                                          Icons.person_outline_rounded,
-                                          size: 35,
-                                        ),
-                                        buttonLabel: "See All",
-                                        label: "Details Info",
-                                      )
-                                    : CheckedProfileCardHr(
-                                        child: ProfileCardHr(
-                                          onTap: () {
-                                            userAccountController
-                                                .updateProfileStats(
-                                                    "users",
-                                                    firebaseAuth
-                                                        .currentUser!.uid,
-                                                    {"profile_details": false});
-                                          },
-                                          icon: Icon(
-                                            Icons.person_rounded,
-                                            size: 35,
-                                          ),
-                                          buttonLabel: "Edit",
-                                          label: "Personal Info is updated",
-                                        ),
-                                      ),
-                                snapshot.data!.cvFile != true
-                                    ? ProfileCardHr(
-                                        onTap: () {
-                                          userAccountController
-                                              .updateProfileStats(
-                                                  "users",
-                                                  firebaseAuth.currentUser!.uid,
-                                                  {"cv_file": true});
-                                        },
-                                        icon: Icon(
-                                          Icons.file_upload_outlined,
-                                          size: 35,
-                                        ),
-                                        buttonLabel: "Upload Now",
-                                        label: "Upload your cv",
-                                      )
-                                    : CheckedProfileCardHr(
-                                        child: ProfileCardHr(
-                                          onTap: () {
-                                            userAccountController
-                                                .updateProfileStats(
-                                                    "users",
-                                                    firebaseAuth
-                                                        .currentUser!.uid,
-                                                    {"cv_file": false});
-                                          },
-                                          icon: Icon(
-                                            Icons.file_upload,
-                                            size: 35,
-                                          ),
-                                          buttonLabel: "Edit",
-                                          label: "Your CV is uploaded.",
-                                        ),
-                                      ),
-                                snapshot.data!.addABio != true
-                                    ? ProfileCardHr(
-                                        onTap: () {
-                                          userAccountController
-                                              .updateProfileStats(
-                                                  "users",
-                                                  firebaseAuth.currentUser!.uid,
-                                                  {"add_a_bio": true});
-                                        },
-                                        icon: Icon(
-                                          Icons.message_outlined,
-                                          size: 35,
-                                        ),
-                                        label: "Add a bio",
-                                        buttonLabel: "Add Now",
-                                      )
-                                    : CheckedProfileCardHr(
-                                        child: ProfileCardHr(
-                                          onTap: () {
-                                            userAccountController
-                                                .updateProfileStats(
-                                                    "users",
-                                                    firebaseAuth
-                                                        .currentUser!.uid,
-                                                    {"add_a_bio": false});
-                                          },
-                                          icon: Icon(
-                                            Icons.message_rounded,
-                                            size: 35,
-                                          ),
-                                          label: "Bio is added",
-                                          buttonLabel: "Edit",
-                                        ),
-                                      ),
-                              ]
-                            ],
-                          ),
-                        );
-                      })
-                  // : SizedBox()
-                  ,
-                  ListTile(
-                    horizontalTitleGap: 7,
-                    minLeadingWidth: 0,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                    leading: Icon(Icons.settings),
-                    title: Text("Setting"),
-                    trailing: Icon(Icons.chevron_right_rounded),
-                  ),
-
-                  ListTile(
-                    horizontalTitleGap: 7,
-                    minLeadingWidth: 0,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                    leading: Icon(
-                      Icons.message_rounded,
-                      size: 25,
-                    ),
-                    title: Text("Help & Feedback"),
-                    trailing: Icon(Icons.chevron_right_rounded),
-                  ),
-
-                  Container(
-                    margin: EdgeInsets.only(top: 20),
-                    width: Get.width,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text("--- v 1.0.0 ---"),
-                        GetBuilder<AuthController>(
-                          builder: (controller) => TextButton(
-                            child: Text(
-                              "Sign Out",
-                              style: TextStyle(fontSize: 18),
                             ),
-                            onPressed: () {
-                              controller.signOut();
-                            },
+                          );
+                        })
+                    // : SizedBox()
+                    ,
+
+                    // Container(
+                    //   margin: EdgeInsets.symmetric(horizontal: 20),
+                    //   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    //   decoration: BoxDecoration(
+                    //       color: Colors.green,
+                    //       borderRadius: BorderRadius.circular(10)),
+                    //   child: Row(children: [
+                    //     Text(
+                    //       "Post a job",
+                    //       style: kLabelTextStyle.copyWith(color: Colors.white),
+                    //     ),
+                    //     Icon(Icons.edit_note_rounded),
+                    //   ]),
+                    // ),
+                    // ListTile(
+                    //   horizontalTitleGap: 7,
+                    //   minLeadingWidth: 0,
+                    //   contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                    //   leading: Icon(Icons.settings),
+                    //   title: Text("Setting"),
+                    //   trailing: Icon(Icons.chevron_right_rounded),
+                    // ),
+
+                    // ListTile(
+                    //   horizontalTitleGap: 7,
+                    //   minLeadingWidth: 0,
+                    //   contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                    //   leading: Icon(
+                    //     Icons.message_rounded,
+                    //     size: 25,
+                    //   ),
+                    //   title: Text("Help & Feedback"),
+                    //   trailing: Icon(Icons.chevron_right_rounded),
+                    // ),
+
+                    Container(
+                      margin: EdgeInsets.only(top: 20),
+                      width: Get.width,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text("--- v 1.0.0 ---"),
+                          GetBuilder<AuthController>(
+                            builder: (controller) => TextButton(
+                              child: Text(
+                                "Sign Out",
+                                style: TextStyle(fontSize: 18),
+                              ),
+                              onPressed: () {
+                                controller.signOut();
+                              },
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              );
-            },
+                        ],
+                      ),
+                    )
+                  ],
+                );
+              },
+            ),
           ),
         ),
-      ),
-    );
+        // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+        floatingActionButton: FloatingActionButton.extended(
+          elevation: 1,
+          highlightElevation: 2,
+          icon: Icon(Icons.edit_note),
+          label: Text("Post a job"),
+          backgroundColor: Colors.green,
+          onPressed: () {
+            Get.toNamed(RouteNames.postJob);
+          },
+        ));
   }
 }
 

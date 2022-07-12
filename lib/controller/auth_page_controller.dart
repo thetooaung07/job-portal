@@ -95,6 +95,7 @@ class AuthController extends GetxController {
               textColor: Colors.white,
               fontSize: 16.0)
           .then((value) => isLoading.value = false);
+      reset();
       // Get.offNamedUntil(RouteNames.home, (route) => false);
     } catch (e) {
       print(e);
@@ -128,6 +129,7 @@ class AuthController extends GetxController {
               fontSize: 16.0)
           .then((value) => isLoading.value = false);
       // Get.offNamedUntil(RouteNames.home, (route) => false);
+      reset();
     } catch (e) {
       print(e);
       await Fluttertoast.showToast(

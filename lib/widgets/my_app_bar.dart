@@ -8,12 +8,16 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? label;
   final bool? centerLabel;
   final List<Widget>? action;
+  final Color? backgroundColor;
+  final double? elevation;
   const MyAppBar(
       {Key? key,
       this.leading,
       this.label = "",
       this.centerLabel = true,
-      this.action})
+      this.action,
+      this.backgroundColor,
+      this.elevation = 0.75})
       : super(key: key);
 
   @override
@@ -28,8 +32,8 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         actions: action ?? null,
         centerTitle: centerLabel,
-        elevation: 0.75,
-        backgroundColor: Colors.white,
+        elevation: backgroundColor == Colors.transparent ? 0 : elevation,
+        backgroundColor: backgroundColor ?? Colors.white,
       ),
     );
   }

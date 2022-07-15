@@ -47,9 +47,15 @@ class PostJobPage extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               children: [
-                JobSection(),
-                JobSection(),
-                JobSection(),
+                JobSection(
+                  sectionTitle: "About Job",
+                ),
+                JobSection(
+                  sectionTitle: "About Job",
+                ),
+                JobSection(
+                  sectionTitle: "About Job",
+                ),
               ],
             ),
           ),
@@ -60,8 +66,10 @@ class PostJobPage extends StatelessWidget {
 }
 
 class JobSection extends StatelessWidget {
+  final String sectionTitle;
   const JobSection({
     Key? key,
+    required this.sectionTitle,
   }) : super(key: key);
 
   @override
@@ -80,25 +88,35 @@ class JobSection extends StatelessWidget {
             width: 7,
           ),
           Text(
-            "About Job",
+            sectionTitle,
             style: kLabelTextStyle.copyWith(fontWeight: FontWeight.w500),
           ),
         ]),
         SizedBox(
           height: 5,
         ),
-        WithLabelTFField(),
-        WithLabelTFField(),
-        WithLabelTFField(),
-        WithLabelTFField(),
+        WithLabelTFField(
+          label: "Skill Level",
+        ),
+        WithLabelTFField(
+          label: "Skill Level",
+        ),
+        WithLabelTFField(
+          label: "Skill Level",
+        ),
+        WithLabelTFField(
+          label: "Skill Level",
+        ),
       ],
     );
   }
 }
 
 class WithLabelTFField extends StatelessWidget {
+  final String label;
   const WithLabelTFField({
     Key? key,
+    required this.label,
   }) : super(key: key);
 
   @override
@@ -118,7 +136,7 @@ class WithLabelTFField extends StatelessWidget {
               height: Get.height,
               width: 120,
               child: Text(
-                "Skill Level" + " :",
+                label + " :",
                 style: TextStyle(fontSize: 18, color: Colors.black),
               )),
           Expanded(

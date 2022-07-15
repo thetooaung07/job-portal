@@ -11,6 +11,7 @@ class JobModel {
   String workHour = ""; // 9 to 5
   String minSalary = ""; // Min - Max
   String maxSalary = ""; // Min - Max
+  String companyLogo = "";
   List<String> responsibilities = [];
   List<String> requirements = [];
 
@@ -25,6 +26,7 @@ class JobModel {
       required this.minSalary,
       required this.maxSalary,
       required this.responsibilities,
+      required this.companyLogo,
       required this.requirements,
       required this.techSkills});
 
@@ -38,6 +40,7 @@ class JobModel {
     jobType = doc["jobType"];
     minSalary = doc["minSalary"];
     maxSalary = doc["maxSalary"];
+    companyLogo = doc["companyLogo"];
     responsibilities = doc["responsibilities"];
     requirements = doc["requirements"];
     techSkills = doc["techSkills"];
@@ -55,5 +58,6 @@ class JobModel {
         "requirements": requirements,
         "techSkills": techSkills,
         "jobType": jobType,
+        "companyLogo": companyLogo,
       };
 }

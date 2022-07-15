@@ -176,20 +176,31 @@ class LoginPage extends GetView<AuthController> {
                             ),
                             ClipRRect(
                               borderRadius: BorderRadius.circular(10),
-                              child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Colors.black,
-                                    padding: EdgeInsets.symmetric(vertical: 20),
-                                  ),
-                                  onPressed: () {
-                                    controller.goLogin();
-                                  },
-                                  child: Center(
-                                    child: Text(
-                                      "Log In",
-                                      style: TextStyle(fontSize: 20),
+                              child: SizedBox(
+                                height: 55,
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.black,
+                                      // padding: EdgeInsets.symmetric(vertical: 20),
                                     ),
-                                  )),
+                                    onPressed: () {
+                                      controller.goLogin();
+                                    },
+                                    child: Obx(
+                                      () => Center(
+                                        child: controller.isLoading == true
+                                            ? SizedBox(
+                                                height: 30,
+                                                width: 30,
+                                                child:
+                                                    CircularProgressIndicator())
+                                            : Text(
+                                                "Log In",
+                                                style: TextStyle(fontSize: 20),
+                                              ),
+                                      ),
+                                    )),
+                              ),
                             )
                           ],
                         ),

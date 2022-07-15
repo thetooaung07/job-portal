@@ -23,17 +23,7 @@ class AccountPage extends StatelessWidget {
         appBar: MyAppBar(
           label: "Profile",
           action: [
-            Container(
-              margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
-              child: CustomIconButton(
-                onTap: () {},
-                child: Icon(
-                  Icons.more_vert_rounded,
-                  size: 30,
-                  color: Colors.black,
-                ),
-              ),
-            ),
+            StyledPopupMenuBtn(),
           ],
         ),
         body: SafeArea(
@@ -281,45 +271,29 @@ class AccountPage extends StatelessWidget {
                     //     Icon(Icons.edit_note_rounded),
                     //   ]),
                     // ),
-                    // ListTile(
-                    //   horizontalTitleGap: 7,
-                    //   minLeadingWidth: 0,
-                    //   contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                    //   leading: Icon(Icons.settings),
-                    //   title: Text("Setting"),
-                    //   trailing: Icon(Icons.chevron_right_rounded),
-                    // ),
 
-                    // ListTile(
-                    //   horizontalTitleGap: 7,
-                    //   minLeadingWidth: 0,
-                    //   contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                    //   leading: Icon(
-                    //     Icons.message_rounded,
-                    //     size: 25,
-                    //   ),
-                    //   title: Text("Help & Feedback"),
-                    //   trailing: Icon(Icons.chevron_right_rounded),
-                    // ),
+                    ListTile(
+                      horizontalTitleGap: 7,
+                      minLeadingWidth: 0,
+                      contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                      leading: Icon(
+                        Icons.message_rounded,
+                        size: 25,
+                      ),
+                      title: Text("Help & Feedback"),
+                      trailing: Icon(Icons.chevron_right_rounded),
+                    ),
 
                     Container(
-                      margin: EdgeInsets.only(top: 20),
+                      margin: EdgeInsets.only(top: 10, left: 20, right: 20),
                       width: Get.width,
-                      child: Column(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text("--- v 1.0.0 ---"),
-                          GetBuilder<AuthController>(
-                            builder: (controller) => TextButton(
-                              child: Text(
-                                "Sign Out",
-                                style: TextStyle(fontSize: 18),
-                              ),
-                              onPressed: () {
-                                controller.signOut();
-                              },
-                            ),
-                          ),
+                          Text(
+                            "version 1.0",
+                          )
                         ],
                       ),
                     )
@@ -329,17 +303,84 @@ class AccountPage extends StatelessWidget {
             ),
           ),
         ),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+        // floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
         floatingActionButton: FloatingActionButton.extended(
-          elevation: 1,
-          highlightElevation: 2,
-          icon: Icon(Icons.edit_note),
-          label: Text("Post a job"),
-          backgroundColor: Colors.green,
+          elevation: 5,
+          highlightElevation: 8,
+          icon: Icon(
+            Icons.edit_note,
+            color: Colors.black,
+          ),
+          label: Text(
+            "Post a job",
+            style: TextStyle(color: Colors.black),
+          ),
+          backgroundColor: Colors.white,
           onPressed: () {
             Get.toNamed(RouteNames.postJob);
           },
         ));
+  }
+}
+
+class StyledPopupMenuBtn extends StatelessWidget {
+  const StyledPopupMenuBtn({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Theme(
+      data: ThemeData(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+      ),
+      child: PopupMenuButton<dynamic>(
+        splashRadius: 0,
+        // color: Colors.transparent,
+        elevation: 0,
+        position: PopupMenuPosition.under,
+        child: Container(
+          margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+          child: CustomIconButton(
+            // onTap: () {},
+            child: Icon(
+              Icons.more_vert_rounded,
+              size: 30,
+              color: Colors.black,
+            ),
+          ),
+        ),
+        itemBuilder: (context) => [
+          PopupMenuItem(
+            child: ListTile(
+              leading: Icon(Icons.settings),
+              title: Text("Settings"),
+            ),
+          ),
+          PopupMenuItem(
+            child: ListTile(
+              leading: Icon(Icons.edit),
+              title: Text("Edit Profile"),
+            ),
+          ),
+          PopupMenuDivider(),
+          PopupMenuItem(
+            child: GetBuilder<AuthController>(
+              builder: (controller) => ElevatedButton(
+                style: ElevatedButton.styleFrom(primary: Colors.black),
+                child: Text(
+                  "Sign Out",
+                ),
+                onPressed: () {
+                  controller.signOut();
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 

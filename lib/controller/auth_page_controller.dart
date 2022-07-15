@@ -65,6 +65,7 @@ class AuthController extends GetxController {
     // validate ? add User : show error.
     // if (signUpForm?.currentState?.validate() != true) return;
     cPassFocusNode.unfocus();
+    isLoading.value = true;
     try {
       //authenticate user
       UserCredential _cre = await firebaseAuth.createUserWithEmailAndPassword(
@@ -87,8 +88,8 @@ class AuthController extends GetxController {
         // user created successfully
         Get.find<UserAccountController>().user = user;
       }
-      ;
 
+      isLoading.value = false;
       await Fluttertoast.showToast(
               msg: "Success",
               backgroundColor: Colors.green,
@@ -121,7 +122,7 @@ class AuthController extends GetxController {
 
       Get.find<UserAccountController>().user =
           await FirestoreHelper().getUser(_cre.user!.uid);
-
+      isLoading.value = false;
       await Fluttertoast.showToast(
               msg: "Success",
               backgroundColor: Colors.green,
@@ -132,6 +133,7 @@ class AuthController extends GetxController {
       reset();
     } catch (e) {
       print(e);
+      isLoading.value = false;
       await Fluttertoast.showToast(
               toastLength: Toast.LENGTH_LONG,
               msg: e.toString(),

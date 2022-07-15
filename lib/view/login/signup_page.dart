@@ -281,20 +281,31 @@ class SignUpPage extends GetView<AuthController> {
                             ),
                             ClipRRect(
                               borderRadius: BorderRadius.circular(10),
-                              child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Colors.black,
-                                    padding: EdgeInsets.symmetric(vertical: 20),
-                                  ),
-                                  onPressed: () {
-                                    controller.goSignUp();
-                                  },
-                                  child: Center(
-                                    child: Text(
-                                      "Sign Up",
-                                      style: TextStyle(fontSize: 20),
+                              child: SizedBox(
+                                height: 55,
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.black,
+                                      // padding: EdgeInsets.symmetric(vertical: 20),
                                     ),
-                                  )),
+                                    onPressed: () {
+                                      controller.goSignUp();
+                                    },
+                                    child: Obx(
+                                      () => Center(
+                                        child: controller.isLoading == true
+                                            ? SizedBox(
+                                                height: 30,
+                                                width: 30,
+                                                child:
+                                                    CircularProgressIndicator())
+                                            : Text(
+                                                "Sign Up",
+                                                style: TextStyle(fontSize: 20),
+                                              ),
+                                      ),
+                                    )),
+                              ),
                             )
                           ],
                         ),

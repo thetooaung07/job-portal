@@ -65,3 +65,7 @@ Main Page Replace leading Icon with something
 
 
 Change Stream connection.active in AccountPage
+
+
+connect Firestore with JobPost 
+Remove dummy data youtube card from main screen and replace with actual job post

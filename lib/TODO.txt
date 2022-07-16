@@ -62,3 +62,6 @@ otn-pub
 
 AccountPage PopUpMenuItem
 Main Page Replace leading Icon with something
+
+
+Change Stream connection.active in AccountPage

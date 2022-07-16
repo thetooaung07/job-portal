@@ -87,7 +87,7 @@ class AccountPage extends StatelessWidget {
                     //  Complete Your Profile
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 20),
+                          horizontal: 20.0, vertical: 15),
                       child: StreamBuilder<UserAccount>(
                           stream: FirestoreHelper()
                               .userAccountStream(firebaseAuth.currentUser!.uid),
@@ -104,8 +104,26 @@ class AccountPage extends StatelessWidget {
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                      "Complete Your Profile (${userAccountController.calculate(profileStats)}/${profileStats.length})"),
+                                  Row(
+                                    children: [
+                                      RichText(
+                                        text: TextSpan(
+                                            style:
+                                                TextStyle(color: Colors.black),
+                                            text: "Complete Your Profile ",
+                                            children: [
+                                              TextSpan(
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: kPrimaryRedColor),
+                                                  text:
+                                                      "( ${userAccountController.calculate(profileStats)} / ${profileStats.length} )"),
+                                            ]),
+                                      ),
+                                    ],
+                                  ),
+                                  // Text(
+                                  //     "Complete Your Profile (${userAccountController.calculate(profileStats)}/${profileStats.length})"),
                                   SizedBox(
                                     height: 10,
                                   ),
@@ -127,7 +145,8 @@ class AccountPage extends StatelessWidget {
                     ),
 // only if you want to disapper cards if both are true
                     // userAccountController.user.profileDetails != true ||
-                    //         userAccountController.user.cvFile != true
+                    //         userAccountController.user.cvFile != true ||
+                    //         userAccountController.user.addABio != true
                     //     ?
 
                     StreamBuilder<UserAccount>(
@@ -255,22 +274,8 @@ class AccountPage extends StatelessWidget {
                           );
                         })
                     // : SizedBox()
-                    ,
 
-                    // Container(
-                    //   margin: EdgeInsets.symmetric(horizontal: 20),
-                    //   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    //   decoration: BoxDecoration(
-                    //       color: Colors.green,
-                    //       borderRadius: BorderRadius.circular(10)),
-                    //   child: Row(children: [
-                    //     Text(
-                    //       "Post a job",
-                    //       style: kLabelTextStyle.copyWith(color: Colors.white),
-                    //     ),
-                    //     Icon(Icons.edit_note_rounded),
-                    //   ]),
-                    // ),
+                    ,
 
                     ListTile(
                       horizontalTitleGap: 7,
@@ -336,9 +341,11 @@ class StyledPopupMenuBtn extends StatelessWidget {
         highlightColor: Colors.transparent,
       ),
       child: PopupMenuButton<dynamic>(
+        padding: EdgeInsets.all(2),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         splashRadius: 0,
         // color: Colors.transparent,
-        elevation: 0,
+        elevation: 5,
         position: PopupMenuPosition.under,
         child: Container(
           margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
@@ -353,28 +360,37 @@ class StyledPopupMenuBtn extends StatelessWidget {
         ),
         itemBuilder: (context) => [
           PopupMenuItem(
+            padding: EdgeInsets.symmetric(horizontal: 0),
             child: ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 20),
+              minLeadingWidth: 10,
               leading: Icon(Icons.settings),
               title: Text("Settings"),
             ),
           ),
           PopupMenuItem(
+            padding: EdgeInsets.symmetric(horizontal: 0),
             child: ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 20),
+              minLeadingWidth: 10,
               leading: Icon(Icons.edit),
               title: Text("Edit Profile"),
             ),
           ),
           PopupMenuDivider(),
           PopupMenuItem(
+            padding: EdgeInsets.symmetric(horizontal: 0),
             child: GetBuilder<AuthController>(
-              builder: (controller) => ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.black),
-                child: Text(
-                  "Sign Out",
-                ),
-                onPressed: () {
+              builder: (controller) => ListTile(
+                contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                minLeadingWidth: 10,
+                iconColor: Colors.red,
+                textColor: Colors.red,
+                onTap: () {
                   controller.signOut();
                 },
+                leading: Icon(Icons.logout_outlined),
+                title: Text("Sign Out"),
               ),
             ),
           ),

@@ -16,10 +16,10 @@ class UserAccountController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
     if (firebaseAuth.currentUser != null)
       _userAccount.bindStream(
           FirestoreHelper().userAccountStream(firebaseAuth.currentUser!.uid));
-    super.onInit();
   }
 
   int calculate(Map profileStats) {
@@ -40,7 +40,5 @@ class UserAccountController extends GetxController {
     // update partially
     await FirestoreHelper()
         .update(collectionPath: collectionPath, docPath: docPath, data: data);
-
-    // calculate();
   }
 }

@@ -54,7 +54,7 @@ routes() => [
       GetPage(
         name: RouteNames.home,
         // binding: HomePageBinding(),
-        page: () => const PostJobPage(), // !TODO to change back
+        page: () => const HomePage(), // !TODO to change back
       ),
       GetPage(
         name: RouteNames.popularJobs,

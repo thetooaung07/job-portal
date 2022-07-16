@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
-import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
+import 'package:job_portal/controller/job_controller.dart';
 import 'package:job_portal/main.dart';
-import 'package:job_portal/routes/routes.dart';
+import 'package:job_portal/widgets/custom_expansion_tile.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
-class PostJobPage extends StatelessWidget {
+class PostJobPage extends GetView<JobController> {
   const PostJobPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Get.put(JobController());
+
+    int maxLines = 7;
+
     return Scaffold(
       backgroundColor: themeBgMainColor,
       appBar: MyAppBar(
@@ -31,9 +35,9 @@ class PostJobPage extends StatelessWidget {
           Container(
             margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
             child: CustomIconButton(
-              onTap: (() => Get.toNamed(RouteNames.search)),
+              onTap: () {},
               child: Icon(
-                Icons.search_rounded,
+                Icons.clear_all_rounded,
                 size: 30,
                 color: Colors.black,
               ),
@@ -47,21 +51,45 @@ class PostJobPage extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               children: [
+                // Container(
+                //   margin: EdgeInsets.symmetric(vertical: 20),
+                //   child: Text(
+                //     "Job Description",
+                //     style: kCaptionTextStyle,
+                //   ),
+                // ),
                 JobSection(
-                  sectionTitle: "Applicant Profile",
-                  sectionIcon: Icon(Icons.person),
+                  sectionIcon: Icon(Icons.local_activity_outlined),
+                  sectionTitle: 'About Position',
                   children: [
                     WithLabelTFField(
                       label: "Title",
-                    ),
-                    WithLabelTFField(
-                      label: "Experience Level",
+                      controller: controller.titleC,
                     ),
                     WithLabelTFField(
                       label: "Tech Skills",
+                      controller: controller.techSkillC,
                     ),
                     WithLabelTFField(
+                      controller: controller.expLevelC,
+                      label: "Experience Level",
+                    ),
+                    //!TODO Change UI for Salary
+
+                    WithLabelTFField(
+                      controller: controller.salaryC,
                       label: "Salary",
+                      hintText: "1200 - 1500",
+                      extendedWidget: Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("in USD"),
+                            Text("per month"),
+                          ],
+                        ),
+                      ),
                     ),
                     SizedBox(
                       height: 10,
@@ -73,15 +101,19 @@ class PostJobPage extends StatelessWidget {
                   sectionIcon: Icon(Icons.work),
                   children: [
                     WithLabelTFField(
+                      controller: controller.companyLocationC,
                       label: "Location",
                     ),
                     WithLabelTFField(
+                      controller: controller.companyNameC,
                       label: "Name",
                     ),
                     WithLabelTFField(
+                      controller: controller.companyWebsiteC,
                       label: "Website",
                     ),
                     WithLabelTFField(
+                      controller: controller.companyContactMailC,
                       label: "Contact Email",
                     ),
                     SizedBox(
@@ -89,11 +121,20 @@ class PostJobPage extends StatelessWidget {
                     ),
                   ],
                 ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 20),
+                  child: Text(
+                    "Job Description",
+                    style: kCaptionTextStyle,
+                  ),
+                ),
                 JobSection(
-                  sectionTitle: "Job Description",
+                  sectionIcon: Icon(Icons.event_note_rounded),
+                  sectionTitle: "Requirements",
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 5.0, bottom: 10),
+                      padding: const EdgeInsets.only(
+                          top: 5.0, bottom: 10, left: 10, right: 10),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -102,7 +143,7 @@ class PostJobPage extends StatelessWidget {
                             size: 20,
                           ),
                           SizedBox(
-                            width: 10,
+                            width: 5,
                           ),
                           Expanded(
                             child: Text(
@@ -114,11 +155,90 @@ class PostJobPage extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      height: 24 * 5,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      height: 30 * maxLines.toDouble(),
                       child: TextField(
-                        style: TextStyle(fontSize: 16),
-                        maxLines: 5,
+                        controller: controller.requirementsC,
+                        style: TextStyle(fontSize: 17),
+                        maxLines: maxLines,
                         decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 2, color: Colors.black45),
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 2, color: Colors.transparent),
+                            ),
+                            // focusedBorder: InputBorder.none,
+                            // enabledBorder: InputBorder.none,
+                            // errorBorder: InputBorder.none,
+                            // disabledBorder: InputBorder.none,
+                            hintStyle: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: 16,
+                              color: Colors.black26,
+                            ),
+                            hintText: "Enter Job Description",
+                            fillColor: Colors.white,
+                            filled: true),
+                      ),
+                    ),
+                  ],
+                ),
+                JobSection(
+                  sectionIcon: Icon(Icons.event_available_rounded),
+                  sectionTitle: "Responsibilities",
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 5.0, bottom: 10, left: 10, right: 10),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.error_outline_rounded,
+                            size: 20,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Expanded(
+                            child: Text(
+                              "Please add full-stop(.) at the end of each sentence\nor press enter to move to next line",
+                              style: TextStyle(fontSize: 14),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      height: 30 * maxLines.toDouble(),
+                      child: TextField(
+                        controller: controller.responsibilitiesC,
+                        style: TextStyle(fontSize: 17),
+                        maxLines: maxLines,
+                        decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 2, color: Colors.black45),
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 2, color: Colors.transparent),
+                            ),
+                            // focusedBorder: InputBorder.none,
+                            // enabledBorder: InputBorder.none,
+                            // errorBorder: InputBorder.none,
+                            // disabledBorder: InputBorder.none,
+                            hintStyle: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: 16,
+                              color: Colors.black26,
+                            ),
                             hintText: "Enter Job Description",
                             fillColor: Colors.white,
                             filled: true),
@@ -151,7 +271,7 @@ class JobSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
         // borderRadius: BorderRadius.circular(20),
         color: Color.fromARGB(26, 204, 204, 204),
@@ -179,8 +299,14 @@ class JobSection extends StatelessWidget {
 
 class WithLabelTFField extends StatelessWidget {
   final String label;
+  final TextEditingController? controller;
+  final String? hintText;
+  final Widget? extendedWidget;
   const WithLabelTFField({
     Key? key,
+    this.controller,
+    this.hintText,
+    this.extendedWidget,
     required this.label,
   }) : super(key: key);
 
@@ -212,6 +338,7 @@ class WithLabelTFField extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 5.0),
               child: TextFormField(
+                controller: controller,
                 textAlignVertical: TextAlignVertical.center,
                 style: TextStyle(
                   fontSize: 18,
@@ -226,7 +353,7 @@ class WithLabelTFField extends StatelessWidget {
                   disabledBorder: InputBorder.none,
                   filled: true,
                   fillColor: Colors.transparent,
-                  hintText: label,
+                  hintText: hintText ?? label,
                   hintStyle: TextStyle(
                     fontWeight: FontWeight.normal,
                     fontSize: 18,
@@ -236,6 +363,7 @@ class WithLabelTFField extends StatelessWidget {
               ),
             ),
           ),
+          extendedWidget ?? SizedBox(),
         ],
       ),
     );

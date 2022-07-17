@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/global.dart';
 import 'package:job_portal/model/job_post_model.dart';
+import 'package:job_portal/model/user_jobPosts_model.dart';
 import 'package:job_portal/services/database.dart';
 
 class JobController extends GetxController {
@@ -78,11 +81,25 @@ class JobController extends GetxController {
     DocumentReference doc =
         await firebaseFirestore.collection("jobPosts").doc();
     String documentID = doc.id;
-    docIdList.add(documentID);
-
-    print(documentID);
+    // docIdList.add(documentID);
 
     await FirestoreHelper().create(
         collectionPath: "jobPosts", docPath: documentID, data: _job.toJson());
+    print(documentID);
+
+    UserJobPostsModel _uJP = new UserJobPostsModel(
+        postId: documentID, isExpired: false, createdAt: DateTime.now());
+
+    await FirestoreHelper().create(
+      collectionPath: "user_jobPosts",
+      docPath: loginUserID,
+      data: _uJP.toFirestore(),
+    );
+
+    await Fluttertoast.showToast(
+        msg: "Success",
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0);
   }
 }

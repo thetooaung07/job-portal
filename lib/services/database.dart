@@ -50,6 +50,17 @@ class FirestoreHelper {
     }
   }
 
+  // add more or merge into Existing Data
+  Future<void> mergeData({
+    required String collectionPath,
+    required Map<String, dynamic> data,
+    String? docPath,
+  }) =>
+      firebaseFirestore
+          .collection(collectionPath)
+          .doc(docPath)
+          .set(data, SetOptions(merge: true));
+
 //delete
   Future<void> delete({
     required String collectionPath,

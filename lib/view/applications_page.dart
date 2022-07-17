@@ -105,7 +105,7 @@ class ApplicationCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SvgPicture.asset(
-                    "assets/logos/logo_youtube.svg",
+                    "assets/icons/logo_youtube.svg",
                     height: 60,
                     width: 60,
                   ),

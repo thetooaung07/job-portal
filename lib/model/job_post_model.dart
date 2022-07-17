@@ -49,7 +49,6 @@ class JobPostModel {
 
   Map<String, dynamic> toJson() => {
         "title": title,
-        // "jobPosition": jobPosition,
         "expLevel": expLevel,
         "companyName": companyName,
         "companyWebsite": companyWebsite,

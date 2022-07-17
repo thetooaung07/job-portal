@@ -44,7 +44,7 @@ class JobPostCardVt extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SvgPicture.asset(
-                        "assets/logos/logo_youtube.svg",
+                        "assets/icons/logo_youtube.svg",
                         height: 50,
                         width: 50,
                       ),

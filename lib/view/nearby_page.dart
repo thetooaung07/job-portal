@@ -53,7 +53,7 @@ class NearbyPage extends StatelessWidget {
                   height: 300,
                   width: 300,
                   child: SvgPicture.asset(
-                    "assets/logos/current_dev.svg",
+                    "assets/icons/current_dev.svg",
                     width: 300,
                     height: 300,
                   ),

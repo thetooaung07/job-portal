@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:job_portal/model/job_model.dart';
+import 'package:job_portal/global.dart';
+import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/services/database.dart';
 
 class JobController extends GetxController {
@@ -14,6 +16,21 @@ class JobController extends GetxController {
   TextEditingController companyContactMailC = new TextEditingController();
   TextEditingController requirementsC = new TextEditingController();
   TextEditingController responsibilitiesC = new TextEditingController();
+
+  RxList docIdList = <String>[].obs;
+
+  void printController() {
+    print(titleC.text);
+    print(expLevelC.text);
+    print(techSkillC.text);
+    print(salaryC.text);
+    print(companyLocationC.text);
+    print(companyNameC.text);
+    print(companyWebsiteC.text);
+    print(companyContactMailC.text);
+    print(requirementsC.text);
+    print(responsibilitiesC.text);
+  }
 
   void clear() {
     titleC.clear();
@@ -43,7 +60,29 @@ class JobController extends GetxController {
     super.onClose();
   }
 
-  //  createJobPost() {
-  //     FirestoreHelper().create(collectionPath: "jobPosts",docPath: "",  data: data)
-  // }
+  Future createJobPost() async {
+    JobPostModel _job = new JobPostModel(
+        title: titleC.text,
+        postedBy: firebaseAuth.currentUser!.email.toString(),
+        expLevel: expLevelC.text,
+        companyName: companyNameC.text,
+        companyLocation: companyLocationC.text,
+        companyWebsite: companyWebsiteC.text,
+        salary: salaryC.text,
+        responsibilities: [responsibilitiesC.text],
+        companyContactMail: companyContactMailC.text,
+        requirements: [requirementsC.text],
+        techSkill: [techSkillC.text],
+        createdAt: DateTime.now());
+
+    DocumentReference doc =
+        await firebaseFirestore.collection("jobPosts").doc();
+    String documentID = doc.id;
+    docIdList.add(documentID);
+
+    print(documentID);
+
+    await FirestoreHelper().create(
+        collectionPath: "jobPosts", docPath: documentID, data: _job.toJson());
+  }
 }

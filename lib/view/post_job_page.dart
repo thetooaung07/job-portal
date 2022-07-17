@@ -245,6 +245,20 @@ class PostJobPage extends GetView<JobController> {
                       ),
                     ),
                   ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () => controller.printController(),
+                        child: Text("Print")),
+                    ElevatedButton(
+                        onPressed: () => controller.createJobPost(),
+                        child: Text("Post")),
+                    ElevatedButton(
+                        onPressed: () => controller.clear(),
+                        child: Text("Clear")),
+                  ],
                 )
               ],
             ),

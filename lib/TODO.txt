@@ -71,4 +71,7 @@ connect Firestore with JobPost
 Remove dummy data youtube card from main screen and replace with actual job post
 
 
-Find a bug where stream is not fetching dataArray according to it's length;
+Find a bug where stream is not fetching dataArray according to it's length; => done
+
+
+Check loading animation and also placement in top_companies

@@ -8,7 +8,7 @@ import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/model/user_jobPosts_model.dart';
 import 'package:job_portal/services/database.dart';
 
-class JobController extends GetxController {
+class JobCreateController extends GetxController {
   TextEditingController titleC = new TextEditingController();
   TextEditingController expLevelC = new TextEditingController();
   TextEditingController techSkillC = new TextEditingController();

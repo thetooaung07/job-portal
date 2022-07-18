@@ -13,3 +13,7 @@ final AuthService authService = AuthService();
 //   "cvFile",
 //   "profileDetails",
 // ];
+
+void customPrint(dynamic title, dynamic res) {
+  print(" $title => ${res}");
+}

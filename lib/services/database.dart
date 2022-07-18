@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:job_portal/global.dart';
+import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/model/user_account.dart';
 
 class FirestoreHelper {
@@ -101,6 +102,17 @@ class FirestoreHelper {
       print(e);
       rethrow;
     }
+  }
+
+  Stream<List<JobPostModel>> jobPostsStream() {
+    return firebaseFirestore.collection("jobPosts").snapshots().map((event) {
+      List<JobPostModel> dataList = [];
+      event.docs.forEach((element) {
+        dataList.add(JobPostModel.fromDocumentSnapshot(element));
+      });
+
+      return dataList;
+    });
   }
 
   Stream<UserAccount> userAccountStream(String userId) {

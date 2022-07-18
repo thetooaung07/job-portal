@@ -59,7 +59,7 @@ class NearbyPage extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "This Page is still in Development",
+                  "This Section is still in Development",
                   style: kHeaderTextStyle.copyWith(color: Colors.black54),
                 ),
               ],

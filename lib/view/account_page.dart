@@ -41,7 +41,8 @@ class AccountPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CircleAvatar(
-                            backgroundColor: kPrimaryRedColor,
+                            backgroundImage: AssetImage("assets/app_logo.png"),
+                            backgroundColor: Colors.transparent,
                             radius: 50,
                           ),
                           SizedBox(

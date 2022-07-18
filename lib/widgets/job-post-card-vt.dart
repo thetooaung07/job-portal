@@ -20,7 +20,7 @@ class JobPostCardVt extends StatelessWidget {
     return GestureDetector(
       onTap: () => Get.toNamed(RouteNames.jobDetails),
       child: Container(
-        padding: EdgeInsets.fromLTRB(15, 0, 15, 5),
+        padding: EdgeInsets.fromLTRB(15, 0, 0, 5),
         margin: EdgeInsets.only(
             left: kSpacingUnit * 1.5,
             right: kSpacingUnit * 1.5,
@@ -43,16 +43,23 @@ class JobPostCardVt extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SvgPicture.asset(
-                        "assets/icons/logo_youtube.svg",
+                      Container(
+                        color: Colors.black,
                         height: 50,
                         width: 50,
+                        alignment: Alignment.center,
+                        child: Image.asset('assets/app_logo.png'),
                       ),
+                      // SvgPicture.asset(
+                      //   "assets/icons/logo_youtube.svg",
+                      //   height: 50,
+                      //   width: 50,
+                      // ),
                       SizedBox(
                         width: 20,
                       ),
                       SizedBox(
-                        height: 65,
+                        height: 60,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,23 +93,26 @@ class JobPostCardVt extends StatelessWidget {
                               },
                               child: controller.isFavourite.value
                                   ? Icon(
-                                      Icons.favorite_rounded,
-                                      color: kPrimaryRedColor,
+                                      Icons.bookmark_rounded,
+                                      color: Colors.black87,
                                     )
                                   : Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.bookmark_border_rounded,
                                       color: Colors.black45,
                                     ),
                             ),
                           )
                         : SizedBox(),
                     SizedBox(
-                      height: 10,
+                      height: 13,
                     ),
-                    Text(
-                      "\$1299/Mo",
-                      style: kLabelTextStyle.copyWith(
-                          color: kPrimaryRedColor, fontSize: 18),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 15),
+                      child: Text(
+                        "\$1299/Mo",
+                        style: kLabelTextStyle.copyWith(
+                            color: kPrimaryRedColor, fontSize: 18),
+                      ),
                     ),
                   ],
                 )
@@ -126,7 +136,10 @@ class JobPostCardVt extends StatelessWidget {
                     Text("Mid-Senior"),
                   ],
                 ),
-                Text("${bullet}23 min ago")
+                Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: Text("${bullet}23 min ago"),
+                ),
               ],
             ),
           ],

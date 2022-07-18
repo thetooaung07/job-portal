@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
-import 'package:job_portal/controller/job_controller.dart';
+import 'package:job_portal/controller/job_create_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/widgets/custom_expansion_tile.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
-class PostJobPage extends GetView<JobController> {
+class PostJobPage extends GetView<JobCreateController> {
   const PostJobPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Get.put(JobController());
+    Get.put(JobCreateController());
 
     int maxLines = 7;
 

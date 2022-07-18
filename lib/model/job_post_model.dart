@@ -1,24 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class JobPostModel {
-  String title = "";
-  // String jobPosition = ""; // Eg. Developer, IT Support, UI/UX Designer
-  String expLevel = ""; // Eg. Mid-Level, Intern, Senior;
-  List<String> techSkill = []; // Eg. Mid-Level, Intern, Senior;
-  String companyLocation = ""; // WFH or on Campus,
-  String companyName = ""; // US,
-  String companyWebsite = ""; // 9 to 5
-  String salary = ""; // Min - Max
-  String companyContactMail = "";
-  List<String> responsibilities = [];
-  List<String> requirements = [];
-  String postedBy = "";
-  DateTime createdAt = DateTime.now();
+  late String title;
+  // String jobPosition ; // Eg. Developer, IT Support, UI/UX Designer
+  late String expLevel; // Eg. Mid-Level, Intern, Senior;
+  late String companyLocation; // WFH or on Campus,
+  late String companyName; // US,
+  late String companyWebsite; // 9 to 5
+  late String salary; // Min - Max
+  late String postedBy;
+  late String companyContactMail;
+  late List responsibilities;
+  late List requirements;
+  late List techSkill; // Eg. Mid-Level, Intern, Senior;
+  late DateTime? createdAt;
 
   JobPostModel({
     required this.title,
     required this.postedBy,
-    // required this.jobPosition,
+    //  this.jobPosition,
     required this.expLevel,
     required this.companyName,
     required this.companyLocation,
@@ -33,17 +33,17 @@ class JobPostModel {
 
   JobPostModel.fromDocumentSnapshot(DocumentSnapshot doc) {
     title = doc["title"];
-    postedBy = doc["postedBy"];
-    // jobPosition = doc["jobPosition"];
+    postedBy = doc.id;
     expLevel = doc["expLevel"];
     companyName = doc["companyName"];
-    companyWebsite = doc["companyWebsite"];
     companyLocation = doc["companyLocation"];
+    companyWebsite = doc["companyWebsite"];
     salary = doc["salary"];
     companyContactMail = doc["companyContactMail"];
-    responsibilities = doc["responsibilities"];
-    requirements = doc["requirements"];
-    techSkill = doc["techSkills"];
+    // responsibilities = (doc["responsibilities"] as List).map((e) => ).toList();
+    requirements = doc["requirements"] as List;
+    responsibilities = doc["responsibilities"] as List;
+    techSkill = doc["techSkills"] as List;
     createdAt = (doc['createdAt'] as Timestamp).toDate();
   }
 

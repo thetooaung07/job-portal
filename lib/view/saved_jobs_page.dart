@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/main.dart';
+import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/job-post-card-vt.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
@@ -68,14 +69,14 @@ class DismissibleJobPostCard extends StatelessWidget {
         // TODO: remove Item on dismiss
       },
       background: Container(
-        // margin: EdgeInsets.symmetric(horizontal: 15),
+        margin: EdgeInsets.only(bottom: 15),
         // padding: EdgeInsets.only(right: 20),
         alignment: Alignment.centerRight,
         color: Colors.transparent,
         child: Container(
-          padding: EdgeInsets.fromLTRB(25, 25, 15, 25),
+          padding: EdgeInsets.fromLTRB(30, 25, 20, 25),
           decoration: BoxDecoration(
-              color: kPrimaryRedColor,
+              color: Colors.black,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20),
                 bottomLeft: Radius.circular(20),
@@ -89,6 +90,7 @@ class DismissibleJobPostCard extends StatelessWidget {
       ),
       child: JobPostCardVt(
         includeSave: true,
+        data: null,
       ),
     );
   }

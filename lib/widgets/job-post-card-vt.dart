@@ -24,7 +24,7 @@ class JobPostCardVt extends StatelessWidget {
   Widget build(BuildContext context) {
     final SavedJobsPageController savedJobsPagecontroller =
         Get.put(SavedJobsPageController());
-    customPrint(data!.postedBy, data!.postedBy);
+    // customPrint(data!.postedBy, data!.postedBy);
     return GestureDetector(
       onTap: () => Get.toNamed(RouteNames.jobDetails),
       child: Container(
@@ -52,11 +52,10 @@ class JobPostCardVt extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        color: Colors.black,
                         height: 50,
                         width: 50,
                         alignment: Alignment.center,
-                        child: Image.asset('assets/app_logo.png'),
+                        child: Image.asset('assets/images/default.png'),
                       ),
                       // SvgPicture.asset(
                       //   "assets/icons/logo_youtube.svg",

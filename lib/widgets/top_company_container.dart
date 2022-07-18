@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:job_portal/controller/job_posts_controller.dart';
 import 'package:job_portal/widgets/job-post-card-hr.dart';
 import 'package:job_portal/widgets/showAllTextBanner.dart';
 import 'package:job_portal/routes/routes.dart';
@@ -22,15 +23,28 @@ class TopCompanyContainer extends StatelessWidget {
         Container(
           padding: EdgeInsets.only(left: 10),
           height: 210,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 5,
-            itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.only(bottom: 20.0, top: 10),
-              child: JobPostCardHr(),
-            ),
-          ),
-        )
+          child: GetX<JobPostsController>(
+              init: Get.put<JobPostsController>(JobPostsController()),
+              builder: (controller) {
+                print(
+                    "controller.jobPosts.length => ${controller.jobPosts.length}");
+                return controller.initialized && controller.jobPosts.length > 0
+                    ? ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: controller.jobPosts.length,
+                        itemBuilder: (context, index) => Padding(
+                          padding: const EdgeInsets.only(bottom: 20.0, top: 10),
+                          child: JobPostCardHr(
+                            data: controller.jobPosts[index],
+                          ),
+                        ),
+                      )
+                    : SizedBox(
+                        height: 100,
+                        width: 50,
+                        child: Center(child: CircularProgressIndicator()));
+              }),
+        ),
       ],
     );
   }

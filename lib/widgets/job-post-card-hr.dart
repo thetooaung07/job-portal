@@ -12,7 +12,7 @@ class JobPostCardHr extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(RouteNames.jobDetails),
+      onTap: () => Get.toNamed(RouteNames.jobDetails, arguments: data),
       child: Container(
           margin: EdgeInsets.symmetric(
             horizontal: 10,

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/saved_jobs_page_controller.dart';
 import 'package:job_portal/main.dart';
+import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
@@ -13,6 +15,8 @@ class JobDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    JobPostModel data = Get.arguments;
+
     return Scaffold(
       appBar: MyAppBar(
         leading: Container(
@@ -28,15 +32,26 @@ class JobDetailsPage extends StatelessWidget {
         ),
         label: "QWERTY",
         action: [
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
-            child: CustomIconButton(
-              onTap: (() => Get.toNamed(RouteNames.search)),
-              child: Icon(
-                Icons.bookmark_border_rounded,
-                size: 30,
-                color: Colors.black,
-              ),
+          GetBuilder<SavedJobsPageController>(
+            builder: (controller) => Container(
+              margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+              child: controller.checkAlreadySaved(data.id)
+                  ? CustomIconButton(
+                      onTap: (() => controller.removeFromFavourite(data)),
+                      child: Icon(
+                        Icons.bookmark_rounded,
+                        size: 30,
+                        color: Colors.black,
+                      ),
+                    )
+                  : CustomIconButton(
+                      onTap: (() => controller.addToFavourite(data)),
+                      child: Icon(
+                        Icons.bookmark_border_rounded,
+                        size: 30,
+                        color: Colors.black,
+                      ),
+                    ),
             ),
           ),
         ],
@@ -294,10 +309,10 @@ class CompanyLogo extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 15.0),
       child: Column(
         children: [
-          SvgPicture.asset(
-            "assets/icons/logo_youtube.svg",
-            height: 75,
+          Container(
             width: 75,
+            height: 75,
+            child: Image.asset("assets/images/default.png"),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20.0, bottom: 10),

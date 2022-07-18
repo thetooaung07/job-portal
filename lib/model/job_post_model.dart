@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class JobPostModel {
+  late String postUserId;
+  late String id;
   late String title; // JS developer
   late String expLevel; // Eg. Mid-Level, Intern, Senior;
   late String companyLocation; // WFH or on Campus,
@@ -15,6 +17,8 @@ class JobPostModel {
   late DateTime? createdAt;
 
   JobPostModel({
+    required this.postUserId,
+    required this.id,
     required this.title,
     required this.postedBy,
     required this.expLevel,
@@ -29,7 +33,10 @@ class JobPostModel {
     required this.createdAt,
   });
 
+// to cloud firestore
   JobPostModel.fromDocumentSnapshot(DocumentSnapshot doc) {
+    postUserId = doc["postUserId"];
+    id = doc["id"];
     title = doc["title"];
     postedBy = doc["postedBy"];
     expLevel = doc["expLevel"];
@@ -44,7 +51,10 @@ class JobPostModel {
     createdAt = (doc['createdAt'] as Timestamp).toDate();
   }
 
+// to flutter
   Map<String, dynamic> toJson() => {
+        "postUserId": postUserId,
+        "id": id,
         "title": title,
         "expLevel": expLevel,
         "postedBy": postedBy,

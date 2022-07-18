@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:job_portal/global.dart';
-import 'package:job_portal/model/profile_stats.dart';
 import 'package:job_portal/model/user_account.dart';
 import 'package:job_portal/services/database.dart';
+import 'dart:async';
+import 'dart:io';
 
 class UserAccountController extends GetxController {
   Rx<UserAccount> _userAccount = UserAccount().obs;
@@ -40,5 +43,27 @@ class UserAccountController extends GetxController {
     // update partially
     await FirestoreHelper()
         .update(collectionPath: collectionPath, docPath: docPath, data: data);
+  }
+
+  RxBool isUploading = false.obs;
+
+  Future<void> uploadProfile() async {
+    String? userId = firebaseAuth.currentUser?.uid;
+    if (userId == null) return;
+    if (isUploading.value) return;
+    final XFile? _file =
+        await imagePicker.pickImage(source: ImageSource.gallery);
+
+    if (_file == null) return;
+    isUploading.value = true;
+    final String fileLink =
+        await storageService.uploadPhoto(_file, 'profile/${userId}');
+
+    await FirestoreHelper().update(
+      collectionPath: "users",
+      docPath: userId,
+      data: {"profile": fileLink},
+    );
+    isUploading.value = false;
   }
 }

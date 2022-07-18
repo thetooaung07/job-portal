@@ -65,10 +65,16 @@ class JobCreateController extends GetxController {
   }
 
   Future createJobPost() async {
+    DocumentReference doc =
+        await firebaseFirestore.collection("jobPosts").doc();
+    String documentID = doc.id;
+
     UserAccount user =
         await FirestoreHelper().getUser(firebaseAuth.currentUser!.uid);
 
     JobPostModel _job = new JobPostModel(
+        postUserId: firebaseAuth.currentUser!.uid,
+        id: documentID,
         title: titleC.text,
         postedBy: user.username!,
         expLevel: expLevelC.text,
@@ -82,24 +88,17 @@ class JobCreateController extends GetxController {
         techSkill: [techSkillC.text],
         createdAt: DateTime.now());
 
-    DocumentReference doc =
-        await firebaseFirestore.collection("jobPosts").doc();
-    String documentID = doc.id;
-
-    customPrint(user.username, user.username);
-
     await FirestoreHelper().create(
         collectionPath: "jobPosts", docPath: documentID, data: _job.toJson());
-    print(documentID);
 
-    UserJobPostsModel _uJP = new UserJobPostsModel(
-        postId: documentID, isExpired: false, createdAt: DateTime.now());
+    // UserJobPostsModel _uJP = new UserJobPostsModel(
+    //     postId: documentID, isExpired: false, createdAt: DateTime.now());
 
-    await FirestoreHelper().create(
-      collectionPath: "user_jobPosts",
-      docPath: loginUserID,
-      data: _uJP.toFirestore(),
-    );
+    // await FirestoreHelper().create(
+    //   collectionPath: "user_jobPosts",
+    //   docPath: loginUserID,
+    //   data: _uJP.toFirestore(),
+    // );
 
     await Fluttertoast.showToast(
       msg: "Success",

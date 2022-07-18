@@ -171,7 +171,7 @@ class AccountPage extends StatelessWidget {
                                                     "users",
                                                     firebaseAuth
                                                         .currentUser!.uid,
-                                                    {"profile_details": true});
+                                                    {"profileDetails": true});
                                           },
                                           icon: Icon(
                                             Icons.person_outline_rounded,
@@ -189,7 +189,7 @@ class AccountPage extends StatelessWidget {
                                                       firebaseAuth
                                                           .currentUser!.uid,
                                                       {
-                                                    "profile_details": false
+                                                    "profileDetails": false
                                                   });
                                             },
                                             icon: Icon(
@@ -208,7 +208,7 @@ class AccountPage extends StatelessWidget {
                                                     "users",
                                                     firebaseAuth
                                                         .currentUser!.uid,
-                                                    {"cv_file": true});
+                                                    {"cvFile": true});
                                           },
                                           icon: Icon(
                                             Icons.file_upload_outlined,
@@ -225,7 +225,7 @@ class AccountPage extends StatelessWidget {
                                                       "users",
                                                       firebaseAuth
                                                           .currentUser!.uid,
-                                                      {"cv_file": false});
+                                                      {"cvFile": false});
                                             },
                                             icon: Icon(
                                               Icons.file_upload,
@@ -243,7 +243,7 @@ class AccountPage extends StatelessWidget {
                                                     "users",
                                                     firebaseAuth
                                                         .currentUser!.uid,
-                                                    {"add_a_bio": true});
+                                                    {"addABio": true});
                                           },
                                           icon: Icon(
                                             Icons.message_outlined,
@@ -260,7 +260,7 @@ class AccountPage extends StatelessWidget {
                                                       "users",
                                                       firebaseAuth
                                                           .currentUser!.uid,
-                                                      {"add_a_bio": false});
+                                                      {"addABio": false});
                                             },
                                             icon: Icon(
                                               Icons.message_rounded,
@@ -337,6 +337,9 @@ class StyledPopupMenuBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final UserAccountController userAccountController =
+        Get.find<UserAccountController>();
+
     return Theme(
       data: ThemeData(
         splashColor: Colors.transparent,
@@ -373,10 +376,11 @@ class StyledPopupMenuBtn extends StatelessWidget {
           PopupMenuItem(
             padding: EdgeInsets.symmetric(horizontal: 0),
             child: ListTile(
+              onTap: userAccountController.uploadProfile,
               contentPadding: EdgeInsets.symmetric(horizontal: 20),
               minLeadingWidth: 10,
-              leading: Icon(Icons.edit),
-              title: Text("Edit Profile"),
+              leading: Icon(Icons.add),
+              title: Text("Add Profile Picture"),
             ),
           ),
           PopupMenuDivider(),

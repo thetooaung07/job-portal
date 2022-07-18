@@ -14,7 +14,7 @@ class ProfileStats {
   // }
 
   Map<String, dynamic> toJson() => {
-        "cv_file": cvFile,
+        "cvFile": cvFile,
         "profileDetails": profileDetails,
         "addABio": addABio,
       };

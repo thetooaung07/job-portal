@@ -26,7 +26,7 @@ class JobPostCardVt extends StatelessWidget {
         Get.put(SavedJobsPageController());
     // customPrint(data!.postedBy, data!.postedBy);
     return GestureDetector(
-      onTap: () => Get.toNamed(RouteNames.jobDetails),
+      onTap: () => Get.toNamed(RouteNames.jobDetails, arguments: data),
       child: Container(
         padding: EdgeInsets.fromLTRB(15, 0, 0, 5),
         margin: EdgeInsets.only(
@@ -94,20 +94,26 @@ class JobPostCardVt extends StatelessWidget {
                   children: [
                     includeSave == true
                         ? Obx(
-                            () => CustomIconButton(
-                              onTap: () {
-                                savedJobsPagecontroller.addToFavourite();
-                              },
-                              child: savedJobsPagecontroller.isFavourite.value
-                                  ? Icon(
+                            () => true == true
+                                ? CustomIconButton(
+                                    onTap: () {
+                                      savedJobsPagecontroller
+                                          .addToFavourite(data!);
+                                    },
+                                    child: Icon(
                                       Icons.bookmark_rounded,
                                       color: Colors.black87,
-                                    )
-                                  : Icon(
+                                    ))
+                                : CustomIconButton(
+                                    onTap: () {
+                                      savedJobsPagecontroller
+                                          .addToFavourite(data!);
+                                    },
+                                    child: Icon(
                                       Icons.bookmark_border_rounded,
                                       color: Colors.black45,
                                     ),
-                            ),
+                                  ),
                           )
                         : SizedBox(),
                     SizedBox(

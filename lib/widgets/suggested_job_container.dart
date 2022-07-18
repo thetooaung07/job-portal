@@ -31,7 +31,9 @@ class SuggestedJobContainer extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: controller.jobPosts.length,
-                    itemBuilder: (context, index) => JobPostCardVt(),
+                    itemBuilder: (context, index) => JobPostCardVt(
+                      data: controller.jobPosts[index],
+                    ),
                   )
                 : SizedBox(
                     height: 100,

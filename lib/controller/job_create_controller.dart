@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/global.dart';
 import 'package:job_portal/model/job_post_model.dart';
+import 'package:job_portal/model/user_account.dart';
 import 'package:job_portal/model/user_jobPosts_model.dart';
 import 'package:job_portal/services/database.dart';
 
@@ -64,9 +65,12 @@ class JobCreateController extends GetxController {
   }
 
   Future createJobPost() async {
+    UserAccount user =
+        await FirestoreHelper().getUser(firebaseAuth.currentUser!.uid);
+
     JobPostModel _job = new JobPostModel(
         title: titleC.text,
-        postedBy: firebaseAuth.currentUser!.email.toString(),
+        postedBy: user.username!,
         expLevel: expLevelC.text,
         companyName: companyNameC.text,
         companyLocation: companyLocationC.text,
@@ -81,7 +85,8 @@ class JobCreateController extends GetxController {
     DocumentReference doc =
         await firebaseFirestore.collection("jobPosts").doc();
     String documentID = doc.id;
-    // docIdList.add(documentID);
+
+    customPrint(user.username, user.username);
 
     await FirestoreHelper().create(
         collectionPath: "jobPosts", docPath: documentID, data: _job.toJson());
@@ -97,9 +102,12 @@ class JobCreateController extends GetxController {
     );
 
     await Fluttertoast.showToast(
-        msg: "Success",
-        backgroundColor: Colors.green,
-        textColor: Colors.white,
-        fontSize: 16.0);
+      msg: "Success",
+      backgroundColor: Colors.green,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+    clear();
+    Get.back();
   }
 }

@@ -4,19 +4,27 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/saved_jobs_page_controller.dart';
+import 'package:job_portal/controller/user_account_controller.dart';
+import 'package:job_portal/global.dart';
 import 'package:job_portal/main.dart';
+import 'package:job_portal/model/job_post_model.dart';
+import 'package:job_portal/model/user_account.dart';
 import 'package:job_portal/routes/routes.dart';
+import 'package:job_portal/services/database.dart';
 
 class JobPostCardVt extends StatelessWidget {
   final bool? includeSave;
+  final JobPostModel? data;
   // final bool? isDimissable;
 
-  const JobPostCardVt({Key? key, this.includeSave = false}) : super(key: key);
+  const JobPostCardVt({Key? key, this.includeSave = false, this.data})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final SavedJobsPageController controller =
+    final SavedJobsPageController savedJobsPagecontroller =
         Get.put(SavedJobsPageController());
+    customPrint(data!.postedBy, data!.postedBy);
     return GestureDetector(
       onTap: () => Get.toNamed(RouteNames.jobDetails),
       child: Container(
@@ -65,13 +73,13 @@ class JobPostCardVt extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Nodejs Developer",
+                              data?.title ?? "Developer",
                               style: kJobPositionTextStyle,
                             ),
                             SizedBox(
                               height: 5,
                             ),
-                            Text("Facebook"),
+                            Text(data?.postedBy ?? "User"),
                             SizedBox(
                               height: 10,
                             ),
@@ -89,9 +97,9 @@ class JobPostCardVt extends StatelessWidget {
                         ? Obx(
                             () => CustomIconButton(
                               onTap: () {
-                                controller.addToFavourite();
+                                savedJobsPagecontroller.addToFavourite();
                               },
-                              child: controller.isFavourite.value
+                              child: savedJobsPagecontroller.isFavourite.value
                                   ? Icon(
                                       Icons.bookmark_rounded,
                                       color: Colors.black87,

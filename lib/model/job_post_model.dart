@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:job_portal/model/user_account.dart';
 
 class JobPostModel {
   late String postUserId;
@@ -9,7 +10,7 @@ class JobPostModel {
   late String companyName; // US,
   late String companyWebsite; // 9 to 5
   late String salary; // Min - Max
-  late String postedBy;
+  late JobPostUser postedBy;
   late String companyContactMail;
   late List responsibilities;
   late List requirements;
@@ -38,7 +39,7 @@ class JobPostModel {
     postUserId = doc["postUserId"];
     id = doc["id"];
     title = doc["title"];
-    postedBy = doc["postedBy"];
+    postedBy = JobPostUser.fromMap(doc["postedBy"]);
     expLevel = doc["expLevel"];
     companyName = doc["companyName"];
     companyLocation = doc["companyLocation"];
@@ -57,7 +58,7 @@ class JobPostModel {
         "id": id,
         "title": title,
         "expLevel": expLevel,
-        "postedBy": postedBy,
+        "postedBy": postedBy.toMap(),
         "companyName": companyName,
         "companyWebsite": companyWebsite,
         "salary": salary,
@@ -67,5 +68,25 @@ class JobPostModel {
         "companyLocation": companyLocation,
         "companyContactMail": companyContactMail,
         "createdAt": createdAt,
+      };
+}
+
+class JobPostUser {
+  late String? username;
+  late String? profile;
+  late String? userId;
+
+  JobPostUser({this.username = "", this.userId = "", this.profile = ""});
+
+  JobPostUser.fromMap(Map doc) {
+    username = doc["username"];
+    profile = doc["profile"];
+    userId = doc["userId"];
+  }
+
+  Map<String, dynamic> toMap() => {
+        "username": username,
+        "profile": profile,
+        "userId": userId,
       };
 }

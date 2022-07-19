@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/job_posts_controller.dart';
 import 'package:job_portal/controller/saved_jobs_page_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
-class JobDetailsPage extends StatelessWidget {
+class JobDetailsPage extends GetView<JobPostsController> {
   const JobDetailsPage({Key? key}) : super(key: key);
 
 //TODO: Use SilverDeligateAppBar for better UI
 
   @override
   Widget build(BuildContext context) {
-    JobPostModel data = Get.arguments;
+    JobPostModel data = Get.arguments as JobPostModel;
 
     return Scaffold(
       appBar: MyAppBar(
@@ -309,20 +310,25 @@ class CompanyLogo extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 15.0),
       child: Column(
         children: [
-          Container(
-            width: 75,
-            height: 75,
-            child: Image.asset("assets/images/default.png"),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
+                height: 75,
+                width: 75,
+                alignment: Alignment.center,
+                child: Get.arguments!.postedBy.profile != null
+                    ? Image.network(Get.arguments!.postedBy.profile!)
+                    : Image.asset('assets/images/default.png')),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20.0, bottom: 10),
             child: Text(
-              "UI/ UX Designer",
+              Get.arguments.title,
               style: kHeaderTextStyle,
             ),
           ),
           Text(
-            "Youtube",
+            Get.arguments.postedBy.username,
             style: kCaptionTextStyle,
           ),
         ],
@@ -434,7 +440,7 @@ class ApplyNowBtn extends StatelessWidget {
                   color: Colors.black54),
             ),
             Text(
-              "\$1000/Month",
+              Get.arguments.salary,
               style: kHeaderTextStyle.copyWith(color: kPrimaryRedColor),
             ),
           ],

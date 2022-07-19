@@ -9,14 +9,11 @@ class SavedJobsPageController extends GetxController {
   set setSavedPosts(List<JobPostModel> value) => savedPosts.value = value;
 
   void addToFavourite(JobPostModel model) {
-    print("Inside Save Job, addToFavourite");
     getSavedPosts.add(model);
     update();
   }
 
   void removeFromFavourite(JobPostModel model) {
-    print("Inside Save Job, removeFromFavourite");
-
     List<JobPostModel> listData = [];
     getSavedPosts.forEach((element) {
       if (element.id != model.id)
@@ -30,7 +27,6 @@ class SavedJobsPageController extends GetxController {
   }
 
   bool checkAlreadySaved(String id) {
-    print("Inside Save Job, checkAlreadySaved");
     JobPostModel? res =
         getSavedPosts.firstWhereOrNull((element) => element.id == id);
     if (res == null) {

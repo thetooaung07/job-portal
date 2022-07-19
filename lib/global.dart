@@ -13,11 +13,6 @@ final AuthService authService = AuthService();
 final StorageService storageService = StorageService();
 final ImagePicker imagePicker = ImagePicker();
 
-// final List<String> profileStats = [
-//   "cvFile",
-//   "profileDetails",
-// ];
-
 void customPrint(dynamic title, dynamic res) {
   print(" $title => ${res}");
 }

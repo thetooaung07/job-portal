@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/job_posts_controller.dart';
 import 'package:job_portal/controller/saved_jobs_page_controller.dart';
 import 'package:job_portal/controller/user_account_controller.dart';
 import 'package:job_portal/global.dart';
@@ -15,6 +16,7 @@ import 'package:job_portal/services/database.dart';
 class JobPostCardVt extends StatelessWidget {
   final bool? includeSave;
   final JobPostModel? data;
+
   // final bool? isDimissable;
 
   const JobPostCardVt({Key? key, this.includeSave = false, this.data})
@@ -24,11 +26,14 @@ class JobPostCardVt extends StatelessWidget {
   Widget build(BuildContext context) {
     final SavedJobsPageController savedJobsPagecontroller =
         Get.put(SavedJobsPageController());
-    // customPrint(data!.postedBy, data!.postedBy);
+
+    final JobPostsController jobPostsController =
+        Get.find<JobPostsController>();
+
     return GestureDetector(
       onTap: () => Get.toNamed(RouteNames.jobDetails, arguments: data),
       child: Container(
-        padding: EdgeInsets.fromLTRB(15, 0, 0, 5),
+        padding: EdgeInsets.fromLTRB(15, 0, 0, 10),
         margin: EdgeInsets.only(
             left: kSpacingUnit * 1.5,
             right: kSpacingUnit * 1.5,
@@ -47,15 +52,19 @@ class JobPostCardVt extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
+                  padding: const EdgeInsets.only(top: 5.0),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        height: 50,
-                        width: 50,
-                        alignment: Alignment.center,
-                        child: Image.asset('assets/images/default.png'),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            height: 60,
+                            width: 60,
+                            alignment: Alignment.center,
+                            child: data!.postedBy.profile != null
+                                ? Image.network(data!.postedBy.profile!)
+                                : Image.asset('assets/images/default.png')),
                       ),
                       // SvgPicture.asset(
                       //   "assets/icons/logo_youtube.svg",
@@ -66,7 +75,7 @@ class JobPostCardVt extends StatelessWidget {
                         width: 20,
                       ),
                       SizedBox(
-                        height: 60,
+                        height: 70,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +87,7 @@ class JobPostCardVt extends StatelessWidget {
                             SizedBox(
                               height: 5,
                             ),
-                            Text(data?.postedBy ?? "User"),
+                            Text(data?.postedBy.username ?? "User"),
                             SizedBox(
                               height: 10,
                             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/controller/job_posts_controller.dart';
 import 'package:job_portal/model/job_post_model.dart';
+import 'package:job_portal/model/user_account.dart';
 import 'package:job_portal/services/database.dart';
 import 'package:job_portal/widgets/job-post-card-vt.dart';
 import 'package:job_portal/widgets/showAllTextBanner.dart';
@@ -24,17 +25,16 @@ class SuggestedJobContainer extends StatelessWidget {
         GetX<JobPostsController>(
           init: Get.put<JobPostsController>(JobPostsController()),
           builder: (controller) {
-            print(
-                "controller.jobPosts.length => ${controller.jobPosts.length}");
             return controller.initialized && controller.jobPosts.length > 0
                 ? ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: controller.jobPosts.length,
-                    itemBuilder: (context, index) => JobPostCardVt(
-                      data: controller.jobPosts[index],
-                    ),
-                  )
+                    itemBuilder: (context, index) {
+                      return JobPostCardVt(
+                        data: controller.jobPosts[index],
+                      );
+                    })
                 : SizedBox(
                     height: 100,
                     width: 50,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/job_posts_controller.dart';
 import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/routes/routes.dart';
 
@@ -32,12 +33,17 @@ class JobPostCardHr extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Container(
-                    height: 40,
-                    width: 40,
-                    alignment: Alignment.center,
-                    child: Image.asset('assets/images/default.png'),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                        height: 50,
+                        width: 50,
+                        alignment: Alignment.center,
+                        child: data!.postedBy.profile != null
+                            ? Image.network(data!.postedBy.profile!)
+                            : Image.asset('assets/images/default.png')),
                   ),
+
                   // SvgPicture.asset(
                   //   "assets/icons/logo_youtube.svg",
                   //   height: 40,
@@ -51,7 +57,7 @@ class JobPostCardHr extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          data?.postedBy ?? "Company Name",
+                          data?.postedBy.username ?? "Company Name",
                           style: kLabelTextStyle,
                         ),
                         SizedBox(

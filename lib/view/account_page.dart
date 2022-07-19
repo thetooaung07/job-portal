@@ -40,12 +40,20 @@ class AccountPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CircleAvatar(
-                            backgroundImage:
-                                AssetImage("assets/images/default.png"),
-                            backgroundColor: Colors.transparent,
-                            radius: 50,
-                          ),
+                          userAccountController.user.profile != null
+                              ? CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                      userAccountController.user.profile!),
+                                  // AssetImage("assets/images/default.png"),
+                                  backgroundColor: Colors.transparent,
+                                  radius: 50,
+                                )
+                              : CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage("assets/images/default.png"),
+                                  backgroundColor: Colors.transparent,
+                                  radius: 50,
+                                ),
                           SizedBox(
                             width: 30,
                           ),

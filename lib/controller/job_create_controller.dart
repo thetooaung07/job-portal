@@ -72,11 +72,14 @@ class JobCreateController extends GetxController {
     UserAccount user =
         await FirestoreHelper().getUser(firebaseAuth.currentUser!.uid);
 
+    JobPostUser jobPostUser = JobPostUser(
+        profile: user.profile, userId: user.userId, username: user.username);
+
     JobPostModel _job = new JobPostModel(
         postUserId: firebaseAuth.currentUser!.uid,
         id: documentID,
         title: titleC.text,
-        postedBy: user.username!,
+        postedBy: jobPostUser,
         expLevel: expLevelC.text,
         companyName: companyNameC.text,
         companyLocation: companyLocationC.text,

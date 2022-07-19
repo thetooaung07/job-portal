@@ -75,3 +75,6 @@ Find a bug where stream is not fetching dataArray according to it's length; => d
 
 
 Check loading animation and also placement in top_companies
+
+// !TODO Bug TO FIX
+Job_Post_Controller bug > only one contoller is working for various picture causing blinkingg blinkingg pics jumping 

@@ -12,6 +12,9 @@ class StorageService {
 
     final UploadTask _uploadTask = _ref.putFile(
       File(file.path),
+      SettableMetadata(
+        contentType: file.mimeType,
+      ),
     );
     await _uploadTask.whenComplete(() => null);
 

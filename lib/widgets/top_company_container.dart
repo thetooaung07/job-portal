@@ -26,8 +26,6 @@ class TopCompanyContainer extends StatelessWidget {
           child: GetX<JobPostsController>(
               init: Get.put<JobPostsController>(JobPostsController()),
               builder: (controller) {
-                print(
-                    "controller.jobPosts.length => ${controller.jobPosts.length}");
                 return controller.initialized && controller.jobPosts.length > 0
                     ? ListView.builder(
                         scrollDirection: Axis.horizontal,

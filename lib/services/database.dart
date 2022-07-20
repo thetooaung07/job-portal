@@ -105,7 +105,11 @@ class FirestoreHelper {
   }
 
   Stream<List<JobPostModel>> jobPostsStream() {
-    return firebaseFirestore.collection("jobPosts").snapshots().map((event) {
+    return firebaseFirestore
+        .collection("jobPosts")
+        .orderBy("createdAt", descending: true)
+        .snapshots()
+        .map((event) {
       List<JobPostModel> dataList = [];
       event.docs.forEach((element) {
         dataList.add(JobPostModel.fromDocumentSnapshot(element));

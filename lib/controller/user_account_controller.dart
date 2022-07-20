@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:job_portal/global.dart';
+import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/model/user_account.dart';
 import 'package:job_portal/services/database.dart';
 import 'dart:async';
@@ -65,5 +66,30 @@ class UserAccountController extends GetxController {
       data: {"profile": fileLink},
     );
     isUploading.value = false;
+
+    // update();
+// Update Profile Link for null
+    List docListWithProfileNull = [];
+    await firebaseFirestore
+        .collection("jobPosts")
+        .where("postUserId", isEqualTo: firebaseAuth.currentUser!.uid)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        if (element["postedBy"]["profile"] == null) {
+          print(element["id"]);
+          docListWithProfileNull.add(element["id"]);
+        } else
+          return;
+      });
+    });
+
+    for (var docPath in docListWithProfileNull) {
+      print(docPath);
+      await FirestoreHelper().update(
+          collectionPath: "jobPosts",
+          docPath: docPath,
+          data: {"postedBy.profile": fileLink});
+    }
   }
 }

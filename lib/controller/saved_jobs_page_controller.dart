@@ -11,6 +11,7 @@ class SavedJobsPageController extends GetxController {
   void addToFavourite(JobPostModel model) {
     getSavedPosts.add(model);
     update();
+    print("savedPosts => $getSavedPosts");
   }
 
   void removeFromFavourite(JobPostModel model) {

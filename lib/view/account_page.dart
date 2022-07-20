@@ -36,62 +36,76 @@ class AccountPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          userAccountController.user.profile != null
-                              ? CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                      userAccountController.user.profile!),
-                                  // AssetImage("assets/images/default.png"),
-                                  backgroundColor: Colors.transparent,
-                                  radius: 50,
-                                )
-                              : CircleAvatar(
-                                  backgroundImage:
-                                      AssetImage("assets/images/default.png"),
-                                  backgroundColor: Colors.transparent,
-                                  radius: 50,
+                      child: StreamBuilder<UserAccount>(
+                          stream: FirestoreHelper()
+                              .userAccountStream(firebaseAuth.currentUser!.uid),
+                          builder: (context, snapshot) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                snapshot.hasData &&
+                                        snapshot.connectionState ==
+                                            ConnectionState.active &&
+                                        userAccountController
+                                                .user.profile?.length !=
+                                            null &&
+                                        userAccountController.user.profile != ""
+                                    ? CircleAvatar(
+                                        backgroundImage: NetworkImage(
+                                            snapshot.data!.profile!),
+                                        // AssetImage("assets/images/default.png"),
+                                        backgroundColor: Colors.transparent,
+                                        radius: 50,
+                                      )
+                                    : CircleAvatar(
+                                        backgroundImage: AssetImage(
+                                            "assets/images/default.png"),
+                                        backgroundColor: Colors.transparent,
+                                        radius: 50,
+                                      ),
+                                SizedBox(
+                                  width: 30,
                                 ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                userAccountController.user.username ?? "User",
-                                style: kHeaderTextStyle,
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                "Flutter Beginner",
-                                style: kBulletListTextStyle.copyWith(
-                                    color: Colors.black54),
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Row(
-                                children: [
-                                  Text("Contact me:"),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(userAccountController.user.email ?? "")
-                                ],
-                              )
-                            ],
-                          )
-                        ],
-                      ),
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      userAccountController.user.username ??
+                                          "User",
+                                      style: kHeaderTextStyle,
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      "Flutter Beginner",
+                                      style: kBulletListTextStyle.copyWith(
+                                          color: Colors.black54),
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text("Contact me:"),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(userAccountController.user.email ??
+                                            "")
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            );
+                          }),
                     ),
                     //TODO:Change Custom to look more beautiful // border of inside indicator being Square
                     //  Complete Your Profile
@@ -382,9 +396,11 @@ class StyledPopupMenuBtn extends StatelessWidget {
             ),
           ),
           PopupMenuItem(
+            onTap: () {
+              userAccountController.uploadProfile();
+            },
             padding: EdgeInsets.symmetric(horizontal: 0),
             child: ListTile(
-              onTap: userAccountController.uploadProfile,
               contentPadding: EdgeInsets.symmetric(horizontal: 20),
               minLeadingWidth: 10,
               leading: Icon(Icons.add),

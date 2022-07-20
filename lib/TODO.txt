@@ -78,3 +78,6 @@ Check loading animation and also placement in top_companies
 
 // !TODO Bug TO FIX
 Job_Post_Controller bug > only one contoller is working for various picture causing blinkingg blinkingg pics jumping 
+
+
+After uploading profile PopUpMenuBtn not close automatically

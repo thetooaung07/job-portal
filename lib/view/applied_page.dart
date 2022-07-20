@@ -90,7 +90,9 @@ class AppliedPage extends StatelessWidget {
             ),
             JobCard(
               onTap: () {
-                Get.toNamed(RouteNames.savePosts);
+                Get.toNamed(
+                  RouteNames.savePosts,
+                );
               },
               icon: Icon(
                 Icons.bookmark_added_outlined,

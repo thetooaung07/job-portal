@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/job_posts_controller.dart';
 import 'package:job_portal/controller/saved_jobs_page_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/job_post_model.dart';
-import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
+
+JobPostModel data = Get.arguments as JobPostModel;
 
 class JobDetailsPage extends GetView<JobPostsController> {
   const JobDetailsPage({Key? key}) : super(key: key);
@@ -16,8 +16,6 @@ class JobDetailsPage extends GetView<JobPostsController> {
 
   @override
   Widget build(BuildContext context) {
-    JobPostModel data = Get.arguments as JobPostModel;
-
     return Scaffold(
       appBar: MyAppBar(
         leading: Container(
@@ -42,7 +40,7 @@ class JobDetailsPage extends GetView<JobPostsController> {
                       child: Icon(
                         Icons.bookmark_rounded,
                         size: 30,
-                        color: Colors.black,
+                        color: kPrimaryRedColor,
                       ),
                     )
                   : CustomIconButton(

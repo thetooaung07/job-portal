@@ -56,37 +56,40 @@ class HomePage extends StatelessWidget {
       AccountPage(),
     ];
 
-    return GestureDetector(
-      onTap: () {
-        FocusScopeNode currentFocus = FocusScope.of(context);
+    return
+        //  GestureDetector(
+        //   onTap: () {
+        //     FocusScopeNode currentFocus = FocusScope.of(context);
 
-        if (!currentFocus.hasPrimaryFocus) {
-          currentFocus.unfocus();
-        }
-      },
-      child: Scaffold(
-        backgroundColor: themeBgMainColor,
-
-        body: Obx(
-          () => _pages[controller.selectedIndex.value],
-        ),
-        // body: PageView(
-        //   children: [
-        //     HomePageView(),
-        //     NearbyPage(),
-        //     AppliedPage(),
-        //     AccountPage(),
-        //   ],
-        //   controller: controller.pageController,
-        //   onPageChanged: (index) {
-        //     controller.selectedIndex.value = index;
+        //     if (!currentFocus.hasPrimaryFocus) {
+        //       currentFocus.unfocus();
+        //     }
         //   },
-        // ),
-        bottomNavigationBar: BottomNavBarConstraints(
-          child: CustomBottomNavBar(),
-        ),
+        //   child:
+
+        Scaffold(
+      backgroundColor: themeBgMainColor,
+
+      body: Obx(
+        () => _pages[controller.selectedIndex.value],
+      ),
+      // body: PageView(
+      //   children: [
+      //     HomePageView(),
+      //     NearbyPage(),
+      //     AppliedPage(),
+      //     AccountPage(),
+      //   ],
+      //   controller: controller.pageController,
+      //   onPageChanged: (index) {
+      //     controller.selectedIndex.value = index;
+      //   },
+      // ),
+      bottomNavigationBar: BottomNavBarConstraints(
+        child: CustomBottomNavBar(),
       ),
     );
+    // );
   }
 }
 

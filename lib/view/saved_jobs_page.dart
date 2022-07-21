@@ -31,7 +31,7 @@ class SavedJobsPage extends StatelessWidget {
             Container(
               margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
               child: CustomIconButton(
-                onTap: (() => Get.toNamed(RouteNames.search)),
+                onTap: () {},
                 child: Icon(
                   Icons.more_vert_rounded,
                   size: 30,
@@ -47,39 +47,20 @@ class SavedJobsPage extends StatelessWidget {
               return ListView.builder(
                 itemCount: controller.getSavedPosts.length,
                 padding: EdgeInsets.symmetric(vertical: 20),
-                itemBuilder: (context, index) => DismissibleJobPostCard(
-                  index: index,
-                  data: controller.getSavedPosts[index],
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    Future.delayed(Duration.zero, () {
+                      Get.toNamed(RouteNames.jobDetails,
+                          arguments: controller.getSavedPosts[index]);
+                    });
+                  },
+                  child: DismissibleJobPostCard(
+                    index: index,
+                    data: controller.getSavedPosts[index],
+                  ),
                 ),
-
-                //  DismissibleJobPostCard(
-                //   index: index,
-                //   data: controller.getSavedPosts[index],
-                // ),
               );
-            })
-
-        //  GetBuilder<SavedJobsPageController>(
-        //   init: Get.put<SavedJobsPageController>(SavedJobsPageController()),
-        //   builder: (controller) {
-        //     return controller.getSavedPosts.length > 0
-        //         ? ListView.builder(
-        //             itemCount: controller.getSavedPosts.length,
-        //             padding: EdgeInsets.symmetric(vertical: 20),
-        //             itemBuilder: (context, index) => DismissibleJobPostCard(
-        //               index: index,
-        //               data: controller.getSavedPosts[index],
-        //             ),
-        //           )
-        //         : Container(
-        //             alignment: Alignment.center,
-        //             height: 50,
-        //             width: Get.width,
-        //             child: Text("No Saved Posts"),
-        //           );
-        //   },
-        // ),
-        );
+            }));
   }
 }
 
@@ -92,7 +73,6 @@ class DismissibleJobPostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(data);
     return Dismissible(
       key: ValueKey(index),
       direction: DismissDirection.endToStart,
@@ -101,25 +81,50 @@ class DismissibleJobPostCard extends StatelessWidget {
           Get.find<SavedJobsPageController>().removeFromFavourite(data!);
         }
       },
-      background: Container(
-        margin: EdgeInsets.only(bottom: 15),
-        // padding: EdgeInsets.only(right: 20),
-        alignment: Alignment.centerRight,
-        color: Colors.transparent,
-        child: Container(
-          padding: EdgeInsets.fromLTRB(30, 25, 20, 25),
-          decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                bottomLeft: Radius.circular(20),
-              )),
-          child: Icon(
-            Icons.delete_outline_rounded,
-            size: 25,
-            color: Colors.white,
+      background: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          // Container(
+          //   margin: EdgeInsets.only(bottom: 15),
+          //   // padding: EdgeInsets.only(right: 20),
+          //   alignment: Alignment.centerLeft,
+          //   color: Colors.transparent,
+          //   child: Container(
+          //     padding: EdgeInsets.fromLTRB(20, 25, 30, 25),
+          //     decoration: BoxDecoration(
+          //         color: Colors.teal,
+          //         borderRadius: BorderRadius.only(
+          //           topRight: Radius.circular(20),
+          //           bottomRight: Radius.circular(20),
+          //         )),
+          //     child: Icon(
+          //       Icons.folder_open_rounded,
+          //       size: 25,
+          //       color: Colors.white,
+          //     ),
+          //   ),
+          // ),
+          Container(
+            margin: EdgeInsets.only(bottom: 15),
+            // padding: EdgeInsets.only(right: 20),
+            alignment: Alignment.centerRight,
+            color: Colors.transparent,
+            child: Container(
+              padding: EdgeInsets.fromLTRB(30, 25, 20, 25),
+              decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                  )),
+              child: Icon(
+                Icons.delete_outline_rounded,
+                size: 25,
+                color: Colors.white,
+              ),
+            ),
           ),
-        ),
+        ],
       ),
       child: Container(
         margin: EdgeInsets.only(

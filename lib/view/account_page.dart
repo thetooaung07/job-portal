@@ -44,26 +44,42 @@ class AccountPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                snapshot.hasData &&
-                                        snapshot.connectionState ==
+                                // Profile Pic
+
+                                if (snapshot.connectionState ==
+                                        ConnectionState.active &&
+                                    snapshot.hasData &&
+                                    userAccountController.isUploading ==
+                                        false) ...[
+                                  CircleAvatar(
+                                    backgroundImage:
+                                        NetworkImage(snapshot.data!.profile!),
+                                    // AssetImage("assets/images/default.png"),
+                                    backgroundColor: Colors.transparent,
+                                    radius: 50,
+                                  )
+                                ] else if (snapshot.connectionState ==
                                             ConnectionState.active &&
-                                        userAccountController
-                                                .user.profile?.length !=
-                                            null &&
-                                        userAccountController.user.profile != ""
-                                    ? CircleAvatar(
-                                        backgroundImage: NetworkImage(
-                                            snapshot.data!.profile!),
-                                        // AssetImage("assets/images/default.png"),
-                                        backgroundColor: Colors.transparent,
-                                        radius: 50,
-                                      )
-                                    : CircleAvatar(
-                                        backgroundImage: AssetImage(
-                                            "assets/images/default.png"),
-                                        backgroundColor: Colors.transparent,
-                                        radius: 50,
-                                      ),
+                                        snapshot.data?.profile == null ||
+                                    snapshot.data?.profile == "") ...[
+                                  CircleAvatar(
+                                    backgroundImage:
+                                        AssetImage("assets/images/default.png"),
+                                    backgroundColor: Colors.transparent,
+                                    radius: 50,
+                                  )
+                                ] else ...[
+                                  CircleAvatar(
+                                    backgroundColor: Colors.transparent,
+                                    radius: 50,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.black54,
+                                    ),
+                                  )
+                                ],
+
+                                // Profile Pic
+
                                 SizedBox(
                                   width: 30,
                                 ),

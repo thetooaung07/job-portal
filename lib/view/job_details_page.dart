@@ -7,8 +7,6 @@ import 'package:job_portal/main.dart';
 import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
-JobPostModel data = Get.arguments as JobPostModel;
-
 class JobDetailsPage extends GetView<JobPostsController> {
   const JobDetailsPage({Key? key}) : super(key: key);
 
@@ -16,6 +14,7 @@ class JobDetailsPage extends GetView<JobPostsController> {
 
   @override
   Widget build(BuildContext context) {
+    JobPostModel data = Get.arguments as JobPostModel;
     return Scaffold(
       appBar: MyAppBar(
         leading: Container(
@@ -165,6 +164,7 @@ class FirstTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    JobPostModel data = Get.arguments as JobPostModel;
     return Container(
       child: Column(
         children: [
@@ -196,9 +196,10 @@ class JobDescShort extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    JobPostModel data = Get.arguments as JobPostModel;
     return Container(
       // margin: EdgeInsets.symmetric(horizontal: 10),
-      padding: EdgeInsets.fromLTRB(50, 12, 50, 5),
+      padding: EdgeInsets.fromLTRB(25, 12, 25, 5),
       decoration: BoxDecoration(
         color: kJobDetailsBgColor,
         borderRadius: BorderRadius.circular(10),
@@ -214,7 +215,7 @@ class JobDescShort extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Text("Design"),
+              Text(data.title),
             ],
           ),
           Column(
@@ -224,7 +225,7 @@ class JobDescShort extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Text("USA NewYork"),
+              Text(data.companyLocation),
             ],
           ),
           Column(
@@ -304,6 +305,7 @@ class CompanyLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    JobPostModel data = Get.arguments as JobPostModel;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15.0),
       child: Column(
@@ -340,6 +342,7 @@ class Responsibilities extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    JobPostModel data = Get.arguments as JobPostModel;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -364,6 +367,7 @@ class Requirements extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    JobPostModel data = Get.arguments as JobPostModel;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -422,45 +426,48 @@ class ApplyNowBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    JobPostModel data = Get.arguments as JobPostModel;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Salary",
-              style: kBulletListTextStyle.copyWith(
-                  letterSpacing: 1,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black54),
-            ),
-            Text(
-              Get.arguments.salary,
-              style: kHeaderTextStyle.copyWith(color: kPrimaryRedColor),
-            ),
-          ],
+        Container(
+          width: Get.width / 3,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Salary",
+                style: kBulletListTextStyle.copyWith(
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54),
+              ),
+              Text(
+                ("${data.salary} / month"),
+                style: kLabelTextStyle.copyWith(color: kPrimaryRedColor),
+              ),
+            ],
+          ),
         ),
         SizedBox(
-          width: 20,
+          width: 10,
         ),
-        Expanded(
-          child: Container(
-            // padding: EdgeInsets.symmetric(vertical: 5, horizontal: 75),
-            margin: EdgeInsets.symmetric(vertical: Get.width * 0.01),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(50),
-            ),
-            child: Center(
-              child: Text(
-                "Apply Now",
-                style:
-                    kLabelTextStyle.copyWith(fontSize: 20, color: themeBgColor),
-              ),
+        Container(
+          width: Get.width / 2,
+          // padding: EdgeInsets.symmetric(vertical: 5, horizontal: 75),
+          margin: EdgeInsets.symmetric(vertical: Get.width * 0.01),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: Center(
+            child: Text(
+              "Apply Now",
+              style:
+                  kLabelTextStyle.copyWith(fontSize: 20, color: themeBgColor),
             ),
           ),
         ),

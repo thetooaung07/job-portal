@@ -31,10 +31,8 @@ class SavedJobsPageController extends GetxController {
     JobPostModel? res =
         getSavedPosts.firstWhereOrNull((element) => element.id == id);
     if (res == null) {
-      update();
       return false;
     } else {
-      update();
       return true;
     }
   }

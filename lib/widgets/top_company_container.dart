@@ -37,10 +37,10 @@ class TopCompanyContainer extends StatelessWidget {
                           ),
                         ),
                       )
-                    : SizedBox(
-                        height: 100,
-                        width: 50,
-                        child: Center(child: CircularProgressIndicator()));
+                    : Padding(
+                        padding: const EdgeInsets.only(bottom: 20.0, right: 10),
+                        child: Center(child: CircularProgressIndicator()),
+                      );
               }),
         ),
       ],

@@ -65,9 +65,10 @@ class UserAccountController extends GetxController {
       docPath: userId,
       data: {"profile": fileLink},
     );
+
     isUploading.value = false;
 
-    // update();
+    update();
 // Update Profile Link for null
     List docListWithProfileNull = [];
     await firebaseFirestore
@@ -91,5 +92,7 @@ class UserAccountController extends GetxController {
           docPath: docPath,
           data: {"postedBy.profile": fileLink});
     }
+    // isUploading.value = false;
+    // update();
   }
 }

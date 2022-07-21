@@ -81,3 +81,7 @@ Job_Post_Controller bug > only one contoller is working for various picture caus
 
 
 After uploading profile PopUpMenuBtn not close automatically
+
+
+TO Fix UI blinking 2 to 3 times after updating Username and email !Need to fix
+Test Username and email change again

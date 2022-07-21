@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/main.dart';
-import 'package:job_portal/widgets/job-post-card-vt.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 import 'package:job_portal/widgets/searchbar.dart';
 import 'package:job_portal/constants.dart';

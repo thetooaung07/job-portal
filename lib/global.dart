@@ -7,7 +7,7 @@ import 'package:job_portal/services/storage.dart';
 final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-final loginUserID = firebaseAuth.currentUser!.uid;
+final loginUserID = firebaseAuth.currentUser?.uid;
 
 final AuthService authService = AuthService();
 final StorageService storageService = StorageService();

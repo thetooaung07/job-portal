@@ -14,6 +14,7 @@ class AccountPageProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     if (snapshot.connectionState == ConnectionState.active &&
         snapshot.hasData &&
+        snapshot.data?.profile != null &&
         controller.isUploading == false)
       return CircleAvatar(
         backgroundImage: NetworkImage(snapshot.data!.profile!),

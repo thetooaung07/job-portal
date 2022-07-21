@@ -46,7 +46,6 @@ class AccountPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 // Profile Pic
-
                                 Stack(
                                   children: [
                                     Container(
@@ -58,17 +57,20 @@ class AccountPage extends StatelessWidget {
                                     ),
                                     Positioned(
                                         bottom: 0,
-                                        right: 2,
+                                        right: 0,
                                         child: GestureDetector(
                                           onTap: userAccountController
                                               .uploadProfile,
                                           child: Container(
-                                            height: 30,
-                                            width: 30,
+                                            height: 35,
+                                            width: 35,
                                             decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.white,
+                                                  width: 2),
                                               shape: BoxShape.circle,
-                                              color:
-                                                  Color.fromARGB(151, 0, 0, 0),
+                                              color: Color.fromARGB(
+                                                  176, 12, 12, 12),
                                             ),
                                             child: Icon(
                                               Icons.edit,
@@ -108,15 +110,14 @@ class AccountPage extends StatelessWidget {
                                     SizedBox(
                                       height: 15,
                                     ),
-                                    Row(
-                                      children: [
-                                        Text("Contact me:"),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(userAccountController.user.email ??
-                                            "")
-                                      ],
+                                    Text("Contact me:"),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      userAccountController.user.email ?? "",
+                                      softWrap: true,
+                                      maxLines: 2,
                                     )
                                   ],
                                 )
@@ -385,6 +386,15 @@ class StyledPopupMenuBtn extends StatelessWidget {
         highlightColor: Colors.transparent,
       ),
       child: PopupMenuButton<dynamic>(
+        onSelected: (value) {
+          print("popup on select => $value");
+          if (value == 2) {
+            Get.toNamed(RouteNames.eidtProfile);
+          }
+          if (value == 3) {
+            Get.find<AuthController>().signOut();
+          }
+        },
         padding: EdgeInsets.all(2),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         splashRadius: 0,
@@ -404,6 +414,7 @@ class StyledPopupMenuBtn extends StatelessWidget {
         ),
         itemBuilder: (context) => [
           PopupMenuItem(
+            value: 1,
             padding: EdgeInsets.symmetric(horizontal: 0),
             child: ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 20),
@@ -413,12 +424,13 @@ class StyledPopupMenuBtn extends StatelessWidget {
             ),
           ),
           PopupMenuItem(
+            value: 2,
             padding: EdgeInsets.symmetric(horizontal: 0),
             child: ListTile(
-              onTap: () {
-                print("Tap Eidt");
-                Get.toNamed(RouteNames.eidtProfile);
-              },
+              // onTap: () {
+              // print("Tap Eidt");
+              // Get.toNamed(RouteNames.eidtProfile);
+              // },
               contentPadding: EdgeInsets.symmetric(horizontal: 20),
               minLeadingWidth: 10,
               leading: Icon(Icons.edit_note_rounded),
@@ -427,21 +439,16 @@ class StyledPopupMenuBtn extends StatelessWidget {
           ),
           PopupMenuDivider(),
           PopupMenuItem(
-            padding: EdgeInsets.symmetric(horizontal: 0),
-            child: GetBuilder<AuthController>(
-              builder: (controller) => ListTile(
+              value: 3,
+              padding: EdgeInsets.symmetric(horizontal: 0),
+              child: ListTile(
                 contentPadding: EdgeInsets.symmetric(horizontal: 20),
                 minLeadingWidth: 10,
                 iconColor: Colors.red,
                 textColor: Colors.red,
-                onTap: () {
-                  controller.signOut();
-                },
                 leading: Icon(Icons.logout_outlined),
                 title: Text("Sign Out"),
-              ),
-            ),
-          ),
+              )),
         ],
       ),
     );

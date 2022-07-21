@@ -12,6 +12,7 @@ import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/services/database.dart';
 import 'package:job_portal/widgets/job-post-card-hr.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
+import 'package:job_portal/widgets/profile_widgets.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -46,38 +47,38 @@ class AccountPage extends StatelessWidget {
                               children: [
                                 // Profile Pic
 
-                                if (snapshot.connectionState ==
-                                        ConnectionState.active &&
-                                    snapshot.hasData &&
-                                    userAccountController.isUploading ==
-                                        false) ...[
-                                  CircleAvatar(
-                                    backgroundImage:
-                                        NetworkImage(snapshot.data!.profile!),
-                                    // AssetImage("assets/images/default.png"),
-                                    backgroundColor: Colors.transparent,
-                                    radius: 50,
-                                  )
-                                ] else if (snapshot.connectionState ==
-                                            ConnectionState.active &&
-                                        snapshot.data?.profile == null ||
-                                    snapshot.data?.profile == "") ...[
-                                  CircleAvatar(
-                                    backgroundImage:
-                                        AssetImage("assets/images/default.png"),
-                                    backgroundColor: Colors.transparent,
-                                    radius: 50,
-                                  )
-                                ] else ...[
-                                  CircleAvatar(
-                                    backgroundColor: Colors.transparent,
-                                    radius: 50,
-                                    child: CircularProgressIndicator(
-                                      color: Colors.black54,
+                                Stack(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(right: 5),
+                                      child: AccountPageProfile(
+                                        snapshot: snapshot,
+                                        controller: userAccountController,
+                                      ),
                                     ),
-                                  )
-                                ],
-
+                                    Positioned(
+                                        bottom: 0,
+                                        right: 2,
+                                        child: GestureDetector(
+                                          onTap: userAccountController
+                                              .uploadProfile,
+                                          child: Container(
+                                            height: 30,
+                                            width: 30,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color:
+                                                  Color.fromARGB(151, 0, 0, 0),
+                                            ),
+                                            child: Icon(
+                                              Icons.edit,
+                                              size: 20,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ))
+                                  ],
+                                ),
                                 // Profile Pic
 
                                 SizedBox(
@@ -412,15 +413,16 @@ class StyledPopupMenuBtn extends StatelessWidget {
             ),
           ),
           PopupMenuItem(
-            onTap: () {
-              userAccountController.uploadProfile();
-            },
             padding: EdgeInsets.symmetric(horizontal: 0),
             child: ListTile(
+              onTap: () {
+                print("Tap Eidt");
+                Get.toNamed(RouteNames.eidtProfile);
+              },
               contentPadding: EdgeInsets.symmetric(horizontal: 20),
               minLeadingWidth: 10,
-              leading: Icon(Icons.add),
-              title: Text("Add Profile Picture"),
+              leading: Icon(Icons.edit_note_rounded),
+              title: Text("Edit Profile"),
             ),
           ),
           PopupMenuDivider(),

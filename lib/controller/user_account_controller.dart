@@ -92,7 +92,5 @@ class UserAccountController extends GetxController {
           docPath: docPath,
           data: {"postedBy.profile": fileLink});
     }
-    // isUploading.value = false;
-    // update();
   }
 }

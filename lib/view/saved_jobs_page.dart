@@ -44,22 +44,27 @@ class SavedJobsPage extends StatelessWidget {
         body: GetBuilder<SavedJobsPageController>(
             init: Get.put<SavedJobsPageController>(SavedJobsPageController()),
             builder: (controller) {
-              return ListView.builder(
-                itemCount: controller.getSavedPosts.length,
-                padding: EdgeInsets.symmetric(vertical: 20),
-                itemBuilder: (context, index) => GestureDetector(
-                  onTap: () {
-                    Future.delayed(Duration.zero, () {
-                      Get.toNamed(RouteNames.jobDetails,
-                          arguments: controller.getSavedPosts[index]);
-                    });
-                  },
-                  child: DismissibleJobPostCard(
-                    index: index,
-                    data: controller.getSavedPosts[index],
-                  ),
-                ),
-              );
+              return controller.getSavedPosts.length > 0
+                  ? ListView.builder(
+                      itemCount: controller.getSavedPosts.length,
+                      padding: EdgeInsets.symmetric(vertical: 20),
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () {
+                          Future.delayed(Duration.zero, () {
+                            Get.toNamed(RouteNames.jobDetails,
+                                arguments: controller.getSavedPosts[index]);
+                          });
+                        },
+                        child: DismissibleJobPostCard(
+                          index: index,
+                          data: controller.getSavedPosts[index],
+                        ),
+                      ),
+                    )
+                  : Center(
+                      heightFactor: 50,
+                      child: Text("No Saved Posts Yet"),
+                    );
             }));
   }
 }

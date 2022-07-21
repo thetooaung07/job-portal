@@ -4,6 +4,7 @@ import 'package:job_portal/main.dart';
 import 'package:job_portal/view/account_page.dart';
 import 'package:job_portal/view/applications_page.dart';
 import 'package:job_portal/view/applied_page.dart';
+import 'package:job_portal/view/edit_profile.dart';
 import 'package:job_portal/view/login/signup_page.dart';
 import 'package:job_portal/view/login/login_page.dart';
 import 'package:job_portal/view/job_details_page.dart';
@@ -20,9 +21,9 @@ class RouteNames {
   static String root = "/root";
   static String login = "/login";
   static String home = "/home";
+  static String search = "/search";
   static String popularJobs = "/popular-jobs";
   static String recentPosts = "/recent-posts";
-  static String search = "/search";
   static String jobDetails = "/job-details";
   static String jobs = "/jobs";
   static String applications = "/applications";
@@ -33,76 +34,30 @@ class RouteNames {
   static String signup = "/signup";
   static String savePosts = "/saved-posts";
   static String postJob = "/post-job";
+  static String eidtProfile = "/edit-profile";
 }
 
 routes() => [
+      GetPage(name: RouteNames.root, page: () => const RootPage()),
+      GetPage(name: RouteNames.login, page: () => const LoginPage()),
+      GetPage(name: RouteNames.signup, page: () => const SignUpPage()),
       GetPage(
-        name: RouteNames.root,
-        // binding: HomePageBinding(),
-        page: () => const RootPage(),
-      ),
+          name: RouteNames.home,
+          page: () => const HomePage()), // !TODO to change back
       GetPage(
-        name: RouteNames.login,
-        // binding: HomePageBinding(),
-        page: () => const LoginPage(),
-      ),
+          name: RouteNames.popularJobs, page: () => const PopularJobsPage()),
       GetPage(
-        name: RouteNames.signup,
-        // binding: HomePageBinding(),
-        page: () => const SignUpPage(),
-      ),
+          name: RouteNames.recentPosts, page: () => const RecentPostsPage()),
+      GetPage(name: RouteNames.search, page: () => const SearchPage()),
+      GetPage(name: RouteNames.jobDetails, page: () => const JobDetailsPage()),
+      GetPage(name: RouteNames.jobs, page: () => const JobsPage()),
+      GetPage(name: RouteNames.nearby, page: () => const NearbyPage()),
+      GetPage(name: RouteNames.applied, page: () => const AppliedPage()),
+      GetPage(name: RouteNames.account, page: () => const AccountPage()),
       GetPage(
-        name: RouteNames.home,
-        // binding: HomePageBinding(),
-        page: () => const HomePage(), // !TODO to change back
-      ),
-      GetPage(
-        name: RouteNames.popularJobs,
-        page: () => const PopularJobsPage(),
-      ),
-      GetPage(
-        name: RouteNames.recentPosts,
-        page: () => const RecentPostsPage(),
-      ),
-      GetPage(
-        name: RouteNames.search,
-        binding: SearchPageBinding(),
-        page: () => const SearchPage(),
-      ),
-      GetPage(
-        name: RouteNames.jobDetails,
-        page: () => const JobDetailsPage(),
-      ),
-      GetPage(
-        name: RouteNames.jobs,
-        page: () => const JobsPage(),
-      ),
-      GetPage(
-        name: RouteNames.nearby,
-        page: () => const NearbyPage(),
-      ),
-      GetPage(
-        name: RouteNames.applied,
-        page: () => const AppliedPage(),
-      ),
-      GetPage(
-        name: RouteNames.account,
-        page: () => const AccountPage(),
-      ),
-      GetPage(
-        name: RouteNames.applications,
-        page: () => const ApplicationsPage(),
-      ),
-      GetPage(
-        name: RouteNames.myJobs,
-        page: () => const MyJobsPage(),
-      ),
-      GetPage(
-        name: RouteNames.savePosts,
-        page: () => const SavedJobsPage(),
-      ),
-      GetPage(
-        name: RouteNames.postJob,
-        page: () => const PostJobPage(),
-      ),
+          name: RouteNames.applications, page: () => const ApplicationsPage()),
+      GetPage(name: RouteNames.myJobs, page: () => const MyJobsPage()),
+      GetPage(name: RouteNames.savePosts, page: () => const SavedJobsPage()),
+      GetPage(name: RouteNames.postJob, page: () => const PostJobPage()),
+      GetPage(name: RouteNames.eidtProfile, page: () => const EditProfilePage())
     ];

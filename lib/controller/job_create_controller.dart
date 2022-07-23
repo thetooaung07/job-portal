@@ -21,6 +21,24 @@ class JobCreateController extends GetxController {
   TextEditingController requirementsC = new TextEditingController();
   TextEditingController responsibilitiesC = new TextEditingController();
 
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    titleC.text = "Web Developer";
+    expLevelC.text = "Mid Senior";
+    techSkillC.text = "Js, React, Api";
+    salaryC.text = "1200-1500";
+    companyLocationC.text = "Yangon";
+    companyNameC.text = "XSoftware House";
+    companyWebsiteC.text = "abc.web.com";
+    companyContactMailC.text = "abc@gmail.com";
+    requirementsC.text =
+        "Need to work first\nPositive attitude\nWork under pressure\nmust come to company";
+    responsibilitiesC.text =
+        "Need to maintain quality code\nAble to provide new features per customer's need\nAble to meet deadline";
+  }
+
   RxList docIdList = <String>[].obs;
 
   void printController() {
@@ -64,6 +82,23 @@ class JobCreateController extends GetxController {
     super.onClose();
   }
 
+  List<String> stringToList(String data) {
+    List<String> c = [];
+    if (data.contains(RegExp(r'\n'))) {
+      c = data.replaceAll('\n', '.').split(".");
+    }
+
+    List<String> result = [];
+
+    c.forEach((element) {
+      if (element.isEmpty)
+        return;
+      else
+        result.add(element);
+    });
+    return result;
+  }
+
   Future createJobPost() async {
     DocumentReference doc =
         await firebaseFirestore.collection("jobPosts").doc();
@@ -85,23 +120,23 @@ class JobCreateController extends GetxController {
         companyLocation: companyLocationC.text,
         companyWebsite: companyWebsiteC.text,
         salary: salaryC.text,
-        responsibilities: [responsibilitiesC.text],
+        responsibilities: stringToList(responsibilitiesC.text),
         companyContactMail: companyContactMailC.text,
-        requirements: [requirementsC.text],
-        techSkill: [techSkillC.text],
+        requirements: stringToList(requirementsC.text),
+        techSkill: stringToList(techSkillC.text),
         createdAt: DateTime.now());
 
     await FirestoreHelper().create(
         collectionPath: "jobPosts", docPath: documentID, data: _job.toJson());
+    // user_jobPosts Joint Table
+    /* UserJobPostsModel _uJP = new UserJobPostsModel(
+        postId: documentID, isExpired: false, createdAt: DateTime.now());
 
-    // UserJobPostsModel _uJP = new UserJobPostsModel(
-    //     postId: documentID, isExpired: false, createdAt: DateTime.now());
-
-    // await FirestoreHelper().create(
-    //   collectionPath: "user_jobPosts",
-    //   docPath: loginUserID,
-    //   data: _uJP.toFirestore(),
-    // );
+    await FirestoreHelper().create(
+      collectionPath: "user_jobPosts",
+      docPath: loginUserID,
+      data: _uJP.toFirestore(),
+    ); */
 
     await Fluttertoast.showToast(
       msg: "Success",

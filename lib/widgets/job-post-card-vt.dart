@@ -160,7 +160,8 @@ class JobPostCardVt extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 15),
-                  child: Text("${bullet}23 min ago"),
+                  child: Text(
+                      "${bullet} ${differenceInString(data!.createdAt!)} ago"),
                 ),
               ],
             ),

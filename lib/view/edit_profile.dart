@@ -1,39 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
-import 'package:job_portal/controller/user_account_controller.dart';
+import 'package:job_portal/controller/user_info_update_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
-class EditProfilePage extends StatefulWidget {
+class EditProfilePage extends StatelessWidget {
   const EditProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<EditProfilePage> createState() => _EditProfilePageState();
-}
-
-class _EditProfilePageState extends State<EditProfilePage> {
-  UserAccountController controller = Get.find<UserAccountController>();
-
-  @override
-  void initState() {
-    super.initState();
-
-    if (controller.user.username != null && controller.user.email != null) {
-      controller.usernameC.text = controller.user.username!;
-      controller.emailC.text = controller.user.email!;
-    }
-  }
-
-  @override
-  void dispose() {
-    controller.usernameC..dispose();
-    controller.emailC.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final UserInfoUpdateController controller =
+        Get.put(UserInfoUpdateController());
     return Scaffold(
       appBar: MyAppBar(
         leading: Container(

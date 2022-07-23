@@ -180,9 +180,15 @@ class FirstTab extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20)),
             child: Column(children: [
               // Requirements
-              Requirements(),
+              BulletListContainer(
+                data: data.requirements,
+                titile: "Requirements",
+              ),
               // Responsibilities
-              Responsibilities(),
+              BulletListContainer(
+                data: data.responsibilities,
+                titile: "Responsibilities",
+              ),
             ]),
           ),
         ],
@@ -337,12 +343,16 @@ class CompanyLogo extends StatelessWidget {
   }
 }
 
-class Responsibilities extends StatelessWidget {
-  const Responsibilities({Key? key}) : super(key: key);
+class BulletListContainer extends StatelessWidget {
+  final String titile;
+  final List data;
+
+  const BulletListContainer(
+      {Key? key, required this.titile, required this.data})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    JobPostModel data = Get.arguments as JobPostModel;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -353,42 +363,43 @@ class Responsibilities extends StatelessWidget {
             style: kLabelTextStyle,
           ),
         ),
-        BulletText(),
-        BulletText(),
-        BulletText(),
-        BulletText(),
-      ],
-    );
-  }
-}
-
-class Requirements extends StatelessWidget {
-  const Requirements({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    JobPostModel data = Get.arguments as JobPostModel;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.only(bottom: 25, top: 10),
-          child: Text(
-            "Requirements",
-            style: kLabelTextStyle,
+        ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: data.length,
+          itemBuilder: (context, index) => BulletText(
+            text: data[index],
           ),
-        ),
-        BulletText(),
-        BulletText(),
-        BulletText(),
-        BulletText(),
+        )
       ],
     );
   }
 }
+
+// class Requirements extends StatelessWidget {
+//   const Requirements({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     JobPostModel data = Get.arguments as JobPostModel;
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         Padding(
+//           padding: EdgeInsets.only(bottom: 25, top: 10),
+//           child: Text(
+//             "Requirements",
+//             style: kLabelTextStyle,
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
 class BulletText extends StatelessWidget {
-  const BulletText({Key? key}) : super(key: key);
+  final String text;
+  const BulletText({Key? key, required this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -409,7 +420,7 @@ class BulletText extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              "Works effectively blah Blah and Dlutter is really good blah and Lorem Ipsum Askman Thether ",
+              text,
               style: kBulletListTextStyle,
             ),
           ),
@@ -438,14 +449,14 @@ class ApplyNowBtn extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Salary",
+                "Salary/ month",
                 style: kBulletListTextStyle.copyWith(
                     letterSpacing: 1,
                     fontWeight: FontWeight.bold,
                     color: Colors.black54),
               ),
               Text(
-                ("${data.salary} / month"),
+                ("\$${data.salary}"),
                 style: kLabelTextStyle.copyWith(color: kPrimaryRedColor),
               ),
             ],

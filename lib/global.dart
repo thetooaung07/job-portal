@@ -16,3 +16,15 @@ final ImagePicker imagePicker = ImagePicker();
 void customPrint(dynamic title, dynamic res) {
   print(" $title => ${res}");
 }
+
+String differenceInString(DateTime time) {
+  return DateTime.now().difference(time).inDays > 365
+      ? "${DateTime.now().difference(time).inDays ~/ 365}y"
+      : DateTime.now().difference(time).inDays > 7
+          ? "${DateTime.now().difference(time).inDays ~/ 7}w"
+          : DateTime.now().difference(time).inDays > 1
+              ? "${DateTime.now().difference(time).inDays}d"
+              : DateTime.now().difference(time).inHours > 1
+                  ? "${DateTime.now().difference(time).inHours}h"
+                  : "${DateTime.now().difference(time).inMinutes}m";
+}

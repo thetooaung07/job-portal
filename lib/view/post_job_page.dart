@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/job_create_controller.dart';
 import 'package:job_portal/main.dart';
-import 'package:job_portal/widgets/custom_expansion_tile.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
 class PostJobPage extends GetView<JobCreateController> {
@@ -147,7 +146,7 @@ class PostJobPage extends GetView<JobCreateController> {
                           ),
                           Expanded(
                             child: Text(
-                              "Please add full-stop(.) at the end of each sentence\nor press enter to move to next line",
+                              "Type in below format to generate bullet points.",
                               style: TextStyle(fontSize: 14),
                             ),
                           ),
@@ -180,7 +179,8 @@ class PostJobPage extends GetView<JobCreateController> {
                               fontSize: 16,
                               color: Colors.black26,
                             ),
-                            hintText: "Enter Job Description",
+                            hintText:
+                                "require minium work exp of 2 years\n\nmust have positive attitude for work\n\nnew Requirement",
                             fillColor: Colors.white,
                             filled: true),
                       ),

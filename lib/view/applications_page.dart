@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
@@ -29,7 +30,10 @@ class ApplicationsPage extends StatelessWidget {
           Container(
             margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
             child: CustomIconButton(
-              onTap: (() => Get.toNamed(RouteNames.search)),
+              onTap: () {
+                Get.back();
+                Get.find<BottomNavBarController>().selectedIndex.value = 1;
+              },
               child: Icon(
                 Icons.search_rounded,
                 size: 30,

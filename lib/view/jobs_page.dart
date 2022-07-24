@@ -30,7 +30,7 @@ class JobsPage extends StatelessWidget {
           Container(
             margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
             child: CustomIconButton(
-              onTap: (() => Get.toNamed(RouteNames.search)),
+              onTap: () {},
               child: Icon(
                 Icons.more_vert_rounded,
                 size: 30,

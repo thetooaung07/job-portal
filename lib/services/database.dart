@@ -113,6 +113,20 @@ class FirestoreHelper {
     });
   }
 
+  Stream<List<JobPostModel>> jobPostsByOneUser({String? userId}) {
+    return firebaseFirestore
+        .collection("jobPosts")
+        .where("postedBy.userId", isEqualTo: firebaseAuth.currentUser!.uid)
+        .snapshots()
+        .map((event) {
+      List<JobPostModel> dataList = [];
+      event.docs.forEach((element) {
+        dataList.add(JobPostModel.fromDocumentSnapshot(element));
+      });
+      return dataList;
+    });
+  }
+
   // Stream<List<JobPostModel>> allJobPostsStream() {
   //   return firebaseFirestore
   //       .collection("jobPosts")

@@ -387,7 +387,6 @@ class StyledPopupMenuBtn extends StatelessWidget {
       ),
       child: PopupMenuButton<dynamic>(
         onSelected: (value) {
-          print("popup on select => $value");
           if (value == 2) {
             Get.toNamed(RouteNames.eidtProfile);
           }
@@ -428,7 +427,6 @@ class StyledPopupMenuBtn extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 0),
             child: ListTile(
               // onTap: () {
-              // print("Tap Eidt");
               // Get.toNamed(RouteNames.eidtProfile);
               // },
               contentPadding: EdgeInsets.symmetric(horizontal: 20),

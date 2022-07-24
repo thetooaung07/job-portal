@@ -29,7 +29,7 @@ class JobDetailsPage extends GetView<JobPostsController> {
             ),
           ),
         ),
-        label: "QWERTY",
+        label: "Details",
         action: [
           GetBuilder<SavedJobsPageController>(
             builder: (controller) => Container(

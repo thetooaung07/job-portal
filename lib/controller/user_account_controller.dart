@@ -82,7 +82,6 @@ class UserAccountController extends GetxController {
         .then((value) {
       value.docs.forEach((element) {
         if (element["postedBy"]["profile"] == null) {
-          print(element["id"]);
           docListWithProfileNull.add(element["id"]);
         } else
           return;
@@ -90,7 +89,6 @@ class UserAccountController extends GetxController {
     });
 
     for (var docPath in docListWithProfileNull) {
-      print(docPath);
       await FirestoreHelper().update(
           collectionPath: "jobPosts",
           docPath: docPath,

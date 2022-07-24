@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:job_portal/global.dart';
 import 'package:job_portal/model/job_post_model.dart';
 
 class SavedJobsPageController extends GetxController {
@@ -11,7 +10,6 @@ class SavedJobsPageController extends GetxController {
   void addToFavourite(JobPostModel model) {
     getSavedPosts.add(model);
     update();
-    print("savedPosts => $getSavedPosts");
   }
 
   void removeFromFavourite(JobPostModel model) {

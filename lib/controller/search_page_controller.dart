@@ -53,8 +53,6 @@ class SearchPageController extends GetxController {
       return jobCard.contains(input);
     }).toList();
 
-    print("Inside getTitle");
-
     if (title == "") {
       jobPostsList.value = dataList;
     }

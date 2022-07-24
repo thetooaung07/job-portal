@@ -85,44 +85,60 @@ class SearchPage extends StatelessWidget {
               ),
             ),
             //Filter Result
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Obx(() => controller.searchTitle.value.isNotEmpty
-                  ? SizedBox(
-                      height: 45,
-                      child: ListView.builder(
-                        itemCount: 1,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) => SearchTag(),
-                      ),
-                    )
-                  : SizedBox(
-                      height: 1,
-                    )),
-            ),
-            ShowAllTextBanner(title: "14 Jobs Available"),
+            // Padding(
+            //   padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+            //   child: Obx(() => controller.searchTitle.value.isNotEmpty
+            //       ? SizedBox(
+            //           height: 45,
+            //           child: ListView.builder(
+            //             itemCount: 1,
+            //             scrollDirection: Axis.horizontal,
+            //             itemBuilder: (context, index) => SearchTag(),
+            //           ),
+            //         )
+            //       : SizedBox(
+            //           height: 1,
+            //         )),
+            // ),
+
             GetX<SearchPageController>(
               init: Get.put<SearchPageController>(SearchPageController()),
               builder: (controller) {
-                print("controller =>  ${controller.jobPosts.length}");
                 return controller.initialized && controller.jobPosts.length > 0
-                    ? ListView.builder(
-                        itemCount: controller.jobPosts.length,
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          // JobPostModel data = controller.data[index];
-                          return
+                    ? Column(
+                        children: [
+                          ShowAllTextBanner(
+                              title:
+                                  "${controller.jobPosts.length} Jobs Available"),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          ListView.builder(
+                            itemCount: controller.jobPosts.length,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              // JobPostModel data = controller.data[index];
+                              return
 
-                              //  Container(
-                              //   child: Text("${index + 1}"),
-                              // );
-                              JobPostCardVt(
-                            data: controller.jobPosts[index],
-                          );
-                        },
+                                  //  Container(
+                                  //   child: Text("${index + 1}"),
+                                  // );
+                                  JobPostCardVt(
+                                data: controller.jobPosts[index],
+                              );
+                            },
+                          ),
+                        ],
                       )
-                    : Text("No Data");
+                    : Container(
+                        width: Get.width,
+                        height: 70,
+                        child: Center(
+                            child: Text(
+                          "No Data found for   \"${controller.searchTitle}\" ",
+                          style: kBulletListTextStyle,
+                        )));
               },
             ),
           ],

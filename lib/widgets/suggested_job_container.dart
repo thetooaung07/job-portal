@@ -45,35 +45,3 @@ class SuggestedJobContainer extends StatelessWidget {
     );
   }
 }
-
-
-  // ListView.builder(
-  //         physics: NeverScrollableScrollPhysics(),
-  //         shrinkWrap: true,
-  //         itemCount: 4,
-  //         itemBuilder: (context, index) => JobPostCardVt(),
-  //       )
-
-
-
-
-
-  /*  StreamBuilder<List<JobPostModel>>(
-          stream: FirestoreHelper().jobPostsStream(),
-          builder: (context, snapshot) {
-            snapshot.connectionState == ConnectionState.active
-                ? print("Inside snapshot ${snapshot.data!.length}")
-                : null;
-            return snapshot.connectionState == ConnectionState.active
-                ? ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) => JobPostCardVt(),
-                  )
-                : SizedBox(
-                    height: 100,
-                    width: 50,
-                    child: Center(child: CircularProgressIndicator()));
-          },
-        ), */

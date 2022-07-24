@@ -73,6 +73,43 @@ class PostJobPage extends GetView<JobCreateController> {
                       controller: controller.expLevelC,
                       label: "Experience Level",
                     ),
+                    WithLabelTFField(
+                      controller: controller.workHourC,
+                      label: "Work Hour",
+                    ),
+
+                    Obx(
+                      () => Row(
+                        children: [
+                          Radio<WorkType>(
+                              activeColor: kPrimaryRedColor,
+                              value: WorkType.company,
+                              groupValue: controller.selectedType.value,
+                              onChanged: (value) {
+                                print(value);
+                                controller.selectedType.value = value!;
+                              }),
+                          Text("Company"),
+                          Radio<WorkType>(
+                              activeColor: kPrimaryRedColor,
+                              value: WorkType.work_from_home,
+                              groupValue: controller.selectedType.value,
+                              onChanged: (value) {
+                                controller.selectedType.value = value!;
+                              }),
+                          Text("Work From Home"),
+                          Radio<WorkType>(
+                              activeColor: kPrimaryRedColor,
+                              value: WorkType.hybrid,
+                              groupValue: controller.selectedType.value,
+                              onChanged: (value) {
+                                controller.selectedType.value = value!;
+                              }),
+                          Text("Hybrid"),
+                        ],
+                      ),
+                    ),
+
                     //!TODO Change UI for Salary
 
                     WithLabelTFField(
@@ -90,6 +127,7 @@ class PostJobPage extends GetView<JobCreateController> {
                         ),
                       ),
                     ),
+
                     SizedBox(
                       height: 10,
                     ),
@@ -146,7 +184,7 @@ class PostJobPage extends GetView<JobCreateController> {
                           ),
                           Expanded(
                             child: Text(
-                              "Type in below format to generate bullet points.",
+                              "Type in format below to generate bullet points.",
                               style: TextStyle(fontSize: 14),
                             ),
                           ),
@@ -159,7 +197,11 @@ class PostJobPage extends GetView<JobCreateController> {
                       height: 30 * maxLines.toDouble(),
                       child: TextField(
                         controller: controller.requirementsC,
-                        style: TextStyle(fontSize: 17),
+                        style: TextStyle(
+                          fontSize: 17,
+                          color: kPrimaryRedColor,
+                          fontWeight: FontWeight.w500,
+                        ),
                         maxLines: maxLines,
                         decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
@@ -219,7 +261,11 @@ class PostJobPage extends GetView<JobCreateController> {
                       height: 30 * maxLines.toDouble(),
                       child: TextField(
                         controller: controller.responsibilitiesC,
-                        style: TextStyle(fontSize: 17),
+                        style: TextStyle(
+                          fontSize: 17,
+                          color: kPrimaryRedColor,
+                          fontWeight: FontWeight.w500,
+                        ),
                         maxLines: maxLines,
                         decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
@@ -246,19 +292,44 @@ class PostJobPage extends GetView<JobCreateController> {
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ElevatedButton(
-                        onPressed: () => controller.printController(),
-                        child: Text("Print")),
-                    ElevatedButton(
-                        onPressed: () => controller.createJobPost(),
-                        child: Text("Post")),
-                    ElevatedButton(
-                        onPressed: () => controller.clear(),
-                        child: Text("Clear")),
-                  ],
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                          onPressed: () => controller.printController(),
+                          child: Text("Print")),
+                      Expanded(
+                        child: ElevatedButton(
+                            onPressed: () => controller.createJobPost(),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 12.0),
+                              child: Text(
+                                "Post",
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            )),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: ElevatedButton(
+                            onPressed: () => controller.clear(),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 12.0),
+                              child: Text(
+                                "Clear",
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            )),
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),
@@ -287,9 +358,10 @@ class JobSection extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
-        // borderRadius: BorderRadius.circular(20),
-        color: Color.fromARGB(26, 204, 204, 204),
-      ),
+          boxShadow: [kIconShadow],
+          // borderRadius: BorderRadius.circular(20),
+
+          color: themeBgMainColor),
       child: Theme(
         data: Theme.of(context).copyWith(
             // splashColor: Colors.transparent,
@@ -356,7 +428,7 @@ class WithLabelTFField extends StatelessWidget {
                 textAlignVertical: TextAlignVertical.center,
                 style: TextStyle(
                   fontSize: 18,
-                  color: Colors.black54,
+                  color: kPrimaryRedColor,
                   fontWeight: FontWeight.w500,
                 ),
                 decoration: InputDecoration(

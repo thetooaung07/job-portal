@@ -9,10 +9,18 @@ import 'package:job_portal/model/user_account.dart';
 import 'package:job_portal/model/user_jobPosts_model.dart';
 import 'package:job_portal/services/database.dart';
 
+enum WorkType {
+  company,
+  work_from_home,
+  hybrid,
+}
+
 class JobCreateController extends GetxController {
   TextEditingController titleC = new TextEditingController();
   TextEditingController expLevelC = new TextEditingController();
   TextEditingController techSkillC = new TextEditingController();
+  TextEditingController workHourC = new TextEditingController();
+
   TextEditingController salaryC = new TextEditingController();
   TextEditingController companyLocationC = new TextEditingController();
   TextEditingController companyNameC = new TextEditingController();
@@ -21,6 +29,8 @@ class JobCreateController extends GetxController {
   TextEditingController requirementsC = new TextEditingController();
   TextEditingController responsibilitiesC = new TextEditingController();
 
+  Rx<WorkType> selectedType = WorkType.company.obs;
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -28,6 +38,8 @@ class JobCreateController extends GetxController {
     titleC.text = "Web Developer";
     expLevelC.text = "Mid Senior";
     techSkillC.text = "Js, React, Api";
+    workHourC.text = "9am-5pm";
+    selectedType.value = WorkType.company;
     salaryC.text = "1200-1500";
     companyLocationC.text = "Yangon";
     companyNameC.text = "XSoftware House";
@@ -45,7 +57,9 @@ class JobCreateController extends GetxController {
     print(titleC.text);
     print(expLevelC.text);
     print(techSkillC.text);
+    print(workHourC.text);
     print(salaryC.text);
+    print(selectedType.value);
     print(companyLocationC.text);
     print(companyNameC.text);
     print(companyWebsiteC.text);
@@ -58,6 +72,7 @@ class JobCreateController extends GetxController {
     titleC.clear();
     expLevelC.clear();
     techSkillC.clear();
+    workHourC.clear();
     salaryC.clear();
     companyLocationC.clear();
     companyNameC.clear();
@@ -72,6 +87,7 @@ class JobCreateController extends GetxController {
     titleC.dispose();
     expLevelC.dispose();
     techSkillC.dispose();
+    workHourC.dispose();
     salaryC.dispose();
     companyLocationC.dispose();
     companyNameC.dispose();
@@ -115,7 +131,9 @@ class JobCreateController extends GetxController {
         id: documentID,
         title: titleC.text,
         postedBy: jobPostUser,
+        workType: selectedType.value,
         expLevel: expLevelC.text,
+        workHour: workHourC.text,
         companyName: companyNameC.text,
         companyLocation: companyLocationC.text,
         companyWebsite: companyWebsiteC.text,

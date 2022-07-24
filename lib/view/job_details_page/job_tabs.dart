@@ -171,7 +171,7 @@ class JobDescShort extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Text("Full Time"),
+              Text(data.workHour),
             ],
           ),
         ],

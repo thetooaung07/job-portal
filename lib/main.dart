@@ -65,26 +65,69 @@ class HomePage extends StatelessWidget {
         //   },
         //   child:
 
-        Scaffold(
-      backgroundColor: themeBgMainColor,
+        WillPopScope(
+      onWillPop: () async {
+        final shouldPop = await showDialog<bool>(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              insetPadding: EdgeInsets.symmetric(horizontal: 50),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              title: const Text('Do you want to Exit?'),
+              actionsAlignment: MainAxisAlignment.center,
+              actions: [
+                Container(
+                  width: MediaQuery.of(context).size.width / 3,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, false);
+                    },
+                    child: const Text(
+                      'No',
+                      style: TextStyle(fontSize: 17),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width / 3,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                    child: const Text(
+                      'Yes',
+                      style: TextStyle(fontSize: 17),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+        return shouldPop!;
+      },
+      child: Scaffold(
+        backgroundColor: themeBgMainColor,
 
-      body: Obx(
-        () => _pages[controller.selectedIndex.value],
-      ),
-      // body: PageView(
-      //   children: [
-      //     HomePageView(),
-      //     NearbyPage(),
-      //     AppliedPage(),
-      //     AccountPage(),
-      //   ],
-      //   controller: controller.pageController,
-      //   onPageChanged: (index) {
-      //     controller.selectedIndex.value = index;
-      //   },
-      // ),
-      bottomNavigationBar: BottomNavBarConstraints(
-        child: CustomBottomNavBar(),
+        body: Obx(
+          () => _pages[controller.selectedIndex.value],
+        ),
+        // body: PageView(
+        //   children: [
+        //     HomePageView(),
+        //     NearbyPage(),
+        //     AppliedPage(),
+        //     AccountPage(),
+        //   ],
+        //   controller: controller.pageController,
+        //   onPageChanged: (index) {
+        //     controller.selectedIndex.value = index;
+        //   },
+        // ),
+        bottomNavigationBar: BottomNavBarConstraints(
+          child: CustomBottomNavBar(),
+        ),
       ),
     );
     // );

@@ -118,13 +118,7 @@ class SearchPage extends StatelessWidget {
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
-                              // JobPostModel data = controller.data[index];
-                              return
-
-                                  //  Container(
-                                  //   child: Text("${index + 1}"),
-                                  // );
-                                  JobPostCardVt(
+                              return JobPostCardVt(
                                 data: controller.jobPosts[index],
                               );
                             },

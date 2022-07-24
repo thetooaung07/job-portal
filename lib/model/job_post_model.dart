@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:job_portal/model/user_account.dart';
+import 'package:job_portal/controller/job_create_controller.dart';
 
 class JobPostModel {
   late String postUserId;
   late String id;
   late String title; // JS developer
   late String expLevel; // Eg. Mid-Level, Intern, Senior;
+  late String workHour;
+  late WorkType workType;
   late String companyLocation; // WFH or on Campus,
   late String companyName; // US,
   late String companyWebsite; // 9 to 5
@@ -21,8 +23,10 @@ class JobPostModel {
     required this.postUserId,
     required this.id,
     required this.title,
+    required this.workHour,
     required this.postedBy,
     required this.expLevel,
+    required this.workType,
     required this.companyName,
     required this.companyLocation,
     required this.companyWebsite,
@@ -41,6 +45,7 @@ class JobPostModel {
     title = doc["title"];
     postedBy = JobPostUser.fromMap(doc["postedBy"]);
     expLevel = doc["expLevel"];
+    workHour = doc["workHour"];
     companyName = doc["companyName"];
     companyLocation = doc["companyLocation"];
     companyWebsite = doc["companyWebsite"];
@@ -58,6 +63,7 @@ class JobPostModel {
         "id": id,
         "title": title,
         "expLevel": expLevel,
+        "workHour": workHour.toString(),
         "postedBy": postedBy.toMap(),
         "companyName": companyName,
         "companyWebsite": companyWebsite,

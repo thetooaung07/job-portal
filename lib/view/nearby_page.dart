@@ -26,7 +26,7 @@ class NearbyPage extends StatelessWidget {
               ),
             ),
           ),
-          label: "Nearby",
+          label: "Search",
           action: [
             Container(
               margin: EdgeInsets.fromLTRB(0, 10, 20, 10),

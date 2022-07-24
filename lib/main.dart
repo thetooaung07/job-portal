@@ -6,8 +6,8 @@ import 'package:job_portal/controller/auth_page_controller.dart';
 import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/controller/user_account_controller.dart';
 import 'package:job_portal/view/account_page.dart';
-import 'package:job_portal/view/applied_page.dart';
-import 'package:job_portal/view/nearby_page.dart';
+import 'package:job_portal/view/jobs_page.dart';
+import 'package:job_portal/view/search_page/search_page.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 import 'package:job_portal/widgets/top_company_container.dart';
 import 'package:job_portal/widgets/suggested_job_container.dart';
@@ -49,8 +49,8 @@ class HomePage extends StatelessWidget {
 
     final List<Widget> _pages = [
       HomePageView(),
-      NearbyPage(),
-      AppliedPage(),
+      SearchPage(),
+      JobsPage(),
       AccountPage(),
     ];
 
@@ -116,9 +116,9 @@ class HomePageView extends StatelessWidget {
           Container(
             margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
             child: CustomIconButton(
-              onTap: (() => Get.toNamed(RouteNames.search)),
+              onTap: () {},
               child: Icon(
-                Icons.search_rounded,
+                Icons.notifications_none_rounded,
                 size: 30,
                 color: Colors.black,
               ),

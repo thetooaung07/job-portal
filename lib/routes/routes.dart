@@ -1,13 +1,12 @@
 import 'package:get/get.dart';
-import 'package:job_portal/binding/searchpage_binding.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/view/account_page.dart';
 import 'package:job_portal/view/applications_page.dart';
-import 'package:job_portal/view/applied_page.dart';
+
 import 'package:job_portal/view/edit_profile.dart';
 import 'package:job_portal/view/login/signup_page.dart';
 import 'package:job_portal/view/login/login_page.dart';
-import 'package:job_portal/view/job_details_page.dart';
+import 'package:job_portal/view/job_details_page/job_details_page.dart';
 import 'package:job_portal/view/jobs_page.dart';
 import 'package:job_portal/view/my_jobs_page.dart';
 import 'package:job_portal/view/nearby_page.dart';
@@ -52,7 +51,7 @@ routes() => [
       GetPage(name: RouteNames.jobDetails, page: () => const JobDetailsPage()),
       GetPage(name: RouteNames.jobs, page: () => const JobsPage()),
       GetPage(name: RouteNames.nearby, page: () => const NearbyPage()),
-      GetPage(name: RouteNames.applied, page: () => const AppliedPage()),
+      GetPage(name: RouteNames.applied, page: () => const JobsPage()),
       GetPage(name: RouteNames.account, page: () => const AccountPage()),
       GetPage(
           name: RouteNames.applications, page: () => const ApplicationsPage()),

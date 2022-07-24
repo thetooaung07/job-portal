@@ -16,143 +16,147 @@ class FilterBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: Get.width,
-      height: Get.height * 0.85,
-      decoration: BoxDecoration(
-        color: themeBgColor,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+    return SingleChildScrollView(
+      child: Container(
+        width: Get.width,
+        height: Get.height * 0.85,
+        decoration: BoxDecoration(
+          color: themeBgColor,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(
-          top: 15,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Align(
-              child: Container(
-                width: 50,
-                height: 7,
-                decoration: BoxDecoration(
-                    color: Colors.black54,
-                    borderRadius: BorderRadius.circular(10)),
+        child: Padding(
+          padding: const EdgeInsets.only(
+            top: 15,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Align(
+                child: Container(
+                  width: 50,
+                  height: 7,
+                  decoration: BoxDecoration(
+                      color: Colors.black54,
+                      borderRadius: BorderRadius.circular(10)),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Row(
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Filters",
+                      style: kHeaderTextStyle.copyWith(letterSpacing: 1),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Reset",
+                        style: kLabelTextStyle.copyWith(
+                            color: kPrimaryRedColor, fontSize: 17),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              LabelDropDownBtn(
+                label: "Job Categories",
+              ),
+              LabelDropDownBtn(
+                label: "Job Type",
+              ),
+              LabelDropDownBtn(label: "Location"),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 1),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Salary",
+                      style: kLabelTextStyle.copyWith(fontSize: 17),
+                    ),
+                    DropdownButton(
+                      underline: SizedBox(),
+                      value: "a",
+                      items: [
+                        DropdownMenuItem(value: "a", child: Text("Month")),
+                        DropdownMenuItem(value: "b", child: Text("Year"))
+                      ],
+                      onChanged: (_) {},
+                    )
+                  ],
+                ),
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Filters",
-                    style: kHeaderTextStyle.copyWith(letterSpacing: 1),
+                  Flexible(
+                      child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      LabelDropDownBtn(
+                        padding: EdgeInsets.only(left: 20),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 30, top: 5),
+                        child: Text(
+                          "Min. Salary",
+                          style: kBulletListTextStyle.copyWith(
+                              color: Colors.black54),
+                        ),
+                      ),
+                    ],
+                  )),
+                  SizedBox(
+                    width: 10,
                   ),
-                  TextButton(
+                  Flexible(
+                      child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      LabelDropDownBtn(
+                        padding: EdgeInsets.only(right: 20),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10, top: 5),
+                        child: Text(
+                          "Max. Salary",
+                          style: kBulletListTextStyle.copyWith(
+                              color: Colors.black54),
+                        ),
+                      ),
+                    ],
+                  )),
+                ],
+              ),
+              Spacer(),
+              Container(
+                margin: EdgeInsets.all(15),
+                width: Get.width,
+                height: 60,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(40),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.black),
                     onPressed: () {},
                     child: Text(
-                      "Reset",
+                      "Show Results",
                       style: kLabelTextStyle.copyWith(
-                          color: kPrimaryRedColor, fontSize: 17),
+                          fontSize: 20,
+                          letterSpacing: 1.5,
+                          color: Colors.white),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            LabelDropDownBtn(
-              label: "Job Categories",
-            ),
-            LabelDropDownBtn(
-              label: "Job Type",
-            ),
-            LabelDropDownBtn(label: "Location"),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 1),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Salary",
-                    style: kLabelTextStyle.copyWith(fontSize: 17),
-                  ),
-                  DropdownButton(
-                    underline: SizedBox(),
-                    value: "a",
-                    items: [
-                      DropdownMenuItem(value: "a", child: Text("Month")),
-                      DropdownMenuItem(value: "b", child: Text("Year"))
-                    ],
-                    onChanged: (_) {},
-                  )
-                ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    LabelDropDownBtn(
-                      padding: EdgeInsets.only(left: 20),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 30, top: 5),
-                      child: Text(
-                        "Min. Salary",
-                        style: kBulletListTextStyle.copyWith(
-                            color: Colors.black54),
-                      ),
-                    ),
-                  ],
-                )),
-                SizedBox(
-                  width: 10,
-                ),
-                Flexible(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    LabelDropDownBtn(
-                      padding: EdgeInsets.only(right: 20),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 10, top: 5),
-                      child: Text(
-                        "Max. Salary",
-                        style: kBulletListTextStyle.copyWith(
-                            color: Colors.black54),
-                      ),
-                    ),
-                  ],
-                )),
-              ],
-            ),
-            Spacer(),
-            Container(
-              margin: EdgeInsets.all(15),
-              width: Get.width,
-              height: 60,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(40),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.black),
-                  onPressed: () {},
-                  child: Text(
-                    "Show Results",
-                    style: kLabelTextStyle.copyWith(
-                        fontSize: 20, letterSpacing: 1.5, color: Colors.white),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

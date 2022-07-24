@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
-import 'package:job_portal/controller/search_title_controller.dart';
+import 'package:job_portal/controller/search_page_controller.dart';
 
 class SearchBar extends StatefulWidget {
   final Widget? prefixIcon;
@@ -14,25 +14,9 @@ class SearchBar extends StatefulWidget {
 }
 
 class _SearchBarState extends State<SearchBar> {
-  // final SearchTitleController _controller = Get.find(tag: "search_bar");
-  // final TextEditingController searchPageController =
-  //     new TextEditingController();
-
-  // @override
-  // void initState() {
-  //   // searchPageController.text = _controller.searchTitle.value;
-  //   super.initState();
-  // }
-
-  // @override
-  // void dispose() {
-  //   searchPageController.dispose();
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SearchTitleController>(
+    return GetBuilder<SearchPageController>(
       builder: (controller) {
         return TextFormField(
           autofocus: false,

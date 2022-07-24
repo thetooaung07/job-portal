@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/main.dart';
+import 'package:job_portal/model/job_post_model.dart';
+import 'package:job_portal/widgets/job-post-card-vt.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 import 'package:job_portal/widgets/searchbar.dart';
 import 'package:job_portal/constants.dart';
-import 'package:job_portal/controller/search_title_controller.dart';
+import 'package:job_portal/controller/search_page_controller.dart';
 import 'package:job_portal/view/search_page/filter_bottom_sheet.dart';
 import 'package:job_portal/widgets/showAllTextBanner.dart';
 
@@ -14,14 +17,16 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SearchTitleController controller = Get.put(SearchTitleController());
+    final SearchPageController controller = Get.put(SearchPageController());
 
     return Scaffold(
       appBar: MyAppBar(
         leading: Container(
           margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: CustomIconButton(
-            onTap: (() => Get.back()),
+            onTap: () {
+              Get.find<BottomNavBarController>().selectedIndex.value = 0;
+            },
             child: Icon(
               Icons.chevron_left_rounded,
               size: 30,
@@ -29,12 +34,13 @@ class SearchPage extends StatelessWidget {
             ),
           ),
         ),
-        label: "QWERTY",
+        label: "Search",
         action: [
           Container(
             margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
             child: CustomIconButton(
               onTap: () {
+                FocusManager.instance.primaryFocus?.unfocus();
                 Get.bottomSheet(FilterBottomSheet(), isScrollControlled: true);
               },
               child: Center(
@@ -53,42 +59,6 @@ class SearchPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // MyAppBar(
-            //   child: Padding(
-            //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            //     child: Row(
-            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //         children: [
-            //           CustomIconButton(
-            //             onTap: () {
-            //               Get.back();
-            //             },
-            //             child: Icon(
-            //               Icons.chevron_left_rounded,
-            //               size: 30,
-            //               color: Colors.black,
-            //             ),
-            //           ),
-            //           Text(
-            //             "Search",
-            //             style: kLogoTextStyle,
-            //           ),
-            //           CustomIconButton(
-            //             onTap: () {
-            //               Get.bottomSheet(FilterBottomSheet(),
-            //                   isScrollControlled: true);
-            //             },
-            //             child: Center(
-            //                 child: SvgPicture.asset(
-            //               'assets/icons/slider_icon.svg',
-            //               height: 20,
-            //               width: 20,
-            //               color: Colors.black,
-            //             )),
-            //           ),
-            //         ]),
-            //   ),
-            // ),
             SizedBox(
               height: 20,
             ),
@@ -130,19 +100,30 @@ class SearchPage extends StatelessWidget {
                       height: 1,
                     )),
             ),
-            Column(
-              children: [
-                ShowAllTextBanner(title: "14 Jobs Available"),
-                SizedBox(
-                  height: 10,
-                ),
-                // JobPostCardVt(),
-                // JobPostCardVt(),
-                // JobPostCardVt(),
-                // JobPostCardVt(),
-                // JobPostCardVt(),
-                // JobPostCardVt(),
-              ],
+            ShowAllTextBanner(title: "14 Jobs Available"),
+            GetX<SearchPageController>(
+              init: Get.put<SearchPageController>(SearchPageController()),
+              builder: (controller) {
+                print("controller =>  ${controller.jobPosts.length}");
+                return controller.initialized && controller.jobPosts.length > 0
+                    ? ListView.builder(
+                        itemCount: controller.jobPosts.length,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          // JobPostModel data = controller.data[index];
+                          return
+
+                              //  Container(
+                              //   child: Text("${index + 1}"),
+                              // );
+                              JobPostCardVt(
+                            data: controller.jobPosts[index],
+                          );
+                        },
+                      )
+                    : Text("No Data");
+              },
             ),
           ],
         ),

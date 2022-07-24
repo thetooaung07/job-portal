@@ -14,15 +14,17 @@ class FirestoreHelper {
   Future<QuerySnapshot<Map<String, dynamic>>> readByCollection({
     required String collectionPath,
   }) =>
-      firebaseFirestore.collection(collectionPath).get();
+      firebaseFirestore
+          .collection(collectionPath)
+          .orderBy("createdAt", descending: true)
+          .get();
 
 // Stream
   Stream<DocumentSnapshot<Map<String, dynamic>>> watchByDoc(
           String collectionPath, String? docPath) =>
       firebaseFirestore.collection(collectionPath).doc(docPath).snapshots();
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> watchCollection(
-          String collectionPath) =>
+  Stream<QuerySnapshot<Map<String, dynamic>>> watchAll(String collectionPath) =>
       firebaseFirestore.collection(collectionPath).snapshots();
 
 // Watch
@@ -75,15 +77,7 @@ class FirestoreHelper {
       await firebaseFirestore
           .collection("users")
           .doc(user.userId)
-          .set(user.toJson()
-              // {
-              //   "username": user.username,
-              //   "email": user.email,
-              //   "password": user.password,
-              //   "cv_file": false,
-              //   "profile_details": false,
-              // },
-              );
+          .set(user.toJson());
       return true;
     } catch (e) {
       print(e);
@@ -118,6 +112,21 @@ class FirestoreHelper {
       return dataList;
     });
   }
+
+  // Stream<List<JobPostModel>> allJobPostsStream() {
+  //   return firebaseFirestore
+  //       .collection("jobPosts")
+  //       .orderBy("createdAt", descending: true)
+  //       .snapshots()
+  //       .map((event) {
+  //     List<JobPostModel> dataList = [];
+  //     event.docs.forEach((element) {
+  //       dataList.add(JobPostModel.fromDocumentSnapshot(element));
+  //     });
+
+  //     return dataList;
+  //   });
+  // }
 
   Stream<UserAccount> userAccountStream(String userId) {
     return firebaseFirestore

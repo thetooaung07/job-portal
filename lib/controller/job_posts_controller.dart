@@ -4,8 +4,8 @@ import 'package:job_portal/model/user_account.dart';
 import 'package:job_portal/services/database.dart';
 
 class JobPostsController extends GetxController {
-  Rx<List<JobPostModel>> jpList = Rx<List<JobPostModel>>([]);
-  List<JobPostModel> get jobPosts => jpList.value;
+  Rx<List<JobPostModel>> jobPostsList = Rx<List<JobPostModel>>([]);
+  List<JobPostModel> get jobPosts => jobPostsList.value;
 
   @override
   void onReady() {
@@ -13,7 +13,7 @@ class JobPostsController extends GetxController {
 
     FirestoreHelper().jobPostsStream().listen((event) {
       if (event.isNotEmpty)
-        jpList.bindStream(FirestoreHelper().jobPostsStream());
+        jobPostsList.bindStream(FirestoreHelper().jobPostsStream());
     });
 
     super.onReady();

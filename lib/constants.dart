@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 const String bullet = "\u2022 "; // Icons.fiber_manual_record_rounded
 
 const List<String> bottomNavBarLabels = [
-  'Home',
-  'Nearby',
-  // 'Applied',
-  "My Jobs",
+  ' Home',
+  'Search',
+  "  Jobs",
   'Account',
 ];
 

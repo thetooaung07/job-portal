@@ -9,12 +9,6 @@ import 'package:job_portal/model/user_account.dart';
 import 'package:job_portal/model/user_jobPosts_model.dart';
 import 'package:job_portal/services/database.dart';
 
-enum WorkType {
-  company,
-  work_from_home,
-  hybrid,
-}
-
 class JobCreateController extends GetxController {
   TextEditingController titleC = new TextEditingController();
   TextEditingController expLevelC = new TextEditingController();
@@ -29,7 +23,7 @@ class JobCreateController extends GetxController {
   TextEditingController requirementsC = new TextEditingController();
   TextEditingController responsibilitiesC = new TextEditingController();
 
-  Rx<WorkType> selectedType = WorkType.company.obs;
+  Rx<String> selectedType = "".obs;
 
   @override
   void onInit() {
@@ -39,7 +33,7 @@ class JobCreateController extends GetxController {
     expLevelC.text = "Mid Senior";
     techSkillC.text = "Js, React, Api";
     workHourC.text = "9am-5pm";
-    selectedType.value = WorkType.company;
+    selectedType.value = "Company";
     salaryC.text = "1200-1500";
     companyLocationC.text = "Yangon";
     companyNameC.text = "XSoftware House";

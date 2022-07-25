@@ -81,31 +81,54 @@ class PostJobPage extends GetView<JobCreateController> {
                     Obx(
                       () => Row(
                         children: [
-                          Radio<WorkType>(
+                          Radio<String>(
                               activeColor: kPrimaryRedColor,
-                              value: WorkType.company,
+                              value: "Company",
                               groupValue: controller.selectedType.value,
                               onChanged: (value) {
                                 print(value);
                                 controller.selectedType.value = value!;
                               }),
-                          Text("Company"),
-                          Radio<WorkType>(
+                          Text(
+                            "Company",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color:
+                                    controller.selectedType.value == "Company"
+                                        ? Colors.red
+                                        : null),
+                          ),
+                          Radio<String>(
                               activeColor: kPrimaryRedColor,
-                              value: WorkType.work_from_home,
+                              value: "Work From Home",
                               groupValue: controller.selectedType.value,
                               onChanged: (value) {
                                 controller.selectedType.value = value!;
                               }),
-                          Text("Work From Home"),
-                          Radio<WorkType>(
+                          Text(
+                            "Work From Home",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: controller.selectedType.value ==
+                                        "Work From Home"
+                                    ? Colors.red
+                                    : null),
+                          ),
+                          Radio<String>(
                               activeColor: kPrimaryRedColor,
-                              value: WorkType.hybrid,
+                              value: "Hybrid",
                               groupValue: controller.selectedType.value,
                               onChanged: (value) {
                                 controller.selectedType.value = value!;
                               }),
-                          Text("Hybrid"),
+                          Text(
+                            "Hybrid",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: controller.selectedType.value == "Hybrid"
+                                    ? Colors.red
+                                    : null),
+                          ),
                         ],
                       ),
                     ),
@@ -184,7 +207,7 @@ class PostJobPage extends GetView<JobCreateController> {
                           ),
                           Expanded(
                             child: Text(
-                              "Type in format below to generate bullet points.",
+                              "Fill in format below to generate bullet points.",
                               style: TextStyle(fontSize: 14),
                             ),
                           ),
@@ -222,7 +245,7 @@ class PostJobPage extends GetView<JobCreateController> {
                               color: Colors.black26,
                             ),
                             hintText:
-                                "require minium work exp of 2 years\n\nmust have positive attitude for work\n\nnew Requirement",
+                                "require minium work exp of 2 years\nmust have positive attitude for work\nnew Requirement",
                             fillColor: Colors.white,
                             filled: true),
                       ),
@@ -248,7 +271,7 @@ class PostJobPage extends GetView<JobCreateController> {
                           ),
                           Expanded(
                             child: Text(
-                              "Please add full-stop(.) at the end of each sentence\nor press enter to move to next line",
+                              "Fill in format below to generate bullet points.",
                               style: TextStyle(fontSize: 14),
                             ),
                           ),
@@ -298,9 +321,9 @@ class PostJobPage extends GetView<JobCreateController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      ElevatedButton(
-                          onPressed: () => controller.printController(),
-                          child: Text("Print")),
+                      // ElevatedButton(
+                      //     onPressed: () => controller.printController(),
+                      //     child: Text("Print")),
                       Expanded(
                         child: ElevatedButton(
                             onPressed: () => controller.createJobPost(),

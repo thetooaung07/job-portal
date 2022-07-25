@@ -7,7 +7,7 @@ class JobPostModel {
   late String title; // JS developer
   late String expLevel; // Eg. Mid-Level, Intern, Senior;
   late String workHour;
-  late WorkType workType;
+  late String workType;
   late String companyLocation; // WFH or on Campus,
   late String companyName; // US,
   late String companyWebsite; // 9 to 5
@@ -46,6 +46,7 @@ class JobPostModel {
     postedBy = JobPostUser.fromMap(doc["postedBy"]);
     expLevel = doc["expLevel"];
     workHour = doc["workHour"];
+    workType = doc["workType"];
     companyName = doc["companyName"];
     companyLocation = doc["companyLocation"];
     companyWebsite = doc["companyWebsite"];
@@ -63,7 +64,8 @@ class JobPostModel {
         "id": id,
         "title": title,
         "expLevel": expLevel,
-        "workHour": workHour.toString(),
+        "workHour": workHour,
+        "workType": workType,
         "postedBy": postedBy.toMap(),
         "companyName": companyName,
         "companyWebsite": companyWebsite,

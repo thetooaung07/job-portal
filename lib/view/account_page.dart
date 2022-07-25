@@ -440,9 +440,9 @@ class StyledPopupMenuBtn extends StatelessWidget {
             value: 3,
             padding: EdgeInsets.symmetric(horizontal: 0),
             child: ListTile(
-              // onTap: () {
-              // Get.toNamed(RouteNames.eidtProfile);
-              // },
+              onTap: () {
+                Get.toNamed(RouteNames.myJobs);
+              },
               contentPadding: EdgeInsets.symmetric(horizontal: 20),
               minLeadingWidth: 10,
               leading: Icon(Icons.edit_calendar_outlined),

@@ -134,45 +134,56 @@ class JobDescShort extends StatelessWidget {
   Widget build(BuildContext context) {
     JobPostModel data = Get.arguments as JobPostModel;
     return Container(
+      width: Get.width,
       // margin: EdgeInsets.symmetric(horizontal: 10),
-      padding: EdgeInsets.fromLTRB(25, 12, 25, 5),
+      // padding: EdgeInsets.fromLTRB(25, 12, 25, 5),
+      padding: EdgeInsets.fromLTRB(0, 12, 0, 10),
       decoration: BoxDecoration(
         color: kJobDetailsBgColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomIconButton(child: Icon(Icons.work_history_outlined)),
-              SizedBox(
-                height: 10,
-              ),
-              Text(data.title),
-            ],
+          Container(
+            width: (Get.width - 50) / 3,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomIconButton(child: Icon(Icons.work_history_outlined)),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(data.title),
+              ],
+            ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomIconButton(child: Icon(Icons.location_on_outlined)),
-              SizedBox(
-                height: 10,
-              ),
-              Text(data.companyLocation),
-            ],
+          Container(
+            width: (Get.width - 50) / 3,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomIconButton(child: Icon(Icons.location_on_outlined)),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(data.companyLocation),
+              ],
+            ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomIconButton(child: Icon(Icons.history_rounded)),
-              SizedBox(
-                height: 10,
-              ),
-              Text(data.workHour),
-            ],
+          Container(
+            width: (Get.width - 50) / 3,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomIconButton(child: Icon(Icons.history_rounded)),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(data.workHour),
+              ],
+            ),
           ),
         ],
       ),

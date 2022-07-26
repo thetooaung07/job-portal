@@ -106,8 +106,9 @@ class Overview extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             decoration: BoxDecoration(
-                color: kJobDetailsBgColor,
-                borderRadius: BorderRadius.circular(20)),
+              color: kJobDetailsBgColor,
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: Column(children: [
               // Requirements
               BulletListContainer(

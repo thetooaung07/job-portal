@@ -82,6 +82,28 @@ class UserInfoUpdateController extends GetxController {
       );
     }
 
+    // Update Profile Link for null
+    List unUpdatedDocList = [];
+    await firebaseFirestore
+        .collection("jobPosts")
+        .where("postUserId", isEqualTo: firebaseAuth.currentUser!.uid)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        if (element["postedBy"]["username"] != usernameC.text) {
+          unUpdatedDocList.add(element["id"]);
+        } else
+          return;
+      });
+    });
+
+    for (var docPath in unUpdatedDocList) {
+      await FirestoreHelper().update(
+          collectionPath: "jobPosts",
+          docPath: docPath,
+          data: {"postedBy.username": usernameC.text});
+    }
+
     Fluttertoast.showToast(
       msg: "Success",
       backgroundColor: Colors.green,

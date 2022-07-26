@@ -17,7 +17,7 @@ class SuggestedJobContainer extends StatelessWidget {
       children: [
         ShowAllTextBanner(
           title: "Suggested Job",
-          onPressed: () => Get.toNamed(RouteNames.recentPosts),
+          // onPressed: () => Get.toNamed(RouteNames.recentPosts),
         ),
         SizedBox(
           height: 15,

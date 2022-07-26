@@ -109,7 +109,10 @@ class JobCreateController extends GetxController {
     return result;
   }
 
+  RxBool isLoading = false.obs;
+
   Future createJobPost() async {
+    isLoading.value = true;
     DocumentReference doc =
         await firebaseFirestore.collection("jobPosts").doc();
     String documentID = doc.id;
@@ -140,6 +143,20 @@ class JobCreateController extends GetxController {
 
     await FirestoreHelper().create(
         collectionPath: "jobPosts", docPath: documentID, data: _job.toJson());
+
+    isLoading.value = false;
+
+    await Fluttertoast.showToast(
+      msg: "Success",
+      backgroundColor: Colors.green,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+
+    clear();
+    Get.back();
+  }
+}
     // user_jobPosts Joint Table
     /* UserJobPostsModel _uJP = new UserJobPostsModel(
         postId: documentID, isExpired: false, createdAt: DateTime.now());
@@ -149,14 +166,3 @@ class JobCreateController extends GetxController {
       docPath: loginUserID,
       data: _uJP.toFirestore(),
     ); */
-
-    await Fluttertoast.showToast(
-      msg: "Success",
-      backgroundColor: Colors.green,
-      textColor: Colors.white,
-      fontSize: 16.0,
-    );
-    clear();
-    Get.back();
-  }
-}

@@ -18,7 +18,7 @@ class TopCompanyContainer extends StatelessWidget {
         ),
         ShowAllTextBanner(
           title: "Top Company",
-          onPressed: () => Get.toNamed(RouteNames.popularJobs),
+          // onPressed: () => Get.toNamed(RouteNames.popularJobs),
         ),
         Container(
           padding: EdgeInsets.only(left: 10),

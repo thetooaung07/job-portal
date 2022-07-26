@@ -52,17 +52,18 @@ class UserInfoUpdateController extends GetxController {
       return;
     else {
       // Update Firebase Authentication
-      late UserCredential newCre;
 
       if (user.email != null && user.password != null) {
-        newCre = await firebaseAuth.signInWithEmailAndPassword(
-          email: user.email!,
-          password: user.password!,
-        );
-        if (newCre.user != null) {
-          await newCre.user?.updateEmail(emailC.text.trim());
-        }
+        await firebaseAuth
+            .signInWithEmailAndPassword(
+              email: user.email!,
+              password: user.password!,
+            )
+            .then((newCre) => newCre.user?.updateEmail(emailC.text.trim()));
       }
+
+      await Get.defaultDialog(
+          title: "Success", middleText: "Username has been updated");
 
       UserAccount _user = new UserAccount(
         username: usernameC.text,
@@ -83,7 +84,7 @@ class UserInfoUpdateController extends GetxController {
     }
 
     // Update Profile Link for null
-    List unUpdatedDocList = [];
+    List unUpdatedUsernameDocList = [];
     await firebaseFirestore
         .collection("jobPosts")
         .where("postUserId", isEqualTo: firebaseAuth.currentUser!.uid)
@@ -91,13 +92,16 @@ class UserInfoUpdateController extends GetxController {
         .then((value) {
       value.docs.forEach((element) {
         if (element["postedBy"]["username"] != usernameC.text) {
-          unUpdatedDocList.add(element["id"]);
+          unUpdatedUsernameDocList.add(element["id"]);
+        }
+        if (element["postedBy"]["email"] != usernameC.text) {
+          unUpdatedUsernameDocList.add(element["id"]);
         } else
           return;
       });
     });
 
-    for (var docPath in unUpdatedDocList) {
+    for (var docPath in unUpdatedUsernameDocList) {
       await FirestoreHelper().update(
           collectionPath: "jobPosts",
           docPath: docPath,

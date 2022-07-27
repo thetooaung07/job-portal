@@ -49,36 +49,36 @@ class AccountPage extends StatelessWidget {
                                 Stack(
                                   children: [
                                     Container(
-                                      margin: EdgeInsets.only(right: 5),
+                                      // margin: EdgeInsets.only(right: 5),
                                       child: AccountPageProfile(
                                         snapshot: snapshot,
                                         controller: userAccountController,
                                       ),
                                     ),
-                                    Positioned(
-                                        bottom: 0,
-                                        right: 0,
-                                        child: GestureDetector(
-                                          onTap: userAccountController
-                                              .uploadProfile,
-                                          child: Container(
-                                            height: 35,
-                                            width: 35,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.white,
-                                                  width: 2),
-                                              shape: BoxShape.circle,
-                                              color: Color.fromARGB(
-                                                  176, 12, 12, 12),
-                                            ),
-                                            child: Icon(
-                                              Icons.edit,
-                                              size: 20,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ))
+                                    // Positioned(
+                                    //     bottom: 0,
+                                    //     right: 0,
+                                    //     child: GestureDetector(
+                                    //       onTap: userAccountController
+                                    //           .uploadProfile,
+                                    //       child: Container(
+                                    //         height: 35,
+                                    //         width: 35,
+                                    //         decoration: BoxDecoration(
+                                    //           border: Border.all(
+                                    //               color: Colors.white,
+                                    //               width: 2),
+                                    //           shape: BoxShape.circle,
+                                    //           color: Color.fromARGB(
+                                    //               176, 12, 12, 12),
+                                    //         ),
+                                    //         child: Icon(
+                                    //           Icons.edit,
+                                    //           size: 20,
+                                    //           color: Colors.white,
+                                    //         ),
+                                    //       ),
+                                    //     ))
                                   ],
                                 ),
                                 // Profile Pic
@@ -86,40 +86,32 @@ class AccountPage extends StatelessWidget {
                                 SizedBox(
                                   width: 30,
                                 ),
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      userAccountController.user.username ??
-                                          "User",
-                                      style: kHeaderTextStyle,
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      "Flutter Beginner",
-                                      style: kBulletListTextStyle.copyWith(
-                                          color: Colors.black54),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text("Contact me:"),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      userAccountController.user.email ?? "",
-                                      softWrap: true,
-                                      maxLines: 2,
-                                    )
-                                  ],
+                                Container(
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  height: 105,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        userAccountController.user.username ??
+                                            "User",
+                                        style: kHeaderTextStyle,
+                                      ),
+                                      Text(
+                                        "Flutter Beginner",
+                                        style: kBulletListTextStyle.copyWith(
+                                            color: Colors.black54),
+                                      ),
+                                      Text(
+                                          "Contact: ${userAccountController.user.email ?? ""}"),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                    ],
+                                  ),
                                 )
                               ],
                             );

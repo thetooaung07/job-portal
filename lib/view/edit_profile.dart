@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/user_account_controller.dart';
 import 'package:job_portal/controller/user_info_update_controller.dart';
+import 'package:job_portal/global.dart';
 import 'package:job_portal/main.dart';
+import 'package:job_portal/model/user_account.dart';
+import 'package:job_portal/services/database.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
+import 'package:job_portal/widgets/profile_widgets.dart';
 
 class EditProfilePage extends StatelessWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -41,53 +46,89 @@ class EditProfilePage extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              Center(
-                child: CircleAvatar(
-                  radius: 50,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              LabelTextField(
-                label: "Username",
-                hintText: "Change Username",
-                controller: controller.usernameC,
-              ),
-              LabelTextField(
-                label: "Mail",
-                hintText: "Change Email",
-                controller: controller.emailC,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: ElevatedButton(
-                  child: Container(
-                      width: Get.width / 4,
-                      alignment: Alignment.center,
-                      child: Text(
-                        "Update",
-                        style: kLabelTextStyle.copyWith(
-                            color: Colors.white, fontWeight: FontWeight.w500),
-                      )),
-                  onPressed: () {
-                    controller.usernameAndEmailUpdate();
-                  },
-                ),
-              )
-            ],
-          ),
-        ),
+        child:
+            GetBuilder<UserAccountController>(builder: (userAccountController) {
+          return StreamBuilder<UserAccount>(
+              stream: FirestoreHelper()
+                  .userAccountStream(firebaseAuth.currentUser!.uid),
+              builder: (context, snapshot) {
+                return Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  child: Column(
+                    children: [
+                      // Profile Pic
+                      Stack(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(right: 5),
+                            child: AccountPageProfile(
+                              snapshot: snapshot,
+                              controller: userAccountController,
+                            ),
+                          ),
+                          Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: GestureDetector(
+                                onTap: userAccountController.uploadProfile,
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.white, width: 2),
+                                    shape: BoxShape.circle,
+                                    color: Color.fromARGB(176, 12, 12, 12),
+                                  ),
+                                  child: Icon(
+                                    Icons.edit,
+                                    size: 20,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ))
+                        ],
+                      ),
+                      // Profile Pic
+
+                      SizedBox(
+                        height: 10,
+                      ),
+                      LabelTextField(
+                        label: "Username",
+                        hintText: "Change Username",
+                        controller: controller.usernameC,
+                      ),
+                      LabelTextField(
+                        label: "Email",
+                        hintText: "Change Email",
+                        controller: controller.emailC,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: ElevatedButton(
+                          child: Container(
+                              width: Get.width / 4,
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Update",
+                                style: kLabelTextStyle.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500),
+                              )),
+                          onPressed: () {
+                            controller.usernameAndEmailUpdate();
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              });
+        }),
       ),
     );
   }

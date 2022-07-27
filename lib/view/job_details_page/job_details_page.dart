@@ -61,6 +61,7 @@ class JobDetailsPage extends GetView<JobPostsController> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CompanyLogo(),
+            // JobDescShort(),
             JobTab(),
           ],
         ),

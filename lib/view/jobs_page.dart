@@ -63,14 +63,14 @@ class JobsPage extends StatelessWidget {
               ),
               text: "Applications",
             ),
-            JobCard(
-              icon: Icon(
-                Icons.check_box_outlined,
-                size: 60,
-                color: kPrimaryRedColor,
-              ),
-              text: "Coming Soon",
-            ),
+            // JobCard(
+            //   icon: Icon(
+            //     Icons.check_box_outlined,
+            //     size: 60,
+            //     color: kPrimaryRedColor,
+            //   ),
+            //   text: "Coming Soon",
+            // ),
             JobCard(
               onTap: (() => Get.toNamed(RouteNames.myJobs)),
               icon: Icon(
@@ -80,14 +80,14 @@ class JobsPage extends StatelessWidget {
               ),
               text: "My Jobs",
             ),
-            JobCard(
-              icon: Icon(
-                Icons.work_history_outlined,
-                size: 60,
-                color: kPrimaryRedColor,
-              ),
-              text: "Coming Soon",
-            ),
+            // JobCard(
+            //   icon: Icon(
+            //     Icons.work_history_outlined,
+            //     size: 60,
+            //     color: kPrimaryRedColor,
+            //   ),
+            //   text: "Coming Soon",
+            // ),
             JobCard(
               onTap: () {
                 Get.toNamed(
@@ -101,14 +101,14 @@ class JobsPage extends StatelessWidget {
               ),
               text: "Saved",
             ),
-            JobCard(
-              icon: Icon(
-                Icons.bookmark_added_outlined,
-                size: 60,
-                color: kPrimaryRedColor,
-              ),
-              text: "Coming Soon",
-            ),
+            // JobCard(
+            //   icon: Icon(
+            //     Icons.bookmark_added_outlined,
+            //     size: 60,
+            //     color: kPrimaryRedColor,
+            //   ),
+            //   text: "Coming Soon",
+            // ),
           ],
         ),
         // child: Column(

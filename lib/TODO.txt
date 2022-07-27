@@ -89,3 +89,5 @@ Test Username and email change again
 
 Full Time half time textField ( working hour textField ) required*
 salary - reformatting
+
+job apply page / employer / review view

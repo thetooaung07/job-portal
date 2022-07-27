@@ -17,7 +17,7 @@ class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   @override
   void initState() {
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
     super.initState();
   }
 
@@ -35,7 +35,7 @@ class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
       children: [
         Container(
           padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          margin: EdgeInsets.symmetric(horizontal: 80),
           decoration: BoxDecoration(
             color: Color.fromARGB(85, 233, 233, 233),
             // color: jobDetailsTabBgColor,
@@ -54,7 +54,7 @@ class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
               indicatorSize: TabBarIndicatorSize.tab,
               indicator: BoxDecoration(
                 color: kPrimaryRedColor,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(12),
               ),
               labelColor: Colors.white,
               controller: _tabController,
@@ -64,10 +64,10 @@ class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
                   height: 40,
                   text: "Overview",
                 ),
-                Tab(
-                  height: 40,
-                  text: "Employer",
-                ),
+                // Tab(
+                //   height: 40,
+                //   text: "Employer",
+                // ),
                 Tab(
                   height: 40,
                   text: "Review",
@@ -77,11 +77,11 @@ class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
           ),
         ),
         Obx(
-          () => CustomTabBarView(
+          () => Custom2TabBarView(
             tabIndex: tabIndex.value,
             firstTab: Overview(),
-            secondTab: Employer(),
-            thirdTab: Review(),
+            // secondTab: Employer(),
+            secondTab: Review(),
           ),
         )
       ],
@@ -104,9 +104,9 @@ class Overview extends StatelessWidget {
             height: 10,
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
             decoration: BoxDecoration(
-              color: kJobDetailsBgColor,
+              // color: kJobDetailsBgColor,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Column(children: [

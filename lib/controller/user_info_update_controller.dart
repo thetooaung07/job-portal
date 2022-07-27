@@ -62,9 +62,6 @@ class UserInfoUpdateController extends GetxController {
             .then((newCre) => newCre.user?.updateEmail(emailC.text.trim()));
       }
 
-      await Get.defaultDialog(
-          title: "Success", middleText: "Username has been updated");
-
       UserAccount _user = new UserAccount(
         username: usernameC.text,
         email: emailC.text,
@@ -92,9 +89,6 @@ class UserInfoUpdateController extends GetxController {
         .then((value) {
       value.docs.forEach((element) {
         if (element["postedBy"]["username"] != usernameC.text) {
-          unUpdatedUsernameDocList.add(element["id"]);
-        }
-        if (element["postedBy"]["email"] != usernameC.text) {
           unUpdatedUsernameDocList.add(element["id"]);
         } else
           return;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/controller/job_posts_controller.dart';
 import 'package:job_portal/main.dart';
@@ -102,15 +103,20 @@ class MyJobCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: (() => Get.toNamed(RouteNames.jobDetails, arguments: data)),
-      child: Container(
-        margin: EdgeInsets.only(bottom: 20),
-        child: Card(
-          elevation: 5,
-          child: Column(
-            children: [
-              Padding(
+    return Container(
+      margin: EdgeInsets.only(
+        bottom: 15,
+      ),
+      child: Card(
+        elevation: 5,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        child: Column(
+          children: [
+            GestureDetector(
+              onTap: (() =>
+                  Get.toNamed(RouteNames.jobDetails, arguments: data)),
+              child: Container(
+                color: Colors.transparent,
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,7 +125,7 @@ class MyJobCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          data.companyLocation,
+                          data.companyName,
                           style: TextStyle(fontWeight: FontWeight.w500),
                         ),
                         Text(
@@ -128,32 +134,45 @@ class MyJobCard extends StatelessWidget {
                         )
                       ],
                     ),
-                    SizedBox(
-                      height: 3,
-                    ),
-                    Text(
-                      "${data.expLevel} ${data.title}",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 3,
-                    ),
-                    Text(
-                      "Laos, Nigera",
-                      style: TextStyle(fontWeight: FontWeight.w500),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: Text(
+                        "${data.expLevel} ${data.title}",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 5,
                     ),
-                    Row(
+                    Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
                         Text(
-                          "${data.salary.split("-")[0]} / month",
+                          data.companyLocation,
                           style: TextStyle(fontWeight: FontWeight.w500),
                         ),
-                        SizedBox(
-                          width: 20,
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 15,
+                          ),
+                          child: Icon(
+                            Icons.fiber_manual_record_rounded,
+                            size: 10,
+                          ),
+                        ),
+                        Text(
+                          "\$${data.salary.split("-")[0]} / month",
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 15,
+                          ),
+                          child: Icon(
+                            Icons.fiber_manual_record_rounded,
+                            size: 10,
+                          ),
                         ),
                         Text(
                           "Full Time",
@@ -164,11 +183,17 @@ class MyJobCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Divider(
-                height: 4,
-                color: Colors.black87,
-              ),
-              Container(
+            ),
+            Divider(
+              height: 4,
+              color: Colors.black87,
+            ),
+            GestureDetector(
+              onTap: () {
+                Get.toNamed(RouteNames.showApplicants);
+              },
+              child: Container(
+                color: Colors.transparent,
                 padding: EdgeInsets.fromLTRB(20, 10, 5, 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -177,9 +202,9 @@ class MyJobCard extends StatelessWidget {
                     Icon(Icons.chevron_right_rounded),
                   ],
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );

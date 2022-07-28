@@ -15,6 +15,7 @@ import 'package:job_portal/view/post_job_page.dart';
 import 'package:job_portal/view/recent_posts/recent_posts_page.dart';
 import 'package:job_portal/view/saved_jobs_page.dart';
 import 'package:job_portal/view/search_page/search_page.dart';
+import 'package:job_portal/view/show_applicants.dart';
 
 class RouteNames {
   static String root = "/root";
@@ -34,15 +35,14 @@ class RouteNames {
   static String savePosts = "/saved-posts";
   static String postJob = "/post-job";
   static String eidtProfile = "/edit-profile";
+  static String showApplicants = "/show-applicants";
 }
 
 routes() => [
       GetPage(name: RouteNames.root, page: () => const RootPage()),
       GetPage(name: RouteNames.login, page: () => const LoginPage()),
       GetPage(name: RouteNames.signup, page: () => const SignUpPage()),
-      GetPage(
-          name: RouteNames.home,
-          page: () => const HomePage()), // !TODO to change back
+      GetPage(name: RouteNames.home, page: () => const HomePage()),
       GetPage(
           name: RouteNames.popularJobs, page: () => const PopularJobsPage()),
       GetPage(
@@ -58,5 +58,7 @@ routes() => [
       GetPage(name: RouteNames.myJobs, page: () => const MyJobsPage()),
       GetPage(name: RouteNames.savePosts, page: () => const SavedJobsPage()),
       GetPage(name: RouteNames.postJob, page: () => const PostJobPage()),
-      GetPage(name: RouteNames.eidtProfile, page: () => EditProfilePage())
+      GetPage(name: RouteNames.eidtProfile, page: () => EditProfilePage()),
+      GetPage(
+          name: RouteNames.showApplicants, page: () => ShowApplicantsPage()),
     ];

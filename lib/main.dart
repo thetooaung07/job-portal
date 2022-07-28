@@ -230,14 +230,13 @@ class CustomIconButton extends StatelessWidget {
   }
 }
 
-class CustomBottomNavBar extends StatelessWidget {
+class CustomBottomNavBar extends GetWidget<BottomNavBarController> {
   const CustomBottomNavBar({Key? key});
 
   @override
   Widget build(BuildContext context) {
     final double _width = MediaQuery.of(context).size.width;
-    final BottomNavBarController controller =
-        Get.find<BottomNavBarController>();
+    final BottomNavBarController controller = Get.put(BottomNavBarController());
     return Container(
       margin: EdgeInsets.all(_width * 0.05),
       decoration: BoxDecoration(

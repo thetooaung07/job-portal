@@ -91,3 +91,7 @@ Full Time half time textField ( working hour textField ) required*
 salary - reformatting
 
 job apply page / employer / review view
+
+//change bind with ever() to auth middleware > user info flickering 3 times 
+mainpage bottom nav bar controller error on user info update
+// thetbgmail.com

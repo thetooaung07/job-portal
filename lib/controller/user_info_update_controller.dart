@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:job_portal/controller/user_account_controller.dart';
 import 'package:job_portal/global.dart';
 import 'package:job_portal/model/user_account.dart';
+import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/services/database.dart';
 
 class UserInfoUpdateController extends GetxController {
@@ -45,40 +46,23 @@ class UserInfoUpdateController extends GetxController {
       return true;
   }
 
-  // Edit Profile Update // only username and email
-
-  void usernameAndEmailUpdate() async {
-    if (!shouldUpdateCheck())
-      return;
-    else {
-      // Update Firebase Authentication
-
-      if (user.email != null && user.password != null) {
-        await firebaseAuth
-            .signInWithEmailAndPassword(
-              email: user.email!,
-              password: user.password!,
-            )
-            .then((newCre) => newCre.user?.updateEmail(emailC.text.trim()));
-      }
-
-      UserAccount _user = new UserAccount(
-        username: usernameC.text,
-        email: emailC.text,
-        addABio: user.addABio,
-        cvFile: user.cvFile,
-        password: user.password,
-        profile: user.profile,
-        profileDetails: user.profileDetails,
-        userId: user.userId,
-      );
-// Update CloudFirestore
-      await FirestoreHelper().update(
-        collectionPath: "users",
-        docPath: user.userId,
-        data: _user.toJson(),
-      );
-    }
+  Future<void> updateUsernameinFirestore() async {
+    // UserAccount _user = new UserAccount(
+    //   username: usernameC.text,
+    //   email: emailC.text,
+    //   addABio: user.addABio,
+    //   cvFile: user.cvFile,
+    //   password: user.password,
+    //   profile: user.profile,
+    //   profileDetails: user.profileDetails,
+    //   userId: user.userId,
+    // );
+    // Update CloudFirestore
+    await FirestoreHelper().update(
+      collectionPath: "users",
+      docPath: user.userId,
+      data: {"username": usernameC.text.trim(), "email": emailC.text.trim()},
+    );
 
     // Update Profile Link for null
     List unUpdatedUsernameDocList = [];
@@ -96,17 +80,42 @@ class UserInfoUpdateController extends GetxController {
     });
 
     for (var docPath in unUpdatedUsernameDocList) {
-      await FirestoreHelper().update(
+      FirestoreHelper().update(
           collectionPath: "jobPosts",
           docPath: docPath,
           data: {"postedBy.username": usernameC.text});
     }
+  }
 
-    Fluttertoast.showToast(
-      msg: "Success",
-      backgroundColor: Colors.green,
-      textColor: Colors.white,
-      fontSize: 16.0,
-    );
+  // Edit Profile Update // only username and email
+
+  void usernameAndEmailUpdate() async {
+    if (!shouldUpdateCheck())
+      return;
+    else {
+      // Update Firebase Authentication
+      if (user.email != null && user.password != null) {
+        if (user.email != emailC.text.trim()) {
+          Future.wait([
+            updateUsernameinFirestore(),
+            firebaseAuth
+                .signInWithEmailAndPassword(
+                  email: user.email!,
+                  password: user.password!,
+                )
+                .then((newCre) => newCre.user?.updateEmail(emailC.text.trim())),
+          ]);
+        } else {
+          await updateUsernameinFirestore();
+          Get.toNamed(RouteNames.home);
+        }
+        await Fluttertoast.showToast(
+          msg: "Success",
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      }
+    }
   }
 }

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-const List DropdownList = [
+const List DropdownList = <String>[
   "All",
   "Apply",
   "Shortlisted",
@@ -9,7 +9,8 @@ const List DropdownList = [
 
 class ApplicationsPageController extends GetxController {
   RxString _selectedVal = "${DropdownList[0]}".obs;
-  get selectedVal => _selectedVal.value;
+  String get selectedVal => _selectedVal.value;
+  set selectedVal(String v) => _selectedVal.value = v;
 
   RxList expansionOpen = [].obs;
 }

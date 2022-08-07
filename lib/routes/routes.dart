@@ -4,7 +4,7 @@ import 'package:job_portal/view/account_page.dart';
 import 'package:job_portal/view/applications_page.dart';
 
 import 'package:job_portal/view/edit_profile.dart';
-import 'package:job_portal/view/job_application_page.dart';
+import 'package:job_portal/view/job_apply_page.dart';
 import 'package:job_portal/view/login/signup_page.dart';
 import 'package:job_portal/view/login/login_page.dart';
 import 'package:job_portal/view/job_details_page/job_details_page.dart';
@@ -37,7 +37,7 @@ class RouteNames {
   static String postJob = "/post-job";
   static String eidtProfile = "/edit-profile";
   static String showApplicants = "/show-applicants";
-  static String jobApplication = "/apply-job";
+  static String jobApply = "/apply-job";
 }
 
 routes() => [
@@ -63,8 +63,7 @@ routes() => [
       GetPage(name: RouteNames.savePosts, page: () => const SavedJobsPage()),
       GetPage(name: RouteNames.postJob, page: () => const PostJobPage()),
       GetPage(name: RouteNames.eidtProfile, page: () => EditProfilePage()),
-      GetPage(
-          name: RouteNames.jobApplication, page: () => JobApplicationPage()),
+      GetPage(name: RouteNames.jobApply, page: () => JobApplyPage()),
       GetPage(
           name: RouteNames.showApplicants, page: () => ShowApplicantsPage()),
     ];

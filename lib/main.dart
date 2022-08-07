@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Job Portal',
-      theme: ThemeData(fontFamily: 'Circular').copyWith(
+      theme: ThemeData(fontFamily: 'OpenSans').copyWith(
         scaffoldBackgroundColor: Colors.white,
         colorScheme:
             ThemeData().colorScheme.copyWith(primary: kPrimaryRedColor),
@@ -230,7 +230,7 @@ class CustomIconButton extends StatelessWidget {
   }
 }
 
-class CustomBottomNavBar extends GetWidget<BottomNavBarController> {
+class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({Key? key});
 
   @override

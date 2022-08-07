@@ -55,17 +55,28 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  # fonts:
+  #   - family: Raleway
+  #     fonts:
+  #       - asset: assets/fonts/Raleway-Black.ttf
+  #       - asset: assets/fonts/Raleway-Bold.ttf
+  #       - asset: assets/fonts/Raleway-ExtraBold.ttf
+  #       - asset: assets/fonts/Raleway-ExtraLight.ttf
+  #       - asset: assets/fonts/Raleway-Light.ttf
+  #       - asset: assets/fonts/Raleway-Medium.ttf
+  #       - asset: assets/fonts/Raleway-Regular.ttf
+  #       - asset: assets/fonts/Raleway-SemiBold.ttf
+  #       - asset: assets/fonts/Raleway-Thin.ttf
+
   fonts:
-    - family: SF-Pro
+    - family: OpenSans
       fonts:
-        - asset: assets/fonts/SF-Pro-Text-Regular.otf
-        - asset: assets/fonts/SF-Pro-Text-Medium.otf
-          weight: 500
-        - asset: assets/fonts/SF-Pro-Text-Semibold.otf
-          weight: 600
-        - asset: assets/fonts/SF-Pro-Text-Bold.otf
-        - asset: assets/fonts/SF-Pro-Rounded-Thin.otf
-        - asset: assets/fonts/SF-Pro-Rounded-Heavy.otf
-        - asset: assets/fonts/SF-Pro-Rounded-Bold.otf
+        - asset: assets/fonts/OpenSans-Bold.ttf
+        - asset: assets/fonts/OpenSans-ExtraBold.ttf
+        - asset: assets/fonts/OpenSans-Light.ttf
+        - asset: assets/fonts/OpenSans-Medium.ttf
+        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/OpenSans-SemiBold.ttf
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

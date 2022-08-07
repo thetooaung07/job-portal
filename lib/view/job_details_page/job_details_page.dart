@@ -5,6 +5,7 @@ import 'package:job_portal/controller/job_posts_controller.dart';
 import 'package:job_portal/controller/saved_jobs_page_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/job_post_model.dart';
+import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/view/job_details_page/job_tabs.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
@@ -150,20 +151,25 @@ class ApplyNowBtn extends StatelessWidget {
         SizedBox(
           width: 10,
         ),
-        Container(
-          width: Get.width / 2,
-          // padding: EdgeInsets.symmetric(vertical: 5, horizontal: 75),
-          margin: EdgeInsets.symmetric(vertical: Get.width * 0.01),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: Center(
-            child: Text(
-              "Apply Now",
-              style:
-                  kLabelTextStyle.copyWith(fontSize: 20, color: themeBgColor),
+        GestureDetector(
+          onTap: () {
+            Get.toNamed(RouteNames.jobApply);
+          },
+          child: Container(
+            width: Get.width / 2,
+            // padding: EdgeInsets.symmetric(vertical: 5, horizontal: 75),
+            margin: EdgeInsets.symmetric(vertical: Get.width * 0.01),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(7),
+            ),
+            child: Center(
+              child: Text(
+                "Apply Now",
+                style:
+                    kLabelTextStyle.copyWith(fontSize: 20, color: themeBgColor),
+              ),
             ),
           ),
         ),

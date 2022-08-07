@@ -54,46 +54,47 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
             child: Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text("View by"),
+                    Text("Filter by"),
                     SizedBox(
-                      width: 30,
+                      width: 10,
                     ),
                     Container(
                       color: Colors.white,
-                      width: 80,
-                      child: DropdownButton(
-                        isExpanded: true,
-                        underline: SizedBox(),
-                        dropdownColor: Colors.white,
-                        value: controller.selectedVal,
-                        onChanged: (v) {
-                          // selectedItem.value = v.toString();
-                        },
-                        items: DropdownList.map(
-                          (item) => DropdownMenuItem(
-                            value: item,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 5.0),
-                              child: Text("$item"),
+                      width: 120,
+                      child: Obx(
+                        () => DropdownButton(
+                          isExpanded: true,
+                          underline: SizedBox(),
+                          dropdownColor: Colors.white,
+                          value: controller.selectedVal,
+                          onChanged: (v) {
+                            controller.selectedVal = v.toString();
+                          },
+                          items: DropdownList.map(
+                            (item) => DropdownMenuItem(
+                              value: item,
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 5.0),
+                                child: Text("$item"),
+                              ),
                             ),
-                          ),
-                        ).toList(),
+                          ).toList(),
+                        ),
                       ),
                     )
                   ],
                 ),
-
-                // ListView.builder(
-                //   shrinkWrap: true,
-                //   physics: NeverScrollableScrollPhysics(),
-                //   scrollDirection: Axis.vertical,
-                //   itemCount: 4,
-                //   itemBuilder: (context, index) {
-                //     return ApplicantCard();
-                //   },
-                // )
-
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return ApplicantCard();
+                  },
+                ),
                 ExpansionPanelList(
                   children: List<ExpansionPanel>.generate(
                     controller.expansionOpen.length,
@@ -123,50 +124,11 @@ class ApplicantCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.red,
+      margin: EdgeInsets.symmetric(vertical: 10),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.teal),
+      ),
       child: Text("D"),
     );
   }
 }
-
-
-
-
-/* Container(
-        child: Column(
-          children: [
-            TabBar(
-              unselectedLabelColor: Colors.red,
-              labelColor: Colors.black,
-              controller: controller,
-              tabs: [
-                Tab(
-                  text: "Apply",
-                ),
-                Tab(
-                  text: "Shortlisted",
-                ),
-                Tab(
-                  text: "Interview",
-                ),
-              ],
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: controller,
-                children: [
-                  Container(
-                    child: Text("TAb bar1"),
-                  ),
-                  Container(
-                    child: Text("TAb bar2"),
-                  ),
-                  Container(
-                    child: Text("TAb bar3"),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ), */

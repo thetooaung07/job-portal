@@ -55,8 +55,33 @@ class JobApplyPage extends StatelessWidget {
           Expanded(
             child: Obx(
               () => Stepper(
+                controlsBuilder: (context, details) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                          onPressed: details.onStepCancel,
+                          child: Text(
+                            "Cancel",
+                            style: TextStyle(fontSize: 15),
+                          )),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(elevation: 0),
+                          onPressed: details.onStepContinue,
+                          child: Text(
+                            "Continue",
+                            style: TextStyle(fontSize: 15),
+                          ))
+                    ],
+                  );
+                },
                 elevation: 0,
-                physics: ScrollPhysics(),
+                physics: controller.stepperType.value == StepperType.horizontal
+                    ? NeverScrollableScrollPhysics()
+                    : ScrollPhysics(),
                 currentStep: controller.currentStep,
                 onStepTapped: (step) => controller.tapped(step),
                 onStepContinue: controller.continued,
@@ -71,6 +96,7 @@ class JobApplyPage extends StatelessWidget {
     );
   }
 
+// Build Steps Function
   List<Step> buildSteps(ApplicationsPageController controller) {
     return [
       Step(
@@ -81,6 +107,7 @@ class JobApplyPage extends StatelessWidget {
                     : null,
                 style: TextStyle(color: Colors.black))),
         content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormField(
               decoration: InputDecoration(labelText: 'Name'),
@@ -94,8 +121,15 @@ class JobApplyPage extends StatelessWidget {
             TextFormField(
               decoration: InputDecoration(labelText: 'Address'),
             ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Summery'),
+            SizedBox(
+              height: 20,
+            ),
+            // Text(
+            //   "Summery",
+            //   style: TextStyle(fontSize: 15),
+            // ),
+            TFField(
+              labelText: "Summery",
             ),
           ],
         ),
@@ -136,78 +170,75 @@ class JobApplyPage extends StatelessWidget {
                 style: TextStyle(color: Colors.black))),
         content: Column(
           children: [
-            Row(
-              children: [
-                SizedBox(
-                  width: 15,
-                ),
-                Icon(Icons.text_snippet_outlined),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  "CV Form ",
-                  style: kBodyTextStyle.copyWith(
-                    fontSize: 18,
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 10,
                   ),
-                ),
-                Expanded(
-                  child: Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.symmetric(horizontal: 20),
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Color.fromARGB(161, 0, 0, 0),
-                        borderRadius: BorderRadius.circular(4)),
-                    child: Text(
-                      "Upload CV",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
+                  Icon(Icons.text_snippet_outlined),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "CV Form ",
+                    style: kBodyTextStyle.copyWith(
+                      fontSize: 16,
                     ),
                   ),
-                )
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.symmetric(horizontal: 20),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(161, 0, 0, 0),
+                          borderRadius: BorderRadius.circular(4)),
+                      child: Text(
+                        "Upload CV",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ExpansionTile(
+              initiallyExpanded:
+                  controller.stepperType.value == StepperType.horizontal
+                      ? true
+                      : false,
+              title: Row(
+                children: [
+                  Text("Provide Socials Links"),
+                ],
+              ),
+              children: [
+                SocialLinkTField(
+                  icon: Icon(Icons.facebook_rounded),
+                  hintText: "Provide Link for facebook",
+                ),
+                SocialLinkTField(
+                  icon: Icon(Icons.text_snippet_rounded),
+                  hintText: "Provide Link for Github",
+                ),
+                SocialLinkTField(
+                  icon: Icon(Icons.linked_camera),
+                  hintText: "Provide Link for Linkedin",
+                ),
+                SocialLinkTField(
+                  icon: Icon(Icons.other_houses_outlined),
+                  hintText: "Link for other Resources",
+                ),
               ],
             ),
             SizedBox(
-              height: 20,
-            ),
-            ListTile(
-              minLeadingWidth: 10,
-              leading: Icon(Icons.facebook),
-              title: TextField(
-                decoration: InputDecoration(
-                    hintText: "Provide Your Link for Facebook",
-                    border: InputBorder.none),
-              ),
-            ),
-            ListTile(
-              minLeadingWidth: 10,
-              leading: Icon(Icons.text_snippet_rounded),
-              title: TextField(
-                decoration: InputDecoration(
-                    hintText: "Provide Your Link for Github",
-                    border: InputBorder.none),
-              ),
-            ),
-            ListTile(
-              minLeadingWidth: 10,
-              leading: Icon(Icons.linked_camera),
-              title: TextField(
-                decoration: InputDecoration(
-                    hintText: "Provide Your Link for Linkedin",
-                    border: InputBorder.none),
-              ),
-            ),
-            ListTile(
-              minLeadingWidth: 10,
-              leading: Icon(Icons.other_houses_outlined),
-              title: TextField(
-                decoration: InputDecoration(
-                    hintText: "Link for other Resources",
-                    border: InputBorder.none),
-              ),
+              height: 10,
             ),
           ],
         ),
@@ -246,8 +277,56 @@ class JobApplyPage extends StatelessWidget {
   }
 }
 
+class SocialLinkTField extends StatelessWidget {
+  final Icon? icon;
+  final String? hintText;
+  const SocialLinkTField({Key? key, this.icon, this.hintText})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 15),
+      height: 40,
+      decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black,
+          ),
+          borderRadius: BorderRadius.circular(5)),
+      child: Row(
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: icon ?? Icon(Icons.insert_chart_outlined_rounded),
+          ),
+          Container(
+            width: 1,
+            height: Get.height,
+            decoration: BoxDecoration(color: Colors.black),
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: TextField(
+                decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(bottom: 11),
+                    hintText: hintText ?? "Provide Your Link for Facebook",
+                    border: InputBorder.none),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class TFField extends StatelessWidget {
+  final String? labelText;
+  final String? hintText;
   const TFField({
+    this.labelText,
+    this.hintText,
     Key? key,
   }) : super(key: key);
 
@@ -255,7 +334,7 @@ class TFField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
-      height: 30 * 4.2,
+      height: 30 * 4.5,
       child: TextField(
         style: TextStyle(
           fontSize: 17,
@@ -264,6 +343,9 @@ class TFField extends StatelessWidget {
         ),
         maxLines: 4,
         decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(horizontal: 7, vertical: 10),
+            labelText: labelText ?? null,
+            alignLabelWithHint: true,
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(width: 2, color: Colors.black45),
             ),

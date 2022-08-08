@@ -42,4 +42,10 @@ class AppController extends GetxController {
   //   super.onInit();
   //   jpList.bindStream(FirestoreHelper().jobPostsStream());
   // }
+
+  // Rx<dynamic> selectedData = null.obs;
+
+  // setSelectedJobPostModel(JobPostModel data) {
+  //   selectedData.value = data;
+  // }
 }

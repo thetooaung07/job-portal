@@ -95,3 +95,11 @@ job apply page / employer / review view
 //change bind with ever() to auth middleware > user info flickering 3 times 
 mainpage bottom nav bar controller error on user info update
 // thetbgmail.com
+
+
+
+// Job Apply Page 
+ - to change summery input field 
+ - to continue CV and socials 
+ - to think about models for applicants
+ 

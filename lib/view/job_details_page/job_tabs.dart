@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/job_posts_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/view/job_details_page/bullet_list_container.dart';
@@ -94,7 +95,9 @@ class Overview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    JobPostModel data = Get.arguments as JobPostModel;
+    final JobPostModel placementData =
+        Get.find<JobPostsController>().jobPosts[1];
+    JobPostModel data = Get.arguments ?? placementData;
     return Container(
       child: Column(
         children: [
@@ -133,7 +136,9 @@ class JobDescShort extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    JobPostModel data = Get.arguments as JobPostModel;
+    final JobPostModel placementData =
+        Get.find<JobPostsController>().jobPosts[1];
+    JobPostModel data = Get.arguments ?? placementData;
     return Container(
       width: Get.width,
       // margin: EdgeInsets.symmetric(horizontal: 10),

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/job_posts_controller.dart';
 import 'package:job_portal/controller/saved_jobs_page_controller.dart';
+import 'package:job_portal/global.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/routes/routes.dart';
@@ -13,10 +14,14 @@ class JobDetailsPage extends GetView<JobPostsController> {
   const JobDetailsPage({Key? key}) : super(key: key);
 
 //TODO: Use SilverDeligateAppBar for better UI
+//TODO: Replace placementData with Cached data
 
   @override
   Widget build(BuildContext context) {
-    JobPostModel data = Get.arguments as JobPostModel;
+    final JobPostModel placementData =
+        Get.find<JobPostsController>().jobPosts[1];
+    JobPostModel data = Get.arguments ?? placementData;
+
     return Scaffold(
       appBar: MyAppBar(
         leading: Container(
@@ -84,7 +89,9 @@ class CompanyLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    JobPostModel data = Get.arguments as JobPostModel;
+    final JobPostModel placementData =
+        Get.find<JobPostsController>().jobPosts[1];
+    JobPostModel data = Get.arguments ?? placementData;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15.0),
       child: Column(
@@ -95,19 +102,19 @@ class CompanyLogo extends StatelessWidget {
                 height: 75,
                 width: 75,
                 alignment: Alignment.center,
-                child: Get.arguments!.postedBy.profile != null
-                    ? Image.network(Get.arguments!.postedBy.profile!)
+                child: data.postedBy.profile != null
+                    ? Image.network(data.postedBy.profile!)
                     : Image.asset('assets/images/default.png')),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20.0, bottom: 10),
             child: Text(
-              Get.arguments.title,
+              data.title,
               style: kHeaderTextStyle,
             ),
           ),
           Text(
-            Get.arguments.postedBy.username,
+            data.postedBy.username!,
             style: kCaptionTextStyle,
           ),
         ],
@@ -123,7 +130,9 @@ class ApplyNowBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    JobPostModel data = Get.arguments as JobPostModel;
+    final JobPostModel placementData =
+        Get.find<JobPostsController>().jobPosts[1];
+    JobPostModel data = Get.arguments ?? placementData;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -153,25 +162,38 @@ class ApplyNowBtn extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
+            if (data.postUserId == firebaseAuth.currentUser!.uid) {
+              return null;
+            }
+
             Get.toNamed(RouteNames.jobApply);
           },
-          child: Container(
-            width: Get.width / 2,
-            // padding: EdgeInsets.symmetric(vertical: 5, horizontal: 75),
-            margin: EdgeInsets.symmetric(vertical: Get.width * 0.01),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(7),
-            ),
-            child: Center(
-              child: Text(
-                "Apply Now",
-                style:
-                    kLabelTextStyle.copyWith(fontSize: 20, color: themeBgColor),
-              ),
-            ),
-          ),
+          child: data.postUserId == firebaseAuth.currentUser!.uid
+              ? Container(
+                  alignment: Alignment.center,
+                  width: Get.width / 2,
+                  child: Text(
+                    "Sorry!  You cannot apply to your own job",
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              : Container(
+                  width: Get.width / 2,
+                  // padding: EdgeInsets.symmetric(vertical: 5, horizontal: 75),
+                  margin: EdgeInsets.symmetric(vertical: Get.width * 0.01),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(7),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Apply Now",
+                      style: kLabelTextStyle.copyWith(
+                          fontSize: 20, color: themeBgColor),
+                    ),
+                  ),
+                ),
         ),
       ],
     );

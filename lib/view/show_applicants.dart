@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/controller/application_page_controller.dart';
 import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
@@ -86,15 +83,15 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
                     )
                   ],
                 ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return ApplicantCard();
-                  },
-                ),
+                // ListView.builder(
+                //   shrinkWrap: true,
+                //   physics: NeverScrollableScrollPhysics(),
+                //   scrollDirection: Axis.vertical,
+                //   itemCount: 4,
+                //   itemBuilder: (context, index) {
+                //     return ApplicantCard();
+                //   },
+                // ),
                 ExpansionPanelList(
                   children: List<ExpansionPanel>.generate(
                     controller.expansionOpen.length,

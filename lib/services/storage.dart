@@ -7,7 +7,7 @@ class StorageService {
   final FirebaseStorage _storage = FirebaseStorage.instance;
 
   // File upload
-  Future<String> uploadPhoto(XFile file, String path) async {
+  Future<String> uploadToFirebaseStorage(XFile file, String path) async {
     Reference _ref = _storage.ref(path);
 
     final UploadTask _uploadTask = _ref.putFile(

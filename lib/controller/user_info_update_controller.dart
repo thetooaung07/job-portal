@@ -89,6 +89,10 @@ class UserInfoUpdateController extends GetxController {
 
   // Edit Profile Update // only username and email
 
+  // RxBool _isUpdating = false.obs;
+  // bool get isUpdating => _isUpdating.value;
+  // set isUpdating(bool v) => _isUpdating.value = v;
+
   void usernameAndEmailUpdate() async {
     if (!shouldUpdateCheck())
       return;
@@ -96,7 +100,7 @@ class UserInfoUpdateController extends GetxController {
       // Update Firebase Authentication
       if (user.email != null && user.password != null) {
         if (user.email != emailC.text.trim()) {
-          Future.wait([
+          await Future.wait([
             updateUsernameinFirestore(),
             firebaseAuth
                 .signInWithEmailAndPassword(
@@ -107,6 +111,7 @@ class UserInfoUpdateController extends GetxController {
           ]);
         } else {
           await updateUsernameinFirestore();
+
           Get.toNamed(RouteNames.home);
         }
         await Fluttertoast.showToast(

@@ -14,6 +14,7 @@ dependencies:
   change_app_package_name: ^1.1.0
   cloud_firestore: ^3.2.1
   cupertino_icons: ^1.0.2
+  file_picker: ^5.0.1
   firebase_auth: ^3.4.1
   firebase_core: ^1.19.1
   firebase_storage: ^10.3.2
@@ -67,7 +68,6 @@ flutter:
   #       - asset: assets/fonts/Raleway-Regular.ttf
   #       - asset: assets/fonts/Raleway-SemiBold.ttf
   #       - asset: assets/fonts/Raleway-Thin.ttf
-
   fonts:
     - family: OpenSans
       fonts:
@@ -77,6 +77,5 @@ flutter:
         - asset: assets/fonts/OpenSans-Medium.ttf
         - asset: assets/fonts/OpenSans-Regular.ttf
         - asset: assets/fonts/OpenSans-SemiBold.ttf
-
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

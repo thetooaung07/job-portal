@@ -27,9 +27,6 @@ class JobPostCardVt extends StatelessWidget {
     final SavedJobsPageController savedJobsPagecontroller =
         Get.put(SavedJobsPageController());
 
-    final JobPostsController jobPostsController =
-        Get.find<JobPostsController>();
-
     return GestureDetector(
       onTap: () => Get.toNamed(RouteNames.jobDetails, arguments: data),
       child: Container(

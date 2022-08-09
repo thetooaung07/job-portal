@@ -61,8 +61,8 @@ class UserAccountController extends GetxController {
 
     if (_file == null) return;
     isUploading.value = true;
-    final String fileLink =
-        await storageService.uploadPhoto(_file, 'profile/${userId}');
+    final String fileLink = await storageService.uploadToFirebaseStorage(
+        _file, 'profile/${userId}');
 
     await FirestoreHelper().update(
       collectionPath: "users",

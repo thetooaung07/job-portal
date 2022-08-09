@@ -154,6 +154,9 @@ class JobApplyPage extends StatelessWidget {
             TextFormField(
               decoration: InputDecoration(labelText: 'Work Experience'),
             ),
+            SizedBox(
+              height: 20,
+            ),
           ],
         ),
         isActive: controller.currentStep >= 0,
@@ -168,79 +171,111 @@ class JobApplyPage extends StatelessWidget {
                     ? "Your CV & Socials"
                     : null,
                 style: TextStyle(color: Colors.black))),
-        content: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 20),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Icon(Icons.text_snippet_outlined),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "CV Form ",
-                    style: kBodyTextStyle.copyWith(
-                      fontSize: 16,
+        content: Container(
+          height: controller.stepperType.value == StepperType.horizontal
+              ? Get.height
+              : null,
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 20),
+                height: 40,
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 10,
                     ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.symmetric(horizontal: 20),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      decoration: BoxDecoration(
-                          color: Color.fromARGB(161, 0, 0, 0),
-                          borderRadius: BorderRadius.circular(4)),
-                      child: Text(
-                        "Upload CV",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
+                    Icon(Icons.text_snippet_outlined),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      "CV Form ",
+                      style: kBodyTextStyle.copyWith(
+                        fontSize: 16,
                       ),
                     ),
-                  )
-                ],
+                    Expanded(
+                      child: controller.fileName != ""
+                          ? Container(
+                              margin: EdgeInsets.only(left: 10),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                      child: Text(
+                                    controller.fileName.value,
+                                    maxLines: 2,
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis),
+                                  )),
+                                  IconButton(
+                                      highlightColor: Colors.transparent,
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      icon: Icon(
+                                        Icons.clear_rounded,
+                                      ),
+                                      onPressed: () {
+                                        controller..fileName.value = "";
+                                      })
+                                ],
+                              ),
+                            )
+                          : GestureDetector(
+                              onTap: controller.pickCV,
+                              child: Container(
+                                alignment: Alignment.center,
+                                margin: EdgeInsets.symmetric(horizontal: 20),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 5),
+                                decoration: BoxDecoration(
+                                    color: Color.fromARGB(161, 0, 0, 0),
+                                    borderRadius: BorderRadius.circular(4)),
+                                child: Text(
+                                  "Upload CV",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ),
+                    )
+                  ],
+                ),
               ),
-            ),
-            ExpansionTile(
-              initiallyExpanded:
-                  controller.stepperType.value == StepperType.horizontal
-                      ? true
-                      : false,
-              title: Row(
+              ExpansionTile(
+                initiallyExpanded: false,
+                title: Row(
+                  children: [
+                    Text("Provide Socials Links"),
+                  ],
+                ),
                 children: [
-                  Text("Provide Socials Links"),
+                  SocialLinkTField(
+                    icon: Icon(Icons.facebook_rounded),
+                    hintText: "Provide Link for facebook",
+                  ),
+                  SocialLinkTField(
+                    icon: Icon(Icons.text_snippet_rounded),
+                    hintText: "Provide Link for Github",
+                  ),
+                  SocialLinkTField(
+                    icon: Icon(Icons.linked_camera),
+                    hintText: "Provide Link for Linkedin",
+                  ),
+                  SocialLinkTField(
+                    icon: Icon(Icons.other_houses_outlined),
+                    hintText: "Link for other Resources",
+                  ),
                 ],
               ),
-              children: [
-                SocialLinkTField(
-                  icon: Icon(Icons.facebook_rounded),
-                  hintText: "Provide Link for facebook",
-                ),
-                SocialLinkTField(
-                  icon: Icon(Icons.text_snippet_rounded),
-                  hintText: "Provide Link for Github",
-                ),
-                SocialLinkTField(
-                  icon: Icon(Icons.linked_camera),
-                  hintText: "Provide Link for Linkedin",
-                ),
-                SocialLinkTField(
-                  icon: Icon(Icons.other_houses_outlined),
-                  hintText: "Link for other Resources",
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-          ],
+              SizedBox(
+                height: 10,
+              ),
+            ],
+          ),
         ),
         isActive: controller.currentStep >= 0,
         state: controller.currentStep >= 2
@@ -269,7 +304,7 @@ class JobApplyPage extends StatelessWidget {
           ],
         ),
         isActive: controller.currentStep >= 0,
-        state: controller.currentStep >= 0
+        state: controller.currentStep >= 3
             ? StepState.complete
             : StepState.disabled,
       ),
@@ -286,7 +321,7 @@ class SocialLinkTField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 15),
+      margin: EdgeInsets.only(bottom: 15, left: 10, right: 10),
       height: 40,
       decoration: BoxDecoration(
           border: Border.all(

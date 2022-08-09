@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:job_portal/global.dart';
+import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/services/storage.dart';
 
 const List DropdownList = <String>[
@@ -26,13 +27,11 @@ class ApplicationsPageController extends GetxController {
   Rx<StepperType> stepperType = StepperType.vertical.obs;
 
   tapped(int step) {
-    print("step => $step");
     currentStep = step;
   }
 
   continued() {
-    print("Inside Continue => $currentStep");
-    currentStep < 3 ? currentStep += 1 : null;
+    currentStep < 3 ? currentStep += 1 : Get.back();
   }
 
   cancel() {
@@ -62,7 +61,6 @@ class ApplicationsPageController extends GetxController {
   Future<XFile?> pickCV() async {
     if (isUploading.value) return null;
     FilePickerResult? result = await FilePicker.platform.pickFiles();
-    print("CV => $result");
     if (result != null) {
       XFile _file = XFile(result.files.single.path!);
       fileName.value = _file.name;

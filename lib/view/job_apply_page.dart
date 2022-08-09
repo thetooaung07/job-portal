@@ -34,20 +34,20 @@ class JobApplyPage extends StatelessWidget {
         ),
         label: "Apply Now",
         action: [
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
-            child: CustomIconButton(
-              onTap: () {
-                Get.back();
-                Get.find<BottomNavBarController>().selectedIndex.value = 1;
-              },
-              child: Icon(
-                Icons.search_rounded,
-                size: 30,
-                color: Colors.black,
-              ),
-            ),
-          ),
+          // Container(
+          //   margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+          //   child: CustomIconButton(
+          //     onTap: () {
+          //       Get.back();
+          //       Get.find<BottomNavBarController>().selectedIndex.value = 1;
+          //     },
+          //     child: Icon(
+          //       Icons.search_rounded,
+          //       size: 30,
+          //       color: Colors.black,
+          //     ),
+          //   ),
+          // ),
         ],
       ),
       body: Column(

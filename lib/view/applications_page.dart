@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/main.dart';
-import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
 class ApplicationsPage extends StatelessWidget {
@@ -117,7 +116,7 @@ class ApplicationCard extends StatelessWidget {
                     width: 20,
                   ),
                   SizedBox(
-                    height: 60,
+                    height: 65,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,7 +143,7 @@ class ApplicationCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 7),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.black),

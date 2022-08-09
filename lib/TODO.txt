@@ -102,4 +102,5 @@ mainpage bottom nav bar controller error on user info update
  - to change summery input field 
  - to continue CV and socials 
  - to think about models for applicants
- 
+ - to add controller for job applicants
+ - 

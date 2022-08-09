@@ -41,7 +41,6 @@ class AuthController extends GetxController {
   }
 
   /// UI
-
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passController = TextEditingController();
   final TextEditingController emailController = TextEditingController();

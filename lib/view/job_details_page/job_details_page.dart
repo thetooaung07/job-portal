@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/application_page_controller.dart';
 import 'package:job_portal/controller/job_posts_controller.dart';
 import 'package:job_portal/controller/saved_jobs_page_controller.dart';
 import 'package:job_portal/global.dart';
@@ -165,8 +166,8 @@ class ApplyNowBtn extends StatelessWidget {
             if (data.postUserId == firebaseAuth.currentUser!.uid) {
               return null;
             }
-
             Get.toNamed(RouteNames.jobApply);
+            Get.put(ApplicationsPageController()).jobPostId.value = data.id;
           },
           child: data.postUserId == firebaseAuth.currentUser!.uid
               ? Container(

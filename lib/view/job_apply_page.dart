@@ -15,8 +15,11 @@ class JobApplyPage extends StatelessWidget {
         Get.find<ApplicationsPageController>();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        backgroundColor: kPrimaryRedColor,
         onPressed: controller.changeStepperType,
-        child: Icon(Icons.replay_circle_filled_rounded),
+        child: Icon(
+          Icons.autorenew_rounded,
+        ),
       ),
       appBar: MyAppBar(
         leading: Container(

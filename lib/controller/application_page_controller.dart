@@ -107,7 +107,7 @@ class ApplicationsPageController extends GetxController {
   RxString jobPostId = "".obs;
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
     UserAccount user = Get.find<UserAccountController>().user;
     nameC.text = user.username!;
@@ -119,6 +119,9 @@ class ApplicationsPageController extends GetxController {
     workExpC.text = "Min 2 Years of experience @ CodeLab";
     suggestionC.text = "Suggestions";
     questionC.text = "No Question";
+
+    await getData();
+    print(myApplicationList.length);
   }
 
   printController() {
@@ -137,7 +140,7 @@ class ApplicationsPageController extends GetxController {
       cvForm: await uploadCV(),
       techStacks: techStackC.text,
       workExp: workExpC.text,
-      socialLinks: [
+      socialLinks: <String>[
         slFacebookC.text,
         slLinkedinC.text,
         slGithubC.text,
@@ -156,7 +159,18 @@ class ApplicationsPageController extends GetxController {
   }
 
   /// Get Applicant Data from firestore
-  RxList<ApplicantModel> _data = <ApplicantModel>[].obs;
+  RxList<ApplicantModel> myApplicationList = <ApplicantModel>[].obs;
+
+  getData() async {
+    await firebaseFirestore
+        .collection("applicants")
+        .where("applicantId", isEqualTo: firebaseAuth.currentUser!.uid)
+        .get()
+        .then((data) => data.docs.forEach((element) {
+              myApplicationList
+                  .add(ApplicantModel.fromDocumentSnapshot(element));
+            }));
+  }
 
   RxList expansionOpen = [].obs;
 }

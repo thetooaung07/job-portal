@@ -10,7 +10,7 @@ class ApplicantModel {
   String? cvForm;
   String? techStacks;
   String? workExp;
-  List<String>? socialLinks;
+  List? socialLinks;
   String? suggestion;
   String? question;
   String? jobPostId;
@@ -31,20 +31,20 @@ class ApplicantModel {
     this.jobPostId,
   });
 
-  // ApplicantModel.fromDocumentSnapshot(DocumentSnapshot doc) {
-  //   applicantId = doc.id;
-  //   applicantName = doc["applicantName"];
-  //   email = doc["email"];
-  //   phoneNumber = doc["phoneNumber"];
-  //   cvForm = doc["cvForm"];
-  //   address = doc["address"];
-  //   summary = doc["summary"];
-  //   techStacks = doc["techStacks"];
-  //   workExp = doc["workExp"];
-  //   socialLinks = doc["socialLinks"];
-  //   suggestion = doc["suggestion"];
-  //   question = doc["question"];
-  // }
+  ApplicantModel.fromDocumentSnapshot(DocumentSnapshot doc) {
+    applicantId = doc.id;
+    applicantName = doc["applicantName"];
+    email = doc["email"];
+    phoneNumber = doc["phoneNumber"];
+    cvForm = doc["cvForm"];
+    address = doc["address"];
+    summary = doc["summary"];
+    techStacks = doc["techStacks"];
+    workExp = doc["workExp"];
+    socialLinks = doc["socialLinks"] as List;
+    suggestion = doc["suggestion"];
+    question = doc["question"];
+  }
 
   Map<String, dynamic> toJson() => {
         "jobPostId": jobPostId,

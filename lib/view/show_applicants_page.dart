@@ -28,6 +28,7 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
           child: CustomIconButton(
             onTap: () {
               controller.applicantsForSelectedJobPost.clear();
+              controller.applicantList.clear();
               Get.back();
             },
             child: Icon(
@@ -93,8 +94,10 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
                   )
                 ],
               ),
-              Obx(() => ListView.builder(
-                    itemCount: controller.applicantsForSelectedJobPost.length,
+              GetX<ApplicationsPageController>(
+                builder: (controller) {
+                  return ListView.builder(
+                    itemCount: controller.applicantList.length,
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
@@ -102,7 +105,9 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
                           ? ApplicantCard(data: controller.applicantList[index])
                           : Text("No Data");
                     },
-                  )),
+                  );
+                },
+              ),
             ],
           ),
         ),
@@ -122,23 +127,26 @@ class ApplicantCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       margin: EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
         // border: Border.all(color: Colors.teal),
-        color: Colors.teal,
+        color: Colors.black,
       ),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Container(
-                height: 60,
-                width: 60,
-                alignment: Alignment.center,
-                child: data.profile != null
-                    ? Image.network(data.profile!)
-                    : Image.asset('assets/images/default.png')),
+          Container(
+            height: 60,
+            width: 60,
+            alignment: Alignment.center,
+            child: data.profile != null
+                ? Image.network(data.profile!)
+                : Image.asset('assets/images/default.png'),
           ),
+          Text(
+            "Data",
+            style: TextStyle(color: Colors.white),
+          )
         ],
       ),
     );

@@ -107,3 +107,10 @@ mainpage bottom nav bar controller error on user info update
 
 
  UI flashing in Job Details ( checking already applied or not )
+
+
+
+
+- application page
+
+- UI not rendering in the first time to show applicants list

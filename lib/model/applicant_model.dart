@@ -44,6 +44,7 @@ class ApplicantModel {
     socialLinks = doc["socialLinks"] as List;
     suggestion = doc["suggestion"];
     question = doc["question"];
+    jobPostId = doc["jobPostId"];
   }
 
   Map<String, dynamic> toJson() => {

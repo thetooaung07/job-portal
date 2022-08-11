@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/application_page_controller.dart';
 import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/controller/my_application_controller.dart';
 import 'package:job_portal/main.dart';
+import 'package:job_portal/model/job_post_model.dart';
+import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
 class ApplicationsPage extends StatelessWidget {
@@ -12,7 +15,7 @@ class ApplicationsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MyApplicationController controller = Get.put(MyApplicationController());
+    // MyApplicationController controller = ;
     return Scaffold(
       appBar: MyAppBar(
         leading: Container(
@@ -61,12 +64,28 @@ class ApplicationsPage extends StatelessWidget {
                 style: kCaptionTextStyle,
               ),
               SizedBox(height: 20),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: 4,
-                itemBuilder: (context, index) {
-                  return ApplicationCard();
+              GetX<ApplicationsPageController>(
+                init: Get.put(ApplicationsPageController()),
+                builder: (controller) {
+                  return controller.myApplicationList.length > 0 &&
+                          controller.jobPostList.length > 0
+                      ? ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: controller.myApplicationList.length,
+                          itemBuilder: (context, index) {
+                            return ApplicationCard(
+                                data: controller.jobPostList[index]);
+                          },
+                        )
+                      : Container(
+                          child: Center(
+                              child: Text(
+                                  "You haven't Applied any Jobs Recently",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w500))),
+                        );
                 },
               )
             ],
@@ -78,90 +97,102 @@ class ApplicationsPage extends StatelessWidget {
 }
 
 class ApplicationCard extends StatelessWidget {
-  const ApplicationCard({Key? key}) : super(key: key);
+  final JobPostModel data;
+  const ApplicationCard({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 20),
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-      height: 125,
-      width: Get.width,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(5),
-        boxShadow: [kCardShadow],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 4),
-                    child: SvgPicture.asset(
-                      "assets/icons/logo_youtube.svg",
-                      height: 40,
-                      width: 40,
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed(RouteNames.jobDetails, arguments: data);
+      },
+      child: Container(
+        margin: EdgeInsets.only(bottom: 20),
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        height: 125,
+        width: Get.width,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(5),
+          boxShadow: [kCardShadow],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 4),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            height: 60,
+                            width: 60,
+                            alignment: Alignment.center,
+                            child: data.postedBy.profile != null
+                                ? Image.network(data.postedBy.profile!)
+                                : Image.asset('assets/images/default.png')),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  SizedBox(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Facebook"),
-                        Text(
-                          "Nodejs Developer",
-                          style: kJobPositionTextStyle,
-                        ),
-                      ],
+                    SizedBox(
+                      width: 20,
                     ),
+                    SizedBox(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(data.companyName),
+                          Text(
+                            data.title,
+                            style: kJobPositionTextStyle,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Icon(
+                  Icons.more_vert_rounded,
+                  size: 30,
+                  color: Colors.black,
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(Icons.people_outlined),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  child: Text(
+                    // TODO count number of people applied to this job
+                    "23 people applied",
+                    style: kBodyTextStyle.copyWith(color: Colors.black),
                   ),
-                ],
-              ),
-              Icon(
-                Icons.more_vert_rounded,
-                size: 30,
-                color: Colors.black,
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Icon(Icons.people_outlined),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                child: Text(
-                  "23 people applied",
-                  style: kBodyTextStyle.copyWith(color: Colors.black),
                 ),
-              ),
-              Spacer(),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 7, vertical: 5),
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(34, 0, 150, 135),
-                  borderRadius: BorderRadius.circular(4),
+                Spacer(),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 7, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(34, 0, 150, 135),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    "\$${data.salary.split("-")[1]} Monthly",
+                    style: kBodyTextStyle.copyWith(
+                        color: Colors.black, fontSize: 16),
+                  ),
                 ),
-                child: Text(
-                  "\$1200 Monthly",
-                  style: kBodyTextStyle.copyWith(
-                      color: Colors.black, fontSize: 16),
-                ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

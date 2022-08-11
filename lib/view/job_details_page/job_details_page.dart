@@ -134,6 +134,7 @@ class ApplyNowBtn extends StatelessWidget {
     final JobPostModel placementData =
         Get.find<JobPostsController>().jobPosts[1];
     JobPostModel data = Get.arguments ?? placementData;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -161,40 +162,59 @@ class ApplyNowBtn extends StatelessWidget {
         SizedBox(
           width: 10,
         ),
-        GestureDetector(
-          onTap: () {
-            if (data.postUserId == firebaseAuth.currentUser!.uid) {
-              return null;
-            }
-            Get.toNamed(RouteNames.jobApply);
-            Get.put(ApplicationsPageController()).jobPostId.value = data.id;
+        GetX<ApplicationsPageController>(
+          init: Get.put(ApplicationsPageController()),
+          builder: (appPageController) {
+            return GestureDetector(
+              onTap: () {
+                if (data.postUserId == firebaseAuth.currentUser!.uid) {
+                  return null;
+                }
+                Get.toNamed(RouteNames.jobApply);
+                appPageController.jobPostId.value = data.id;
+              },
+              child: data.postUserId == firebaseAuth.currentUser!.uid &&
+                      !appPageController.isSelectedJobAlreadyApplied(data.id)
+                  ? Container(
+                      alignment: Alignment.center,
+                      width: Get.width / 2,
+                      child: Text(
+                        "Sorry!  You cannot apply to your own job",
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                  : data.postUserId != firebaseAuth.currentUser!.uid &&
+                          appPageController
+                                  .isSelectedJobAlreadyApplied(data.id) ==
+                              true
+                      ? Container(
+                          alignment: Alignment.center,
+                          width: Get.width / 2,
+                          child: Text(
+                            "You have already applied to this job",
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      : Container(
+                          width: Get.width / 2,
+                          // padding: EdgeInsets.symmetric(vertical: 5, horizontal: 75),
+                          margin:
+                              EdgeInsets.symmetric(vertical: Get.width * 0.01),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Apply Now",
+                              style: kLabelTextStyle.copyWith(
+                                  fontSize: 20, color: themeBgColor),
+                            ),
+                          ),
+                        ),
+            );
           },
-          child: data.postUserId == firebaseAuth.currentUser!.uid
-              ? Container(
-                  alignment: Alignment.center,
-                  width: Get.width / 2,
-                  child: Text(
-                    "Sorry!  You cannot apply to your own job",
-                    textAlign: TextAlign.center,
-                  ),
-                )
-              : Container(
-                  width: Get.width / 2,
-                  // padding: EdgeInsets.symmetric(vertical: 5, horizontal: 75),
-                  margin: EdgeInsets.symmetric(vertical: Get.width * 0.01),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(7),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Apply Now",
-                      style: kLabelTextStyle.copyWith(
-                          fontSize: 20, color: themeBgColor),
-                    ),
-                  ),
-                ),
         ),
       ],
     );

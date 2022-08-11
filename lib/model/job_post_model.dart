@@ -38,7 +38,7 @@ class JobPostModel {
     required this.createdAt,
   });
 
-// to cloud firestore
+// from cloud firestore
   JobPostModel.fromDocumentSnapshot(DocumentSnapshot doc) {
     postUserId = doc["postUserId"];
     id = doc["id"];

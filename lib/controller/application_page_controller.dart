@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -8,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:job_portal/controller/user_account_controller.dart';
 import 'package:job_portal/global.dart';
 import 'package:job_portal/model/applicant_model.dart';
+import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/model/user_account.dart';
 import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/services/database.dart';
@@ -91,6 +93,16 @@ class ApplicationsPageController extends GetxController {
       return null;
   }
 
+  bool isSelectedJobAlreadyApplied(String postId) {
+    List<String> appliedJobPostId = [];
+
+    myApplicationList.forEach((element) {
+      appliedJobPostId.add(element.jobPostId!);
+    });
+
+    return appliedJobPostId.contains(postId);
+  }
+
   TextEditingController nameC = new TextEditingController();
   TextEditingController emailC = new TextEditingController();
   TextEditingController phoneNumberC = new TextEditingController();
@@ -121,7 +133,8 @@ class ApplicationsPageController extends GetxController {
     questionC.text = "No Question";
 
     await getData();
-    print(myApplicationList.length);
+    await getJobPostOwner();
+    // print(myApplicationList.length);
   }
 
   printController() {
@@ -149,8 +162,6 @@ class ApplicationsPageController extends GetxController {
       suggestion: suggestionC.text,
       question: questionC.text,
     );
-    print("ApplyJob => ");
-    print(data.toString());
     await FirestoreHelper()
         .create(collectionPath: "applicants", data: data.toJson());
 
@@ -160,6 +171,8 @@ class ApplicationsPageController extends GetxController {
 
   /// Get Applicant Data from firestore
   RxList<ApplicantModel> myApplicationList = <ApplicantModel>[].obs;
+  RxList<JobPostModel> jobPostList = <JobPostModel>[].obs;
+  RxList<String> jobPostOwnerList = <String>[].obs;
 
   getData() async {
     await firebaseFirestore
@@ -170,6 +183,18 @@ class ApplicationsPageController extends GetxController {
               myApplicationList
                   .add(ApplicantModel.fromDocumentSnapshot(element));
             }));
+  }
+
+  getJobPostOwner() async {
+    if (myApplicationList.length > 0) {
+      // print("Inside > 0, lenght => ${myApplicationList.length} ");
+      myApplicationList.forEach((element) async {
+        // print("element => ${element.jobPostId}");
+        DocumentSnapshot<Map<String, dynamic>> res = await FirestoreHelper()
+            .readByDoc(collectionPath: "jobPosts", docPath: element.jobPostId);
+        jobPostList.add(JobPostModel.fromDocumentSnapshot(res));
+      });
+    }
   }
 
   RxList expansionOpen = [].obs;

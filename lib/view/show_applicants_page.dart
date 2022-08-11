@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/controller/application_page_controller.dart';
 import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/main.dart';
+import 'package:job_portal/model/applicant_model.dart';
 import 'package:job_portal/model/job_post_model.dart';
+import 'package:job_portal/model/user_account.dart';
+import 'package:job_portal/services/database.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
 class ShowApplicantsPage extends GetView<ApplicationsPageController> {
@@ -94,7 +98,9 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return ApplicantCard();
+                      return controller.applicantList.length > 0
+                          ? ApplicantCard(data: controller.applicantList[index])
+                          : Text("No Data");
                     },
                   )),
             ],
@@ -106,8 +112,11 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
 }
 
 class ApplicantCard extends StatelessWidget {
+  final UserAccount data;
+
   const ApplicantCard({
     Key? key,
+    required this.data,
   }) : super(key: key);
 
   @override
@@ -115,9 +124,23 @@ class ApplicantCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.teal),
+        // border: Border.all(color: Colors.teal),
+        color: Colors.teal,
       ),
-      child: Text("D"),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
+                height: 60,
+                width: 60,
+                alignment: Alignment.center,
+                child: data.profile != null
+                    ? Image.network(data.profile!)
+                    : Image.asset('assets/images/default.png')),
+          ),
+        ],
+      ),
     );
   }
 }

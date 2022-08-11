@@ -32,7 +32,7 @@ class ApplicantModel {
   });
 
   ApplicantModel.fromDocumentSnapshot(DocumentSnapshot doc) {
-    applicantId = doc.id;
+    applicantId = doc["applicantId"];
     applicantName = doc["applicantName"];
     email = doc["email"];
     phoneNumber = doc["phoneNumber"];

@@ -197,21 +197,33 @@ class ApplicationsPageController extends GetxController {
   }
 
   RxList<ApplicantModel> applicantsForSelectedJobPost = <ApplicantModel>[].obs;
+
+  RxList<UserAccount> applicantList = <UserAccount>[].obs;
+
   getApplicantsFromPostedJobPosts(String selectedJobId) async {
     await firebaseFirestore
         .collection("applicants")
         .where("jobPostId", isEqualTo: selectedJobId)
         .get()
-        .then((value) => value.docs.forEach((element) {
+        .then(
+          (value) => value.docs.forEach(
+            (element) async {
               applicantsForSelectedJobPost
                   .add(ApplicantModel.fromDocumentSnapshot(element));
-            }));
 
-    // get job posts
-    // find all the applicants
-    // no for loop <It has to be specific job post per specific applicant>
+              String userId =
+                  ApplicantModel.fromDocumentSnapshot(element).applicantId!;
+
+              await firebaseFirestore
+                  .collection("users")
+                  .doc(userId)
+                  .get()
+                  .then((value) {
+                return applicantList
+                    .add(UserAccount.fromDocumentSnapshot(value));
+              });
+            },
+          ),
+        );
   }
-
-// Find total number of applicants for expansion
-
 }

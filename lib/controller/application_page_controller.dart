@@ -133,8 +133,7 @@ class ApplicationsPageController extends GetxController {
     questionC.text = "No Question";
 
     await getData();
-    await getJobPostOwner();
-    // print(myApplicationList.length);
+    await getAppliedJobs();
   }
 
   printController() {
@@ -171,8 +170,8 @@ class ApplicationsPageController extends GetxController {
 
   /// Get Applicant Data from firestore
   RxList<ApplicantModel> myApplicationList = <ApplicantModel>[].obs;
-  RxList<JobPostModel> jobPostList = <JobPostModel>[].obs;
-  RxList<String> jobPostOwnerList = <String>[].obs;
+  RxList<JobPostModel> appliedJobsList = <JobPostModel>[].obs;
+  RxList<ApplicantModel> postedJobsList = <ApplicantModel>[].obs;
 
   getData() async {
     await firebaseFirestore
@@ -185,17 +184,34 @@ class ApplicationsPageController extends GetxController {
             }));
   }
 
-  getJobPostOwner() async {
+  getAppliedJobs() async {
     if (myApplicationList.length > 0) {
       // print("Inside > 0, lenght => ${myApplicationList.length} ");
       myApplicationList.forEach((element) async {
         // print("element => ${element.jobPostId}");
         DocumentSnapshot<Map<String, dynamic>> res = await FirestoreHelper()
             .readByDoc(collectionPath: "jobPosts", docPath: element.jobPostId);
-        jobPostList.add(JobPostModel.fromDocumentSnapshot(res));
+        appliedJobsList.add(JobPostModel.fromDocumentSnapshot(res));
       });
     }
   }
 
-  RxList expansionOpen = [].obs;
+  RxList<ApplicantModel> applicantsForSelectedJobPost = <ApplicantModel>[].obs;
+  getApplicantsFromPostedJobPosts(String selectedJobId) async {
+    await firebaseFirestore
+        .collection("applicants")
+        .where("jobPostId", isEqualTo: selectedJobId)
+        .get()
+        .then((value) => value.docs.forEach((element) {
+              applicantsForSelectedJobPost
+                  .add(ApplicantModel.fromDocumentSnapshot(element));
+            }));
+
+    // get job posts
+    // find all the applicants
+    // no for loop <It has to be specific job post per specific applicant>
+  }
+
+// Find total number of applicants for expansion
+
 }

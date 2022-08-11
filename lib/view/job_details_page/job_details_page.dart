@@ -163,7 +163,8 @@ class ApplyNowBtn extends StatelessWidget {
           width: 10,
         ),
         GetX<ApplicationsPageController>(
-          init: Get.put(ApplicationsPageController()),
+          init:
+              Get.put<ApplicationsPageController>(ApplicationsPageController()),
           builder: (appPageController) {
             return GestureDetector(
               onTap: () {

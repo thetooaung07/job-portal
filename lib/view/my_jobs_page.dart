@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/application_page_controller.dart';
 import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/controller/job_posts_controller.dart';
 import 'package:job_portal/main.dart';
@@ -190,7 +191,9 @@ class MyJobCard extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Get.toNamed(RouteNames.showApplicants);
+                Get.put(ApplicationsPageController())
+                    .getApplicantsFromPostedJobPosts(data.id);
+                Get.toNamed(RouteNames.showApplicants, arguments: data);
               },
               child: Container(
                 color: Colors.transparent,

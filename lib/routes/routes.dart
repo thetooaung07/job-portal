@@ -16,7 +16,7 @@ import 'package:job_portal/view/post_job_page.dart';
 import 'package:job_portal/view/recent_posts/recent_posts_page.dart';
 import 'package:job_portal/view/saved_jobs_page.dart';
 import 'package:job_portal/view/search_page/search_page.dart';
-import 'package:job_portal/view/show_applicants.dart';
+import 'package:job_portal/view/show_applicants_page.dart';
 
 class RouteNames {
   static String root = "/root";

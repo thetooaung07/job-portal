@@ -60,13 +60,6 @@ class PostJobPage extends GetView<JobCreateController> {
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 children: [
-                  // Container(
-                  //   margin: EdgeInsets.symmetric(vertical: 20),
-                  //   child: Text(
-                  //     "Job Description",
-                  //     style: kCaptionTextStyle,
-                  //   ),
-                  // ),
                   JobSection(
                     sectionIcon: Icon(Icons.local_activity_outlined),
                     sectionTitle: 'About Position',
@@ -91,60 +84,72 @@ class PostJobPage extends GetView<JobCreateController> {
                         controller: controller.workHourC,
                         label: "Work Hour",
                       ),
-
                       Obx(
-                        () => Row(
-                          children: [
-                            Radio<String>(
-                                activeColor: Colors.black,
-                                value: "Company",
-                                groupValue: controller.selectedType.value,
-                                onChanged: (value) {
-                                  print(value);
-                                  controller.selectedType.value = value!;
-                                }),
-                            Text(
-                              "Company",
-                              style: TextStyle(
-                                  fontWeight:
-                                      controller.selectedType.value == "Company"
-                                          ? FontWeight.w700
-                                          : FontWeight.normal),
-                            ),
-                            Radio<String>(
-                                activeColor: Colors.black,
-                                value: "Work From Home",
-                                groupValue: controller.selectedType.value,
-                                onChanged: (value) {
-                                  controller.selectedType.value = value!;
-                                }),
-                            Text(
-                              "Work From Home",
-                              style: TextStyle(
-                                  fontWeight: controller.selectedType.value ==
-                                          "Work From Home"
-                                      ? FontWeight.w700
-                                      : FontWeight.normal),
-                            ),
-                            Radio<String>(
-                                activeColor: Colors.black,
-                                value: "Hybrid",
-                                groupValue: controller.selectedType.value,
-                                onChanged: (value) {
-                                  controller.selectedType.value = value!;
-                                }),
-                            Text(
-                              "Hybrid",
-                              style: TextStyle(
-                                  fontWeight:
-                                      controller.selectedType.value == "Hybrid"
-                                          ? FontWeight.w700
-                                          : FontWeight.normal),
-                            ),
-                          ],
+                        () => Padding(
+                          padding:
+                              EdgeInsets.only(top: 7, bottom: 15, right: 5),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio<String>(
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  activeColor: Colors.black,
+                                  value: "Company",
+                                  groupValue: controller.selectedType.value,
+                                  onChanged: (value) {
+                                    print(value);
+                                    controller.selectedType.value = value!;
+                                  }),
+                              Text(
+                                "Company",
+                                style: TextStyle(
+                                    color: controller.selectedType.value ==
+                                            "Company"
+                                        ? Color.fromARGB(224, 0, 0, 0)
+                                        : Color.fromARGB(130, 0, 0, 0),
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Radio<String>(
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  activeColor: Colors.black,
+                                  value: "Work From Home",
+                                  groupValue: controller.selectedType.value,
+                                  onChanged: (value) {
+                                    controller.selectedType.value = value!;
+                                  }),
+                              Text(
+                                "Work From Home",
+                                style: TextStyle(
+                                    color: controller.selectedType.value ==
+                                            "Work From Home"
+                                        ? Color.fromARGB(224, 0, 0, 0)
+                                        : Color.fromARGB(130, 0, 0, 0),
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Radio<String>(
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  activeColor: Colors.black,
+                                  value: "Hybrid",
+                                  groupValue: controller.selectedType.value,
+                                  onChanged: (value) {
+                                    controller.selectedType.value = value!;
+                                  }),
+                              Text(
+                                "Hybrid",
+                                style: TextStyle(
+                                    color: controller.selectedType.value ==
+                                            "Hybrid"
+                                        ? Color.fromARGB(224, 0, 0, 0)
+                                        : Color.fromARGB(130, 0, 0, 0),
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-
                       //!TODO Change UI for Salary
 
                       WithLabelTFField(
@@ -333,7 +338,6 @@ class PostJobPage extends GetView<JobCreateController> {
                       ),
                     ],
                   ),
-
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20.0),
                     child: Row(

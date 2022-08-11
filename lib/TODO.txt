@@ -94,7 +94,7 @@ job apply page / employer / review view
 
 //change bind with ever() to auth middleware > user info flickering 3 times 
 mainpage bottom nav bar controller error on user info update
-// thetbgmail.com
+// thetgmail.com
 
 
 
@@ -104,3 +104,6 @@ mainpage bottom nav bar controller error on user info update
  - to think about models for applicants
  - to add controller for job applicants
  - 
+
+
+ UI flashing in Job Details ( checking already applied or not )

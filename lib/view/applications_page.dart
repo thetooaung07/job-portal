@@ -68,14 +68,14 @@ class ApplicationsPage extends StatelessWidget {
                 init: Get.put(ApplicationsPageController()),
                 builder: (controller) {
                   return controller.myApplicationList.length > 0 &&
-                          controller.jobPostList.length > 0
+                          controller.appliedJobsList.length > 0
                       ? ListView.builder(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           itemCount: controller.myApplicationList.length,
                           itemBuilder: (context, index) {
                             return ApplicationCard(
-                                data: controller.jobPostList[index]);
+                                data: controller.appliedJobsList[index]);
                           },
                         )
                       : Container(

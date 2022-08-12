@@ -14,11 +14,11 @@ class JobsPage extends StatelessWidget {
     return Scaffold(
       appBar: MyAppBar(
         leading: Container(
-          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: CustomIconButton(
             onTap: (() =>
                 Get.find<BottomNavBarController>().selectedIndex.value = 0),
-            child: Icon(
+            child: const Icon(
               Icons.chevron_left_rounded,
               size: 30,
               color: Colors.black,
@@ -28,10 +28,10 @@ class JobsPage extends StatelessWidget {
         label: "Jobs",
         action: [
           Container(
-            margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+            margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
             child: CustomIconButton(
               onTap: () {},
-              child: Icon(
+              child: const Icon(
                 Icons.more_vert_rounded,
                 size: 30,
                 color: Colors.black,
@@ -41,13 +41,13 @@ class JobsPage extends StatelessWidget {
         ],
       ),
       body: Container(
-        margin: EdgeInsets.only(top: 20),
+        margin: const EdgeInsets.only(top: 20),
         width: MediaQuery.of(context).size.width,
         child: GridView(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: 20,
           ),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 1.03,
           ),
@@ -56,7 +56,7 @@ class JobsPage extends StatelessWidget {
               onTap: () {
                 Get.toNamed(RouteNames.applications);
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.check_box_outlined,
                 size: 60,
                 color: kPrimaryRedColor,
@@ -73,7 +73,7 @@ class JobsPage extends StatelessWidget {
             // ),
             JobCard(
               onTap: (() => Get.toNamed(RouteNames.myJobs)),
-              icon: Icon(
+              icon: const Icon(
                 Icons.work_outline,
                 size: 60,
                 color: kPrimaryRedColor,
@@ -94,7 +94,7 @@ class JobsPage extends StatelessWidget {
                   RouteNames.savePosts,
                 );
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.bookmark_added_outlined,
                 size: 60,
                 color: kPrimaryRedColor,
@@ -167,11 +167,11 @@ class JobCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Color.fromARGB(16, 0, 0, 0),
               blurRadius: 15,
@@ -180,18 +180,18 @@ class JobCard extends StatelessWidget {
             )
           ],
         ),
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         width: 160,
         height: Get.height * 0.2,
         // height: Get.height * 0.15,
         child: Column(children: [
           icon,
-          Spacer(),
+          const Spacer(),
           Text(
             text,
             style: kCaptionTextStyle.copyWith(fontSize: 20),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
         ]),

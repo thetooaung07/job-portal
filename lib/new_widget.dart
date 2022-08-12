@@ -1,7 +1,9 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 
 class OrderedList extends StatelessWidget {
-  OrderedList(this.texts);
+  const OrderedList(this.texts);
   final List<dynamic> texts;
 
   @override
@@ -13,7 +15,7 @@ class OrderedList extends StatelessWidget {
       counter++;
       widgetList.add(OrderedListItem(counter, text));
       // Add space between items
-      widgetList.add(SizedBox(height: 5.0));
+      widgetList.add(const SizedBox(height: 5.0));
     }
 
     return Column(children: widgetList);
@@ -21,7 +23,7 @@ class OrderedList extends StatelessWidget {
 }
 
 class OrderedListItem extends StatelessWidget {
-  OrderedListItem(this.counter, this.text);
+  const OrderedListItem(this.counter, this.text);
   final int counter;
   final String text;
 
@@ -46,7 +48,7 @@ class OrderedListItem extends StatelessWidget {
  */
 
 class UnorderedList extends StatelessWidget {
-  UnorderedList(this.texts);
+  const UnorderedList(this.texts);
   final List<String> texts;
 
   @override
@@ -56,7 +58,7 @@ class UnorderedList extends StatelessWidget {
       // Add list item
       widgetList.add(UnorderedListItem(text));
       // Add space between items
-      widgetList.add(SizedBox(height: 5.0));
+      widgetList.add(const SizedBox(height: 5.0));
     }
 
     return Column(children: widgetList);
@@ -64,7 +66,7 @@ class UnorderedList extends StatelessWidget {
 }
 
 class UnorderedListItem extends StatelessWidget {
-  UnorderedListItem(this.text);
+  const UnorderedListItem(this.text);
   final String text;
 
   @override
@@ -72,7 +74,7 @@ class UnorderedListItem extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text("• "),
+        const Text("• "),
         Expanded(
           child: Text(text),
         ),

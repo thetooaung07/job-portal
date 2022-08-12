@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:job_portal/global.dart';
 import 'package:job_portal/model/job_post_model.dart';
@@ -49,7 +51,7 @@ class FirestoreHelper {
           .doc(docPath)
           .update(data);
     } catch (e) {
-      print(e);
+      log(e.toString());
     }
   }
 
@@ -80,7 +82,7 @@ class FirestoreHelper {
           .set(user.toJson());
       return true;
     } catch (e) {
-      print(e);
+      log(e.toString());
       return false;
     }
   }
@@ -93,7 +95,7 @@ class FirestoreHelper {
 
       return UserAccount.fromDocumentSnapshot(doc);
     } catch (e) {
-      print(e);
+      log(e.toString());
       rethrow;
     }
   }
@@ -105,9 +107,9 @@ class FirestoreHelper {
         .snapshots()
         .map((event) {
       List<JobPostModel> dataList = [];
-      event.docs.forEach((element) {
+      for (var element in event.docs) {
         dataList.add(JobPostModel.fromDocumentSnapshot(element));
-      });
+      }
 
       return dataList;
     });
@@ -120,9 +122,9 @@ class FirestoreHelper {
         .snapshots()
         .map((event) {
       List<JobPostModel> dataList = [];
-      event.docs.forEach((element) {
+      for (var element in event.docs) {
         dataList.add(JobPostModel.fromDocumentSnapshot(element));
-      });
+      }
       return dataList;
     });
   }

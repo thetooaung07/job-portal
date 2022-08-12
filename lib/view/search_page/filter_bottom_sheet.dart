@@ -20,7 +20,7 @@ class FilterBottomSheet extends StatelessWidget {
       child: Container(
         width: Get.width,
         height: Get.height * 0.85,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: themeBgColor,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20),
@@ -64,13 +64,13 @@ class FilterBottomSheet extends StatelessWidget {
                   ],
                 ),
               ),
-              LabelDropDownBtn(
+              const LabelDropDownBtn(
                 label: "Job Categories",
               ),
-              LabelDropDownBtn(
+              const LabelDropDownBtn(
                 label: "Job Type",
               ),
-              LabelDropDownBtn(label: "Location"),
+              const LabelDropDownBtn(label: "Location"),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20.0, vertical: 1),
@@ -82,9 +82,9 @@ class FilterBottomSheet extends StatelessWidget {
                       style: kLabelTextStyle.copyWith(fontSize: 17),
                     ),
                     DropdownButton(
-                      underline: SizedBox(),
+                      underline: const SizedBox(),
                       value: "a",
-                      items: [
+                      items: const [
                         DropdownMenuItem(value: "a", child: Text("Month")),
                         DropdownMenuItem(value: "b", child: Text("Year"))
                       ],
@@ -100,11 +100,11 @@ class FilterBottomSheet extends StatelessWidget {
                       child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      LabelDropDownBtn(
+                      const LabelDropDownBtn(
                         padding: EdgeInsets.only(left: 20),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 30, top: 5),
+                        padding: const EdgeInsets.only(left: 30, top: 5),
                         child: Text(
                           "Min. Salary",
                           style: kBulletListTextStyle.copyWith(
@@ -113,18 +113,18 @@ class FilterBottomSheet extends StatelessWidget {
                       ),
                     ],
                   )),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Flexible(
                       child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      LabelDropDownBtn(
+                      const LabelDropDownBtn(
                         padding: EdgeInsets.only(right: 20),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 10, top: 5),
+                        padding: const EdgeInsets.only(left: 10, top: 5),
                         child: Text(
                           "Max. Salary",
                           style: kBulletListTextStyle.copyWith(
@@ -135,9 +135,9 @@ class FilterBottomSheet extends StatelessWidget {
                   )),
                 ],
               ),
-              Spacer(),
+              const Spacer(),
               Container(
-                margin: EdgeInsets.all(15),
+                margin: const EdgeInsets.all(15),
                 width: Get.width,
                 height: 60,
                 child: ClipRRect(
@@ -199,7 +199,7 @@ class LabelDropDownBtn extends StatelessWidget {
     RxString selectedItem = "Flutter".obs;
 
     return Padding(
-      padding: padding ?? EdgeInsets.symmetric(horizontal: 20),
+      padding: padding ?? const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -211,23 +211,23 @@ class LabelDropDownBtn extends StatelessWidget {
                     style: kLabelTextStyle.copyWith(fontSize: 17),
                   ),
                 )
-              : SizedBox(
+              : const SizedBox(
                   height: 1,
                 ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(10)),
             child: Obx(
               () => DropdownButton(
-                icon: Icon(Icons.arrow_drop_down),
+                icon: const Icon(Icons.arrow_drop_down),
                 iconSize: 42,
-                underline: SizedBox(),
+                underline: const SizedBox(),
                 dropdownColor: Colors.white,
                 value: selectedItem.value,
                 isExpanded: true,
                 focusColor: Colors.red,
-                hint: Text("UI / UX Designer"),
+                hint: const Text("UI / UX Designer"),
                 onChanged: (v) {
                   selectedItem.value = v.toString();
                 },

@@ -22,7 +22,7 @@ class SignUpPage extends GetView<AuthController> {
         body: SafeArea(
           child: SingleChildScrollView(
             child: Container(
-              margin: EdgeInsets.symmetric(
+              margin: const EdgeInsets.symmetric(
                 horizontal: 20,
               ),
               child: Column(
@@ -30,25 +30,25 @@ class SignUpPage extends GetView<AuthController> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 50,
                       ),
-                      Text(
+                      const Text(
                         "REGISTER ACCOUNT!",
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Text(
+                      const Text(
                         " Fill your details to sign up",
                         style: kBulletListTextStyle,
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 30),
+                        margin: const EdgeInsets.symmetric(vertical: 30),
                         child: Form(
                           // key: controller.signUpForm,
                           child: Column(
@@ -60,7 +60,7 @@ class SignUpPage extends GetView<AuthController> {
                                 controller: controller.usernameController,
                                 onEditingComplete:
                                     controller.emailFocusNode.requestFocus,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 20,
                                   color: Colors.black54,
                                   fontWeight: FontWeight.w500,
@@ -68,40 +68,40 @@ class SignUpPage extends GetView<AuthController> {
                                 decoration: InputDecoration(
                                   focusColor: Colors.black,
                                   isDense: true,
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 20),
                                   hoverColor: Colors.transparent,
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(20),
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.white,
                                         width: 1,
                                       )),
                                   focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(20),
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.white,
                                         width: 2,
                                       )),
                                   filled: true,
                                   fillColor: Colors.white,
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20, right: 20),
+                                  prefixIcon: const Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 20, right: 20),
                                     child: Icon(
                                       Icons.person_outline_rounded,
                                       size: 25,
                                     ),
                                   ),
                                   hintText: "Username",
-                                  hintStyle: TextStyle(
+                                  hintStyle: const TextStyle(
                                     fontWeight: FontWeight.normal,
                                     fontSize: 18,
                                     color: Colors.black26,
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 15,
                               ),
 
@@ -112,7 +112,7 @@ class SignUpPage extends GetView<AuthController> {
                                 controller: controller.emailController,
                                 onEditingComplete:
                                     controller.passFocusNode.requestFocus,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 20,
                                   color: Colors.black54,
                                   fontWeight: FontWeight.w500,
@@ -120,40 +120,40 @@ class SignUpPage extends GetView<AuthController> {
                                 decoration: InputDecoration(
                                   focusColor: Colors.black,
                                   isDense: true,
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 20),
                                   hoverColor: Colors.transparent,
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(20),
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.white,
                                         width: 1,
                                       )),
                                   focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(20),
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.white,
                                         width: 2,
                                       )),
                                   filled: true,
                                   fillColor: Colors.white,
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20, right: 20),
+                                  prefixIcon: const Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 20, right: 20),
                                     child: Icon(
                                       Icons.email_outlined,
                                       size: 25,
                                     ),
                                   ),
                                   hintText: "Email",
-                                  hintStyle: TextStyle(
+                                  hintStyle: const TextStyle(
                                     fontWeight: FontWeight.normal,
                                     fontSize: 18,
                                     color: Colors.black26,
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               //Password
@@ -164,40 +164,40 @@ class SignUpPage extends GetView<AuthController> {
                                   obscureText: controller.isObscure.value,
                                   focusNode: controller.passFocusNode,
                                   controller: controller.passController,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 20,
                                     color: Colors.black54,
                                     fontWeight: FontWeight.w500,
                                   ),
                                   decoration: InputDecoration(
                                     isDense: true,
-                                    contentPadding: EdgeInsets.symmetric(
+                                    contentPadding: const EdgeInsets.symmetric(
                                         horizontal: 20, vertical: 20),
                                     hoverColor: Colors.transparent,
                                     enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           color: Colors.white,
                                           width: 1,
                                         )),
                                     focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           color: Colors.white,
                                           width: 2,
                                         )),
                                     filled: true,
                                     fillColor: Colors.white,
-                                    prefixIcon: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 20, right: 20),
+                                    prefixIcon: const Padding(
+                                      padding:
+                                          EdgeInsets.only(left: 20, right: 20),
                                       child: Icon(
                                         Icons.lock_outline_rounded,
                                         size: 25,
                                       ),
                                     ),
                                     hintText: "Password",
-                                    hintStyle: TextStyle(
+                                    hintStyle: const TextStyle(
                                       fontWeight: FontWeight.normal,
                                       fontSize: 18,
                                       color: Colors.black26,
@@ -205,7 +205,7 @@ class SignUpPage extends GetView<AuthController> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
 
@@ -215,33 +215,33 @@ class SignUpPage extends GetView<AuthController> {
                                   obscureText: controller.isObscure.value,
                                   focusNode: controller.cPassFocusNode,
                                   controller: controller.cPassController,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 20,
                                     color: Colors.black54,
                                     fontWeight: FontWeight.w500,
                                   ),
                                   decoration: InputDecoration(
                                     isDense: true,
-                                    contentPadding: EdgeInsets.symmetric(
+                                    contentPadding: const EdgeInsets.symmetric(
                                         horizontal: 20, vertical: 20),
                                     hoverColor: Colors.transparent,
                                     enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           color: Colors.white,
                                           width: 1,
                                         )),
                                     focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           color: Colors.white,
                                           width: 2,
                                         )),
                                     filled: true,
                                     fillColor: Colors.white,
-                                    prefixIcon: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 20, right: 20),
+                                    prefixIcon: const Padding(
+                                      padding:
+                                          EdgeInsets.only(left: 20, right: 20),
                                       child: Icon(
                                         Icons.lock_outline_rounded,
                                         size: 25,
@@ -263,7 +263,7 @@ class SignUpPage extends GetView<AuthController> {
                                       ),
                                     ),
                                     hintText: "Confirm Password",
-                                    hintStyle: TextStyle(
+                                    hintStyle: const TextStyle(
                                       fontWeight: FontWeight.normal,
                                       fontSize: 18,
                                       color: Colors.black26,
@@ -284,7 +284,7 @@ class SignUpPage extends GetView<AuthController> {
                               //   child: Text("Forget Password?"),
                               // ),
 
-                              SizedBox(
+                              const SizedBox(
                                 height: 40,
                               ),
                               ClipRRect(
@@ -301,13 +301,13 @@ class SignUpPage extends GetView<AuthController> {
                                       },
                                       child: Obx(
                                         () => Center(
-                                          child: controller.isLoading == true
-                                              ? SizedBox(
+                                          child: controller.isLoading.isTrue
+                                              ? const SizedBox(
                                                   height: 30,
                                                   width: 30,
                                                   child:
                                                       CircularProgressIndicator())
-                                              : Text(
+                                              : const Text(
                                                   "Sign Up",
                                                   style:
                                                       TextStyle(fontSize: 20),
@@ -324,7 +324,7 @@ class SignUpPage extends GetView<AuthController> {
                   ),
                   Column(
                     children: [
-                      Text("- Or Continue With -"),
+                      const Text("- Or Continue With -"),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -332,14 +332,14 @@ class SignUpPage extends GetView<AuthController> {
                             height: 60,
                             width: 60,
                             color: Colors.red,
-                            margin: EdgeInsets.symmetric(
+                            margin: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 20),
                           ),
                           Container(
                             height: 60,
                             width: 60,
                             color: Colors.red,
-                            margin: EdgeInsets.symmetric(
+                            margin: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 20),
                           ),
                         ],
@@ -347,8 +347,8 @@ class SignUpPage extends GetView<AuthController> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Already have account? "),
-                          SizedBox(
+                          const Text("Already have account? "),
+                          const SizedBox(
                             width: 5,
                           ),
                           GestureDetector(
@@ -356,7 +356,7 @@ class SignUpPage extends GetView<AuthController> {
                               controller.reset();
                               Get.toNamed(RouteNames.login);
                             },
-                            child: Text(
+                            child: const Text(
                               "Login",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),

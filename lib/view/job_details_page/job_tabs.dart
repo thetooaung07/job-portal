@@ -35,10 +35,10 @@ class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-          margin: EdgeInsets.symmetric(horizontal: 80),
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+          margin: const EdgeInsets.symmetric(horizontal: 80),
           decoration: BoxDecoration(
-            color: Color.fromARGB(85, 233, 233, 233),
+            color: const Color.fromARGB(85, 233, 233, 233),
             // color: jobDetailsTabBgColor,
             borderRadius: BorderRadius.circular(10),
           ),
@@ -59,8 +59,8 @@ class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
               ),
               labelColor: Colors.white,
               controller: _tabController,
-              labelStyle: TextStyle(fontSize: 16),
-              tabs: [
+              labelStyle: const TextStyle(fontSize: 16),
+              tabs: const [
                 Tab(
                   height: 40,
                   text: "Overview",
@@ -80,9 +80,9 @@ class _JobTabState extends State<JobTab> with SingleTickerProviderStateMixin {
         Obx(
           () => Custom2TabBarView(
             tabIndex: tabIndex.value,
-            firstTab: Overview(),
+            firstTab: const Overview(),
             // secondTab: Employer(),
-            secondTab: Review(),
+            secondTab: const Review(),
           ),
         )
       ],
@@ -98,35 +98,33 @@ class Overview extends StatelessWidget {
     final JobPostModel placementData =
         Get.find<JobPostsController>().jobPosts[1];
     JobPostModel data = Get.arguments ?? placementData;
-    return Container(
-      child: Column(
-        children: [
-          //JobDescShort
-          JobDescShort(),
-          SizedBox(
-            height: 10,
+    return Column(
+      children: [
+        //JobDescShort
+        const JobDescShort(),
+        const SizedBox(
+          height: 10,
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+          decoration: BoxDecoration(
+            // color: kJobDetailsBgColor,
+            borderRadius: BorderRadius.circular(20),
           ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
-            decoration: BoxDecoration(
-              // color: kJobDetailsBgColor,
-              borderRadius: BorderRadius.circular(20),
+          child: Column(children: [
+            // Requirements
+            BulletListContainer(
+              data: data.requirements,
+              titile: "Requirements",
             ),
-            child: Column(children: [
-              // Requirements
-              BulletListContainer(
-                data: data.requirements,
-                titile: "Requirements",
-              ),
-              // Responsibilities
-              BulletListContainer(
-                data: data.responsibilities,
-                titile: "Responsibilities",
-              ),
-            ]),
-          ),
-        ],
-      ),
+            // Responsibilities
+            BulletListContainer(
+              data: data.responsibilities,
+              titile: "Responsibilities",
+            ),
+          ]),
+        ),
+      ],
     );
   }
 }
@@ -143,7 +141,7 @@ class JobDescShort extends StatelessWidget {
       width: Get.width,
       // margin: EdgeInsets.symmetric(horizontal: 10),
       // padding: EdgeInsets.fromLTRB(25, 12, 25, 5),
-      padding: EdgeInsets.fromLTRB(0, 12, 0, 10),
+      padding: const EdgeInsets.fromLTRB(0, 12, 0, 10),
       decoration: BoxDecoration(
         color: kJobDetailsBgColor,
         borderRadius: BorderRadius.circular(10),
@@ -152,39 +150,40 @@ class JobDescShort extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
+          SizedBox(
             width: (Get.width - 50) / 3,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomIconButton(child: Icon(Icons.work_history_outlined)),
-                SizedBox(
+                const CustomIconButton(
+                    child: Icon(Icons.work_history_outlined)),
+                const SizedBox(
                   height: 10,
                 ),
                 Text(data.title),
               ],
             ),
           ),
-          Container(
+          SizedBox(
             width: (Get.width - 50) / 3,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomIconButton(child: Icon(Icons.location_on_outlined)),
-                SizedBox(
+                const CustomIconButton(child: Icon(Icons.location_on_outlined)),
+                const SizedBox(
                   height: 10,
                 ),
                 Text(data.companyLocation),
               ],
             ),
           ),
-          Container(
+          SizedBox(
             width: (Get.width - 50) / 3,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomIconButton(child: Icon(Icons.history_rounded)),
-                SizedBox(
+                const CustomIconButton(child: Icon(Icons.history_rounded)),
+                const SizedBox(
                   height: 10,
                 ),
                 Text(data.workHour),
@@ -202,9 +201,7 @@ class Employer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text("Employer Details")),
-    );
+    return const Center(child: Text("Employer Details"));
   }
 }
 
@@ -213,10 +210,8 @@ class Review extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text("Review Tab"),
-      ),
+    return const Center(
+      child: Text("Review Tab"),
     );
   }
 }

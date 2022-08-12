@@ -1,14 +1,14 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/controller/user_account_controller.dart';
 import 'package:job_portal/global.dart';
-import 'package:job_portal/main.dart';
 import 'package:job_portal/model/user_account.dart';
 import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/services/database.dart';
-import 'package:job_portal/view/login/login_page.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -72,7 +72,7 @@ class AuthController extends GetxController {
           password: passController.text.trim());
       //store user details in cfirestore
 
-      UserAccount user = new UserAccount(
+      UserAccount user = UserAccount(
         user: _cre.user,
         userId: _cre.user?.uid,
         username: usernameController.text.trim(),
@@ -98,7 +98,7 @@ class AuthController extends GetxController {
       reset();
       // Get.offNamedUntil(RouteNames.home, (route) => false);
     } catch (e) {
-      print(e);
+      log(e.toString());
       isLoading.value = false;
       await Fluttertoast.showToast(
               toastLength: Toast.LENGTH_LONG,
@@ -131,7 +131,7 @@ class AuthController extends GetxController {
       // Get.offNamedUntil(RouteNames.home, (route) => false);
       reset();
     } catch (e) {
-      print(e);
+      log(e.toString());
       isLoading.value = false;
       await Fluttertoast.showToast(
               toastLength: Toast.LENGTH_LONG,
@@ -164,7 +164,7 @@ class AuthController extends GetxController {
       Get.find<UserAccountController>().clear();
       Get.offAllNamed(RouteNames.login);
     } catch (e) {
-      print(e);
+      log(e.toString());
       await Fluttertoast.showToast(
               toastLength: Toast.LENGTH_LONG,
               msg: e.toString(),

@@ -1,4 +1,4 @@
-import 'dart:io';
+// ignore_for_file: avoid_function_literals_in_foreach_calls, unrelated_type_equality_checks
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
@@ -11,11 +11,9 @@ import 'package:job_portal/global.dart';
 import 'package:job_portal/model/applicant_model.dart';
 import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/model/user_account.dart';
-import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/services/database.dart';
-import 'package:job_portal/services/storage.dart';
 
-const List DropdownList = <String>[
+const List dropdownList = <String>[
   "All",
   "Apply",
   "Shortlisted",
@@ -23,11 +21,11 @@ const List DropdownList = <String>[
 ];
 
 class ApplicationsPageController extends GetxController {
-  RxString _selectedVal = "${DropdownList[0]}".obs;
+  final RxString _selectedVal = "${dropdownList[0]}".obs;
   String get selectedVal => _selectedVal.value;
   set selectedVal(String v) => _selectedVal.value = v;
 
-  RxInt _currentStep = 0.obs;
+  final RxInt _currentStep = 0.obs;
   int get currentStep => _currentStep.value;
   set currentStep(int v) => _currentStep.value = v;
 
@@ -59,8 +57,9 @@ class ApplicationsPageController extends GetxController {
         return true;
       }
       return false;
-    } else
+    } else {
       return true;
+    }
   }
 
   RxBool isUploading = false.obs;
@@ -89,33 +88,34 @@ class ApplicationsPageController extends GetxController {
           file, 'cv-form/${file.name}');
       getFileLink.value = fileLink;
       return fileLink;
-    } else
+    } else {
       return null;
+    }
   }
 
   bool isSelectedJobAlreadyApplied(String postId) {
     List<String> appliedJobPostId = [];
 
-    myApplicationList.forEach((element) {
+    for (var element in myApplicationList) {
       appliedJobPostId.add(element.jobPostId!);
-    });
+    }
 
     return appliedJobPostId.contains(postId);
   }
 
-  TextEditingController nameC = new TextEditingController();
-  TextEditingController emailC = new TextEditingController();
-  TextEditingController phoneNumberC = new TextEditingController();
-  TextEditingController addressC = new TextEditingController();
-  TextEditingController summaryC = new TextEditingController();
-  TextEditingController techStackC = new TextEditingController();
-  TextEditingController workExpC = new TextEditingController();
-  TextEditingController slFacebookC = new TextEditingController();
-  TextEditingController slLinkedinC = new TextEditingController();
-  TextEditingController slGithubC = new TextEditingController();
-  TextEditingController slotherC = new TextEditingController();
-  TextEditingController questionC = new TextEditingController();
-  TextEditingController suggestionC = new TextEditingController();
+  TextEditingController nameC = TextEditingController();
+  TextEditingController emailC = TextEditingController();
+  TextEditingController phoneNumberC = TextEditingController();
+  TextEditingController addressC = TextEditingController();
+  TextEditingController summaryC = TextEditingController();
+  TextEditingController techStackC = TextEditingController();
+  TextEditingController workExpC = TextEditingController();
+  TextEditingController slFacebookC = TextEditingController();
+  TextEditingController slLinkedinC = TextEditingController();
+  TextEditingController slGithubC = TextEditingController();
+  TextEditingController slotherC = TextEditingController();
+  TextEditingController questionC = TextEditingController();
+  TextEditingController suggestionC = TextEditingController();
   RxString jobPostId = "".obs;
 
   @override
@@ -136,9 +136,9 @@ class ApplicationsPageController extends GetxController {
     await getAppliedJobs();
   }
 
-  printController() {
-    print("Controller => ${getFileLink.value}");
-  }
+  // printController() {
+  //   print("Controller => ${getFileLink.value}");
+  // }
 
   applyJob() async {
     ApplicantModel data = ApplicantModel(
@@ -185,14 +185,13 @@ class ApplicationsPageController extends GetxController {
   }
 
   getAppliedJobs() async {
-    if (myApplicationList.length > 0) {
+    if (myApplicationList.isNotEmpty) {
       // print("Inside > 0, lenght => ${myApplicationList.length} ");
-      myApplicationList.forEach((element) async {
-        // print("element => ${element.jobPostId}");
+      for (var element in myApplicationList) {
         DocumentSnapshot<Map<String, dynamic>> res = await FirestoreHelper()
             .readByDoc(collectionPath: "jobPosts", docPath: element.jobPostId);
         appliedJobsList.add(JobPostModel.fromDocumentSnapshot(res));
-      });
+      }
     }
   }
 
@@ -201,6 +200,8 @@ class ApplicationsPageController extends GetxController {
   RxList<UserAccount> applicantList = <UserAccount>[].obs;
 
   getApplicantsFromPostedJobPosts(String selectedJobId) async {
+    applicantsForSelectedJobPost.clear();
+    applicantList.clear();
     await firebaseFirestore
         .collection("applicants")
         .where("jobPostId", isEqualTo: selectedJobId)

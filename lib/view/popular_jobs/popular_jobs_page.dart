@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_portal/widgets/job-post-card-vt.dart';
+import 'package:job_portal/widgets/job_post_card_vt.dart';
 
 class PopularJobsPage extends StatelessWidget {
   const PopularJobsPage({Key? key}) : super(key: key);
@@ -8,13 +8,13 @@ class PopularJobsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Popular Jobs"),
+        title: const Text("Popular Jobs"),
       ),
       body: Container(
-        margin: EdgeInsets.only(top: 25),
+        margin: const EdgeInsets.only(top: 25),
         child: ListView.builder(
           itemCount: 4,
-          itemBuilder: (context, index) => JobPostCardVt(),
+          itemBuilder: (context, index) => const JobPostCardVt(),
         ),
       ),
     );

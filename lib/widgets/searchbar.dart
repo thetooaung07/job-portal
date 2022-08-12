@@ -22,16 +22,16 @@ class _SearchBarState extends State<SearchBar> {
           autofocus: false,
           controller: controller.textEditingController,
           onChanged: (v) => controller.getTitleFromSearchBar(v),
-          style: TextStyle(
+          style: const TextStyle(
             color: kPrimaryRedColor,
             fontWeight: FontWeight.w500,
           ),
           decoration: InputDecoration(
-            prefixIcon: widget.prefixIcon ?? null,
-            suffixIcon: widget.suffixIcon ?? null,
-            contentPadding: EdgeInsets.symmetric(horizontal: 20),
+            prefixIcon: widget.prefixIcon,
+            suffixIcon: widget.suffixIcon,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 20),
             hintText: "Search job",
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               color: Color.fromARGB(111, 0, 0, 0),
             ),
             filled: true,
@@ -39,14 +39,14 @@ class _SearchBarState extends State<SearchBar> {
 
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Colors.white,
                   width: 1,
                 )),
 
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Colors.white,
                   width: 1,
                 )),

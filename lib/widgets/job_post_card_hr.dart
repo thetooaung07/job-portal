@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
-import 'package:job_portal/controller/job_posts_controller.dart';
 import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/routes/routes.dart';
 
@@ -17,7 +15,7 @@ class JobPostCardHr extends StatelessWidget {
         Get.toNamed(RouteNames.jobDetails, arguments: data);
       },
       child: Container(
-          margin: EdgeInsets.symmetric(
+          margin: const EdgeInsets.symmetric(
             horizontal: 10,
           ),
           decoration: BoxDecoration(
@@ -25,9 +23,9 @@ class JobPostCardHr extends StatelessWidget {
             // border: Border.all(color: Colors.teal),
             // TODO: add bg color according to design
             color: Colors.white,
-            boxShadow: [kCardShadow],
+            boxShadow: const [kCardShadow],
           ),
-          padding: EdgeInsets.fromLTRB(15, 15, 15, 10),
+          padding: const EdgeInsets.fromLTRB(15, 15, 15, 10),
           width: 200,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,7 +48,7 @@ class JobPostCardHr extends StatelessWidget {
                   //   "assets/icons/logo_youtube.svg",
                   //   height: 40,
                   // ),
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
                   Expanded(
@@ -62,10 +60,10 @@ class JobPostCardHr extends StatelessWidget {
                           data?.postedBy.username ?? "Company Name",
                           style: kLabelTextStyle,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
-                        Text("45 Job vacancy"),
+                        const Text("45 Job vacancy"),
                       ],
                     ),
                   )
@@ -73,7 +71,7 @@ class JobPostCardHr extends StatelessWidget {
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: const [
                   Text("$bullet \$2K - 5K/Mo"),
                   SizedBox(
                     height: 5,
@@ -81,7 +79,7 @@ class JobPostCardHr extends StatelessWidget {
                   Text("$bullet Remote / Onsite"),
                 ],
               ),
-              CustomTextButton(),
+              const CustomTextButton(),
             ],
           )),
     );
@@ -98,10 +96,10 @@ class CustomTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap ?? null,
+      onTap: onTap,
       child: Container(
         width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.symmetric(vertical: 8),
         decoration: BoxDecoration(
           color: btnBgColorGrey,
           borderRadius: BorderRadius.circular(4),
@@ -109,7 +107,7 @@ class CustomTextButton extends StatelessWidget {
         child: Center(
           child: Text(
             label ?? "Show All",
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
         ),
       ),

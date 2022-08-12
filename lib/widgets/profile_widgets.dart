@@ -15,28 +15,29 @@ class AccountPageProfile extends StatelessWidget {
     if (snapshot.connectionState == ConnectionState.active &&
         snapshot.hasData &&
         snapshot.data?.profile != null &&
-        controller.isUploading == false)
+        controller.isUploading.value == false) {
       return CircleAvatar(
         backgroundImage: NetworkImage(snapshot.data!.profile!),
         // AssetImage("assets/images/default.png"),
         backgroundColor: Colors.transparent,
         radius: 50,
       );
-    else if (snapshot.connectionState == ConnectionState.active &&
+    } else if (snapshot.connectionState == ConnectionState.active &&
             snapshot.data?.profile == null ||
-        snapshot.data?.profile == "")
-      return CircleAvatar(
+        snapshot.data?.profile == "") {
+      return const CircleAvatar(
         backgroundImage: AssetImage("assets/images/default.png"),
         backgroundColor: Colors.transparent,
         radius: 50,
       );
-    else
-      return CircleAvatar(
+    } else {
+      return const CircleAvatar(
         backgroundColor: Colors.transparent,
         radius: 50,
         child: CircularProgressIndicator(
           color: Colors.black54,
         ),
       );
+    }
   }
 }

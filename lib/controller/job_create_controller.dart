@@ -1,27 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/global.dart';
 import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/model/user_account.dart';
-import 'package:job_portal/model/user_jobPosts_model.dart';
 import 'package:job_portal/services/database.dart';
 
 class JobCreateController extends GetxController {
-  TextEditingController titleC = new TextEditingController();
-  TextEditingController expLevelC = new TextEditingController();
-  TextEditingController techSkillC = new TextEditingController();
-  TextEditingController workHourC = new TextEditingController();
+  TextEditingController titleC = TextEditingController();
+  TextEditingController expLevelC = TextEditingController();
+  TextEditingController techSkillC = TextEditingController();
+  TextEditingController workHourC = TextEditingController();
 
-  TextEditingController salaryC = new TextEditingController();
-  TextEditingController companyLocationC = new TextEditingController();
-  TextEditingController companyNameC = new TextEditingController();
-  TextEditingController companyWebsiteC = new TextEditingController();
-  TextEditingController companyContactMailC = new TextEditingController();
-  TextEditingController requirementsC = new TextEditingController();
-  TextEditingController responsibilitiesC = new TextEditingController();
+  TextEditingController salaryC = TextEditingController();
+  TextEditingController companyLocationC = TextEditingController();
+  TextEditingController companyNameC = TextEditingController();
+  TextEditingController companyWebsiteC = TextEditingController();
+  TextEditingController companyContactMailC = TextEditingController();
+  TextEditingController requirementsC = TextEditingController();
+  TextEditingController responsibilitiesC = TextEditingController();
 
   Rx<String> selectedType = "".obs;
 
@@ -47,20 +45,20 @@ class JobCreateController extends GetxController {
 
   RxList docIdList = <String>[].obs;
 
-  void printController() {
-    print(titleC.text);
-    print(expLevelC.text);
-    print(techSkillC.text);
-    print(workHourC.text);
-    print(salaryC.text);
-    print(selectedType.value);
-    print(companyLocationC.text);
-    print(companyNameC.text);
-    print(companyWebsiteC.text);
-    print(companyContactMailC.text);
-    print(requirementsC.text);
-    print(responsibilitiesC.text);
-  }
+  // void printController() {
+  //   print(titleC.text);
+  //   print(expLevelC.text);
+  //   print(techSkillC.text);
+  //   print(workHourC.text);
+  //   print(salaryC.text);
+  //   print(selectedType.value);
+  //   print(companyLocationC.text);
+  //   print(companyNameC.text);
+  //   print(companyWebsiteC.text);
+  //   print(companyContactMailC.text);
+  //   print(requirementsC.text);
+  //   print(responsibilitiesC.text);
+  // }
 
   void clear() {
     titleC.clear();
@@ -100,12 +98,13 @@ class JobCreateController extends GetxController {
 
     List<String> result = [];
 
-    c.forEach((element) {
-      if (element.isEmpty)
-        return;
-      else
+    for (var element in c) {
+      if (element.isEmpty) {
+        continue;
+      } else {
         result.add(element);
-    });
+      }
+    }
     return result;
   }
 
@@ -113,8 +112,7 @@ class JobCreateController extends GetxController {
 
   Future createJobPost() async {
     isLoading.value = true;
-    DocumentReference doc =
-        await firebaseFirestore.collection("jobPosts").doc();
+    DocumentReference doc = firebaseFirestore.collection("jobPosts").doc();
     String documentID = doc.id;
 
     UserAccount user =
@@ -123,7 +121,7 @@ class JobCreateController extends GetxController {
     JobPostUser jobPostUser = JobPostUser(
         profile: user.profile, userId: user.userId, username: user.username);
 
-    JobPostModel _job = new JobPostModel(
+    JobPostModel _job = JobPostModel(
         postUserId: firebaseAuth.currentUser!.uid,
         id: documentID,
         title: titleC.text,

@@ -32,17 +32,17 @@ class AppDrawer extends StatelessWidget {
     return SafeArea(
       child: Container(
         color: Colors.black54,
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 30,
                     backgroundColor: Colors.lightBlue,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   Column(
@@ -71,31 +71,31 @@ class AppDrawer extends StatelessWidget {
                         Icon(
                           item["icon"],
                           size: 35,
-                          color: Color.fromARGB(180, 255, 255, 255),
+                          color: const Color.fromARGB(180, 255, 255, 255),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Text(
                           item["title"],
                           style: kLabelTextStyle.copyWith(
-                              color: Color.fromARGB(167, 255, 255, 255)),
+                              color: const Color.fromARGB(167, 255, 255, 255)),
                         ),
                       ],
                     );
                   }).toList(),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 1,
               ),
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.settings,
                     color: Colors.white,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Text(
@@ -104,7 +104,7 @@ class AppDrawer extends StatelessWidget {
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
                     height: 20,
                     width: 2,
                     color: Colors.white,

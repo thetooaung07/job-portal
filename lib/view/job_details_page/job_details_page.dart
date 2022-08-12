@@ -26,10 +26,10 @@ class JobDetailsPage extends GetView<JobPostsController> {
     return Scaffold(
       appBar: MyAppBar(
         leading: Container(
-          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: CustomIconButton(
             onTap: (() => Get.back()),
-            child: Icon(
+            child: const Icon(
               Icons.chevron_left_rounded,
               size: 30,
               color: Colors.black,
@@ -40,11 +40,11 @@ class JobDetailsPage extends GetView<JobPostsController> {
         action: [
           GetBuilder<SavedJobsPageController>(
             builder: (controller) => Container(
-              margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+              margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
               child: controller.checkAlreadySaved(data.id)
                   ? CustomIconButton(
                       onTap: (() => controller.removeFromFavourite(data)),
-                      child: Icon(
+                      child: const Icon(
                         Icons.bookmark_rounded,
                         size: 30,
                         color: kPrimaryRedColor,
@@ -52,7 +52,7 @@ class JobDetailsPage extends GetView<JobPostsController> {
                     )
                   : CustomIconButton(
                       onTap: (() => controller.addToFavourite(data)),
-                      child: Icon(
+                      child: const Icon(
                         Icons.bookmark_border_rounded,
                         size: 30,
                         color: Colors.black,
@@ -62,11 +62,11 @@ class JobDetailsPage extends GetView<JobPostsController> {
           ),
         ],
       ),
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+          children: const [
             CompanyLogo(),
             // JobDescShort(),
             JobTab(),
@@ -78,7 +78,7 @@ class JobDetailsPage extends GetView<JobPostsController> {
         child: Container(
           margin: EdgeInsets.all(Get.width * 0.05),
           padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
-          child: ApplyNowBtn(),
+          child: const ApplyNowBtn(),
         ),
       ),
     );
@@ -139,7 +139,7 @@ class ApplyNowBtn extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
+        SizedBox(
           width: Get.width / 3,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -159,7 +159,7 @@ class ApplyNowBtn extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         GetX<ApplicationsPageController>(
@@ -169,8 +169,11 @@ class ApplyNowBtn extends StatelessWidget {
             return GestureDetector(
               onTap: () {
                 if (data.postUserId == firebaseAuth.currentUser!.uid) {
-                  return null;
+                  return;
                 }
+
+                if (appPageController.isSelectedJobAlreadyApplied(data.id) ==
+                    true) return;
                 Get.toNamed(RouteNames.jobApply);
                 appPageController.jobPostId.value = data.id;
               },
@@ -179,7 +182,7 @@ class ApplyNowBtn extends StatelessWidget {
                   ? Container(
                       alignment: Alignment.center,
                       width: Get.width / 2,
-                      child: Text(
+                      child: const Text(
                         "Sorry!  You cannot apply to your own job",
                         textAlign: TextAlign.center,
                       ),
@@ -191,7 +194,7 @@ class ApplyNowBtn extends StatelessWidget {
                       ? Container(
                           alignment: Alignment.center,
                           width: Get.width / 2,
-                          child: Text(
+                          child: const Text(
                             "You have already applied to this job",
                             textAlign: TextAlign.center,
                           ),

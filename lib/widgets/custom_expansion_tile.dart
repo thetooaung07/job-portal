@@ -462,6 +462,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// ignore_for_file: unnecessary_import, unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -522,8 +524,7 @@ class CustomExpansionTile extends StatefulWidget {
     this.iconColor,
     this.collapsedIconColor,
     this.controlAffinity,
-  })  : assert(initiallyExpanded != null),
-        assert(maintainState != null),
+  })  : assert(maintainState != null),
         assert(
           expandedCrossAxisAlignment != CrossAxisAlignment.baseline,
           'CrossAxisAlignment.baseline is not supported since the expanded children '

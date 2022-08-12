@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/application_page_controller.dart';
 import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/controller/job_posts_controller.dart';
@@ -17,12 +16,12 @@ class MyJobsPage extends StatelessWidget {
     return Scaffold(
       appBar: MyAppBar(
         leading: Container(
-          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: CustomIconButton(
             onTap: () {
               Get.back();
             },
-            child: Icon(
+            child: const Icon(
               Icons.chevron_left_rounded,
               size: 30,
               color: Colors.black,
@@ -32,13 +31,13 @@ class MyJobsPage extends StatelessWidget {
         label: "My Jobs",
         action: [
           Container(
-            margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+            margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
             child: CustomIconButton(
               onTap: () {
                 Get.back();
                 Get.find<BottomNavBarController>().selectedIndex.value = 1;
               },
-              child: Icon(
+              child: const Icon(
                 Icons.search_rounded,
                 size: 30,
                 color: Colors.black,
@@ -53,12 +52,12 @@ class MyJobsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "Jobs you are offering to others: ",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Row(
-                children: [
+                children: const [
                   Icon(
                     Icons.not_listed_location_outlined,
                     size: 20,
@@ -76,13 +75,13 @@ class MyJobsPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               GetX<JobPostsController>(builder: (controller) {
                 return ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: controller.userJobPosts.length,
                     itemBuilder: (context, index) {
                       return MyJobCard(
@@ -105,7 +104,7 @@ class MyJobCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         bottom: 15,
       ),
       child: Card(
@@ -127,11 +126,11 @@ class MyJobCard extends StatelessWidget {
                       children: [
                         Text(
                           data.companyName,
-                          style: TextStyle(fontWeight: FontWeight.w500),
+                          style: const TextStyle(fontWeight: FontWeight.w500),
                         ),
                         Text(
                           data.createdAt.toString().split(" ")[0],
-                          style: TextStyle(color: Colors.black54),
+                          style: const TextStyle(color: Colors.black54),
                         )
                       ],
                     ),
@@ -139,11 +138,11 @@ class MyJobCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 10.0),
                       child: Text(
                         "${data.expLevel} ${data.title}",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Wrap(
@@ -151,9 +150,9 @@ class MyJobCard extends StatelessWidget {
                       children: [
                         Text(
                           data.companyLocation,
-                          style: TextStyle(fontWeight: FontWeight.w500),
+                          style: const TextStyle(fontWeight: FontWeight.w500),
                         ),
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: 15,
                           ),
@@ -164,9 +163,9 @@ class MyJobCard extends StatelessWidget {
                         ),
                         Text(
                           "\$${data.salary.split("-")[0]} / month",
-                          style: TextStyle(fontWeight: FontWeight.w500),
+                          style: const TextStyle(fontWeight: FontWeight.w500),
                         ),
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: 15,
                           ),
@@ -175,7 +174,7 @@ class MyJobCard extends StatelessWidget {
                             size: 10,
                           ),
                         ),
-                        Text(
+                        const Text(
                           "Full Time",
                           style: TextStyle(fontWeight: FontWeight.w500),
                         ),
@@ -185,7 +184,7 @@ class MyJobCard extends StatelessWidget {
                 ),
               ),
             ),
-            Divider(
+            const Divider(
               height: 4,
               color: Colors.black87,
             ),
@@ -197,10 +196,10 @@ class MyJobCard extends StatelessWidget {
               },
               child: Container(
                 color: Colors.transparent,
-                padding: EdgeInsets.fromLTRB(20, 10, 5, 10),
+                padding: const EdgeInsets.fromLTRB(20, 10, 5, 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: const [
                     Text("Show Applicants"),
                     Icon(Icons.chevron_right_rounded),
                   ],

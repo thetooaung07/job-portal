@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:job_portal/controller/job_create_controller.dart';
 
 class JobPostModel {
   late String postUserId;

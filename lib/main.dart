@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
-import 'package:job_portal/controller/app_controller.dart';
 import 'package:job_portal/controller/auth_page_controller.dart';
 import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/controller/user_account_controller.dart';
@@ -50,10 +49,10 @@ class HomePage extends StatelessWidget {
     final BottomNavBarController controller = Get.put(BottomNavBarController());
 
     final List<Widget> _pages = [
-      HomePageView(),
-      SearchPage(),
-      JobsPage(),
-      AccountPage(),
+      const HomePageView(),
+      const SearchPage(),
+      const JobsPage(),
+      const AccountPage(),
     ];
 
     return
@@ -73,13 +72,13 @@ class HomePage extends StatelessWidget {
           context: context,
           builder: (context) {
             return AlertDialog(
-              insetPadding: EdgeInsets.symmetric(horizontal: 50),
-              shape: RoundedRectangleBorder(
+              insetPadding: const EdgeInsets.symmetric(horizontal: 50),
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0))),
               title: const Text('Do you want to Exit?'),
               actionsAlignment: MainAxisAlignment.center,
               actions: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width / 3,
                   child: TextButton(
                     onPressed: () {
@@ -91,7 +90,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width / 3,
                   child: TextButton(
                     onPressed: () {
@@ -127,7 +126,7 @@ class HomePage extends StatelessWidget {
         //     controller.selectedIndex.value = index;
         //   },
         // ),
-        bottomNavigationBar: BottomNavBarConstraints(
+        bottomNavigationBar: const BottomNavBarConstraints(
           child: CustomBottomNavBar(),
         ),
       ),
@@ -146,10 +145,10 @@ class HomePageView extends StatelessWidget {
     return Scaffold(
       appBar: MyAppBar(
         leading: Container(
-          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: CustomIconButton(
             onTap: (() => {}),
-            child: Icon(
+            child: const Icon(
               Icons.clear_all_rounded,
               size: 30,
               color: Colors.black,
@@ -159,10 +158,10 @@ class HomePageView extends StatelessWidget {
         label: "QWERTY",
         action: [
           Container(
-            margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+            margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
             child: CustomIconButton(
               onTap: () {},
-              child: Icon(
+              child: const Icon(
                 Icons.notifications_none_rounded,
                 size: 30,
                 color: Colors.black,
@@ -173,7 +172,7 @@ class HomePageView extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: [
+          children: const [
             //Popular Job
             TopCompanyContainer(),
             //Recent Post
@@ -218,14 +217,14 @@ class CustomIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap ?? null,
+      onTap: onTap,
       child: Container(
           height: 35,
           width: 35,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: btnBgColor,
-            boxShadow: [kIconShadow],
+            boxShadow: const [kIconShadow],
           ),
           child: child),
     );
@@ -233,7 +232,7 @@ class CustomIconButton extends StatelessWidget {
 }
 
 class CustomBottomNavBar extends StatelessWidget {
-  const CustomBottomNavBar({Key? key});
+  const CustomBottomNavBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -247,7 +246,7 @@ class CustomBottomNavBar extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
             blurRadius: 30,
-            offset: Offset(0, 10),
+            offset: const Offset(0, 10),
           ),
         ],
         borderRadius: BorderRadius.circular(10),
@@ -268,14 +267,14 @@ class CustomBottomNavBar extends StatelessWidget {
               children: [
                 Obx(
                   () => AnimatedContainer(
-                    duration: Duration(seconds: 1),
+                    duration: const Duration(seconds: 1),
                     curve: Curves.fastLinearToSlowEaseIn,
                     width: index == controller.selectedIndex.value
                         ? _width * 0.32
                         : _width * 0.18,
                     alignment: Alignment.center,
                     child: AnimatedContainer(
-                      duration: Duration(seconds: 1),
+                      duration: const Duration(seconds: 1),
                       curve: Curves.fastLinearToSlowEaseIn,
                       height: index == controller.selectedIndex.value
                           ? _width * 0.12
@@ -295,7 +294,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 ),
                 Obx(
                   () => AnimatedContainer(
-                    duration: Duration(seconds: 1),
+                    duration: const Duration(seconds: 1),
                     curve: Curves.fastLinearToSlowEaseIn,
                     width: index == controller.selectedIndex.value
                         ? _width * 0.31
@@ -306,7 +305,7 @@ class CustomBottomNavBar extends StatelessWidget {
                         Row(
                           children: [
                             AnimatedContainer(
-                              duration: Duration(seconds: 1),
+                              duration: const Duration(seconds: 1),
                               curve: Curves.fastLinearToSlowEaseIn,
                               width: index == controller.selectedIndex.value
                                   ? _width * 0.13
@@ -316,13 +315,13 @@ class CustomBottomNavBar extends StatelessWidget {
                               opacity: index == controller.selectedIndex.value
                                   ? 1
                                   : 0,
-                              duration: Duration(seconds: 1),
+                              duration: const Duration(seconds: 1),
                               curve: Curves.fastLinearToSlowEaseIn,
                               child: Text(
                                 index == controller.selectedIndex.value
-                                    ? '${bottomNavBarLabels[index]}'
+                                    ? bottomNavBarLabels[index]
                                     : '',
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Color.fromARGB(255, 255, 255, 255),
                                     fontWeight: FontWeight.w600,
                                     fontSize: 15),
@@ -333,7 +332,7 @@ class CustomBottomNavBar extends StatelessWidget {
                         Row(
                           children: [
                             AnimatedContainer(
-                              duration: Duration(seconds: 1),
+                              duration: const Duration(seconds: 1),
                               curve: Curves.fastLinearToSlowEaseIn,
                               width: index == controller.selectedIndex.value
                                   ? _width * 0.03
@@ -343,7 +342,7 @@ class CustomBottomNavBar extends StatelessWidget {
                               bottomNavBarIcons[index],
                               size: _width * 0.076,
                               color: index == controller.selectedIndex.value
-                                  ? Color.fromARGB(255, 255, 255, 255)
+                                  ? const Color.fromARGB(255, 255, 255, 255)
                                   : Colors.black26,
                             )
                           ],
@@ -370,7 +369,7 @@ class RootPage extends GetWidget<AuthController> {
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       color: Colors.white,
-      child: Center(
+      child: const Center(
         child: SizedBox(
           height: 50,
           width: 50,

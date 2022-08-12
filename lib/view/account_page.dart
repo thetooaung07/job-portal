@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
@@ -10,7 +9,7 @@ import 'package:job_portal/model/profile_stats.dart';
 import 'package:job_portal/model/user_account.dart';
 import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/services/database.dart';
-import 'package:job_portal/widgets/job-post-card-hr.dart';
+import 'package:job_portal/widgets/job_post_card_hr.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 import 'package:job_portal/widgets/profile_widgets.dart';
 
@@ -21,7 +20,7 @@ class AccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: MyAppBar(
+        appBar: const MyAppBar(
           label: "Profile",
           action: [
             StyledPopupMenuBtn(),
@@ -48,12 +47,9 @@ class AccountPage extends StatelessWidget {
                                 // Profile Pic
                                 Stack(
                                   children: [
-                                    Container(
-                                      // margin: EdgeInsets.only(right: 5),
-                                      child: AccountPageProfile(
-                                        snapshot: snapshot,
-                                        controller: userAccountController,
-                                      ),
+                                    AccountPageProfile(
+                                      snapshot: snapshot,
+                                      controller: userAccountController,
                                     ),
                                     // Positioned(
                                     //     bottom: 0,
@@ -83,11 +79,12 @@ class AccountPage extends StatelessWidget {
                                 ),
                                 // Profile Pic
 
-                                SizedBox(
+                                const SizedBox(
                                   width: 30,
                                 ),
                                 Container(
-                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
                                   height: 105,
                                   child: Column(
                                     mainAxisAlignment:
@@ -107,7 +104,7 @@ class AccountPage extends StatelessWidget {
                                       ),
                                       Text(
                                           "Contact: ${userAccountController.user.email ?? ""}"),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 5,
                                       ),
                                     ],
@@ -142,12 +139,12 @@ class AccountPage extends StatelessWidget {
                                     children: [
                                       RichText(
                                         text: TextSpan(
-                                            style:
-                                                TextStyle(color: Colors.black),
+                                            style: const TextStyle(
+                                                color: Colors.black),
                                             text: "Complete Your Profile ",
                                             children: [
                                               TextSpan(
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontSize: 16,
                                                       color: kPrimaryRedColor),
                                                   text:
@@ -158,7 +155,7 @@ class AccountPage extends StatelessWidget {
                                   ),
                                   // Text(
                                   //     "Complete Your Profile (${userAccountController.calculate(profileStats)}/${profileStats.length})"),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                   ClipRRect(
@@ -173,8 +170,9 @@ class AccountPage extends StatelessWidget {
                                   ),
                                 ],
                               );
-                            } else
-                              return SizedBox();
+                            } else {
+                              return const SizedBox();
+                            }
                           }),
                     ),
 // only if you want to disapper cards if both are true
@@ -187,10 +185,10 @@ class AccountPage extends StatelessWidget {
                         stream: FirestoreHelper()
                             .userAccountStream(firebaseAuth.currentUser!.uid),
                         builder: (context, snapshot) {
-                          return Container(
+                          return SizedBox(
                             height: 200,
                             child: ListView(
-                              padding: EdgeInsets.only(left: 20),
+                              padding: const EdgeInsets.only(left: 20),
                               scrollDirection: Axis.horizontal,
                               children: [
                                 if (snapshot.connectionState ==
@@ -205,7 +203,7 @@ class AccountPage extends StatelessWidget {
                                                         .currentUser!.uid,
                                                     {"profileDetails": true});
                                           },
-                                          icon: Icon(
+                                          icon: const Icon(
                                             Icons.person_outline_rounded,
                                             size: 35,
                                           ),
@@ -224,7 +222,7 @@ class AccountPage extends StatelessWidget {
                                                     "profileDetails": false
                                                   });
                                             },
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.person_rounded,
                                               size: 35,
                                             ),
@@ -242,7 +240,7 @@ class AccountPage extends StatelessWidget {
                                                         .currentUser!.uid,
                                                     {"cvFile": true});
                                           },
-                                          icon: Icon(
+                                          icon: const Icon(
                                             Icons.file_upload_outlined,
                                             size: 35,
                                           ),
@@ -259,7 +257,7 @@ class AccountPage extends StatelessWidget {
                                                           .currentUser!.uid,
                                                       {"cvFile": false});
                                             },
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.file_upload,
                                               size: 35,
                                             ),
@@ -277,7 +275,7 @@ class AccountPage extends StatelessWidget {
                                                         .currentUser!.uid,
                                                     {"addABio": true});
                                           },
-                                          icon: Icon(
+                                          icon: const Icon(
                                             Icons.message_outlined,
                                             size: 35,
                                           ),
@@ -294,7 +292,7 @@ class AccountPage extends StatelessWidget {
                                                           .currentUser!.uid,
                                                       {"addABio": false});
                                             },
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.message_rounded,
                                               size: 35,
                                             ),
@@ -311,7 +309,7 @@ class AccountPage extends StatelessWidget {
 
                     ,
 
-                    ListTile(
+                    const ListTile(
                       horizontalTitleGap: 7,
                       minLeadingWidth: 0,
                       contentPadding: EdgeInsets.symmetric(horizontal: 20),
@@ -324,12 +322,13 @@ class AccountPage extends StatelessWidget {
                     ),
 
                     Container(
-                      margin: EdgeInsets.only(top: 10, left: 20, right: 20),
+                      margin:
+                          const EdgeInsets.only(top: 10, left: 20, right: 20),
                       width: Get.width,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
+                        children: const [
                           Text(
                             "version 1.0",
                           )
@@ -346,11 +345,11 @@ class AccountPage extends StatelessWidget {
         floatingActionButton: FloatingActionButton.extended(
           elevation: 5,
           highlightElevation: 8,
-          icon: Icon(
+          icon: const Icon(
             Icons.edit_note,
             color: Colors.black,
           ),
-          label: Text(
+          label: const Text(
             "Post a job",
             style: TextStyle(color: Colors.black),
           ),
@@ -369,9 +368,6 @@ class StyledPopupMenuBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserAccountController userAccountController =
-        Get.find<UserAccountController>();
-
     return Theme(
       data: ThemeData(
         splashColor: Colors.transparent,
@@ -387,15 +383,15 @@ class StyledPopupMenuBtn extends StatelessWidget {
             Get.find<AuthController>().signOut();
           }
         },
-        padding: EdgeInsets.all(2),
+        padding: const EdgeInsets.all(2),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         splashRadius: 0,
         // color: Colors.transparent,
         elevation: 5,
         position: PopupMenuPosition.under,
         child: Container(
-          margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
-          child: CustomIconButton(
+          margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
+          child: const CustomIconButton(
             // onTap: () {},
             child: Icon(
               Icons.more_vert_rounded,
@@ -405,7 +401,7 @@ class StyledPopupMenuBtn extends StatelessWidget {
           ),
         ),
         itemBuilder: (context) => [
-          PopupMenuItem(
+          const PopupMenuItem(
             value: 1,
             padding: EdgeInsets.symmetric(horizontal: 0),
             child: ListTile(
@@ -415,7 +411,7 @@ class StyledPopupMenuBtn extends StatelessWidget {
               title: Text("Settings"),
             ),
           ),
-          PopupMenuItem(
+          const PopupMenuItem(
             value: 2,
             padding: EdgeInsets.symmetric(horizontal: 0),
             child: ListTile(
@@ -430,19 +426,19 @@ class StyledPopupMenuBtn extends StatelessWidget {
           ),
           PopupMenuItem(
             value: 3,
-            padding: EdgeInsets.symmetric(horizontal: 0),
+            padding: const EdgeInsets.symmetric(horizontal: 0),
             child: ListTile(
               onTap: () {
                 Get.toNamed(RouteNames.myJobs);
               },
-              contentPadding: EdgeInsets.symmetric(horizontal: 20),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
               minLeadingWidth: 10,
-              leading: Icon(Icons.edit_calendar_outlined),
-              title: Text("Manage Jobs"),
+              leading: const Icon(Icons.edit_calendar_outlined),
+              title: const Text("Manage Jobs"),
             ),
           ),
-          PopupMenuDivider(),
-          PopupMenuItem(
+          const PopupMenuDivider(),
+          const PopupMenuItem(
               value: 4,
               padding: EdgeInsets.symmetric(horizontal: 0),
               child: ListTile(
@@ -472,9 +468,9 @@ class ProfileCardHr extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10, bottom: 20, right: 20),
+      margin: const EdgeInsets.only(top: 10, bottom: 20, right: 20),
       width: 150,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         // border: Border.all(color: Colors.black),
         color: Colors.white,
         boxShadow: [
@@ -487,13 +483,13 @@ class ProfileCardHr extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: EdgeInsets.fromLTRB(15, 15, 15, 10),
+        padding: const EdgeInsets.fromLTRB(15, 15, 15, 10),
         child: GetBuilder<UserAccountController>(builder: (controller) {
           return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 icon ??
-                    Icon(
+                    const Icon(
                       Icons.person_rounded,
                       size: 35,
                     ),
@@ -528,7 +524,7 @@ class CheckedProfileCardHr extends StatelessWidget {
     return Stack(
       children: [
         child,
-        Positioned(
+        const Positioned(
           top: 10,
           right: 20,
           child: Icon(

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/application_page_controller.dart';
 import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
-import 'package:job_portal/controller/my_application_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/routes/routes.dart';
@@ -19,10 +17,10 @@ class ApplicationsPage extends StatelessWidget {
     return Scaffold(
       appBar: MyAppBar(
         leading: Container(
-          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: CustomIconButton(
             onTap: () => Get.back(),
-            child: Icon(
+            child: const Icon(
               Icons.chevron_left_rounded,
               size: 30,
               color: Colors.black,
@@ -32,13 +30,13 @@ class ApplicationsPage extends StatelessWidget {
         label: "My Applications",
         action: [
           Container(
-            margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+            margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
             child: CustomIconButton(
               onTap: () {
                 Get.back();
                 Get.find<BottomNavBarController>().selectedIndex.value = 1;
               },
-              child: Icon(
+              child: const Icon(
                 Icons.search_rounded,
                 size: 30,
                 color: Colors.black,
@@ -53,39 +51,35 @@ class ApplicationsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "Applications Stats",
                 style: kCaptionTextStyle,
               ),
-              jobListDiagram(),
-              SizedBox(height: 20),
-              Text(
+              const JobListDiagram(),
+              const SizedBox(height: 20),
+              const Text(
                 "Your Last Applications",
                 style: kCaptionTextStyle,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               GetX<ApplicationsPageController>(
                 init: Get.put(ApplicationsPageController()),
                 builder: (controller) {
-                  return controller.myApplicationList.length > 0 &&
-                          controller.appliedJobsList.length > 0
+                  return controller.myApplicationList.isNotEmpty &&
+                          controller.appliedJobsList.isNotEmpty
                       ? ListView.builder(
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: controller.myApplicationList.length,
                           itemBuilder: (context, index) {
                             return ApplicationCard(
                                 data: controller.appliedJobsList[index]);
                           },
                         )
-                      : Container(
-                          child: Center(
-                              child: Text(
-                                  "You haven't Applied any Jobs Recently",
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500))),
-                        );
+                      : const Center(
+                          child: Text("You haven't Applied any Jobs Recently",
+                              style: TextStyle(
+                                  fontSize: 17, fontWeight: FontWeight.w500)));
                 },
               )
             ],
@@ -107,14 +101,14 @@ class ApplicationCard extends StatelessWidget {
         Get.toNamed(RouteNames.jobDetails, arguments: data);
       },
       child: Container(
-        margin: EdgeInsets.only(bottom: 20),
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        margin: const EdgeInsets.only(bottom: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
         height: 125,
         width: Get.width,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(5),
-          boxShadow: [kCardShadow],
+          boxShadow: const [kCardShadow],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -127,7 +121,7 @@ class ApplicationCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 4),
+                      padding: const EdgeInsets.symmetric(vertical: 4),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Container(
@@ -139,7 +133,7 @@ class ApplicationCard extends StatelessWidget {
                                 : Image.asset('assets/images/default.png')),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                     SizedBox(
@@ -157,7 +151,7 @@ class ApplicationCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Icon(
+                const Icon(
                   Icons.more_vert_rounded,
                   size: 30,
                   color: Colors.black,
@@ -167,20 +161,22 @@ class ApplicationCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Icon(Icons.people_outlined),
+                const Icon(Icons.people_outlined),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   child: Text(
                     // TODO count number of people applied to this job
                     "23 people applied",
                     style: kBodyTextStyle.copyWith(color: Colors.black),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 7, vertical: 5),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(34, 0, 150, 135),
+                    color: const Color.fromARGB(34, 0, 150, 135),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
@@ -198,15 +194,15 @@ class ApplicationCard extends StatelessWidget {
   }
 }
 
-class jobListDiagram extends StatelessWidget {
-  const jobListDiagram({
+class JobListDiagram extends StatelessWidget {
+  const JobListDiagram({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 20),
+      margin: const EdgeInsets.symmetric(vertical: 20),
       width: Get.width,
       height: 175,
       child: Row(
@@ -215,7 +211,7 @@ class jobListDiagram extends StatelessWidget {
             flex: 2,
             child: Container(
               // width: Get.width / 3,
-              margin: EdgeInsets.only(right: 10),
+              margin: const EdgeInsets.only(right: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 color: Colors.teal,
@@ -226,36 +222,36 @@ class jobListDiagram extends StatelessWidget {
                 children: [
                   Container(
                     // margin: EdgeInsets.symmetric(vertical: 10),
-                    padding: EdgeInsets.all(7),
-                    decoration: BoxDecoration(
+                    padding: const EdgeInsets.all(7),
+                    decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         color: Color.fromARGB(61, 0, 0, 0)),
-                    child: Icon(
+                    child: const Icon(
                       Icons.my_library_books_outlined,
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     "5 Jobs",
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
                         color: Colors.white),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     "Total Application",
                     style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Colors.white),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                 ],
@@ -266,7 +262,7 @@ class jobListDiagram extends StatelessWidget {
             flex: 3,
             // color: Colors.teal,
             child: Column(
-              children: [
+              children: const [
                 Expanded(
                   child: HorizontalCard(
                       jobType: "Opened Jobs",
@@ -311,7 +307,7 @@ class HorizontalCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       margin: margin,
       decoration: BoxDecoration(
         color: color,
@@ -322,15 +318,15 @@ class HorizontalCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            padding: EdgeInsets.all(7),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.all(7),
+            decoration: const BoxDecoration(
                 shape: BoxShape.circle, color: Color.fromARGB(61, 0, 0, 0)),
             child: Icon(
               icon,
               color: Colors.white,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 20,
           ),
           Column(
@@ -339,19 +335,19 @@ class HorizontalCard extends StatelessWidget {
             children: [
               Text(
                 job,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
                     color: Colors.white),
               ),
               Text(
                 jobType,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                     color: Colors.white),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
             ],

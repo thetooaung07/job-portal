@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/controller/job_posts_controller.dart';
-import 'package:job_portal/widgets/job-post-card-hr.dart';
-import 'package:job_portal/widgets/showAllTextBanner.dart';
-import 'package:job_portal/routes/routes.dart';
+import 'package:job_portal/widgets/job_post_card_hr.dart';
+import 'package:job_portal/widgets/show_all_text_banner.dart';
 
 class TopCompanyContainer extends StatelessWidget {
   const TopCompanyContainer({Key? key}) : super(key: key);
@@ -13,20 +12,20 @@ class TopCompanyContainer extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
-        ShowAllTextBanner(
+        const ShowAllTextBanner(
           title: "Top Company",
           // onPressed: () => Get.toNamed(RouteNames.popularJobs),
         ),
         Container(
-          padding: EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10),
           height: 210,
           child: GetX<JobPostsController>(
               init: Get.put<JobPostsController>(JobPostsController()),
               builder: (controller) {
-                return controller.initialized && controller.jobPosts.length > 0
+                return controller.initialized && controller.jobPosts.isNotEmpty
                     ? ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: controller.jobPosts.length,
@@ -37,8 +36,8 @@ class TopCompanyContainer extends StatelessWidget {
                           ),
                         ),
                       )
-                    : Padding(
-                        padding: const EdgeInsets.only(bottom: 20.0, right: 10),
+                    : const Padding(
+                        padding: EdgeInsets.only(bottom: 20.0, right: 10),
                         child: Center(child: CircularProgressIndicator()),
                       );
               }),

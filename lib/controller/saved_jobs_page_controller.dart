@@ -14,12 +14,13 @@ class SavedJobsPageController extends GetxController {
 
   void removeFromFavourite(JobPostModel model) {
     List<JobPostModel> listData = [];
-    getSavedPosts.forEach((element) {
-      if (element.id != model.id)
+    for (var element in getSavedPosts) {
+      if (element.id != model.id) {
         listData.add(element);
-      else
-        return;
-    });
+      } else {
+        continue;
+      }
+    }
 
     savedPosts.value = listData;
     update();

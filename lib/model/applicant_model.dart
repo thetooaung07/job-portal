@@ -66,6 +66,6 @@ class ApplicantModel {
   @override
   String toString() {
     // TODO: implement toString
-    return "${applicantId} ${applicantName} ${email} ${phoneNumber} ${cvForm} ";
+    return "$applicantId $applicantName $email $phoneNumber $cvForm ";
   }
 }

@@ -25,12 +25,12 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     return SafeArea(
       child: AppBar(
         leadingWidth: 75,
-        leading: leading ?? null,
+        leading: leading,
         title: Text(
           label ?? "",
           style: kLogoTextStyle,
         ),
-        actions: action ?? null,
+        actions: action,
         centerTitle: centerLabel,
         elevation: backgroundColor == Colors.transparent ? 0 : elevation,
         backgroundColor: backgroundColor ?? Colors.white,

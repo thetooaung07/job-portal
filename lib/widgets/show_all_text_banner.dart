@@ -11,7 +11,7 @@ class ShowAllTextBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: kSpacingUnit * 2,
       ),
       child: Row(
@@ -25,7 +25,7 @@ class ShowAllTextBanner extends StatelessWidget {
             splashRadius: 17,
             splashColor: Colors.white,
             onPressed: onPressed,
-            icon: Icon(Icons.more_horiz_rounded),
+            icon: const Icon(Icons.more_horiz_rounded),
           ),
         ],
       ),

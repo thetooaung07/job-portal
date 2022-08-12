@@ -62,8 +62,10 @@ routes() => [
       GetPage(name: RouteNames.myJobs, page: () => const MyJobsPage()),
       GetPage(name: RouteNames.savePosts, page: () => const SavedJobsPage()),
       GetPage(name: RouteNames.postJob, page: () => const PostJobPage()),
-      GetPage(name: RouteNames.eidtProfile, page: () => EditProfilePage()),
-      GetPage(name: RouteNames.jobApply, page: () => JobApplyPage()),
       GetPage(
-          name: RouteNames.showApplicants, page: () => ShowApplicantsPage()),
+          name: RouteNames.eidtProfile, page: () => const EditProfilePage()),
+      GetPage(name: RouteNames.jobApply, page: () => const JobApplyPage()),
+      GetPage(
+          name: RouteNames.showApplicants,
+          page: () => const ShowApplicantsPage()),
     ];

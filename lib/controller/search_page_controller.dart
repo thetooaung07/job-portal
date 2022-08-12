@@ -32,8 +32,7 @@ class SearchPageController extends GetxController {
     return res;
   }
 
-  final TextEditingController textEditingController =
-      new TextEditingController();
+  final TextEditingController textEditingController = TextEditingController();
 
 // clear btn
   void clearText() {

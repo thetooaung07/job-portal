@@ -1,5 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -14,8 +12,8 @@ class UserInfoUpdateController extends GetxController {
 
   UserAccount user = Get.find<UserAccountController>().user;
 
-  TextEditingController usernameC = new TextEditingController();
-  TextEditingController emailC = new TextEditingController();
+  TextEditingController usernameC = TextEditingController();
+  TextEditingController emailC = TextEditingController();
 
   @override
   void onInit() {
@@ -31,19 +29,20 @@ class UserInfoUpdateController extends GetxController {
   void onClose() {
     // TODO: implement onClose
     super.onClose();
-    usernameC..dispose();
+    usernameC.dispose();
     emailC.dispose();
   }
 
   bool shouldUpdateCheck() {
     if (usernameC.text == user.username &&
         emailC.text == user.email &&
-        usernameC.text == firebaseAuth.currentUser?.email)
+        usernameC.text == firebaseAuth.currentUser?.email) {
       return false;
-    else if (usernameC.text.trim().length < 0 && emailC.text.trim().length < 0)
+    } else if (usernameC.text.trim().isEmail && emailC.text.trim().isEmpty) {
       return false;
-    else
+    } else {
       return true;
+    }
   }
 
   Future<void> updateUsernameinFirestore() async {
@@ -71,12 +70,13 @@ class UserInfoUpdateController extends GetxController {
         .where("postUserId", isEqualTo: firebaseAuth.currentUser!.uid)
         .get()
         .then((value) {
-      value.docs.forEach((element) {
+      for (var element in value.docs) {
         if (element["postedBy"]["username"] != usernameC.text) {
           unUpdatedUsernameDocList.add(element["id"]);
-        } else
-          return;
-      });
+        } else {
+          continue;
+        }
+      }
     });
 
     for (var docPath in unUpdatedUsernameDocList) {
@@ -94,9 +94,9 @@ class UserInfoUpdateController extends GetxController {
   // set isUpdating(bool v) => _isUpdating.value = v;
 
   void usernameAndEmailUpdate() async {
-    if (!shouldUpdateCheck())
+    if (!shouldUpdateCheck()) {
       return;
-    else {
+    } else {
       // Update Firebase Authentication
       if (user.email != null && user.password != null) {
         if (user.email != emailC.text.trim()) {

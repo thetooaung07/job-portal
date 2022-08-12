@@ -114,3 +114,4 @@ mainpage bottom nav bar controller error on user info update
 - application page
 
 - UI not rendering in the first time to show applicants list
+fix bug by changing the itemCount ref RxList to applicantLists

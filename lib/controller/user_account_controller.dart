@@ -1,21 +1,15 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:job_portal/global.dart';
-import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/model/user_account.dart';
 import 'package:job_portal/services/database.dart';
 import 'dart:async';
-import 'dart:io';
 
 class UserAccountController extends GetxController {
-  Rx<UserAccount> _userAccount = UserAccount().obs;
+  final Rx<UserAccount> _userAccount = UserAccount().obs;
   UserAccount get user => _userAccount.value;
 
-  set user(UserAccount value) => this._userAccount.value = value;
+  set user(UserAccount value) => _userAccount.value = value;
 
   void clear() {
     _userAccount.value = UserAccount();
@@ -61,8 +55,8 @@ class UserAccountController extends GetxController {
 
     if (_file == null) return;
     isUploading.value = true;
-    final String fileLink = await storageService.uploadToFirebaseStorage(
-        _file, 'profile/${userId}');
+    final String fileLink =
+        await storageService.uploadToFirebaseStorage(_file, 'profile/$userId');
 
     await FirestoreHelper().update(
       collectionPath: "users",
@@ -80,12 +74,13 @@ class UserAccountController extends GetxController {
         .where("postUserId", isEqualTo: firebaseAuth.currentUser!.uid)
         .get()
         .then((value) {
-      value.docs.forEach((element) {
+      for (var element in value.docs) {
         if (element["postedBy"]["profile"] == null) {
           docListWithProfileNull.add(element["id"]);
-        } else
-          return;
-      });
+        } else {
+          continue;
+        }
+      }
     });
 
     for (var docPath in docListWithProfileNull) {

@@ -14,7 +14,7 @@ class BulletListContainer extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
+        const Padding(
           padding: EdgeInsets.only(bottom: 25, top: 10),
           child: Text(
             "Responsibilities",
@@ -23,7 +23,7 @@ class BulletListContainer extends StatelessWidget {
         ),
         ListView.builder(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: data.length,
           itemBuilder: (context, index) => BulletText(
             text: data[index],
@@ -45,14 +45,14 @@ class BulletText extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 3),
+          const Padding(
+            padding: EdgeInsets.only(top: 3),
             child: Icon(
               Icons.fiber_manual_record_rounded,
               size: 11,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
           Expanded(

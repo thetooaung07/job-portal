@@ -10,8 +10,9 @@ class JobPostsController extends GetxController {
   @override
   void onReady() {
     FirestoreHelper().jobPostsStream().listen((event) {
-      if (event.isNotEmpty)
+      if (event.isNotEmpty) {
         jobPostsList.bindStream(FirestoreHelper().jobPostsStream());
+      }
 
       userJobPostsList.bindStream(FirestoreHelper().jobPostsByOneUser());
     });

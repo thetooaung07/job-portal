@@ -13,9 +13,9 @@ final AuthService authService = AuthService();
 final StorageService storageService = StorageService();
 final ImagePicker imagePicker = ImagePicker();
 
-void customPrint(dynamic title, dynamic res) {
-  print(" $title => ${res}");
-}
+// void customPrint(dynamic title, dynamic res) {
+//   print(" $title => ${res}");
+// }
 
 String differenceInString(DateTime time) {
   return DateTime.now().difference(time).inDays > 365

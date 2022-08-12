@@ -20,10 +20,10 @@ class EditProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: MyAppBar(
         leading: Container(
-          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: CustomIconButton(
             onTap: (() => Get.back()),
-            child: Icon(
+            child: const Icon(
               Icons.chevron_left_rounded,
               size: 30,
               color: Colors.black,
@@ -33,10 +33,10 @@ class EditProfilePage extends StatelessWidget {
         label: "Jobs",
         action: [
           Container(
-            margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+            margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
             child: CustomIconButton(
               onTap: (() => {}),
-              child: Icon(
+              child: const Icon(
                 Icons.more_vert_rounded,
                 size: 30,
                 color: Colors.black,
@@ -53,14 +53,15 @@ class EditProfilePage extends StatelessWidget {
                   .userAccountStream(firebaseAuth.currentUser!.uid),
               builder: (context, snapshot) {
                 return Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: Column(
                     children: [
                       // Profile Pic
                       Stack(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(right: 5),
+                            margin: const EdgeInsets.only(right: 5),
                             child: AccountPageProfile(
                               snapshot: snapshot,
                               controller: userAccountController,
@@ -78,9 +79,10 @@ class EditProfilePage extends StatelessWidget {
                                     border: Border.all(
                                         color: Colors.white, width: 2),
                                     shape: BoxShape.circle,
-                                    color: Color.fromARGB(176, 12, 12, 12),
+                                    color:
+                                        const Color.fromARGB(176, 12, 12, 12),
                                   ),
-                                  child: Icon(
+                                  child: const Icon(
                                     Icons.edit,
                                     size: 20,
                                     color: Colors.white,
@@ -91,7 +93,7 @@ class EditProfilePage extends StatelessWidget {
                       ),
                       // Profile Pic
 
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       LabelTextField(
@@ -104,7 +106,7 @@ class EditProfilePage extends StatelessWidget {
                         hintText: "Change Email",
                         controller: controller.emailC,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Align(
@@ -161,18 +163,18 @@ class LabelTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           child: TextField(
-            controller: controller ?? null,
+            controller: controller,
             autofocus: false,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.w500,
             ),
             decoration: InputDecoration(
                 prefixIcon: null,
                 suffixIcon: null,
-                contentPadding: EdgeInsets.all(20),
+                contentPadding: const EdgeInsets.all(20),
                 hintText: hintText ?? "",
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                   color: Color.fromARGB(111, 0, 0, 0),
                 ),
                 filled: true,

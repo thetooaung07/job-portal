@@ -22,7 +22,7 @@ class LoginPage extends GetView<AuthController> {
         body: SafeArea(
           child: SingleChildScrollView(
             child: Container(
-              margin: EdgeInsets.symmetric(
+              margin: const EdgeInsets.symmetric(
                 horizontal: 20,
               ),
               child: Column(
@@ -30,25 +30,25 @@ class LoginPage extends GetView<AuthController> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 50,
                       ),
-                      Text(
+                      const Text(
                         "WELCOME BACK!",
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Text(
+                      const Text(
                         " Fill your details to log in",
                         style: kBulletListTextStyle,
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 30),
+                        margin: const EdgeInsets.symmetric(vertical: 30),
                         child: Form(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +59,7 @@ class LoginPage extends GetView<AuthController> {
                                 controller: controller.emailController,
                                 onEditingComplete:
                                     controller.passFocusNode.requestFocus,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 20,
                                   color: Colors.black54,
                                   fontWeight: FontWeight.w500,
@@ -67,40 +67,40 @@ class LoginPage extends GetView<AuthController> {
                                 decoration: InputDecoration(
                                   focusColor: Colors.black,
                                   isDense: true,
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 30),
                                   hoverColor: Colors.transparent,
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(20),
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.white,
                                         width: 1,
                                       )),
                                   focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(20),
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.white,
                                         width: 2,
                                       )),
                                   filled: true,
                                   fillColor: Colors.white,
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20, right: 20),
+                                  prefixIcon: const Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 20, right: 20),
                                     child: Icon(
                                       Icons.email_outlined,
                                       size: 25,
                                     ),
                                   ),
                                   hintText: "Email",
-                                  hintStyle: TextStyle(
+                                  hintStyle: const TextStyle(
                                     fontWeight: FontWeight.normal,
                                     fontSize: 18,
                                     color: Colors.black26,
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
 
@@ -110,33 +110,33 @@ class LoginPage extends GetView<AuthController> {
                                   obscureText: controller.isObscure.value,
                                   focusNode: controller.passFocusNode,
                                   controller: controller.passController,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 20,
                                     color: Colors.black54,
                                     fontWeight: FontWeight.w500,
                                   ),
                                   decoration: InputDecoration(
                                     isDense: true,
-                                    contentPadding: EdgeInsets.symmetric(
+                                    contentPadding: const EdgeInsets.symmetric(
                                         horizontal: 20, vertical: 30),
                                     hoverColor: Colors.transparent,
                                     enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           color: Colors.white,
                                           width: 1,
                                         )),
                                     focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           color: Colors.white,
                                           width: 2,
                                         )),
                                     filled: true,
                                     fillColor: Colors.white,
-                                    prefixIcon: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 20, right: 20),
+                                    prefixIcon: const Padding(
+                                      padding:
+                                          EdgeInsets.only(left: 20, right: 20),
                                       child: Icon(
                                         Icons.lock_outline_rounded,
                                         size: 25,
@@ -158,7 +158,7 @@ class LoginPage extends GetView<AuthController> {
                                       ),
                                     ),
                                     hintText: "Password",
-                                    hintStyle: TextStyle(
+                                    hintStyle: const TextStyle(
                                       fontWeight: FontWeight.normal,
                                       fontSize: 18,
                                       color: Colors.black26,
@@ -166,20 +166,20 @@ class LoginPage extends GetView<AuthController> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               //Forget Password
                               TextButton(
                                 style: TextButton.styleFrom(
                                   // splashFactory: NoSplash.splashFactory,
-                                  primary: Color.fromARGB(166, 0, 0, 0),
+                                  primary: const Color.fromARGB(166, 0, 0, 0),
                                 ),
                                 onPressed: () {},
-                                child: Text("Forget Password?"),
+                                child: const Text("Forget Password?"),
                               ),
 
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               ClipRRect(
@@ -196,13 +196,13 @@ class LoginPage extends GetView<AuthController> {
                                       },
                                       child: Obx(
                                         () => Center(
-                                          child: controller.isLoading == true
-                                              ? SizedBox(
+                                          child: controller.isLoading.isTrue
+                                              ? const SizedBox(
                                                   height: 30,
                                                   width: 30,
                                                   child:
                                                       CircularProgressIndicator())
-                                              : Text(
+                                              : const Text(
                                                   "Log In",
                                                   style:
                                                       TextStyle(fontSize: 20),
@@ -219,7 +219,7 @@ class LoginPage extends GetView<AuthController> {
                   ),
                   Column(
                     children: [
-                      Text("- Or Continue With -"),
+                      const Text("- Or Continue With -"),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -227,14 +227,14 @@ class LoginPage extends GetView<AuthController> {
                             height: 60,
                             width: 60,
                             color: Colors.red,
-                            margin: EdgeInsets.symmetric(
+                            margin: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 20),
                           ),
                           Container(
                             height: 60,
                             width: 60,
                             color: Colors.red,
-                            margin: EdgeInsets.symmetric(
+                            margin: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 20),
                           ),
                         ],
@@ -242,8 +242,8 @@ class LoginPage extends GetView<AuthController> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("New User?"),
-                          SizedBox(
+                          const Text("New User?"),
+                          const SizedBox(
                             width: 5,
                           ),
                           GestureDetector(
@@ -251,7 +251,7 @@ class LoginPage extends GetView<AuthController> {
                               controller.reset();
                               Get.toNamed(RouteNames.signup);
                             },
-                            child: Text(
+                            child: const Text(
                               "Create Account",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),

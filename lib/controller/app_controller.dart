@@ -1,11 +1,4 @@
-import 'dart:async';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:job_portal/controller/user_account_controller.dart';
-import 'package:job_portal/global.dart';
-import 'package:job_portal/model/job_post_model.dart';
-import 'package:job_portal/services/database.dart';
 
 class AppController extends GetxController {
 //   late StreamSubscription authStateChanges;

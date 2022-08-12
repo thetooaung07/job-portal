@@ -15,11 +15,11 @@ class NearbyPage extends StatelessWidget {
     return Scaffold(
         appBar: MyAppBar(
           leading: Container(
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: CustomIconButton(
               onTap: (() =>
                   Get.find<BottomNavBarController>().selectedIndex.value = 0),
-              child: Icon(
+              child: const Icon(
                 Icons.chevron_left_rounded,
                 size: 30,
                 color: Colors.black,
@@ -29,10 +29,10 @@ class NearbyPage extends StatelessWidget {
           label: "Search",
           action: [
             Container(
-              margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+              margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
               child: CustomIconButton(
                 onTap: (() => Get.toNamed(RouteNames.search)),
-                child: Icon(
+                child: const Icon(
                   Icons.search_rounded,
                   size: 30,
                   color: Colors.black,
@@ -42,14 +42,14 @@ class NearbyPage extends StatelessWidget {
           ],
         ),
         body: SafeArea(
-          child: Container(
+          child: SizedBox(
             width: Get.width,
             height: Get.height,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
+                SizedBox(
                   height: 300,
                   width: 300,
                   child: SvgPicture.asset(

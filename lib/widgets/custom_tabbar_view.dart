@@ -25,7 +25,7 @@ class Custom3TabBarView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
           transform:
               Matrix4.translationValues(tabIndex == 0 ? 0 : -Get.width, 0, 0),
-          duration: Duration(milliseconds: 175),
+          duration: const Duration(milliseconds: 175),
           curve: Curves.easeIn,
         ),
         AnimatedContainer(
@@ -40,7 +40,7 @@ class Custom3TabBarView extends StatelessWidget {
                       : Get.width,
               0,
               0),
-          duration: Duration(milliseconds: 175),
+          duration: const Duration(milliseconds: 175),
           curve: Curves.easeIn,
         ),
         AnimatedContainer(
@@ -49,7 +49,7 @@ class Custom3TabBarView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
           transform:
               Matrix4.translationValues(tabIndex == 2 ? 0 : Get.width, 0, 0),
-          duration: Duration(milliseconds: 175),
+          duration: const Duration(milliseconds: 175),
           curve: Curves.easeIn,
         )
       ],
@@ -81,7 +81,7 @@ class Custom2TabBarView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
           transform:
               Matrix4.translationValues(tabIndex == 0 ? 0 : -Get.width, 0, 0),
-          duration: Duration(milliseconds: 175),
+          duration: const Duration(milliseconds: 175),
           curve: Curves.easeIn,
         ),
         AnimatedContainer(
@@ -90,7 +90,7 @@ class Custom2TabBarView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
           transform:
               Matrix4.translationValues(tabIndex == 1 ? 0 : Get.width, 0, 0),
-          duration: Duration(milliseconds: 175),
+          duration: const Duration(milliseconds: 175),
           curve: Curves.easeIn,
         )
       ],

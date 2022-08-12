@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/controller/job_posts_controller.dart';
-import 'package:job_portal/model/job_post_model.dart';
-import 'package:job_portal/model/user_account.dart';
-import 'package:job_portal/services/database.dart';
-import 'package:job_portal/widgets/job-post-card-vt.dart';
-import 'package:job_portal/widgets/showAllTextBanner.dart';
-import 'package:job_portal/routes/routes.dart';
+import 'package:job_portal/widgets/job_post_card_vt.dart';
+import 'package:job_portal/widgets/show_all_text_banner.dart';
 
 class SuggestedJobContainer extends StatelessWidget {
   const SuggestedJobContainer({Key? key}) : super(key: key);
@@ -15,19 +11,19 @@ class SuggestedJobContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ShowAllTextBanner(
+        const ShowAllTextBanner(
           title: "Suggested Job",
           // onPressed: () => Get.toNamed(RouteNames.recentPosts),
         ),
-        SizedBox(
+        const SizedBox(
           height: 15,
         ),
         GetX<JobPostsController>(
           init: Get.put<JobPostsController>(JobPostsController()),
           builder: (controller) {
-            return controller.initialized && controller.jobPosts.length > 0
+            return controller.initialized && controller.jobPosts.isNotEmpty
                 ? ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: controller.jobPosts.length,
                     itemBuilder: (context, index) {
@@ -35,7 +31,7 @@ class SuggestedJobContainer extends StatelessWidget {
                         data: controller.jobPosts[index],
                       );
                     })
-                : SizedBox(
+                : const SizedBox(
                     height: 100,
                     width: 50,
                     child: Center(child: CircularProgressIndicator()));

@@ -5,7 +5,6 @@ import 'package:job_portal/controller/saved_jobs_page_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/routes/routes.dart';
-import 'package:job_portal/widgets/job-post-card-vt.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
 class SavedJobsPage extends StatelessWidget {
@@ -16,10 +15,10 @@ class SavedJobsPage extends StatelessWidget {
     return Scaffold(
         appBar: MyAppBar(
           leading: Container(
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: CustomIconButton(
               onTap: (() => Get.back()),
-              child: Icon(
+              child: const Icon(
                 Icons.chevron_left_rounded,
                 size: 30,
                 color: Colors.black,
@@ -29,10 +28,10 @@ class SavedJobsPage extends StatelessWidget {
           label: "Saved",
           action: [
             Container(
-              margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+              margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
               child: CustomIconButton(
                 onTap: () {},
-                child: Icon(
+                child: const Icon(
                   Icons.more_vert_rounded,
                   size: 30,
                   color: Colors.black,
@@ -44,10 +43,10 @@ class SavedJobsPage extends StatelessWidget {
         body: GetBuilder<SavedJobsPageController>(
             init: Get.put<SavedJobsPageController>(SavedJobsPageController()),
             builder: (controller) {
-              return controller.getSavedPosts.length > 0
+              return controller.getSavedPosts.isNotEmpty
                   ? ListView.builder(
                       itemCount: controller.getSavedPosts.length,
-                      padding: EdgeInsets.symmetric(vertical: 20),
+                      padding: const EdgeInsets.symmetric(vertical: 20),
                       itemBuilder: (context, index) => GestureDetector(
                         onTap: () {
                           Future.delayed(Duration.zero, () {
@@ -61,7 +60,7 @@ class SavedJobsPage extends StatelessWidget {
                         ),
                       ),
                     )
-                  : Center(
+                  : const Center(
                       heightFactor: 50,
                       child: Text("No Saved Posts Yet"),
                     );
@@ -110,19 +109,19 @@ class DismissibleJobPostCard extends StatelessWidget {
           //   ),
           // ),
           Container(
-            margin: EdgeInsets.only(bottom: 15),
+            margin: const EdgeInsets.only(bottom: 15),
             // padding: EdgeInsets.only(right: 20),
             alignment: Alignment.centerRight,
             color: Colors.transparent,
             child: Container(
-              padding: EdgeInsets.fromLTRB(30, 25, 20, 25),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.fromLTRB(30, 25, 20, 25),
+              decoration: const BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     bottomLeft: Radius.circular(20),
                   )),
-              child: Icon(
+              child: const Icon(
                 Icons.delete_outline_rounded,
                 size: 25,
                 color: Colors.white,
@@ -132,14 +131,14 @@ class DismissibleJobPostCard extends StatelessWidget {
         ],
       ),
       child: Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
             left: kSpacingUnit * 1.5,
             right: kSpacingUnit * 1.5,
             bottom: kSpacingUnit * 2),
         child: Stack(
           children: [
             Container(
-              padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
+              padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
               // margin: EdgeInsets.only(
               //     left: kSpacingUnit * 1.5,
               //     right: kSpacingUnit * 1.5,
@@ -147,7 +146,7 @@ class DismissibleJobPostCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.white),
-                boxShadow: [kCardShadow],
+                boxShadow: const [kCardShadow],
                 color: Colors.white,
               ),
               height: 110,
@@ -179,7 +178,7 @@ class DismissibleJobPostCard extends StatelessWidget {
                             //   height: 50,
                             //   width: 50,
                             // ),
-                            SizedBox(
+                            const SizedBox(
                               width: 20,
                             ),
                             SizedBox(
@@ -192,11 +191,11 @@ class DismissibleJobPostCard extends StatelessWidget {
                                     data?.title ?? "Developer",
                                     style: kJobPositionTextStyle,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Text(data?.postedBy.username ?? "User"),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                 ],
@@ -220,7 +219,7 @@ class DismissibleJobPostCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
-                        children: [
+                        children: const [
                           Icon(
                             Icons.location_on_outlined,
                             size: 18,
@@ -234,7 +233,7 @@ class DismissibleJobPostCard extends StatelessWidget {
                           Text("Mid-Senior"),
                         ],
                       ),
-                      Text("${bullet}23 min ago"),
+                      const Text("${bullet}23 min ago"),
                     ],
                   ),
                 ],
@@ -243,14 +242,12 @@ class DismissibleJobPostCard extends StatelessWidget {
             Positioned(
               top: 0,
               right: 0,
-              child: Container(
-                child: InkWell(
-                  onTap: () {},
-                  child: Icon(
-                    Icons.bookmark_rounded,
-                    size: 30,
-                    color: kPrimaryRedColor,
-                  ),
+              child: InkWell(
+                onTap: () {},
+                child: const Icon(
+                  Icons.bookmark_rounded,
+                  size: 30,
+                  color: kPrimaryRedColor,
                 ),
               ),
             )

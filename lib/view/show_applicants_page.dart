@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/application_page_controller.dart';
 import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/applicant_model.dart';
-import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/model/user_account.dart';
-import 'package:job_portal/services/database.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
 class ShowApplicantsPage extends GetView<ApplicationsPageController> {
@@ -17,21 +15,19 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
   Widget build(BuildContext context) {
     ApplicationsPageController controller =
         Get.find<ApplicationsPageController>();
-    JobPostModel data = Get.arguments;
+    // JobPostModel data = Get.arguments;
 
     // TODO try to change the code placement since it can duplicate applicants since method is call on widget build
 
     return Scaffold(
       appBar: MyAppBar(
         leading: Container(
-          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: CustomIconButton(
             onTap: () {
-              controller.applicantsForSelectedJobPost.clear();
-              controller.applicantList.clear();
               Get.back();
             },
-            child: Icon(
+            child: const Icon(
               Icons.chevron_left_rounded,
               size: 30,
               color: Colors.black,
@@ -41,13 +37,13 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
         label: "Applicants",
         action: [
           Container(
-            margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
+            margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
             child: CustomIconButton(
               onTap: () {
                 Get.back();
                 Get.find<BottomNavBarController>().selectedIndex.value = 1;
               },
-              child: Icon(
+              child: const Icon(
                 Icons.search_rounded,
                 size: 30,
                 color: Colors.black,
@@ -58,14 +54,14 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text("Filter by"),
-                  SizedBox(
+                  const Text("Filter by"),
+                  const SizedBox(
                     width: 10,
                   ),
                   Container(
@@ -74,21 +70,23 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
                     child: Obx(
                       () => DropdownButton(
                         isExpanded: true,
-                        underline: SizedBox(),
+                        underline: const SizedBox(),
                         dropdownColor: Colors.white,
                         value: controller.selectedVal,
                         onChanged: (v) {
                           controller.selectedVal = v.toString();
                         },
-                        items: DropdownList.map(
-                          (item) => DropdownMenuItem(
-                            value: item,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 5.0),
-                              child: Text("$item"),
-                            ),
-                          ),
-                        ).toList(),
+                        items: dropdownList
+                            .map(
+                              (item) => DropdownMenuItem(
+                                value: item,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 5.0),
+                                  child: Text("$item"),
+                                ),
+                              ),
+                            )
+                            .toList(),
                       ),
                     ),
                   )
@@ -98,12 +96,17 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
                 builder: (controller) {
                   return ListView.builder(
                     itemCount: controller.applicantList.length,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return controller.applicantList.length > 0
-                          ? ApplicantCard(data: controller.applicantList[index])
-                          : Text("No Data");
+                      return controller.applicantList.isNotEmpty &&
+                              controller.applicantsForSelectedJobPost.isNotEmpty
+                          ? ApplicantCard(
+                              user: controller.applicantList[index],
+                              applicant: controller
+                                  .applicantsForSelectedJobPost[index],
+                            )
+                          : const Text("No Data");
                     },
                   );
                 },
@@ -117,35 +120,81 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
 }
 
 class ApplicantCard extends StatelessWidget {
-  final UserAccount data;
+  final UserAccount user;
+  final ApplicantModel applicant;
 
   const ApplicantCard({
     Key? key,
-    required this.data,
+    required this.user,
+    required this.applicant,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      margin: EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
-        // border: Border.all(color: Colors.teal),
-        color: Colors.black,
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: const [kCardShadow],
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            height: 60,
-            width: 60,
-            alignment: Alignment.center,
-            child: data.profile != null
-                ? Image.network(data.profile!)
-                : Image.asset('assets/images/default.png'),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 70,
+                width: 70,
+                alignment: Alignment.center,
+                child: user.profile != null
+                    ? Image.network(user.profile!)
+                    : Image.asset('assets/images/default.png'),
+              ),
+            ],
           ),
-          Text(
-            "Data",
-            style: TextStyle(color: Colors.white),
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  user.username!,
+                  style: const TextStyle(color: Colors.black),
+                ),
+                Text(
+                  applicant.email!,
+                  style: const TextStyle(color: Colors.black),
+                ),
+                Text(
+                  applicant.phoneNumber!,
+                  style: const TextStyle(color: Colors.black),
+                ),
+                Text(
+                  applicant.techStacks!,
+                  style: const TextStyle(color: Colors.black),
+                ),
+              ],
+            ),
+          ),
+          RotatedBox(
+            quarterTurns: 3,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(152, 0, 187, 212),
+                  borderRadius: BorderRadius.circular(5)),
+              child: const Text(
+                "Applied",
+                style: TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    shadows: [kIconShadow]),
+              ),
+            ),
           )
         ],
       ),

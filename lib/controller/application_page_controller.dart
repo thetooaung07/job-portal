@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_function_literals_in_foreach_calls, unrelated_type_equality_checks
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -44,15 +42,15 @@ class ApplicationsPageController extends GetxController {
   }
 
   changeStepperType() {
-    if (stepperType == StepperType.vertical) {
+    if (stepperType.value == StepperType.vertical) {
       stepperType.value = StepperType.horizontal;
-    } else if (stepperType == StepperType.horizontal) {
+    } else if (stepperType.value == StepperType.horizontal) {
       stepperType.value = StepperType.vertical;
     }
   }
 
   bool checkShouldDisplayLabel(int index) {
-    if (stepperType == StepperType.horizontal) {
+    if (stepperType.value == StepperType.horizontal) {
       if (currentStep == index) {
         return true;
       }

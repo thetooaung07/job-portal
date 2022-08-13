@@ -14,6 +14,7 @@ class ApplicantModel {
   String? suggestion;
   String? question;
   String? jobPostId;
+  String? applicationProcess;
 
   ApplicantModel({
     this.applicantId,
@@ -29,6 +30,7 @@ class ApplicantModel {
     this.suggestion,
     this.question,
     this.jobPostId,
+    this.applicationProcess,
   });
 
   ApplicantModel.fromDocumentSnapshot(DocumentSnapshot doc) {
@@ -45,6 +47,7 @@ class ApplicantModel {
     suggestion = doc["suggestion"];
     question = doc["question"];
     jobPostId = doc["jobPostId"];
+    applicationProcess = doc["applicationProcess"];
   }
 
   Map<String, dynamic> toJson() => {
@@ -61,11 +64,12 @@ class ApplicantModel {
         "socialLinks": socialLinks,
         "suggestion": suggestion,
         "question": question,
+        "applicationProcess": applicationProcess,
       };
 
   @override
   String toString() {
     // TODO: implement toString
-    return "$applicantId $applicantName $email $phoneNumber $cvForm ";
+    return "$applicantId $applicantName $email $phoneNumber $cvForm $applicationProcess";
   }
 }

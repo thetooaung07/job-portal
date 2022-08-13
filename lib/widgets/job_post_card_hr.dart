@@ -90,7 +90,7 @@ class CustomTextButton extends StatelessWidget {
   final String? label;
   final void Function()? onTap;
 
-  const CustomTextButton({Key? key, this.label = "Show All", this.onTap})
+  const CustomTextButton({Key? key, this.label = "Show More", this.onTap})
       : super(key: key);
 
   @override
@@ -106,7 +106,7 @@ class CustomTextButton extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            label ?? "Show All",
+            label ?? "Show More",
             style: const TextStyle(color: Colors.white),
           ),
         ),

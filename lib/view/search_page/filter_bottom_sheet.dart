@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 
-const List DropdownItemList = [
+const List dropdownItemList = [
   "UI/UX",
   "Graphic Designer",
   "Web Developer",
@@ -231,12 +231,14 @@ class LabelDropDownBtn extends StatelessWidget {
                 onChanged: (v) {
                   selectedItem.value = v.toString();
                 },
-                items: DropdownItemList.map(
-                  (item) => DropdownMenuItem(
-                    value: item,
-                    child: Text("$item"),
-                  ),
-                ).toList(),
+                items: dropdownItemList
+                    .map(
+                      (item) => DropdownMenuItem(
+                        value: item,
+                        child: Text("$item"),
+                      ),
+                    )
+                    .toList(),
               ),
             ),
           ),

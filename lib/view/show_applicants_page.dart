@@ -6,6 +6,7 @@ import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/applicant_model.dart';
 import 'package:job_portal/model/user_account.dart';
+import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
 class ShowApplicantsPage extends GetView<ApplicationsPageController> {
@@ -54,7 +55,7 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           child: Column(
             children: [
               Row(
@@ -131,72 +132,79 @@ class ApplicantCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: const [kCardShadow],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                height: 70,
-                width: 70,
-                alignment: Alignment.center,
-                child: user.profile != null
-                    ? Image.network(user.profile!)
-                    : Image.asset('assets/images/default.png'),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 15),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed(RouteNames.viewApplicantDetails,
+            arguments: [user, applicant]);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: const [kCardShadow],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  user.username!,
-                  style: const TextStyle(color: Colors.black),
-                ),
-                Text(
-                  applicant.email!,
-                  style: const TextStyle(color: Colors.black),
-                ),
-                Text(
-                  applicant.phoneNumber!,
-                  style: const TextStyle(color: Colors.black),
-                ),
-                Text(
-                  applicant.techStacks!,
-                  style: const TextStyle(color: Colors.black),
+                Container(
+                  height: 70,
+                  width: 70,
+                  alignment: Alignment.center,
+                  child: user.profile != null
+                      ? Image.network(user.profile!)
+                      : Image.asset('assets/images/default.png'),
                 ),
               ],
             ),
-          ),
-          RotatedBox(
-            quarterTurns: 3,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-              decoration: BoxDecoration(
-                  color: const Color.fromARGB(152, 0, 187, 212),
-                  borderRadius: BorderRadius.circular(5)),
-              child: const Text(
-                "Applied",
-                style: TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    shadows: [kIconShadow]),
+            Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    user.username!,
+                    style: const TextStyle(color: Colors.black, fontSize: 18),
+                  ),
+                  const SizedBox(height: 7),
+                  Text(
+                    applicant.email!,
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    applicant.phoneNumber!,
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                ],
               ),
             ),
-          )
-        ],
+            RotatedBox(
+              quarterTurns: 3,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                decoration: BoxDecoration(
+                    color: applicationProcessMatchColor(
+                        applicant.applicationProcess ??
+                            ApplicationProcess.unknown),
+                    borderRadius: BorderRadius.circular(5)),
+                child: Text(
+                  applicant.applicationProcess ?? ApplicationProcess.unknown,
+                  style: const TextStyle(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      shadows: [kIconShadow]),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

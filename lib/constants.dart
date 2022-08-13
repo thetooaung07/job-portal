@@ -16,10 +16,27 @@ const List<IconData> bottomNavBarIcons = [
   Icons.person_outline_rounded,
 ];
 
+class ApplicationProcess {
+  static String applied = "Applied";
+  static String shortlisted = "Shortlisted";
+  static String interview = "Interview";
+  static String rejected = "Rejected";
+  static String unknown = "Unknown";
+}
+
+Color applicationProcessMatchColor(String currentProcess) {
+  if (currentProcess == ApplicationProcess.applied) {
+    return const Color.fromARGB(152, 0, 187, 212);
+  } else {
+    return Colors.black;
+  }
+}
+
 const themeBgColor = Color.fromARGB(255, 245, 245, 245);
 const themeBgMainColor = Color.fromARGB(255, 253, 253, 253);
 const jobDetailsTabBgColor = Color.fromARGB(242, 240, 240, 240);
 const kJobDetailsBgColor = Color.fromARGB(19, 189, 189, 189);
+
 //  TODO: Change Color to linear from up(dark) to down(light) like pale color at bottom
 const btnColor = Color.fromRGBO(35, 35, 35, 1);
 const btnBgColorWhite = Color.fromRGBO(255, 255, 255, 1);

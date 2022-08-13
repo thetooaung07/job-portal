@@ -1,9 +1,12 @@
+// ignore_for_file: avoid_function_literals_in_foreach_calls
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/user_account_controller.dart';
 import 'package:job_portal/global.dart';
 import 'package:job_portal/model/applicant_model.dart';
@@ -134,31 +137,31 @@ class ApplicationsPageController extends GetxController {
     await getAppliedJobs();
   }
 
-  // printController() {
+  // printController() {`
   //   print("Controller => ${getFileLink.value}");
   // }
 
   applyJob() async {
     ApplicantModel data = ApplicantModel(
-      jobPostId: jobPostId.value,
-      applicantId: firebaseAuth.currentUser!.uid,
-      applicantName: nameC.text,
-      email: emailC.text,
-      phoneNumber: phoneNumberC.text,
-      address: addressC.text,
-      summary: summaryC.text,
-      cvForm: await uploadCV(),
-      techStacks: techStackC.text,
-      workExp: workExpC.text,
-      socialLinks: <String>[
-        slFacebookC.text,
-        slLinkedinC.text,
-        slGithubC.text,
-        slotherC.text
-      ],
-      suggestion: suggestionC.text,
-      question: questionC.text,
-    );
+        jobPostId: jobPostId.value,
+        applicantId: firebaseAuth.currentUser!.uid,
+        applicantName: nameC.text,
+        email: emailC.text,
+        phoneNumber: phoneNumberC.text,
+        address: addressC.text,
+        summary: summaryC.text,
+        cvForm: await uploadCV(),
+        techStacks: techStackC.text,
+        workExp: workExpC.text,
+        socialLinks: <String>[
+          slFacebookC.text,
+          slLinkedinC.text,
+          slGithubC.text,
+          slotherC.text
+        ],
+        suggestion: suggestionC.text,
+        question: questionC.text,
+        applicationProcess: ApplicationProcess.applied);
     await FirestoreHelper()
         .create(collectionPath: "applicants", data: data.toJson());
 

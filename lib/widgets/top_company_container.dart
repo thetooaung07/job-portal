@@ -16,7 +16,7 @@ class TopCompanyContainer extends StatelessWidget {
           height: 10,
         ),
         const ShowAllTextBanner(
-          title: "Top Company",
+          title: "Recent Posts",
           // onPressed: () => Get.toNamed(RouteNames.popularJobs),
         ),
         Container(

@@ -55,7 +55,7 @@ class ApplicationsPage extends StatelessWidget {
                 "Applications Stats",
                 style: kCaptionTextStyle,
               ),
-              const JobListDiagram(),
+              const JobCountDiagram(),
               const SizedBox(height: 20),
               const Text(
                 "Your Last Applications",
@@ -194,8 +194,8 @@ class ApplicationCard extends StatelessWidget {
   }
 }
 
-class JobListDiagram extends StatelessWidget {
-  const JobListDiagram({
+class JobCountDiagram extends StatelessWidget {
+  const JobCountDiagram({
     Key? key,
   }) : super(key: key);
 
@@ -208,7 +208,7 @@ class JobListDiagram extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            flex: 2,
+            flex: 5,
             child: Container(
               // width: Get.width / 3,
               margin: const EdgeInsets.only(right: 10),
@@ -245,7 +245,7 @@ class JobListDiagram extends StatelessWidget {
                     height: 10,
                   ),
                   const Text(
-                    "Total Application",
+                    "Total Applications",
                     style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
@@ -259,13 +259,13 @@ class JobListDiagram extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 3,
+            flex: 7,
             // color: Colors.teal,
             child: Column(
               children: const [
                 Expanded(
                   child: HorizontalCard(
-                      jobType: "Opened Jobs",
+                      jobType: "Opening Jobs",
                       job: "2 Jobs",
                       icon: Icons.check_circle_rounded,
                       margin: EdgeInsets.only(bottom: 4),
@@ -273,8 +273,8 @@ class JobListDiagram extends StatelessWidget {
                 ),
                 Expanded(
                   child: HorizontalCard(
-                      jobType: "Opened Jobs",
-                      job: "2 Jobs",
+                      jobType: "Expired Jobs",
+                      job: "3 Jobs",
                       icon: Icons.cancel_rounded,
                       margin: EdgeInsets.only(top: 4),
                       color: Color.fromARGB(255, 255, 82, 70)),

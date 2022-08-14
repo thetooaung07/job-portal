@@ -99,13 +99,14 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
                     itemCount: controller.applicantList.length,
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemBuilder: (context, index) {
+                    itemBuilder: (context, idx) {
                       return controller.applicantList.isNotEmpty &&
                               controller.applicantsForSelectedJobPost.isNotEmpty
                           ? ApplicantCard(
-                              user: controller.applicantList[index],
-                              applicant: controller
-                                  .applicantsForSelectedJobPost[index],
+                              index: idx,
+                              user: controller.applicantList[idx],
+                              applicant:
+                                  controller.applicantsForSelectedJobPost[idx],
                             )
                           : const Text("No Data");
                     },
@@ -121,11 +122,13 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
 }
 
 class ApplicantCard extends StatelessWidget {
+  final int index;
   final UserAccount user;
   final ApplicantModel applicant;
 
   const ApplicantCard({
     Key? key,
+    required this.index,
     required this.user,
     required this.applicant,
   }) : super(key: key);
@@ -135,7 +138,7 @@ class ApplicantCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Get.toNamed(RouteNames.viewApplicantDetails,
-            arguments: [user, applicant]);
+            arguments: [user, applicant, index]);
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -185,23 +188,30 @@ class ApplicantCard extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            RotatedBox(
-              quarterTurns: 3,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-                decoration: BoxDecoration(
-                    color: applicationProcessMatchColor(
-                        applicant.applicationProcess ??
+            GetBuilder<ApplicationsPageController>(
+              builder: (controller) {
+                return RotatedBox(
+                  quarterTurns: 3,
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                    decoration: BoxDecoration(
+                        color: applicationProcessMatchColor(controller
+                                .applicantsForSelectedJobPost[index]
+                                .applicationProcess ??
                             ApplicationProcess.unknown),
-                    borderRadius: BorderRadius.circular(5)),
-                child: Text(
-                  applicant.applicationProcess ?? ApplicationProcess.unknown,
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      shadows: [kIconShadow]),
-                ),
-              ),
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Text(
+                      controller.applicantsForSelectedJobPost[index]
+                              .applicationProcess ??
+                          ApplicationProcess.unknown,
+                      style: const TextStyle(
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          shadows: [kIconShadow]),
+                    ),
+                  ),
+                );
+              },
             )
           ],
         ),

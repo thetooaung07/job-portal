@@ -142,7 +142,10 @@ class ApplicationsPageController extends GetxController {
   // }
 
   applyJob() async {
+    DocumentReference doc = firebaseFirestore.collection("applicants").doc();
+    String documentID = doc.id;
     ApplicantModel data = ApplicantModel(
+        id: documentID,
         jobPostId: jobPostId.value,
         applicantId: firebaseAuth.currentUser!.uid,
         applicantName: nameC.text,
@@ -162,8 +165,9 @@ class ApplicationsPageController extends GetxController {
         suggestion: suggestionC.text,
         question: questionC.text,
         applicationProcess: ApplicationProcess.applied);
-    await FirestoreHelper()
-        .create(collectionPath: "applicants", data: data.toJson());
+
+    await FirestoreHelper().create(
+        collectionPath: "applicants", docPath: documentID, data: data.toJson());
 
     Fluttertoast.showToast(msg: "Success", backgroundColor: Colors.green);
     Get.back();
@@ -227,5 +231,12 @@ class ApplicationsPageController extends GetxController {
             },
           ),
         );
+  }
+
+  updateProcessStatus({required String toUpdate, required String docId}) async {
+    await FirestoreHelper().update(
+        collectionPath: "applicants",
+        docPath: docId,
+        data: {"applicationProcess": toUpdate}).then((value) => update());
   }
 }

@@ -28,6 +28,10 @@ Color applicationProcessMatchColor(String currentProcess) {
   if (currentProcess == ApplicationProcess.applied) {
     // return const Color.fromARGB(152, 0, 187, 212);
     return Colors.teal;
+  } else if (currentProcess == ApplicationProcess.rejected) {
+    return Colors.red;
+  } else if (currentProcess == ApplicationProcess.shortlisted) {
+    return Colors.green;
   } else {
     return Colors.black;
   }

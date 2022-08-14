@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ApplicantModel {
+  String id = "";
   String? applicantId;
   String? applicantName;
   String? email;
@@ -17,6 +18,7 @@ class ApplicantModel {
   String? applicationProcess;
 
   ApplicantModel({
+    required this.id,
     this.applicantId,
     this.applicantName,
     this.email,
@@ -34,6 +36,7 @@ class ApplicantModel {
   });
 
   ApplicantModel.fromDocumentSnapshot(DocumentSnapshot doc) {
+    id = doc["id"];
     applicantId = doc["applicantId"];
     applicantName = doc["applicantName"];
     email = doc["email"];
@@ -51,6 +54,7 @@ class ApplicantModel {
   }
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "jobPostId": jobPostId,
         "applicantId": applicantId,
         "applicantName": applicantName,
@@ -70,6 +74,6 @@ class ApplicantModel {
   @override
   String toString() {
     // TODO: implement toString
-    return "$applicantId $applicantName $email $phoneNumber $cvForm $applicationProcess";
+    return "$id => $applicantId $applicantName $email $phoneNumber $cvForm $applicationProcess";
   }
 }

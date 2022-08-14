@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/application_page_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/applicant_model.dart';
 import 'package:job_portal/model/user_account.dart';
@@ -13,7 +14,7 @@ class ApplicantDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     UserAccount user = Get.arguments[0] as UserAccount;
     ApplicantModel applicant = Get.arguments[1] as ApplicantModel;
-
+    int index = Get.arguments[2];
     return Scaffold(
         appBar: MyAppBar(
           leading: Container(
@@ -51,7 +52,7 @@ class ApplicantDetailsPage extends StatelessWidget {
             children: [
               Container(
                 margin:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 35, horizontal: 20),
                 child: Column(
                   children: [
                     Container(
@@ -104,28 +105,88 @@ class ApplicantDetailsPage extends StatelessWidget {
                       label: "Question",
                       body: applicant.question!,
                     ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        OutlinedButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 12),
+                                child: const Text(
+                                  "Cancel",
+                                  style: TextStyle(fontSize: 16),
+                                ))),
+                        ElevatedButton(
+                            style:
+                                ElevatedButton.styleFrom(primary: Colors.red),
+                            onPressed: () {
+                              Get.find<ApplicationsPageController>()
+                                  .updateProcessStatus(
+                                      toUpdate: ApplicationProcess.rejected,
+                                      docId: applicant.id);
+                            },
+                            child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 12),
+                                child: const Text(
+                                  "Reject",
+                                  style: TextStyle(fontSize: 16),
+                                ))),
+                        ElevatedButton(
+                            style:
+                                ElevatedButton.styleFrom(primary: Colors.green),
+                            onPressed: () {
+                              Get.find<ApplicationsPageController>()
+                                  .updateProcessStatus(
+                                      toUpdate: ApplicationProcess.shortlisted,
+                                      docId: applicant.id);
+                            },
+                            child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 12),
+                                child: const Text(
+                                  "Shortlist",
+                                  style: TextStyle(fontSize: 16),
+                                ))),
+                      ],
+                    ),
                   ],
                 ),
               ),
               Positioned(
-                  right: 0,
-                  top: 0,
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-                    decoration: BoxDecoration(
-                        color: applicationProcessMatchColor(
-                            applicant.applicationProcess ??
-                                ApplicationProcess.unknown),
-                        borderRadius: BorderRadius.circular(5)),
-                    child: Text(
-                      applicant.applicationProcess ??
-                          ApplicationProcess.unknown,
-                      style: const TextStyle(
+                right: 0,
+                top: 0,
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(35, 7, 15, 7),
+                  decoration: BoxDecoration(
+                      color: applicationProcessMatchColor(
+                          applicant.applicationProcess ??
+                              ApplicationProcess.unknown),
+                      borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(45))),
+                  child: GetBuilder<ApplicationsPageController>(
+                    builder: (controller) {
+                      print("Builder is built");
+                      return Text(
+                        controller.applicantsForSelectedJobPost[index]
+                                .applicationProcess ??
+                            ApplicationProcess.unknown,
+                        style: const TextStyle(
+                          fontSize: 16,
                           color: Color.fromARGB(255, 255, 255, 255),
-                          shadows: [kIconShadow]),
-                    ),
-                  ))
+                          // shadows: [kIconShadow],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
             ],
           ),
         ));
@@ -143,7 +204,7 @@ class LabelTextHor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         crossAxisAlignment:
             data != null ? CrossAxisAlignment.center : CrossAxisAlignment.start,

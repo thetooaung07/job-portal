@@ -153,12 +153,12 @@ class ApplicationsPageController extends GetxController {
         cvForm: await uploadCV(),
         techStacks: techStackC.text,
         workExp: workExpC.text,
-        socialLinks: <String>[
-          slFacebookC.text,
-          slLinkedinC.text,
-          slGithubC.text,
-          slotherC.text
-        ],
+        socialLinks: {
+          "facebook": slFacebookC.text,
+          "linkedIn": slLinkedinC.text,
+          "github": slGithubC.text,
+          "other": slotherC.text
+        },
         suggestion: suggestionC.text,
         question: questionC.text,
         applicationProcess: ApplicationProcess.applied);

@@ -146,7 +146,6 @@ class ApplicantCard extends StatelessWidget {
           boxShadow: const [kCardShadow],
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -162,7 +161,7 @@ class ApplicantCard extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 15),
+              padding: const EdgeInsets.only(left: 15),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -185,6 +184,7 @@ class ApplicantCard extends StatelessWidget {
                 ],
               ),
             ),
+            const Spacer(),
             RotatedBox(
               quarterTurns: 3,
               child: Container(

@@ -26,7 +26,8 @@ class ApplicationProcess {
 
 Color applicationProcessMatchColor(String currentProcess) {
   if (currentProcess == ApplicationProcess.applied) {
-    return const Color.fromARGB(152, 0, 187, 212);
+    // return const Color.fromARGB(152, 0, 187, 212);
+    return Colors.teal;
   } else {
     return Colors.black;
   }

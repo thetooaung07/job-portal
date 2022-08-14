@@ -10,7 +10,7 @@ class ApplicantModel {
   String? cvForm;
   String? techStacks;
   String? workExp;
-  List? socialLinks;
+  Map<String, dynamic>? socialLinks;
   String? suggestion;
   String? question;
   String? jobPostId;
@@ -43,7 +43,7 @@ class ApplicantModel {
     summary = doc["summary"];
     techStacks = doc["techStacks"];
     workExp = doc["workExp"];
-    socialLinks = doc["socialLinks"] as List;
+    socialLinks = doc["socialLinks"] as Map<String, dynamic>;
     suggestion = doc["suggestion"];
     question = doc["question"];
     jobPostId = doc["jobPostId"];

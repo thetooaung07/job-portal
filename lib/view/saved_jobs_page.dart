@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/saved_jobs_page_controller.dart';
+import 'package:job_portal/global.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/routes/routes.dart';
@@ -88,29 +89,8 @@ class DismissibleJobPostCard extends StatelessWidget {
       background: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          // Container(
-          //   margin: EdgeInsets.only(bottom: 15),
-          //   // padding: EdgeInsets.only(right: 20),
-          //   alignment: Alignment.centerLeft,
-          //   color: Colors.transparent,
-          //   child: Container(
-          //     padding: EdgeInsets.fromLTRB(20, 25, 30, 25),
-          //     decoration: BoxDecoration(
-          //         color: Colors.teal,
-          //         borderRadius: BorderRadius.only(
-          //           topRight: Radius.circular(20),
-          //           bottomRight: Radius.circular(20),
-          //         )),
-          //     child: Icon(
-          //       Icons.folder_open_rounded,
-          //       size: 25,
-          //       color: Colors.white,
-          //     ),
-          //   ),
-          // ),
           Container(
             margin: const EdgeInsets.only(bottom: 15),
-            // padding: EdgeInsets.only(right: 20),
             alignment: Alignment.centerRight,
             color: Colors.transparent,
             child: Container(
@@ -131,6 +111,11 @@ class DismissibleJobPostCard extends StatelessWidget {
         ],
       ),
       child: Container(
+        decoration: BoxDecoration(
+          boxShadow: const [kCardShadow],
+          borderRadius: BorderRadius.circular(5),
+          color: Colors.white,
+        ),
         margin: const EdgeInsets.only(
             left: kSpacingUnit * 1.5,
             right: kSpacingUnit * 1.5,
@@ -139,16 +124,6 @@ class DismissibleJobPostCard extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
-              // margin: EdgeInsets.only(
-              //     left: kSpacingUnit * 1.5,
-              //     right: kSpacingUnit * 1.5,
-              //     bottom: kSpacingUnit * 2),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.white),
-                boxShadow: const [kCardShadow],
-                color: Colors.white,
-              ),
               height: 110,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -165,8 +140,9 @@ class DismissibleJobPostCard extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Container(
+                                  margin: EdgeInsets.only(top: 4),
                                   height: 60,
-                                  width: 60,
+                                  width: 65,
                                   alignment: Alignment.center,
                                   child: data!.postedBy.profile != null
                                       ? Image.network(data!.postedBy.profile!)
@@ -206,49 +182,47 @@ class DismissibleJobPostCard extends StatelessWidget {
                       ),
                       // Icon(Icons.favorite_outline_rounded),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 5.0),
+                        padding: const EdgeInsets.only(bottom: 10),
                         child: Text(
-                          "\$1299/Mo",
-                          style: kLabelTextStyle.copyWith(
-                              color: kPrimaryRedColor, fontSize: 18),
-                        ),
-                      )
+                            "${bullet} ${differenceInString(data!.createdAt!)} ago"),
+                      ),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
-                        children: const [
+                        children: [
                           Icon(
                             Icons.location_on_outlined,
                             size: 18,
                           ),
-                          Text("Full Time"),
+                          Text(data!.workHour),
                           SizedBox(width: 15),
                           Icon(
                             Icons.workspace_premium_outlined,
                             size: 18,
                           ),
-                          Text("Mid-Senior"),
+                          Text(data!.expLevel),
                         ],
                       ),
-                      const Text("${bullet}23 min ago"),
+                      Text(
+                        "\$${data!.salary.split("-")[0]}/m",
+                        style: kLabelTextStyle.copyWith(
+                            color: kPrimaryRedColor, fontSize: 18),
+                      )
                     ],
                   ),
                 ],
               ),
             ),
             Positioned(
-              top: 0,
-              right: 0,
-              child: InkWell(
-                onTap: () {},
-                child: const Icon(
-                  Icons.bookmark_rounded,
-                  size: 30,
-                  color: kPrimaryRedColor,
-                ),
+              top: -5,
+              right: 3,
+              child: const Icon(
+                Icons.bookmark_rounded,
+                size: 30,
+                color: Colors.black,
               ),
             )
           ],

@@ -234,12 +234,18 @@ class JobCountDiagram extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  const Text(
-                    "5 Jobs",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white),
+                  GetX<ApplicationsPageController>(
+                    builder: (controller) {
+                      int count = controller.appliedJobsList.length;
+
+                      return Text(
+                        "$count Jobs",
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white),
+                      );
+                    },
                   ),
                   const SizedBox(
                     height: 10,
@@ -262,19 +268,18 @@ class JobCountDiagram extends StatelessWidget {
             flex: 7,
             // color: Colors.teal,
             child: Column(
-              children: const [
+              children: [
                 Expanded(
-                  child: HorizontalCard(
-                      jobType: "Opening Jobs",
-                      job: "2 Jobs",
-                      icon: Icons.check_circle_rounded,
-                      margin: EdgeInsets.only(bottom: 4),
-                      color: Colors.cyan),
-                ),
-                Expanded(
+                    child: HorizontalCard(
+                        jobType: "Opening Jobs",
+                        job: "0",
+                        icon: Icons.check_circle_rounded,
+                        margin: const EdgeInsets.only(bottom: 4),
+                        color: Colors.green.shade500)),
+                const Expanded(
                   child: HorizontalCard(
                       jobType: "Expired Jobs",
-                      job: "3 Jobs",
+                      job: "0",
                       icon: Icons.cancel_rounded,
                       margin: EdgeInsets.only(top: 4),
                       color: Color.fromARGB(255, 255, 82, 70)),
@@ -334,7 +339,7 @@ class HorizontalCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                job,
+                "$job Jobs",
                 style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,

@@ -25,7 +25,7 @@ class JobsPage extends StatelessWidget {
             ),
           ),
         ),
-        label: "Jobs",
+        label: "Your Jobs",
         action: [
           Container(
             margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),

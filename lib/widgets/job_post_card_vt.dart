@@ -122,7 +122,7 @@ class JobPostCardVt extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 15),
                       child: Text(
-                        "\$1299/Mo",
+                        "\$ ${data!.salary.split("-")[0]}/m",
                         style: kLabelTextStyle.copyWith(
                             color: kPrimaryRedColor, fontSize: 18),
                       ),
@@ -135,18 +135,18 @@ class JobPostCardVt extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
-                  children: const [
+                  children: [
                     Icon(
                       Icons.location_on_outlined,
                       size: 18,
                     ),
-                    Text("Full Time"),
+                    Text(data!.workHour),
                     SizedBox(width: 15),
                     Icon(
                       Icons.workspace_premium_outlined,
                       size: 18,
                     ),
-                    Text("Mid-Senior"),
+                    Text(data!.expLevel),
                   ],
                 ),
                 Padding(

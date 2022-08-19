@@ -78,7 +78,7 @@ class JobPostCardVt extends StatelessWidget {
                             const SizedBox(
                               height: 5,
                             ),
-                            Text(data?.postedBy.username ?? "User"),
+                            Text(data?.companyName ?? "User"),
                             const SizedBox(
                               height: 10,
                             ),
@@ -124,7 +124,7 @@ class JobPostCardVt extends StatelessWidget {
                       child: Text(
                         "\$ ${data!.salary.split("-")[0]}/m",
                         style: kLabelTextStyle.copyWith(
-                            color: kPrimaryRedColor, fontSize: 18),
+                            color: kPrimaryRedColor, fontSize: 16),
                       ),
                     ),
                   ],

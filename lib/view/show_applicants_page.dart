@@ -16,7 +16,6 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
   Widget build(BuildContext context) {
     Get.put(ApplicationsPageController())
         .getApplicantsFromPostedJobPosts(Get.arguments.id);
-    // JobPostModel data = Get.arguments;
 
     return Scaffold(
       appBar: MyAppBar(
@@ -99,22 +98,12 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, idx) {
-                      controller.proc.value = controller
-                          .applicantsForSelectedJobPost[idx].applicationProcess;
-
                       return controller.filterByProc.isNotEmpty
-                          ? controller.applicantList.isNotEmpty
-                              ? ApplicantCard(
-                                  index: idx,
-                                  user: controller.applicantList[idx],
-                                  applicant: controller.filterByProc[idx],
-                                )
-                              : const Text(
-                                  "No Applicants",
-                                  style: TextStyle(color: Colors.black),
-                                )
-                          : Text(
-                              "No Data",
+                          ? ApplicantCard(
+                              applicant: controller.filterByProc[idx],
+                            )
+                          : const Text(
+                              "No Applicants",
                               style: TextStyle(color: Colors.black),
                             );
                     },
@@ -129,27 +118,31 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
   }
 }
 
-class ApplicantCard extends StatelessWidget {
-  final int index;
-  final UserAccount user;
+class ApplicantCard extends GetView<ApplicationsPageController> {
   final ApplicantModel applicant;
 
   const ApplicantCard({
     Key? key,
-    required this.index,
-    required this.user,
     required this.applicant,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Rx<String?> procTest = applicant.applicationProcess.obs;
+
+    UserAccount user = Get.find<ApplicationsPageController>()
+        .getUserFromApplicantId(applicant.applicantId!);
     return GestureDetector(
       onTap: () {
-        Get.toNamed(RouteNames.viewApplicantDetails,
-            arguments: [user, applicant, index]);
+        Get.toNamed(RouteNames.viewApplicantDetails, arguments: [
+          controller.getUserFromApplicantId(applicant.applicantId!),
+          applicant,
+          procTest.value ?? ApplicationProcess.unknown
+        ]);
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        height: 100,
+        padding: const EdgeInsets.only(left: 10, top: 0, bottom: 0),
         margin: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -172,7 +165,7 @@ class ApplicantCard extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15),
+              padding: const EdgeInsets.only(left: 15, top: 10, bottom: 10),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -196,27 +189,25 @@ class ApplicantCard extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            GetBuilder<ApplicationsPageController>(
-              builder: (controller) {
-                return RotatedBox(
-                  quarterTurns: 3,
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-                    decoration: BoxDecoration(
-                        color: applicationProcessMatchColor(
-                            controller.proc.value ??
-                                ApplicationProcess.unknown),
-                        borderRadius: BorderRadius.circular(5)),
-                    child: Text(
-                      controller.proc.value ?? ApplicationProcess.unknown,
-                      style: const TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          shadows: [kIconShadow]),
-                    ),
+            Obx(
+              () => RotatedBox(
+                quarterTurns: 3,
+                child: Container(
+                  width: Get.width,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(vertical: 6),
+                  decoration: BoxDecoration(
+                    color: applicationProcessMatchColor(
+                        procTest.value ?? ApplicationProcess.unknown),
                   ),
-                );
-              },
+                  child: Text(
+                    procTest.value ?? ApplicationProcess.unknown,
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        shadows: [kIconShadow]),
+                  ),
+                ),
+              ),
             )
           ],
         ),

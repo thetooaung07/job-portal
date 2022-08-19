@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_function_literals_in_foreach_calls
 
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +18,10 @@ import 'package:job_portal/services/database.dart';
 
 const List dropdownList = <String>[
   "All",
-  "Apply",
+  "Applied",
   "Shortlisted",
   "Interview",
+  "Rejected"
 ];
 
 class ApplicationsPageController extends GetxController {
@@ -129,7 +132,7 @@ class ApplicationsPageController extends GetxController {
     addressC.text = "Yangon, Myanmar";
     summaryC.text = "Energetic Person, etc\nPostitive Person\nBlah Blah";
     techStackC.text = "React, Nodejs, Flutter, Dart";
-    workExpC.text = "Min 2 Years of experience @ CodeLab";
+    workExpC.text = "2 Years of exp @ Starlight Studio";
     suggestionC.text = "Suggestions";
     questionC.text = "No Question";
 
@@ -203,11 +206,11 @@ class ApplicationsPageController extends GetxController {
 
   RxList<ApplicantModel> applicantsForSelectedJobPost = <ApplicantModel>[].obs;
 
-  RxList<UserAccount> applicantList = <UserAccount>[].obs;
+  RxList<UserAccount> userApplicantList = <UserAccount>[].obs;
 
   getApplicantsFromPostedJobPosts(String selectedJobId) async {
     applicantsForSelectedJobPost.clear();
-    applicantList.clear();
+    userApplicantList.clear();
     await firebaseFirestore
         .collection("applicants")
         .where("jobPostId", isEqualTo: selectedJobId)
@@ -226,7 +229,7 @@ class ApplicationsPageController extends GetxController {
                   .doc(userId)
                   .get()
                   .then((value) {
-                return applicantList
+                return userApplicantList
                     .add(UserAccount.fromDocumentSnapshot(value));
               });
             },
@@ -234,20 +237,38 @@ class ApplicationsPageController extends GetxController {
         );
   }
 
-  Rx<String?> proc = ApplicationProcess.applied.obs;
-
-  updateProcessStatus({required String toUpdate, required String docId}) async {
+  updateProcessStatus(
+      {required String toUpdate,
+      required String docId,
+      required String procTest}) async {
     await FirestoreHelper().update(
         collectionPath: "applicants",
         docPath: docId,
         data: {"applicationProcess": toUpdate}).then((value) => update());
-    proc.value = toUpdate;
+    procTest = toUpdate;
+
+    print("procTest => $procTest");
+
     update();
+  }
+
+  UserAccount getUserFromApplicantId(String applicantId) {
+    late UserAccount user;
+    if (userApplicantList.isNotEmpty) {
+      user = userApplicantList.singleWhere((element) {
+        print(element.userId);
+        return element.userId == applicantId;
+      });
+    }
+
+    return user;
   }
 
   RxList<ApplicantModel> filterByProc = <ApplicantModel>[].obs;
 
-  void funcFilter(String appProc) {
+  void funcFilter(
+    String appProc,
+  ) {
     if (appProc == "All") {
       filterByProc.value = applicantsForSelectedJobPost;
     } else {

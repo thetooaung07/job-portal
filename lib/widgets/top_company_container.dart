@@ -21,7 +21,7 @@ class TopCompanyContainer extends StatelessWidget {
         ),
         Container(
           padding: const EdgeInsets.only(left: 10),
-          height: 210,
+          height: 240,
           child: GetX<JobPostsController>(
               init: Get.put<JobPostsController>(JobPostsController()),
               builder: (controller) {

@@ -16,12 +16,10 @@ class JobPostCardHr extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(7),
-
-          // TODO: add bg color according to design
           color: Colors.white,
           boxShadow: const [kCardShadow],
         ),
-        padding: const EdgeInsets.fromLTRB(15, 15, 15, 10),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 17),
         width: 200,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

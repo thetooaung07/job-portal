@@ -167,7 +167,7 @@ class HomePageView extends StatelessWidget {
                 children: [
                   Text(
                     greeting()[0],
-                    style: TextStyle(fontSize: 25),
+                    style: TextStyle(fontSize: 22),
                   ),
                   // Text(
                   //   greeting()[1],

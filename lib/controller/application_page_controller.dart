@@ -250,7 +250,7 @@ class ApplicationsPageController extends GetxController {
   }
 
   UserAccount getUserFromApplicantId(String applicantId) {
-    late UserAccount user;
+    late UserAccount user = UserAccount();
     if (userApplicantList.isNotEmpty) {
       user = userApplicantList.singleWhere((element) {
         print(element.userId);

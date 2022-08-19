@@ -146,8 +146,15 @@ class ApplicantCard extends GetView<ApplicationsPageController> {
         margin: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: const [kCardShadow],
+          borderRadius: BorderRadius.circular(5),
+          boxShadow: const [
+            BoxShadow(
+              color: Color.fromARGB(20, 0, 0, 0),
+              blurRadius: 2,
+              offset: Offset(-1, 2),
+              spreadRadius: 0.5,
+            )
+          ],
         ),
         child: Row(
           children: [
@@ -204,7 +211,14 @@ class ApplicantCard extends GetView<ApplicationsPageController> {
                     procTest.value ?? ApplicationProcess.unknown,
                     style: const TextStyle(
                         color: Color.fromARGB(255, 255, 255, 255),
-                        shadows: [kIconShadow]),
+                        shadows: [
+                          // BoxShadow(
+                          //   color: Color.fromARGB(20, 0, 0, 0),
+                          //   blurRadius: 2,
+                          //   offset: Offset(-1, 2),
+                          //   spreadRadius: 0.5,
+                          // )
+                        ]),
                   ),
                 ),
               ),

@@ -21,7 +21,6 @@ class SavedJobsPageController extends GetxController {
         continue;
       }
     }
-
     savedPosts.value = listData;
     update();
   }

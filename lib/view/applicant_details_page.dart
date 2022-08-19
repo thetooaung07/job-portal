@@ -14,7 +14,7 @@ class ApplicantDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     UserAccount user = Get.arguments[0] as UserAccount;
     ApplicantModel applicant = Get.arguments[1] as ApplicantModel;
-    String procTest = Get.arguments[2];
+    Rx<String?> procTest = Get.arguments[2]!;
     return Scaffold(
         appBar: MyAppBar(
           leading: Container(
@@ -129,8 +129,9 @@ class ApplicantDetailsPage extends StatelessWidget {
                               Get.find<ApplicationsPageController>()
                                   .updateProcessStatus(
                                       toUpdate: ApplicationProcess.rejected,
-                                      docId: applicant.id,
-                                      procTest: procTest);
+                                      docId: applicant.id);
+
+                              procTest.value = ApplicationProcess.rejected;
                             },
                             child: Container(
                                 padding: const EdgeInsets.symmetric(
@@ -146,8 +147,9 @@ class ApplicantDetailsPage extends StatelessWidget {
                               Get.find<ApplicationsPageController>()
                                   .updateProcessStatus(
                                       toUpdate: ApplicationProcess.shortlisted,
-                                      docId: applicant.id,
-                                      procTest: procTest);
+                                      docId: applicant.id);
+
+                              procTest.value = ApplicationProcess.shortlisted;
                             },
                             child: Container(
                                 padding: const EdgeInsets.symmetric(
@@ -168,11 +170,11 @@ class ApplicantDetailsPage extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(35, 7, 15, 7),
                     decoration: BoxDecoration(
-                        color: applicationProcessMatchColor(procTest),
+                        color: applicationProcessMatchColor(procTest.value!),
                         borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(45))),
                     child: Text(
-                      procTest,
+                      procTest.value!,
                       style: const TextStyle(
                         fontSize: 16,
                         color: Color.fromARGB(255, 255, 255, 255),

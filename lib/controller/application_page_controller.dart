@@ -237,17 +237,14 @@ class ApplicationsPageController extends GetxController {
         );
   }
 
-  updateProcessStatus(
-      {required String toUpdate,
-      required String docId,
-      required String procTest}) async {
+  updateProcessStatus({
+    required String toUpdate,
+    required String docId,
+  }) async {
     await FirestoreHelper().update(
         collectionPath: "applicants",
         docPath: docId,
         data: {"applicationProcess": toUpdate}).then((value) => update());
-    procTest = toUpdate;
-
-    print("procTest => $procTest");
 
     update();
   }

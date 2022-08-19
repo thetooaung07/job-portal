@@ -137,7 +137,7 @@ class ApplicantCard extends GetView<ApplicationsPageController> {
         Get.toNamed(RouteNames.viewApplicantDetails, arguments: [
           controller.getUserFromApplicantId(applicant.applicantId!),
           applicant,
-          procTest.value ?? ApplicationProcess.unknown
+          procTest
         ]);
       },
       child: Container(

@@ -124,3 +124,6 @@ toDo:
  UI flashing in Job Details ( checking already applied or not )
 
  update method in reject shortlisted not working
+
+
+ TODO filter method 

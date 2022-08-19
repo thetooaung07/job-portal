@@ -5,6 +5,7 @@ import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/auth_page_controller.dart';
 import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/controller/user_account_controller.dart';
+import 'package:job_portal/global.dart';
 import 'package:job_portal/view/account_page.dart';
 import 'package:job_portal/view/jobs_page.dart';
 import 'package:job_portal/view/search_page/search_page.dart';
@@ -55,18 +56,7 @@ class HomePage extends StatelessWidget {
       const AccountPage(),
     ];
 
-    return
-        //  GestureDetector(
-        //   onTap: () {
-        //     FocusScopeNode currentFocus = FocusScope.of(context);
-
-        //     if (!currentFocus.hasPrimaryFocus) {
-        //       currentFocus.unfocus();
-        //     }
-        //   },
-        //   child:
-
-        WillPopScope(
+    return WillPopScope(
       onWillPop: () async {
         final shouldPop = await showDialog<bool>(
           context: context,
@@ -144,30 +134,59 @@ class HomePageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(
+        leadingWidth: 200,
         leading: Container(
-          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          child: CustomIconButton(
-            onTap: (() => {}),
-            child: const Icon(
-              Icons.clear_all_rounded,
-              size: 30,
-              color: Colors.black,
-            ),
-          ),
-        ),
-        label: "QWERTY",
+            alignment: Alignment.centerLeft,
+            //  TODO : remove padding and center widget Portal txt
+            padding: EdgeInsets.only(top: 3),
+            margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.donut_large_rounded,
+                  color: Colors.black,
+                  size: 20,
+                ),
+                SizedBox(
+                  width: 7,
+                ),
+                Text(
+                  "Portal",
+                  style: kLogoTextStyle,
+                )
+              ],
+            )),
         action: [
           Container(
-            margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
-            child: CustomIconButton(
-              onTap: () {},
-              child: const Icon(
-                Icons.notifications_none_rounded,
-                size: 30,
-                color: Colors.black,
-              ),
-            ),
-          ),
+              alignment: Alignment.center,
+              margin: const EdgeInsets.fromLTRB(0, 10, 20, 5),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    greeting()[0],
+                    style: TextStyle(fontSize: 25),
+                  ),
+                  // Text(
+                  //   greeting()[1],
+                  //   style: TextStyle(fontSize: 12, color: Colors.black),
+                  // ),
+                ],
+              )),
+
+          // Container(
+          //   margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
+          //   child: CustomIconButton(
+          //     onTap: () {},
+          //     child: const Icon(
+          //       Icons.notifications_none_rounded,
+          //       size: 30,
+          //       color: Colors.black,
+          //     ),
+          //   ),
+          // ),
         ],
       ),
       body: SingleChildScrollView(

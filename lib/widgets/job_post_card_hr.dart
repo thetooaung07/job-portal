@@ -10,79 +10,78 @@ class JobPostCardHr extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Get.toNamed(RouteNames.jobDetails, arguments: data);
-      },
-      child: Container(
-          margin: const EdgeInsets.symmetric(
-            horizontal: 10,
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            // border: Border.all(color: Colors.teal),
-            // TODO: add bg color according to design
-            color: Colors.white,
-            boxShadow: const [kCardShadow],
-          ),
-          padding: const EdgeInsets.fromLTRB(15, 15, 15, 10),
-          width: 200,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Container(
-                        height: 50,
-                        width: 50,
-                        alignment: Alignment.center,
-                        child: data!.postedBy.profile != null
-                            ? Image.network(data!.postedBy.profile!)
-                            : Image.asset('assets/images/default.png')),
-                  ),
+    return Container(
+        margin: const EdgeInsets.symmetric(
+          horizontal: 10,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(7),
 
-                  // SvgPicture.asset(
-                  //   "assets/icons/logo_youtube.svg",
-                  //   height: 40,
-                  // ),
-                  const SizedBox(
-                    width: 15,
+          // TODO: add bg color according to design
+          color: Colors.white,
+          boxShadow: const [kCardShadow],
+        ),
+        padding: const EdgeInsets.fromLTRB(15, 15, 15, 10),
+        width: 200,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                      height: 50,
+                      width: 50,
+                      alignment: Alignment.center,
+                      child: data!.postedBy.profile != null
+                          ? Image.network(data!.postedBy.profile!)
+                          : Image.asset('assets/images/default.png')),
+                ),
+
+                // SvgPicture.asset(
+                //   "assets/icons/logo_youtube.svg",
+                //   height: 40,
+                // ),
+                const SizedBox(
+                  width: 15,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        data?.postedBy.username ?? "Company Name",
+                        style: kLabelTextStyle,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      const Text("45 Job vacancy"),
+                    ],
                   ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          data?.postedBy.username ?? "Company Name",
-                          style: kLabelTextStyle,
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        const Text("45 Job vacancy"),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text("$bullet \$2K - 5K/Mo"),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text("$bullet Remote / Onsite"),
-                ],
-              ),
-              const CustomTextButton(),
-            ],
-          )),
-    );
+                )
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("$bullet \$${data!.salary} / Mo"),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                    "$bullet ${data!.workHour} / ${data!.workType == "Work From Home" ? "WFH" : data!.workType}"),
+              ],
+            ),
+            CustomTextButton(
+                onTap: () =>
+                    Get.toNamed(RouteNames.jobDetails, arguments: data)),
+          ],
+        ));
   }
 }
 

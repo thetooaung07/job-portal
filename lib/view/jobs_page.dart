@@ -26,19 +26,7 @@ class JobsPage extends StatelessWidget {
           ),
         ),
         label: "Your Jobs",
-        action: [
-          Container(
-            margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
-            child: CustomIconButton(
-              onTap: () {},
-              child: const Icon(
-                Icons.more_vert_rounded,
-                size: 30,
-                color: Colors.black,
-              ),
-            ),
-          ),
-        ],
+        action: [],
       ),
       body: Container(
         margin: const EdgeInsets.only(top: 20),

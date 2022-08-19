@@ -13,7 +13,8 @@ class ApplicationsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // MyApplicationController controller = ;
+    ApplicationsPageController controller =
+        Get.put(ApplicationsPageController());
     return Scaffold(
       appBar: MyAppBar(
         leading: Container(
@@ -55,7 +56,7 @@ class ApplicationsPage extends StatelessWidget {
                 "Applications Stats",
                 style: kCaptionTextStyle,
               ),
-              const JobCountDiagram(),
+              JobCountDiagram(controller: controller),
               const SizedBox(height: 20),
               const Text(
                 "Your Last Applications",
@@ -63,7 +64,6 @@ class ApplicationsPage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               GetX<ApplicationsPageController>(
-                init: Get.put(ApplicationsPageController()),
                 builder: (controller) {
                   return controller.myApplicationList.isNotEmpty &&
                           controller.appliedJobsList.isNotEmpty
@@ -195,8 +195,10 @@ class ApplicationCard extends StatelessWidget {
 }
 
 class JobCountDiagram extends StatelessWidget {
+  final ApplicationsPageController controller;
   const JobCountDiagram({
     Key? key,
+    required this.controller,
   }) : super(key: key);
 
   @override

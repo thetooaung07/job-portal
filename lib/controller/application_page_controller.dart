@@ -135,6 +135,8 @@ class ApplicationsPageController extends GetxController {
 
     await getData();
     await getAppliedJobs();
+
+    funcFilter("All");
   }
 
   // printController() {`
@@ -191,7 +193,6 @@ class ApplicationsPageController extends GetxController {
 
   getAppliedJobs() async {
     if (myApplicationList.isNotEmpty) {
-      // print("Inside > 0, lenght => ${myApplicationList.length} ");
       for (var element in myApplicationList) {
         DocumentSnapshot<Map<String, dynamic>> res = await FirestoreHelper()
             .readByDoc(collectionPath: "jobPosts", docPath: element.jobPostId);
@@ -233,10 +234,26 @@ class ApplicationsPageController extends GetxController {
         );
   }
 
+  Rx<String?> proc = ApplicationProcess.applied.obs;
+
   updateProcessStatus({required String toUpdate, required String docId}) async {
     await FirestoreHelper().update(
         collectionPath: "applicants",
         docPath: docId,
         data: {"applicationProcess": toUpdate}).then((value) => update());
+    proc.value = toUpdate;
+    update();
+  }
+
+  RxList<ApplicantModel> filterByProc = <ApplicantModel>[].obs;
+
+  void funcFilter(String appProc) {
+    if (appProc == "All") {
+      filterByProc.value = applicantsForSelectedJobPost;
+    } else {
+      filterByProc.value = applicantsForSelectedJobPost
+          .where((el) => el.applicationProcess == appProc)
+          .toList();
+    }
   }
 }

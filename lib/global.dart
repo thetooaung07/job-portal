@@ -17,14 +17,27 @@ final ImagePicker imagePicker = ImagePicker();
 //   print(" $title => ${res}");
 // }
 
+List<String> greeting() {
+  var hour = DateTime.now().hour;
+  if (hour < 12) {
+    return ["🌄", " Good Morning"];
+  }
+  if (hour < 17) {
+    return ["☀️", "Good Afternoon"];
+  }
+  return ["🌃", "Good Evening"];
+}
+
 String differenceInString(DateTime time) {
-  return DateTime.now().difference(time).inDays > 365
-      ? "${DateTime.now().difference(time).inDays ~/ 365}y"
-      : DateTime.now().difference(time).inDays > 7
-          ? "${DateTime.now().difference(time).inDays ~/ 7}w"
-          : DateTime.now().difference(time).inDays > 1
-              ? "${DateTime.now().difference(time).inDays}d"
-              : DateTime.now().difference(time).inHours > 1
-                  ? "${DateTime.now().difference(time).inHours}h"
-                  : "${DateTime.now().difference(time).inMinutes}m";
+  Duration res = DateTime.now().difference(time);
+
+  return res.inDays > 365
+      ? "${res.inDays ~/ 365}y"
+      : res.inDays > 7
+          ? "${res.inDays ~/ 7}w"
+          : res.inDays > 1
+              ? "${res.inDays}d"
+              : res.inHours > 1
+                  ? "${res.inHours}h"
+                  : "${res.inMinutes}m";
 }

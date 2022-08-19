@@ -10,6 +10,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget>? action;
   final Color? backgroundColor;
   final double? elevation;
+  final double? leadingWidth;
   const MyAppBar(
       {Key? key,
       this.leading,
@@ -17,6 +18,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.centerLabel = true,
       this.action,
       this.backgroundColor,
+      this.leadingWidth = 75,
       this.elevation = 0.75})
       : super(key: key);
 
@@ -24,12 +26,14 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: AppBar(
-        leadingWidth: 75,
+        leadingWidth: leadingWidth ?? 75,
         leading: leading,
-        title: Text(
-          label ?? "",
-          style: kLogoTextStyle,
-        ),
+        title: label != null && label!.isNotEmpty
+            ? Text(
+                label!,
+                style: kLogoTextStyle,
+              )
+            : null,
         actions: action,
         centerTitle: centerLabel,
         elevation: backgroundColor == Colors.transparent ? 0 : elevation,

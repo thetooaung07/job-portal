@@ -159,34 +159,29 @@ class ApplicantDetailsPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Positioned(
-                right: 0,
-                top: 0,
-                child: Container(
-                  padding: const EdgeInsets.fromLTRB(35, 7, 15, 7),
-                  decoration: BoxDecoration(
-                      color: applicationProcessMatchColor(
-                          applicant.applicationProcess ??
-                              ApplicationProcess.unknown),
-                      borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(45))),
-                  child: GetBuilder<ApplicationsPageController>(
-                    builder: (controller) {
-                      print("Builder is built");
-                      return Text(
-                        controller.applicantsForSelectedJobPost[index]
-                                .applicationProcess ??
-                            ApplicationProcess.unknown,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          // shadows: [kIconShadow],
-                        ),
-                      );
-                    },
+              GetBuilder<ApplicationsPageController>(builder: (controller) {
+                return Positioned(
+                  right: 0,
+                  top: 0,
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(35, 7, 15, 7),
+                    decoration: BoxDecoration(
+                        color: applicationProcessMatchColor(
+                            controller.proc.value ??
+                                ApplicationProcess.unknown),
+                        borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(45))),
+                    child: Text(
+                      controller.proc.value ?? ApplicationProcess.unknown,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        // shadows: [kIconShadow],
+                      ),
+                    ),
                   ),
-                ),
-              ),
+                );
+              }),
             ],
           ),
         ));

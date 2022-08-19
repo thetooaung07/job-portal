@@ -14,11 +14,9 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
 
   @override
   Widget build(BuildContext context) {
-    ApplicationsPageController controller =
-        Get.find<ApplicationsPageController>();
+    Get.put(ApplicationsPageController())
+        .getApplicantsFromPostedJobPosts(Get.arguments.id);
     // JobPostModel data = Get.arguments;
-
-    // TODO try to change the code placement since it can duplicate applicants since method is call on widget build
 
     return Scaffold(
       appBar: MyAppBar(
@@ -75,6 +73,7 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
                         dropdownColor: Colors.white,
                         value: controller.selectedVal,
                         onChanged: (v) {
+                          controller.funcFilter(v.toString());
                           controller.selectedVal = v.toString();
                         },
                         items: dropdownList
@@ -96,19 +95,28 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
               GetX<ApplicationsPageController>(
                 builder: (controller) {
                   return ListView.builder(
-                    itemCount: controller.applicantList.length,
+                    itemCount: controller.filterByProc.length,
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, idx) {
-                      return controller.applicantList.isNotEmpty &&
-                              controller.applicantsForSelectedJobPost.isNotEmpty
-                          ? ApplicantCard(
-                              index: idx,
-                              user: controller.applicantList[idx],
-                              applicant:
-                                  controller.applicantsForSelectedJobPost[idx],
-                            )
-                          : const Text("No Data");
+                      controller.proc.value = controller
+                          .applicantsForSelectedJobPost[idx].applicationProcess;
+
+                      return controller.filterByProc.isNotEmpty
+                          ? controller.applicantList.isNotEmpty
+                              ? ApplicantCard(
+                                  index: idx,
+                                  user: controller.applicantList[idx],
+                                  applicant: controller.filterByProc[idx],
+                                )
+                              : const Text(
+                                  "No Applicants",
+                                  style: TextStyle(color: Colors.black),
+                                )
+                          : Text(
+                              "No Data",
+                              style: TextStyle(color: Colors.black),
+                            );
                     },
                   );
                 },
@@ -196,15 +204,12 @@ class ApplicantCard extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
                     decoration: BoxDecoration(
-                        color: applicationProcessMatchColor(controller
-                                .applicantsForSelectedJobPost[index]
-                                .applicationProcess ??
-                            ApplicationProcess.unknown),
+                        color: applicationProcessMatchColor(
+                            controller.proc.value ??
+                                ApplicationProcess.unknown),
                         borderRadius: BorderRadius.circular(5)),
                     child: Text(
-                      controller.applicantsForSelectedJobPost[index]
-                              .applicationProcess ??
-                          ApplicationProcess.unknown,
+                      controller.proc.value ?? ApplicationProcess.unknown,
                       style: const TextStyle(
                           color: Color.fromARGB(255, 255, 255, 255),
                           shadows: [kIconShadow]),

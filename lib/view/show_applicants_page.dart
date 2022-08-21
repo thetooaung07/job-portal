@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/application_page_controller.dart';
-import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/applicant_model.dart';
 import 'package:job_portal/model/user_account.dart';
@@ -14,8 +13,8 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ApplicationsPageController())
-        .getApplicantsFromPostedJobPosts(Get.arguments.id);
+    // print("IsBuild => ShowApplicantsPage");
+    Get.put(ApplicationsPageController());
 
     return Scaffold(
       appBar: MyAppBar(
@@ -33,22 +32,7 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
           ),
         ),
         label: "Applicants",
-        action: [
-          Container(
-            margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
-            child: CustomIconButton(
-              onTap: () {
-                Get.back();
-                Get.find<BottomNavBarController>().selectedIndex.value = 1;
-              },
-              child: const Icon(
-                Icons.search_rounded,
-                size: 30,
-                color: Colors.black,
-              ),
-            ),
-          ),
-        ],
+        action: [],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -98,9 +82,11 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, idx) {
+                      // UserAccount user = ;
                       return controller.filterByProc.isNotEmpty
                           ? ApplicantCard(
-                              applicant: controller.filterByProc[idx],
+                              user: controller.filterByProc[idx].user,
+                              applicant: controller.filterByProc[idx].applicant,
                             )
                           : const Text(
                               "No Applicants",
@@ -120,22 +106,23 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
 
 class ApplicantCard extends GetView<ApplicationsPageController> {
   final ApplicantModel applicant;
+  final UserAccount user;
 
   const ApplicantCard({
     Key? key,
     required this.applicant,
+    required this.user,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Rx<String?> procTest = applicant.applicationProcess.obs;
 
-    UserAccount user = Get.find<ApplicationsPageController>()
-        .getUserFromApplicantId(applicant.applicantId!);
     return GestureDetector(
       onTap: () {
         Get.toNamed(RouteNames.viewApplicantDetails, arguments: [
-          controller.getUserFromApplicantId(applicant.applicantId!),
+          // controller.getUserFromApplicantId(applicant.applicantId!),
+          user,
           applicant,
           procTest
         ]);

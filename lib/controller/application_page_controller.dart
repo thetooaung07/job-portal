@@ -14,6 +14,7 @@ import 'package:job_portal/global.dart';
 import 'package:job_portal/model/applicant_model.dart';
 import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/model/user_account.dart';
+import 'package:job_portal/model/user_applicant_model.dart';
 import 'package:job_portal/services/database.dart';
 
 const List dropdownList = <String>[
@@ -139,12 +140,18 @@ class ApplicationsPageController extends GetxController {
     await getData();
     await getAppliedJobs();
 
+    FirestoreHelper()
+        .userApplicantStream("J6ssebZMip9XTQU0AHrh")
+        .listen((event) {
+      print(event);
+      if (event.isNotEmpty) {
+        applicantsForSelectedJobPost.bindStream(
+            FirestoreHelper().userApplicantStream("J6ssebZMip9XTQU0AHrh"));
+      }
+    });
+
     funcFilter("All");
   }
-
-  // printController() {`
-  //   print("Controller => ${getFileLink.value}");
-  // }
 
   applyJob() async {
     DocumentReference doc = firebaseFirestore.collection("applicants").doc();
@@ -204,38 +211,41 @@ class ApplicationsPageController extends GetxController {
     }
   }
 
-  RxList<ApplicantModel> applicantsForSelectedJobPost = <ApplicantModel>[].obs;
+  RxList<UserApplicantModel> applicantsForSelectedJobPost =
+      <UserApplicantModel>[].obs;
 
   RxList<UserAccount> userApplicantList = <UserAccount>[].obs;
 
-  getApplicantsFromPostedJobPosts(String selectedJobId) async {
-    applicantsForSelectedJobPost.clear();
-    userApplicantList.clear();
-    await firebaseFirestore
-        .collection("applicants")
-        .where("jobPostId", isEqualTo: selectedJobId)
-        .get()
-        .then(
-          (value) => value.docs.forEach(
-            (element) async {
-              applicantsForSelectedJobPost
-                  .add(ApplicantModel.fromDocumentSnapshot(element));
+  // getApplicantsFromPostedJobPosts(String selectedJobId) async {
+  //   applicantsForSelectedJobPost.clear();
+  //   userApplicantList.clear();
+  //   await firebaseFirestore
+  //       .collection("applicants")
+  //       .where("jobPostId", isEqualTo: selectedJobId)
+  //       .get()
+  //       .then(
+  //         (value) => value.docs.forEach(
+  //           (element) async {
+  //             applicantsForSelectedJobPost
+  //                 .add(ApplicantModel.fromDocumentSnapshot(element));
 
-              String userId =
-                  ApplicantModel.fromDocumentSnapshot(element).applicantId!;
+  //             String userId =
+  //                 ApplicantModel.fromDocumentSnapshot(element).applicantId!;
 
-              await firebaseFirestore
-                  .collection("users")
-                  .doc(userId)
-                  .get()
-                  .then((value) {
-                return userApplicantList
-                    .add(UserAccount.fromDocumentSnapshot(value));
-              });
-            },
-          ),
-        );
-  }
+  //             await firebaseFirestore
+  //                 .collection("users")
+  //                 .doc(userId)
+  //                 .get()
+  //                 .then((value) {
+  //               return userApplicantList
+  //                   .add(UserAccount.fromDocumentSnapshot(value));
+  //             });
+  //           },
+  //         ),
+  //       );
+  // }
+
+  getApplicantsFromPostedJobPosts(String selectedJobId) {}
 
   updateProcessStatus({
     required String toUpdate,
@@ -261,7 +271,7 @@ class ApplicationsPageController extends GetxController {
     return user;
   }
 
-  RxList<ApplicantModel> filterByProc = <ApplicantModel>[].obs;
+  RxList<UserApplicantModel> filterByProc = <UserApplicantModel>[].obs;
 
   void funcFilter(
     String appProc,
@@ -270,7 +280,7 @@ class ApplicationsPageController extends GetxController {
       filterByProc.value = applicantsForSelectedJobPost;
     } else {
       filterByProc.value = applicantsForSelectedJobPost
-          .where((el) => el.applicationProcess == appProc)
+          .where((el) => el.applicant.applicationProcess == appProc)
           .toList();
     }
   }

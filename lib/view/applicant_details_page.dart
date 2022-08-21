@@ -5,6 +5,7 @@ import 'package:job_portal/controller/application_page_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/applicant_model.dart';
 import 'package:job_portal/model/user_account.dart';
+import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
 class ApplicantDetailsPage extends StatelessWidget {
@@ -14,7 +15,9 @@ class ApplicantDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     UserAccount user = Get.arguments[0] as UserAccount;
     ApplicantModel applicant = Get.arguments[1] as ApplicantModel;
-    Rx<String?> procTest = Get.arguments[2]!;
+    Rx<String?> procTest = applicant.applicationProcess!.obs;
+    ApplicationsPageController controller =
+        Get.find<ApplicationsPageController>();
     return Scaffold(
         appBar: MyAppBar(
           leading: Container(
@@ -31,21 +34,7 @@ class ApplicantDetailsPage extends StatelessWidget {
             ),
           ),
           label: "Details",
-          action: const [
-            //  Container(
-            //     margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
-            //     padding:
-            //         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            //     alignment: Alignment.center,
-            //     decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.circular(10),
-            //       color: Colors.teal,
-            //     ),
-            //     child: Text(
-            //       applicant.applicationProcess!,
-            //       style: const TextStyle(color: Colors.white),
-            //     )),
-          ],
+          action: const [],
         ),
         body: SingleChildScrollView(
           child: Stack(
@@ -126,11 +115,9 @@ class ApplicantDetailsPage extends StatelessWidget {
                             style:
                                 ElevatedButton.styleFrom(primary: Colors.red),
                             onPressed: () {
-                              Get.find<ApplicationsPageController>()
-                                  .updateProcessStatus(
-                                      toUpdate: ApplicationProcess.rejected,
-                                      docId: applicant.id);
-
+                              controller.updateProcessStatus(
+                                  toUpdate: ApplicationProcess.rejected,
+                                  docId: applicant.id);
                               procTest.value = ApplicationProcess.rejected;
                             },
                             child: Container(
@@ -144,11 +131,9 @@ class ApplicantDetailsPage extends StatelessWidget {
                             style:
                                 ElevatedButton.styleFrom(primary: Colors.green),
                             onPressed: () {
-                              Get.find<ApplicationsPageController>()
-                                  .updateProcessStatus(
-                                      toUpdate: ApplicationProcess.shortlisted,
-                                      docId: applicant.id);
-
+                              controller.updateProcessStatus(
+                                  toUpdate: ApplicationProcess.shortlisted,
+                                  docId: applicant.id);
                               procTest.value = ApplicationProcess.shortlisted;
                             },
                             child: Container(
@@ -163,8 +148,8 @@ class ApplicantDetailsPage extends StatelessWidget {
                   ],
                 ),
               ),
-              GetBuilder<ApplicationsPageController>(builder: (controller) {
-                return Positioned(
+              Obx(
+                () => Positioned(
                   right: 0,
                   top: 0,
                   child: Container(
@@ -182,8 +167,8 @@ class ApplicantDetailsPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                );
-              }),
+                ),
+              )
             ],
           ),
         ));

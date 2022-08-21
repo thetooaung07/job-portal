@@ -2,8 +2,10 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:job_portal/global.dart';
+import 'package:job_portal/model/applicant_model.dart';
 import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/model/user_account.dart';
+import 'package:job_portal/model/user_applicant_model.dart';
 
 class FirestoreHelper {
 // Read
@@ -129,26 +131,38 @@ class FirestoreHelper {
     });
   }
 
-  // Stream<List<JobPostModel>> allJobPostsStream() {
-  //   return firebaseFirestore
-  //       .collection("jobPosts")
-  //       .orderBy("createdAt", descending: true)
-  //       .snapshots()
-  //       .map((event) {
-  //     List<JobPostModel> dataList = [];
-  //     event.docs.forEach((element) {
-  //       dataList.add(JobPostModel.fromDocumentSnapshot(element));
-  //     });
-
-  //     return dataList;
-  //   });
-  // }
-
   Stream<UserAccount> userAccountStream(String userId) {
     return firebaseFirestore
         .collection("users")
         .doc(userId)
         .snapshots()
         .map((event) => UserAccount.fromDocumentSnapshot(event));
+  }
+
+  Stream<List<UserApplicantModel>> userApplicantStream(String selectedJobId) {
+    return firebaseFirestore
+        .collection("applicants")
+        .where("jobPostId", isEqualTo: selectedJobId)
+        .snapshots()
+        .asyncMap((event) async {
+      List<UserApplicantModel> applicantList = [];
+      for (var element in event.docs) {
+        String userId =
+            ApplicantModel.fromDocumentSnapshot(element).applicantId!;
+
+        UserAccount user = await firebaseFirestore
+            .collection("users")
+            .doc(userId)
+            .get()
+            .then((value) => UserAccount.fromDocumentSnapshot(value));
+
+        UserApplicantModel data = UserApplicantModel(
+            applicant: ApplicantModel.fromDocumentSnapshot(element),
+            user: user);
+
+        applicantList.add(data);
+      }
+      return applicantList;
+    });
   }
 }

@@ -162,6 +162,8 @@ class ApplyNowBtn extends StatelessWidget {
         const SizedBox(
           width: 10,
         ),
+
+        // Re-Write Code Structure
         GetX<ApplicationsPageController>(
           init:
               Get.put<ApplicationsPageController>(ApplicationsPageController()),

@@ -82,7 +82,8 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, idx) {
-                      // UserAccount user = ;
+                      print(
+                          "controller.filterByProc => ${controller.filterByProc}");
                       return controller.filterByProc.isNotEmpty
                           ? ApplicantCard(
                               user: controller.filterByProc[idx].user,

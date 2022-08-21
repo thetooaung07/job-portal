@@ -118,6 +118,8 @@ class ApplicantDetailsPage extends StatelessWidget {
                               controller.updateProcessStatus(
                                   toUpdate: ApplicationProcess.rejected,
                                   docId: applicant.id);
+                              controller.selectedVal = "All";
+                              controller.funcFilter("All");
                               procTest.value = ApplicationProcess.rejected;
                             },
                             child: Container(
@@ -134,6 +136,8 @@ class ApplicantDetailsPage extends StatelessWidget {
                               controller.updateProcessStatus(
                                   toUpdate: ApplicationProcess.shortlisted,
                                   docId: applicant.id);
+                              controller.selectedVal = "All";
+                              controller.funcFilter("All");
                               procTest.value = ApplicationProcess.shortlisted;
                             },
                             child: Container(

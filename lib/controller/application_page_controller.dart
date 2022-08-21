@@ -102,9 +102,10 @@ class ApplicationsPageController extends GetxController {
   RxBool isSelectedJobAlreadyApplied = false.obs;
 
   checkAlreadyApplied(String postId) async {
+    myApplicationList2ForCheck.value = [];
     await getData();
     List<String> appliedJobPostId = [];
-    for (var element in myApplicationList) {
+    for (var element in myApplicationList2ForCheck) {
       appliedJobPostId.add(element.jobPostId!);
     }
     isSelectedJobAlreadyApplied.value = appliedJobPostId.contains(postId);
@@ -125,11 +126,27 @@ class ApplicationsPageController extends GetxController {
   TextEditingController suggestionC = TextEditingController();
   RxString jobPostId = "".obs;
 
+  void reset() {
+    print("On Close is called");
+    nameC.clear();
+    emailC.clear();
+    phoneNumberC.clear();
+    addressC.clear();
+    summaryC.clear();
+    techStackC.clear();
+    workExpC.clear();
+    suggestionC.clear();
+    questionC.clear();
+    currentStep = 0;
+  }
+
   @override
   void onInit() async {
     super.onInit();
-    await getData();
-    await getAppliedJobs();
+    myInit();
+  }
+
+  void myInit() async {
     UserAccount user = Get.find<UserAccountController>().user;
     nameC.text = user.username!;
     emailC.text = user.email!;
@@ -189,10 +206,14 @@ class ApplicationsPageController extends GetxController {
     isSelectedJobAlreadyApplied.value = true;
 
     Get.back();
+
+    reset();
+    myInit();
   }
 
   /// Get Applicant Data from firestore
   RxList<ApplicantModel> myApplicationList = <ApplicantModel>[].obs;
+  RxList<ApplicantModel> myApplicationList2ForCheck = <ApplicantModel>[].obs;
   RxList<JobPostModel> appliedJobsList = <JobPostModel>[].obs;
   RxList<ApplicantModel> postedJobsList = <ApplicantModel>[].obs;
 
@@ -204,11 +225,18 @@ class ApplicationsPageController extends GetxController {
         .then((data) => data.docs.forEach((element) {
               myApplicationList
                   .add(ApplicantModel.fromDocumentSnapshot(element));
+              myApplicationList2ForCheck
+                  .add(ApplicantModel.fromDocumentSnapshot(element));
             }));
   }
 
   getAppliedJobs() async {
+    myApplicationList.value = [];
+    appliedJobsList.value = [];
+    await getData();
+    print("myApplicationList => ${myApplicationList.length}");
     if (myApplicationList.isNotEmpty) {
+      print("Inside if");
       for (var element in myApplicationList) {
         DocumentSnapshot<Map<String, dynamic>> res = await FirestoreHelper()
             .readByDoc(collectionPath: "jobPosts", docPath: element.jobPostId);

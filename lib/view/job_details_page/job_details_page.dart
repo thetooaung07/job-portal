@@ -22,14 +22,14 @@ class JobDetailsPage extends GetView<JobPostsController> {
     final JobPostModel placementData =
         Get.find<JobPostsController>().jobPosts[1];
     JobPostModel data = Get.arguments ?? placementData;
-
+    Get.put(ApplicationsPageController()).checkAlreadyApplied(data.id);
     return Scaffold(
       appBar: MyAppBar(
         leading: Container(
           margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: CustomIconButton(
             onTap: (() {
-              Get.offAndToNamed(RouteNames.home);
+              Get.back();
             }),
             child: const Icon(
               Icons.chevron_left_rounded,

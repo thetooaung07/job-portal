@@ -65,6 +65,10 @@ class ApplicationsPage extends StatelessWidget {
               const SizedBox(height: 20),
               GetX<ApplicationsPageController>(
                 builder: (controller) {
+                  print(
+                      "myApplicationList =>  ${controller.myApplicationList.length}");
+                  print(
+                      "appliedJobsList =>  ${controller.appliedJobsList.length}");
                   return controller.myApplicationList.isNotEmpty &&
                           controller.appliedJobsList.isNotEmpty
                       ? ListView.builder(

@@ -24,9 +24,6 @@ class JobPostCardVt extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        print("data Ui -> ${data!.id}");
-        Get.put(ApplicationsPageController()).checkAlreadyApplied(data!.id);
-
         Get.toNamed(RouteNames.jobDetails, arguments: data);
       },
       child: Container(

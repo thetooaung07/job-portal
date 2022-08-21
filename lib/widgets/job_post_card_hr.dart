@@ -77,10 +77,6 @@ class JobPostCardHr extends StatelessWidget {
               ],
             ),
             CustomTextButton(onTap: () {
-              print("data Ui -> ${data!.id}");
-              Get.put(ApplicationsPageController())
-                  .checkAlreadyApplied(data!.id);
-
               Get.toNamed(RouteNames.jobDetails, arguments: data);
             }),
           ],

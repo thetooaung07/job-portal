@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/application_page_controller.dart';
 import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/routes/routes.dart';
@@ -43,6 +44,9 @@ class JobsPage extends StatelessWidget {
             JobCard(
               onTap: () {
                 Get.toNamed(RouteNames.applications);
+                Get.put<ApplicationsPageController>(
+                        ApplicationsPageController())
+                    .getAppliedJobs();
               },
               icon: const Icon(
                 Icons.check_box_outlined,

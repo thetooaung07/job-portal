@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/application_page_controller.dart';
 import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/routes/routes.dart';
 
@@ -75,9 +76,13 @@ class JobPostCardHr extends StatelessWidget {
                     "$bullet ${data!.workHour} / ${data!.workType == "Work From Home" ? "WFH" : data!.workType}"),
               ],
             ),
-            CustomTextButton(
-                onTap: () =>
-                    Get.toNamed(RouteNames.jobDetails, arguments: data)),
+            CustomTextButton(onTap: () {
+              print("data Ui -> ${data!.id}");
+              Get.put(ApplicationsPageController())
+                  .checkAlreadyApplied(data!.id);
+
+              Get.toNamed(RouteNames.jobDetails, arguments: data);
+            }),
           ],
         ));
   }

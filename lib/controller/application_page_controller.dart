@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_function_literals_in_foreach_calls
 
 import 'dart:developer';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
@@ -70,7 +71,7 @@ class ApplicationsPageController extends GetxController {
   RxBool isUploading = false.obs;
   RxString fileName = "".obs;
   RxString getFileLink = "".obs;
-  Rx<XFile?> getFile = XFile("").obs;
+  Rx<XFile?> getFile = null.obs;
 
   void pickCV() async {
     if (isUploading.value) return null;
@@ -98,14 +99,15 @@ class ApplicationsPageController extends GetxController {
     }
   }
 
-  bool isSelectedJobAlreadyApplied(String postId) {
-    List<String> appliedJobPostId = [];
+  RxBool isSelectedJobAlreadyApplied = false.obs;
 
+  checkAlreadyApplied(String postId) async {
+    await getData();
+    List<String> appliedJobPostId = [];
     for (var element in myApplicationList) {
       appliedJobPostId.add(element.jobPostId!);
     }
-
-    return appliedJobPostId.contains(postId);
+    isSelectedJobAlreadyApplied.value = appliedJobPostId.contains(postId);
   }
 
   TextEditingController nameC = TextEditingController();
@@ -126,6 +128,8 @@ class ApplicationsPageController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    await getData();
+    await getAppliedJobs();
     UserAccount user = Get.find<UserAccountController>().user;
     nameC.text = user.username!;
     emailC.text = user.email!;
@@ -136,9 +140,6 @@ class ApplicationsPageController extends GetxController {
     workExpC.text = "2 Years of exp @ Starlight Studio";
     suggestionC.text = "Suggestions";
     questionC.text = "No Question";
-
-    await getData();
-    await getAppliedJobs();
 
     FirestoreHelper()
         .userApplicantStream("J6ssebZMip9XTQU0AHrh")
@@ -151,6 +152,8 @@ class ApplicationsPageController extends GetxController {
     });
 
     funcFilter("All");
+
+    print("isSelectedJobAlreadyApplied => $isSelectedJobAlreadyApplied");
   }
 
   applyJob() async {
@@ -182,6 +185,9 @@ class ApplicationsPageController extends GetxController {
         collectionPath: "applicants", docPath: documentID, data: data.toJson());
 
     Fluttertoast.showToast(msg: "Success", backgroundColor: Colors.green);
+// TOADD Some Funcitonality to pre-check apply job before Get.back();
+    isSelectedJobAlreadyApplied.value = true;
+
     Get.back();
   }
 
@@ -215,37 +221,6 @@ class ApplicationsPageController extends GetxController {
       <UserApplicantModel>[].obs;
 
   RxList<UserAccount> userApplicantList = <UserAccount>[].obs;
-
-  // getApplicantsFromPostedJobPosts(String selectedJobId) async {
-  //   applicantsForSelectedJobPost.clear();
-  //   userApplicantList.clear();
-  //   await firebaseFirestore
-  //       .collection("applicants")
-  //       .where("jobPostId", isEqualTo: selectedJobId)
-  //       .get()
-  //       .then(
-  //         (value) => value.docs.forEach(
-  //           (element) async {
-  //             applicantsForSelectedJobPost
-  //                 .add(ApplicantModel.fromDocumentSnapshot(element));
-
-  //             String userId =
-  //                 ApplicantModel.fromDocumentSnapshot(element).applicantId!;
-
-  //             await firebaseFirestore
-  //                 .collection("users")
-  //                 .doc(userId)
-  //                 .get()
-  //                 .then((value) {
-  //               return userApplicantList
-  //                   .add(UserAccount.fromDocumentSnapshot(value));
-  //             });
-  //           },
-  //         ),
-  //       );
-  // }
-
-  getApplicantsFromPostedJobPosts(String selectedJobId) {}
 
   updateProcessStatus({
     required String toUpdate,

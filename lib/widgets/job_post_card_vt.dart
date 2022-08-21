@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
+import 'package:job_portal/controller/application_page_controller.dart';
 import 'package:job_portal/controller/saved_jobs_page_controller.dart';
 import 'package:job_portal/global.dart';
 import 'package:job_portal/main.dart';
@@ -22,7 +23,12 @@ class JobPostCardVt extends StatelessWidget {
         Get.put(SavedJobsPageController());
 
     return GestureDetector(
-      onTap: () => Get.toNamed(RouteNames.jobDetails, arguments: data),
+      onTap: () {
+        print("data Ui -> ${data!.id}");
+        Get.put(ApplicationsPageController()).checkAlreadyApplied(data!.id);
+
+        Get.toNamed(RouteNames.jobDetails, arguments: data);
+      },
       child: Container(
         padding: const EdgeInsets.fromLTRB(15, 0, 0, 10),
         margin: const EdgeInsets.only(

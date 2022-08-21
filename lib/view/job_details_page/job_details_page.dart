@@ -28,7 +28,9 @@ class JobDetailsPage extends GetView<JobPostsController> {
         leading: Container(
           margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: CustomIconButton(
-            onTap: (() => Get.back()),
+            onTap: (() {
+              Get.offAndToNamed(RouteNames.home);
+            }),
             child: const Icon(
               Icons.chevron_left_rounded,
               size: 30,
@@ -163,47 +165,35 @@ class ApplyNowBtn extends StatelessWidget {
           width: 10,
         ),
 
-        // Re-Write Code Structure
         GetX<ApplicationsPageController>(
-          init:
-              Get.put<ApplicationsPageController>(ApplicationsPageController()),
+          init: Get.find<ApplicationsPageController>(),
           builder: (appPageController) {
-            return GestureDetector(
-              onTap: () {
-                if (data.postUserId == firebaseAuth.currentUser!.uid) {
-                  return;
-                }
-
-                if (appPageController.isSelectedJobAlreadyApplied(data.id) ==
-                    true) return;
-                Get.toNamed(RouteNames.jobApply);
-                appPageController.jobPostId.value = data.id;
-              },
-              child: data.postUserId == firebaseAuth.currentUser!.uid &&
-                      !appPageController.isSelectedJobAlreadyApplied(data.id)
-                  ? Container(
-                      alignment: Alignment.center,
-                      width: Get.width / 2,
-                      child: const Text(
-                        "Sorry!  You cannot apply to your own job",
-                        textAlign: TextAlign.center,
-                      ),
-                    )
-                  : data.postUserId != firebaseAuth.currentUser!.uid &&
-                          appPageController
-                                  .isSelectedJobAlreadyApplied(data.id) ==
-                              true
-                      ? Container(
-                          alignment: Alignment.center,
+            return data.postUserId == firebaseAuth.currentUser!.uid &&
+                    appPageController.isSelectedJobAlreadyApplied.value != true
+                ? Container(
+                    alignment: Alignment.center,
+                    width: Get.width / 2,
+                    child: Text(
+                      "Sorry!  You cannot apply to your own job",
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                : appPageController.isSelectedJobAlreadyApplied.value == true
+                    ? Container(
+                        alignment: Alignment.center,
+                        width: Get.width / 2,
+                        child: Text(
+                          "You have already applied to the job",
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    : GestureDetector(
+                        onTap: () {
+                          Get.toNamed(RouteNames.jobApply);
+                          appPageController.jobPostId.value = data.id;
+                        },
+                        child: Container(
                           width: Get.width / 2,
-                          child: const Text(
-                            "You have already applied to this job",
-                            textAlign: TextAlign.center,
-                          ),
-                        )
-                      : Container(
-                          width: Get.width / 2,
-                          // padding: EdgeInsets.symmetric(vertical: 5, horizontal: 75),
                           margin:
                               EdgeInsets.symmetric(vertical: Get.width * 0.01),
                           alignment: Alignment.center,
@@ -219,9 +209,68 @@ class ApplyNowBtn extends StatelessWidget {
                             ),
                           ),
                         ),
-            );
+                      );
           },
-        ),
+        )
+        // Re-Write Code Structure
+        // GetX<ApplicationsPageController>(
+        //   init:
+        //       Get.put<ApplicationsPageController>(ApplicationsPageController()),
+        //   builder: (appPageController) {
+        //     return GestureDetector(
+        //       onTap: () {
+        //         if (data.postUserId == firebaseAuth.currentUser!.uid) {
+        //           return;
+        //         }
+
+        //         if (appPageController.isSelectedJobAlreadyApplied(data.id) ==
+        //             true) return;
+        //         Get.toNamed(RouteNames.jobApply);
+        //         appPageController.jobPostId.value = data.id;
+        //       },
+        //       child: data.postUserId == firebaseAuth.currentUser!.uid &&
+        //               !appPageController.isSelectedJobAlreadyApplied(data.id)
+        // ? Container(
+        //     alignment: Alignment.center,
+        //     width: Get.width / 2,
+        //     child: const Text(
+        //       "Sorry!  You cannot apply to your own job",
+        //       textAlign: TextAlign.center,
+        //     ),
+        //   )
+        //           : data.postUserId != firebaseAuth.currentUser!.uid &&
+        //                   appPageController
+        //                           .isSelectedJobAlreadyApplied(data.id) ==
+        //                       true
+        //               ? Container(
+        //                   alignment: Alignment.center,
+        //                   width: Get.width / 2,
+        //                   child: const Text(
+        //                     "You have already applied to this job",
+        //                     textAlign: TextAlign.center,
+        //                   ),
+        //                 )
+        // : Container(
+        //     width: Get.width / 2,
+        //     // padding: EdgeInsets.symmetric(vertical: 5, horizontal: 75),
+        //     margin:
+        //         EdgeInsets.symmetric(vertical: Get.width * 0.01),
+        //     alignment: Alignment.center,
+        //     decoration: BoxDecoration(
+        //       color: Colors.black,
+        //       borderRadius: BorderRadius.circular(7),
+        //     ),
+        //     child: Center(
+        //       child: Text(
+        //         "Apply Now",
+        //         style: kLabelTextStyle.copyWith(
+        //             fontSize: 20, color: themeBgColor),
+        //       ),
+        //                   ),
+        //                 ),
+        //     );
+        //   },
+        // ),
       ],
     );
   }

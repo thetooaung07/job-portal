@@ -219,26 +219,26 @@ class LoginPage extends GetView<AuthController> {
                   ),
                   Column(
                     children: [
-                      const Text("- Or Continue With -"),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 60,
-                            width: 60,
-                            color: Colors.red,
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 20),
-                          ),
-                          Container(
-                            height: 60,
-                            width: 60,
-                            color: Colors.red,
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 20),
-                          ),
-                        ],
-                      ),
+                      // const Text("- Or Continue With -"),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     Container(
+                      //       height: 60,
+                      //       width: 60,
+                      //       color: Colors.red,
+                      //       margin: const EdgeInsets.symmetric(
+                      //           horizontal: 10, vertical: 20),
+                      //     ),
+                      //     Container(
+                      //       height: 60,
+                      //       width: 60,
+                      //       color: Colors.red,
+                      //       margin: const EdgeInsets.symmetric(
+                      //           horizontal: 10, vertical: 20),
+                      //     ),
+                      //   ],
+                      // ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

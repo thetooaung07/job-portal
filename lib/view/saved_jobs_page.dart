@@ -28,14 +28,18 @@ class SavedJobsPage extends StatelessWidget {
           ),
           label: "Saved",
           action: [
-            Container(
-              margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
-              child: CustomIconButton(
-                onTap: () {},
-                child: const Icon(
-                  Icons.more_vert_rounded,
-                  size: 30,
-                  color: Colors.black,
+            Tooltip(
+              showDuration: Duration(seconds: 1),
+              triggerMode: TooltipTriggerMode.tap,
+              message: "Swipe left to dismiss Saved Posts",
+              child: Container(
+                margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
+                child: CustomIconButton(
+                  child: const Icon(
+                    Icons.error_outline_rounded,
+                    size: 30,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),

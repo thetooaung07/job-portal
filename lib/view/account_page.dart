@@ -175,11 +175,6 @@ class AccountPage extends StatelessWidget {
                             }
                           }),
                     ),
-// only if you want to disapper cards if both are true
-                    // userAccountController.user.profileDetails != true ||
-                    //         userAccountController.user.cvFile != true ||
-                    //         userAccountController.user.addABio != true
-                    //     ?
 
                     StreamBuilder<UserAccount>(
                         stream: FirestoreHelper()
@@ -304,10 +299,7 @@ class AccountPage extends StatelessWidget {
                               ],
                             ),
                           );
-                        })
-                    // : SizedBox()
-
-                    ,
+                        }),
 
                     const ListTile(
                       horizontalTitleGap: 7,
@@ -375,10 +367,10 @@ class StyledPopupMenuBtn extends StatelessWidget {
       ),
       child: PopupMenuButton<dynamic>(
         onSelected: (value) {
-          if (value == 2) {
-            Get.toNamed(RouteNames.eidtProfile);
-          }
-          if (value == 3) {}
+          // if (value == 2) {
+          //   Get.toNamed(RouteNames.eidtProfile);
+          // }
+          // if (value == 3) {}
           if (value == 4) {
             Get.find<AuthController>().signOut();
           }
@@ -411,13 +403,13 @@ class StyledPopupMenuBtn extends StatelessWidget {
               title: Text("Settings"),
             ),
           ),
-          const PopupMenuItem(
+          PopupMenuItem(
             value: 2,
             padding: EdgeInsets.symmetric(horizontal: 0),
             child: ListTile(
-              // onTap: () {
-              // Get.toNamed(RouteNames.eidtProfile);
-              // },
+              onTap: () {
+                Get.toNamed(RouteNames.eidtProfile);
+              },
               contentPadding: EdgeInsets.symmetric(horizontal: 20),
               minLeadingWidth: 10,
               leading: Icon(Icons.edit_note_rounded),

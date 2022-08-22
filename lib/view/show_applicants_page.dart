@@ -79,25 +79,27 @@ class ShowApplicantsPage extends GetView<ShowApplicantsController> {
               ),
               GetX<ShowApplicantsController>(
                 builder: (controller) {
-                  print("Controller => ${controller.selectedJobId.value}");
-                  return ListView.builder(
-                    itemCount: controller.filterByProc.length,
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, idx) {
-                      print(
-                          "controller.filterByProc => ${controller.filterByProc}");
-                      return controller.filterByProc.isNotEmpty
-                          ? ApplicantCard(
-                              user: controller.filterByProc[idx].user,
-                              applicant: controller.filterByProc[idx].applicant,
-                            )
-                          : const Text(
-                              "No Applicants",
-                              style: TextStyle(color: Colors.black),
-                            );
-                    },
-                  );
+                  return controller.applicantsForSelectedJobPost.length > 0
+                      ? ListView.builder(
+                          itemCount: controller.filterByProc.length,
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, idx) {
+                            print(
+                                "controller.filterByProc => ${controller.filterByProc}");
+                            return controller.filterByProc.isNotEmpty
+                                ? ApplicantCard(
+                                    user: controller.filterByProc[idx].user,
+                                    applicant:
+                                        controller.filterByProc[idx].applicant,
+                                  )
+                                : const Text(
+                                    "No Applicants",
+                                    style: TextStyle(color: Colors.black),
+                                  );
+                          },
+                        )
+                      : Text("Fetching Data");
                 },
               ),
             ],

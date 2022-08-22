@@ -14,19 +14,20 @@ class ShowApplicantsController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    FirestoreHelper().userApplicantStream(selectedJobId.value).listen((event) {
-      print(selectedJobId.value);
-      if (event.isNotEmpty) {
-        applicantsForSelectedJobPost.bindStream(
-            FirestoreHelper().userApplicantStream(selectedJobId.value));
-      }
-    });
+    streamInit(selectedJobId);
     funcFilter("All");
   }
 
-  @override
-  void onInit() {
-    super.onInit();
+  RxString selectedJobId = "".obs;
+  streamInit(selectedJobId) {
+    applicantsForSelectedJobPost.clear();
+    FirestoreHelper().userApplicantStream(selectedJobId).listen((event) {
+      print(selectedJobId);
+      if (event.isNotEmpty) {
+        applicantsForSelectedJobPost
+            .bindStream(FirestoreHelper().userApplicantStream(selectedJobId));
+      }
+    });
   }
 
   final RxString _selectedVal = "${dropdownList[0]}".obs;
@@ -46,7 +47,6 @@ class ShowApplicantsController extends GetxController {
     }
   }
 
-  RxString selectedJobId = "".obs;
   RxList<UserApplicantModel> filterByProc = <UserApplicantModel>[].obs;
 
   updateProcessStatus({

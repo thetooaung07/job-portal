@@ -190,9 +190,8 @@ class MyJobCard extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
+                Get.put(ShowApplicantsController()).streamInit(data.id);
                 print("Putting data to App Page Controller");
-                Get.put(ShowApplicantsController()).selectedJobId.value =
-                    data.id;
                 Get.toNamed(RouteNames.showApplicants);
               },
               child: Container(

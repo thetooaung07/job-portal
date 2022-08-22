@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:job_portal/controller/application_page_controller.dart';
 import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/controller/job_posts_controller.dart';
+import 'package:job_portal/controller/show_applicants_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/routes/routes.dart';
@@ -190,7 +190,10 @@ class MyJobCard extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Get.toNamed(RouteNames.showApplicants, arguments: data);
+                print("Putting data to App Page Controller");
+                Get.put(ShowApplicantsController()).selectedJobId.value =
+                    data.id;
+                Get.toNamed(RouteNames.showApplicants);
               },
               child: Container(
                 color: Colors.transparent,

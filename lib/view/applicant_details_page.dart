@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/application_page_controller.dart';
+import 'package:job_portal/controller/show_applicants_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/applicant_model.dart';
 import 'package:job_portal/model/user_account.dart';
@@ -16,8 +17,7 @@ class ApplicantDetailsPage extends StatelessWidget {
     UserAccount user = Get.arguments[0] as UserAccount;
     ApplicantModel applicant = Get.arguments[1] as ApplicantModel;
     Rx<String?> procTest = applicant.applicationProcess!.obs;
-    ApplicationsPageController controller =
-        Get.find<ApplicationsPageController>();
+    ShowApplicantsController controller = Get.find<ShowApplicantsController>();
     return Scaffold(
         appBar: MyAppBar(
           leading: Container(

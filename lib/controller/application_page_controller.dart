@@ -15,22 +15,9 @@ import 'package:job_portal/global.dart';
 import 'package:job_portal/model/applicant_model.dart';
 import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/model/user_account.dart';
-import 'package:job_portal/model/user_applicant_model.dart';
 import 'package:job_portal/services/database.dart';
 
-const List dropdownList = <String>[
-  "All",
-  "Applied",
-  "Shortlisted",
-  "Interview",
-  "Rejected"
-];
-
 class ApplicationsPageController extends GetxController {
-  final RxString _selectedVal = "${dropdownList[0]}".obs;
-  String get selectedVal => _selectedVal.value;
-  set selectedVal(String v) => _selectedVal.value = v;
-
   final RxInt _currentStep = 0.obs;
   int get currentStep => _currentStep.value;
   set currentStep(int v) => _currentStep.value = v;
@@ -146,6 +133,21 @@ class ApplicationsPageController extends GetxController {
     myInit();
   }
 
+  // @override
+  // void onReady() {
+  //   super.onReady();
+  //   FirestoreHelper().userApplicantStream(selectedJobId.value).listen((event) {
+  //     print(selectedJobId.value);
+  //     if (event.isNotEmpty) {
+  //       applicantsForSelectedJobPost.bindStream(
+  //           FirestoreHelper().userApplicantStream(selectedJobId.value));
+  //     }
+  //   });
+
+  //   funcFilter("All");
+  // }
+
+  // RxString selectedJobId = "".obs;
   void myInit() async {
     UserAccount user = Get.find<UserAccountController>().user;
     nameC.text = user.username!;
@@ -157,20 +159,6 @@ class ApplicationsPageController extends GetxController {
     workExpC.text = "2 Years of exp @ Starlight Studio";
     suggestionC.text = "Suggestions";
     questionC.text = "No Question";
-
-    FirestoreHelper()
-        .userApplicantStream("J6ssebZMip9XTQU0AHrh")
-        .listen((event) {
-      print(event);
-      if (event.isNotEmpty) {
-        applicantsForSelectedJobPost.bindStream(
-            FirestoreHelper().userApplicantStream("J6ssebZMip9XTQU0AHrh"));
-      }
-    });
-
-    funcFilter("All");
-
-    print("isSelectedJobAlreadyApplied => $isSelectedJobAlreadyApplied");
   }
 
   applyJob() async {
@@ -245,22 +233,22 @@ class ApplicationsPageController extends GetxController {
     }
   }
 
-  RxList<UserApplicantModel> applicantsForSelectedJobPost =
-      <UserApplicantModel>[].obs;
+  // RxList<UserApplicantModel> applicantsForSelectedJobPost =
+  //     <UserApplicantModel>[].obs;
 
   RxList<UserAccount> userApplicantList = <UserAccount>[].obs;
 
-  updateProcessStatus({
-    required String toUpdate,
-    required String docId,
-  }) async {
-    await FirestoreHelper().update(
-        collectionPath: "applicants",
-        docPath: docId,
-        data: {"applicationProcess": toUpdate}).then((value) => update());
+  // updateProcessStatus({
+  //   required String toUpdate,
+  //   required String docId,
+  // }) async {
+  //   await FirestoreHelper().update(
+  //       collectionPath: "applicants",
+  //       docPath: docId,
+  //       data: {"applicationProcess": toUpdate}).then((value) => update());
 
-    update();
-  }
+  //   update();
+  // }
 
   UserAccount getUserFromApplicantId(String applicantId) {
     late UserAccount user = UserAccount();
@@ -274,17 +262,15 @@ class ApplicationsPageController extends GetxController {
     return user;
   }
 
-  RxList<UserApplicantModel> filterByProc = <UserApplicantModel>[].obs;
+  // RxList<UserApplicantModel> filterByProc = <UserApplicantModel>[].obs;
 
-  void funcFilter(
-    String appProc,
-  ) {
-    if (appProc == "All") {
-      filterByProc.value = applicantsForSelectedJobPost;
-    } else {
-      filterByProc.value = applicantsForSelectedJobPost
-          .where((el) => el.applicant.applicationProcess == appProc)
-          .toList();
-    }
-  }
+  // void funcFilter(String appProc) {
+  //   if (appProc == "All") {
+  //     filterByProc.value = applicantsForSelectedJobPost;
+  //   } else {
+  //     filterByProc.value = applicantsForSelectedJobPost
+  //         .where((el) => el.applicant.applicationProcess == appProc)
+  //         .toList();
+  //   }
+  // }
 }

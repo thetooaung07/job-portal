@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/application_page_controller.dart';
+import 'package:job_portal/controller/show_applicants_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/applicant_model.dart';
+import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/model/user_account.dart';
 import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
-class ShowApplicantsPage extends GetView<ApplicationsPageController> {
+class ShowApplicantsPage extends GetView<ShowApplicantsController> {
   const ShowApplicantsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // print("IsBuild => ShowApplicantsPage");
-    Get.put(ApplicationsPageController());
+    // JobPostModel data = Get.arguments;
 
     return Scaffold(
       appBar: MyAppBar(
@@ -75,8 +77,9 @@ class ShowApplicantsPage extends GetView<ApplicationsPageController> {
                   )
                 ],
               ),
-              GetX<ApplicationsPageController>(
+              GetX<ShowApplicantsController>(
                 builder: (controller) {
+                  print("Controller => ${controller.selectedJobId.value}");
                   return ListView.builder(
                     itemCount: controller.filterByProc.length,
                     physics: const NeverScrollableScrollPhysics(),
@@ -121,12 +124,8 @@ class ApplicantCard extends GetView<ApplicationsPageController> {
 
     return GestureDetector(
       onTap: () {
-        Get.toNamed(RouteNames.viewApplicantDetails, arguments: [
-          // controller.getUserFromApplicantId(applicant.applicantId!),
-          user,
-          applicant,
-          procTest
-        ]);
+        Get.toNamed(RouteNames.viewApplicantDetails,
+            arguments: [user, applicant, procTest]);
       },
       child: Container(
         height: 100,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/controller/job_posts_controller.dart';
+import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/job_post_card_vt.dart';
 import 'package:job_portal/widgets/show_all_text_banner.dart';
 
@@ -11,9 +12,9 @@ class SuggestedJobContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const ShowAllTextBanner(
+        ShowAllTextBanner(
           title: "Suggested Job",
-          // onPressed: () => Get.toNamed(RouteNames.recentPosts),
+          onPressed: () => Get.toNamed(RouteNames.suggestedJobs),
         ),
         const SizedBox(
           height: 15,

@@ -84,6 +84,7 @@ class SearchPage extends StatelessWidget {
                 ],
               ),
             ),
+
             //Filter Result
             // Padding(
             //   padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
@@ -107,12 +108,17 @@ class SearchPage extends StatelessWidget {
                 return controller.initialized && controller.jobPosts.isNotEmpty
                     ? Column(
                         children: [
-                          ShowAllTextBanner(
-                              title:
-                                  "${controller.jobPosts.length} Jobs Available"),
                           const SizedBox(
                             height: 10,
                           ),
+                          Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 20.0),
+                              child: Text(
+                                "${controller.jobPosts.length} Jobs Available",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w600),
+                              )),
                           ListView.builder(
                             itemCount: controller.jobPosts.length,
                             shrinkWrap: true,

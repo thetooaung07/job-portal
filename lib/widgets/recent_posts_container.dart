@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/controller/job_posts_controller.dart';
+import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/job_post_card_hr.dart';
 import 'package:job_portal/widgets/show_all_text_banner.dart';
 
@@ -15,9 +16,9 @@ class TopCompanyContainer extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        const ShowAllTextBanner(
+        ShowAllTextBanner(
           title: "Recent Posts",
-          // onPressed: () => Get.toNamed(RouteNames.popularJobs),
+          onPressed: () => Get.toNamed(RouteNames.recentPosts),
         ),
         Container(
           padding: const EdgeInsets.only(left: 10),

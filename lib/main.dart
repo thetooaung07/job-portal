@@ -10,7 +10,7 @@ import 'package:job_portal/view/account_page.dart';
 import 'package:job_portal/view/jobs_page.dart';
 import 'package:job_portal/view/search_page/search_page.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
-import 'package:job_portal/widgets/top_company_container.dart';
+import 'package:job_portal/widgets/recent_posts_container.dart';
 import 'package:job_portal/widgets/suggested_job_container.dart';
 import 'package:job_portal/routes/routes.dart';
 

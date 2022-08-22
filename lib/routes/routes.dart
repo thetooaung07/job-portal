@@ -12,9 +12,9 @@ import 'package:job_portal/view/job_details_page/job_details_page.dart';
 import 'package:job_portal/view/jobs_page.dart';
 import 'package:job_portal/view/my_jobs_page.dart';
 import 'package:job_portal/view/nearby_page.dart';
-import 'package:job_portal/view/popular_jobs/popular_jobs_page.dart';
+import 'package:job_portal/view/suggested_jobs_page.dart';
 import 'package:job_portal/view/post_job_page.dart';
-import 'package:job_portal/view/recent_posts/recent_posts_page.dart';
+import 'package:job_portal/view/recent_posts_page.dart';
 import 'package:job_portal/view/saved_jobs_page.dart';
 import 'package:job_portal/view/search_page/search_page.dart';
 import 'package:job_portal/view/show_applicants_page.dart';
@@ -24,7 +24,7 @@ class RouteNames {
   static String login = "/login";
   static String home = "/home";
   static String search = "/search";
-  static String popularJobs = "/popular-jobs";
+  static String suggestedJobs = "/suggested-jobs";
   static String recentPosts = "/recent-posts";
   static String jobDetails = "/job-details";
   static String jobs = "/jobs";
@@ -50,7 +50,8 @@ routes() => [
           name: RouteNames.home,
           page: () => const HomePage()), //!TODO Change Back
       GetPage(
-          name: RouteNames.popularJobs, page: () => const PopularJobsPage()),
+          name: RouteNames.suggestedJobs,
+          page: () => const SuggestedJobsPage()),
       GetPage(
           name: RouteNames.recentPosts, page: () => const RecentPostsPage()),
       GetPage(name: RouteNames.search, page: () => const SearchPage()),

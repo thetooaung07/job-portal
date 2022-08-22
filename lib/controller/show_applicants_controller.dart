@@ -14,18 +14,19 @@ class ShowApplicantsController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    streamInit(selectedJobId);
+
+    selectedJobId(selectedJobId.value);
     funcFilter("All");
   }
 
   RxString selectedJobId = "".obs;
-  streamInit(selectedJobId) {
+  streamInit(String inputJobId) {
     applicantsForSelectedJobPost.clear();
-    FirestoreHelper().userApplicantStream(selectedJobId).listen((event) {
-      print(selectedJobId);
+    FirestoreHelper().userApplicantStream(inputJobId).listen((event) {
+      print(inputJobId);
       if (event.isNotEmpty) {
         applicantsForSelectedJobPost
-            .bindStream(FirestoreHelper().userApplicantStream(selectedJobId));
+            .bindStream(FirestoreHelper().userApplicantStream(inputJobId));
       }
     });
   }

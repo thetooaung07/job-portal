@@ -18,8 +18,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp().then((value) => Get.put(AuthController()));
   Get.put(UserAccountController());
-  // Get.put(AppController());
-  // firebaseAuth.signOut();
+
   runApp(const MyApp());
 }
 

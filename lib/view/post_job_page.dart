@@ -179,11 +179,6 @@ class PostJobPage extends GetView<JobCreateController> {
                     sectionIcon: const Icon(Icons.work),
                     children: [
                       WithLabelTFField(
-                        hintText: "Yangon, Myanmar",
-                        controller: controller.companyLocationC,
-                        label: "Location",
-                      ),
-                      WithLabelTFField(
                         hintText: "Enter Your Company Name",
                         controller: controller.companyNameC,
                         label: "Name",
@@ -197,6 +192,11 @@ class PostJobPage extends GetView<JobCreateController> {
                         hintText: "Enter Company Email",
                         controller: controller.companyContactMailC,
                         label: "Contact Email",
+                      ),
+                      WithLabelTFField(
+                        hintText: "Yangon, Myanmar",
+                        controller: controller.companyLocationC,
+                        label: "Location",
                       ),
                       const SizedBox(
                         height: 10,

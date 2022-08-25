@@ -11,12 +11,12 @@ import 'package:job_portal/controller/search_page_controller.dart';
 import 'package:job_portal/view/search_page/filter_bottom_sheet.dart';
 import 'package:job_portal/widgets/show_all_text_banner.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends GetView<SearchPageController> {
   const SearchPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final SearchPageController controller = Get.put(SearchPageController());
+    Get.lazyPut(() => SearchPageController());
 
     return Scaffold(
       appBar: MyAppBar(

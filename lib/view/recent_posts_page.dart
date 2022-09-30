@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:job_portal/controller/bottom_nav_bar_controller.dart';
 import 'package:job_portal/controller/job_posts_controller.dart';
 import 'package:job_portal/main.dart';
-import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/job_post_card_vt.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
@@ -26,7 +24,7 @@ class RecentPostsPage extends StatelessWidget {
           ),
         ),
         label: "Recent Posts",
-        action: [],
+        action: const [],
       ),
       body: SingleChildScrollView(
         child: Padding(

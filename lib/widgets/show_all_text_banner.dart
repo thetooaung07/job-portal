@@ -25,8 +25,9 @@ class ShowAllTextBanner extends StatelessWidget {
             splashRadius: 17,
             splashColor: Colors.white,
             onPressed: onPressed,
-            icon:
-                onPressed != null ? Icon(Icons.more_horiz_rounded) : Icon(null),
+            icon: onPressed != null
+                ? const Icon(Icons.more_horiz_rounded)
+                : const Icon(null),
           )
         ],
       ),

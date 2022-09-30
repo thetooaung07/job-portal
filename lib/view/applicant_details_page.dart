@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
-import 'package:job_portal/controller/application_page_controller.dart';
 import 'package:job_portal/controller/show_applicants_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/applicant_model.dart';
 import 'package:job_portal/model/user_account.dart';
-import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
 
 class ApplicantDetailsPage extends StatelessWidget {
@@ -112,8 +110,8 @@ class ApplicantDetailsPage extends StatelessWidget {
                                   style: TextStyle(fontSize: 16),
                                 ))),
                         ElevatedButton(
-                            style:
-                                ElevatedButton.styleFrom(primary: Colors.red),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.red),
                             onPressed: () {
                               controller.updateProcessStatus(
                                   toUpdate: ApplicationProcess.rejected,
@@ -130,8 +128,8 @@ class ApplicantDetailsPage extends StatelessWidget {
                                   style: TextStyle(fontSize: 16),
                                 ))),
                         ElevatedButton(
-                            style:
-                                ElevatedButton.styleFrom(primary: Colors.green),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green),
                             onPressed: () {
                               controller.updateProcessStatus(
                                   toUpdate: ApplicationProcess.shortlisted,

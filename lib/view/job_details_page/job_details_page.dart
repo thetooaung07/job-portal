@@ -173,7 +173,7 @@ class ApplyNowBtn extends StatelessWidget {
                 ? Container(
                     alignment: Alignment.center,
                     width: Get.width / 2,
-                    child: Text(
+                    child: const Text(
                       "Sorry!  You cannot apply to your own job",
                       textAlign: TextAlign.center,
                     ),
@@ -182,7 +182,7 @@ class ApplyNowBtn extends StatelessWidget {
                     ? Container(
                         alignment: Alignment.center,
                         width: Get.width / 2,
-                        child: Text(
+                        child: const Text(
                           "You have already applied to the job",
                           textAlign: TextAlign.center,
                         ),

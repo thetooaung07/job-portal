@@ -29,13 +29,13 @@ class SavedJobsPage extends StatelessWidget {
           label: "Saved",
           action: [
             Tooltip(
-              showDuration: Duration(seconds: 1),
+              showDuration: const Duration(seconds: 1),
               triggerMode: TooltipTriggerMode.tap,
               message: "Swipe left to dismiss Saved Posts",
               child: Container(
                 margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
-                child: CustomIconButton(
-                  child: const Icon(
+                child: const CustomIconButton(
+                  child: Icon(
                     Icons.error_outline_rounded,
                     size: 30,
                     color: Colors.black,
@@ -144,7 +144,7 @@ class DismissibleJobPostCard extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Container(
-                                  margin: EdgeInsets.only(top: 4),
+                                  margin: const EdgeInsets.only(top: 4),
                                   height: 60,
                                   width: 65,
                                   alignment: Alignment.center,
@@ -188,7 +188,7 @@ class DismissibleJobPostCard extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: Text(
-                            "${bullet} ${differenceInString(data!.createdAt!)} ago"),
+                            "$bullet ${differenceInString(data!.createdAt!)} ago"),
                       ),
                     ],
                   ),
@@ -197,13 +197,13 @@ class DismissibleJobPostCard extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.location_on_outlined,
                             size: 18,
                           ),
                           Text(data!.workHour),
-                          SizedBox(width: 15),
-                          Icon(
+                          const SizedBox(width: 15),
+                          const Icon(
                             Icons.workspace_premium_outlined,
                             size: 18,
                           ),
@@ -220,10 +220,10 @@ class DismissibleJobPostCard extends StatelessWidget {
                 ],
               ),
             ),
-            Positioned(
+            const Positioned(
               top: -5,
               right: 3,
-              child: const Icon(
+              child: Icon(
                 Icons.bookmark_rounded,
                 size: 30,
                 color: Colors.black,

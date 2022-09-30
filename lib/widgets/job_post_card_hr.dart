@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
-import 'package:job_portal/controller/application_page_controller.dart';
 import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/routes/routes.dart';
 
@@ -69,7 +68,7 @@ class JobPostCardHr extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("$bullet \$${data!.salary} / Mo"),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Text(

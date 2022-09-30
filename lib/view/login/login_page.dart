@@ -173,7 +173,8 @@ class LoginPage extends GetView<AuthController> {
                               TextButton(
                                 style: TextButton.styleFrom(
                                   // splashFactory: NoSplash.splashFactory,
-                                  primary: const Color.fromARGB(166, 0, 0, 0),
+                                  foregroundColor:
+                                      const Color.fromARGB(166, 0, 0, 0),
                                 ),
                                 onPressed: () {},
                                 child: const Text("Forget Password?"),
@@ -188,7 +189,7 @@ class LoginPage extends GetView<AuthController> {
                                   height: 55,
                                   child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        primary: Colors.black,
+                                        backgroundColor: Colors.black,
                                         // padding: EdgeInsets.symmetric(vertical: 20),
                                       ),
                                       onPressed: () {

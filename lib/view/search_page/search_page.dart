@@ -9,7 +9,6 @@ import 'package:job_portal/widgets/searchbar.dart';
 import 'package:job_portal/constants.dart';
 import 'package:job_portal/controller/search_page_controller.dart';
 import 'package:job_portal/view/search_page/filter_bottom_sheet.dart';
-import 'package:job_portal/widgets/show_all_text_banner.dart';
 
 class SearchPage extends GetView<SearchPageController> {
   const SearchPage({Key? key}) : super(key: key);
@@ -116,7 +115,7 @@ class SearchPage extends GetView<SearchPageController> {
                                   const EdgeInsets.symmetric(vertical: 20.0),
                               child: Text(
                                 "${controller.jobPosts.length} Jobs Available",
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.w600),
                               )),
                           ListView.builder(

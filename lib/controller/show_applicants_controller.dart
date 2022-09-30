@@ -23,7 +23,6 @@ class ShowApplicantsController extends GetxController {
   streamInit(String inputJobId) {
     applicantsForSelectedJobPost.clear();
     FirestoreHelper().userApplicantStream(inputJobId).listen((event) {
-      print(inputJobId);
       if (event.isNotEmpty) {
         applicantsForSelectedJobPost
             .bindStream(FirestoreHelper().userApplicantStream(inputJobId));

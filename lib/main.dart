@@ -137,11 +137,11 @@ class HomePageView extends StatelessWidget {
         leading: Container(
             alignment: Alignment.centerLeft,
             //  TODO : remove padding and center widget Portal txt
-            padding: EdgeInsets.only(top: 3),
-            margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+            padding: const EdgeInsets.only(top: 3),
+            margin: const EdgeInsets.only(left: 20),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+              children: const [
                 Icon(
                   Icons.donut_large_rounded,
                   color: Colors.black,
@@ -166,26 +166,10 @@ class HomePageView extends StatelessWidget {
                 children: [
                   Text(
                     greeting()[0],
-                    style: TextStyle(fontSize: 22),
+                    style: const TextStyle(fontSize: 22),
                   ),
-                  // Text(
-                  //   greeting()[1],
-                  //   style: TextStyle(fontSize: 12, color: Colors.black),
-                  // ),
                 ],
               )),
-
-          // Container(
-          //   margin: const EdgeInsets.fromLTRB(0, 10, 20, 10),
-          //   child: CustomIconButton(
-          //     onTap: () {},
-          //     child: const Icon(
-          //       Icons.notifications_none_rounded,
-          //       size: 30,
-          //       color: Colors.black,
-          //     ),
-          //   ),
-          // ),
         ],
       ),
       body: SingleChildScrollView(

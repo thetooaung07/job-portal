@@ -1,8 +1,5 @@
 // ignore_for_file: avoid_function_literals_in_foreach_calls
 
-import 'dart:developer';
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -114,7 +111,6 @@ class ApplicationsPageController extends GetxController {
   RxString jobPostId = "".obs;
 
   void reset() {
-    print("On Close is called");
     nameC.clear();
     emailC.clear();
     phoneNumberC.clear();
@@ -222,9 +218,8 @@ class ApplicationsPageController extends GetxController {
     myApplicationList.value = [];
     appliedJobsList.value = [];
     await getData();
-    print("myApplicationList => ${myApplicationList.length}");
+
     if (myApplicationList.isNotEmpty) {
-      print("Inside if");
       for (var element in myApplicationList) {
         DocumentSnapshot<Map<String, dynamic>> res = await FirestoreHelper()
             .readByDoc(collectionPath: "jobPosts", docPath: element.jobPostId);
@@ -254,7 +249,6 @@ class ApplicationsPageController extends GetxController {
     late UserAccount user = UserAccount();
     if (userApplicantList.isNotEmpty) {
       user = userApplicantList.singleWhere((element) {
-        print(element.userId);
         return element.userId == applicantId;
       });
     }

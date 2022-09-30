@@ -405,15 +405,15 @@ class StyledPopupMenuBtn extends StatelessWidget {
           ),
           PopupMenuItem(
             value: 2,
-            padding: EdgeInsets.symmetric(horizontal: 0),
+            padding: const EdgeInsets.symmetric(horizontal: 0),
             child: ListTile(
               onTap: () {
                 Get.toNamed(RouteNames.eidtProfile);
               },
-              contentPadding: EdgeInsets.symmetric(horizontal: 20),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
               minLeadingWidth: 10,
-              leading: Icon(Icons.edit_note_rounded),
-              title: Text("Edit Profile"),
+              leading: const Icon(Icons.edit_note_rounded),
+              title: const Text("Edit Profile"),
             ),
           ),
           PopupMenuItem(

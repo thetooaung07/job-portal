@@ -5,7 +5,6 @@ import 'package:job_portal/controller/application_page_controller.dart';
 import 'package:job_portal/controller/show_applicants_controller.dart';
 import 'package:job_portal/main.dart';
 import 'package:job_portal/model/applicant_model.dart';
-import 'package:job_portal/model/job_post_model.dart';
 import 'package:job_portal/model/user_account.dart';
 import 'package:job_portal/routes/routes.dart';
 import 'package:job_portal/widgets/my_app_bar.dart';
@@ -34,7 +33,7 @@ class ShowApplicantsPage extends GetView<ShowApplicantsController> {
           ),
         ),
         label: "Applicants",
-        action: [],
+        action: const [],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -79,14 +78,12 @@ class ShowApplicantsPage extends GetView<ShowApplicantsController> {
               ),
               GetX<ShowApplicantsController>(
                 builder: (controller) {
-                  return controller.applicantsForSelectedJobPost.length > 0
+                  return controller.applicantsForSelectedJobPost.isNotEmpty
                       ? ListView.builder(
                           itemCount: controller.filterByProc.length,
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, idx) {
-                            print(
-                                "controller.filterByProc => ${controller.filterByProc}");
                             return controller.filterByProc.isNotEmpty
                                 ? ApplicantCard(
                                     user: controller.filterByProc[idx].user,
@@ -99,7 +96,7 @@ class ShowApplicantsPage extends GetView<ShowApplicantsController> {
                                   );
                           },
                         )
-                      : Text("Fetching Data");
+                      : const Text("Fetching Data");
                 },
               ),
             ],

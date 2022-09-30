@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_portal/constants.dart';
-import 'package:job_portal/controller/application_page_controller.dart';
 import 'package:job_portal/controller/saved_jobs_page_controller.dart';
 import 'package:job_portal/global.dart';
 import 'package:job_portal/main.dart';
@@ -39,47 +38,52 @@ class JobPostCardVt extends StatelessWidget {
           color: Colors.white,
         ),
         height: 110,
+        width: Get.width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 5.0),
+                Container(
+                  padding: const EdgeInsets.only(top: 10.0),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Container(
-                            height: 60,
-                            width: 60,
-                            alignment: Alignment.center,
-                            child: data!.postedBy.profile != null
-                                ? Image.network(data!.postedBy.profile!)
-                                : Image.asset('assets/images/default.png')),
+                          height: 60,
+                          width: 60,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: data!.postedBy.profile != null
+                                  ? NetworkImage(data!.postedBy.profile!)
+                                  : const AssetImage(
+                                          "assets/images/default.png")
+                                      as ImageProvider,
+                            ),
+                          ),
+                        ),
                       ),
-                      // SvgPicture.asset(
-                      //   "assets/icons/logo_youtube.svg",
-                      //   height: 50,
-                      //   width: 50,
-                      // ),
                       const SizedBox(
-                        width: 20,
+                        width: 15,
                       ),
                       SizedBox(
-                        height: 70,
+                        height: 60,
+                        width: Get.width / 2.4,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              data?.title ?? "Developer",
-                              style: kJobPositionTextStyle,
-                            ),
-                            const SizedBox(
-                              height: 5,
+                            Expanded(
+                              child: Text(
+                                data?.title ?? "Developer",
+                                overflow: TextOverflow.ellipsis,
+                                style: kJobPositionTextStyle,
+                              ),
                             ),
                             Text(data?.companyName ?? "User"),
                             const SizedBox(
@@ -91,7 +95,6 @@ class JobPostCardVt extends StatelessWidget {
                     ],
                   ),
                 ),
-                // Icon(Icons.favorite_outline_rounded),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -139,13 +142,13 @@ class JobPostCardVt extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.location_on_outlined,
                       size: 18,
                     ),
                     Text(data!.workHour),
-                    SizedBox(width: 15),
-                    Icon(
+                    const SizedBox(width: 15),
+                    const Icon(
                       Icons.workspace_premium_outlined,
                       size: 18,
                     ),

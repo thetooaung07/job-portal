@@ -143,7 +143,8 @@ class FilterBottomSheet extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(40),
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.black),
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.black),
                     onPressed: () {},
                     child: Text(
                       "Show Results",

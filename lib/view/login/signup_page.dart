@@ -293,7 +293,7 @@ class SignUpPage extends GetView<AuthController> {
                                   height: 55,
                                   child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        primary: Colors.black,
+                                        backgroundColor: Colors.black,
                                         // padding: EdgeInsets.symmetric(vertical: 20),
                                       ),
                                       onPressed: () {

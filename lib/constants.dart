@@ -66,7 +66,7 @@ const TextStyle kLabelTextStyle = TextStyle(
   fontWeight: FontWeight.w600,
 );
 const TextStyle kJobPositionTextStyle = TextStyle(
-  fontSize: 18,
+  fontSize: 16,
   color: Color.fromARGB(255, 63, 63, 63),
   fontWeight: FontWeight.w500,
 );

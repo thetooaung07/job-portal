@@ -126,7 +126,20 @@ toDo:
  update method in reject shortlisted not working
 
 
- TODO filter method 
+! TODO filter method 
 
 
  Get Argument data.
+
+ /// !add animation to page transition
+
+
+ /// change database model
+
+ - controller_modeling  
+
+app_controller      > use for auth / login / logout / theme (later)
+user_controller     > fetching user for app_controller / user_colletcion CRUD
+job_post_controller > fetching job_posts and work in sync with list<id> from user_controller
+
+respective_ui_controllers # use for controlling UI state
